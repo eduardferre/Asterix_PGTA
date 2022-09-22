@@ -1,11 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lpgpIWF76tU2NQ3xjDe7ICL5Pa84o5BDi8C4SMlOZoEMkZPGahu8ZGuPcFktgcKSuckaF1qi/+/LKOGULgW2SQ==",
+  "dgSpecHash": "y9QV0Jik1hE5bzjhl66FzNEypA49P6cd8LzsL8+C5bE8elCvMzHZ7okbKL/SKq08NnpresAGl203O2evIndH1A==",
   "success": true,
   "projectFilePath": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\AsterixDecoder\\AsterixDecoder.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\gerar\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Users\\gerar\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
-  ],
+  "expectedPackageFiles": [],
   "logs": []
 }

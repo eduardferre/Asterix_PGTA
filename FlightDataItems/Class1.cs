@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AsterixDecoder
+namespace FlightDataItems
 {
     public class Class1
     {

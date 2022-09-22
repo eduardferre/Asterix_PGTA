@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "RExovGG6wW6AFFPOi1Pj2QX878KIB/1PjZSYHs1qU2JTyi9JwoC6fjf5WG+y3X28ElqtT0vwF/I+wOAbEd48Gg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\ClassLibrary\\ClassLibrary.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\gerar\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\gerar\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
