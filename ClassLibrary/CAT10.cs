@@ -51,9 +51,53 @@ namespace ClassLibrary
             }
             return msgDecimal;
         }
-        
-        public void DecodeCAT10(string[] msgCAT10)
+
+
+
+        readonly string[] FSPEC; 
+        string [] data; //octets
+        int position; //one octet
+
+        public string messageType;
+        public string SAC;
+        public string SIC;
+
+        public void DecodeCAT10(string[] fspec, int position)
         {
+            if (FSPEC[0] == "1") {
+                DataSourceIdentifier(data, position);
+                position = position + 2;
+            } 
+            if (FSPEC[1] == "2") { 
+                MessageType(data, position);
+                position = position + 1;
+            } 
+
+        }
+
+        //DATA ITEM: I010/010
+        private void DataSourceIdentifier(string[] data, int position)
+        {
+            SAC = Convert.ToString(Convert.ToInt32(data[position], 2));
+            SIC = Convert.ToString(Convert.ToInt32(data[position + 1], 2));
+        }
+
+        //DATA ITEM: I010/000
+        private void MessageType(string[] data, int position)
+        {
+            messageType = data[position];
+            if (messageType == "00") {
+                messageType = "Target Report"; 
+            }
+            if (messageType == "01") {
+                messageType = "Start of Update Cycle"; 
+            }
+            if (messageType == "10") {
+                messageType = "Periodic Status Message"; 
+            }
+            if (messageType == "11") {
+                messageType = "Event-triggered Status Message"; 
+            }
         }
 
         public void UTM2WGS84()
