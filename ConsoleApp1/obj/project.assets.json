@@ -32,11 +32,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\AsterixDecoder\\AsterixDecoder.csproj",
-      "projectName": "AsterixDecoder",
-      "projectPath": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\AsterixDecoder\\AsterixDecoder.csproj",
+      "projectUniqueName": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\ConsoleApp1\\ConsoleApp1.csproj",
+      "projectName": "ConsoleApp1",
+      "projectPath": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\ConsoleApp1\\ConsoleApp1.csproj",
       "packagesPath": "C:\\Users\\gerar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\AsterixDecoder\\obj\\",
+      "outputPath": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\ConsoleApp1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\gerar\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -79,9 +79,6 @@
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
-          },
-          "Microsoft.WindowsDesktop.App.WindowsForms": {
-            "privateAssets": "none"
           }
         },
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
