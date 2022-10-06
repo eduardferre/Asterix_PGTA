@@ -89,8 +89,7 @@ namespace ClassLibrary
             }
             if (FSPEC[6] == "1")
             {
-                PositioninCartesianCoordinates(data, position);
-                position = position + 4;
+                position = PositioninCartesianCoordinates(data, position);
             }
             
 
@@ -258,8 +257,8 @@ namespace ClassLibrary
         //DATA ITEM: I010/041
         public string LatitudeinWGS84;
         public string LongitudeinWGS84;
-        public double LatitudeMapWGS84;
-        public double LongitudeMapWGS84;
+        public double LatitudeMapWGS84 = -200; //For the map
+        public double LongitudeMapWGS84 = -200; //For the map
 
         private int PositioninWGS84Coordinates(string[] data, int position) 
         {
@@ -278,6 +277,78 @@ namespace ClassLibrary
             this.LongitudeinWGS84 = Convert.ToString(longitudeDeg) + "º " + Convert.ToString(longitudeMin) + "' " + Convert.ToString(longitudeSec) + "''";
 
             return newposition;
+        }
+
+        //DATA ITEM: I010/42
+        public double XMap = -99999; //For the map
+        public double YMap = -99999; //For the map
+        public string PositioninCartesianCoordinates;
+
+        private int PositioninCartesianCoordinates(string[] data, int position)
+        {
+            int newposition = position + 4;
+            this.XMap = Convert.ToDouble(BinTwosComplementToSignedDecimal(data[position]) + BinTwosComplementToSignedDecimal(data[position + 1]));
+            this.YMap = Convert.ToDouble(BinTwosComplementToSignedDecimal(data[position + 2]) + BinTwosComplementToSignedDecimal(data[position + 3]));
+
+            string X = Convert.ToString(this.XMap);
+            string Y = Convert.ToString(this.YMap);
+
+            PositioninCartesianCoordinates = "X Component = " + XMap + ", Y Component = " + YMap;
+
+            Point MapPoint = new Point(XMap, YMap);
+
+            /*
+                WSG84 FROM CARTESIAN
+
+                PointLatLng position = lib.ComputeWGS_84_from_Cartesian(p, this.SIC); //Compute WGS84 position from cartesian position
+                Set_WGS84_Coordinates(position); //Apply computed WGS84 position to this message
+
+                 public void Set_WGS84_Coordinates(PointLatLng pos)
+                {
+                    LatitudeWGS_84_map=pos.Lat;
+                    LongitudeWGS_84_map=pos.Lng;
+                    int Latdegres = Convert.ToInt32(Math.Truncate(LatitudeWGS_84_map));
+                    int Latmin = Convert.ToInt32(Math.Truncate((LatitudeWGS_84_map - Latdegres) * 60));
+                    double Latsec = Math.Round(((LatitudeWGS_84_map - (Latdegres + (Convert.ToDouble(Latmin) / 60))) * 3600), 5);
+                    int Londegres = Convert.ToInt32(Math.Truncate(LongitudeWGS_84_map));
+                    int Lonmin = Convert.ToInt32(Math.Truncate((LongitudeWGS_84_map - Londegres) * 60));
+                    double Lonsec = Math.Round(((LongitudeWGS_84_map - (Londegres + (Convert.ToDouble(Lonmin) / 60))) * 3600), 5);
+                    Latitude_in_WGS_84 = Convert.ToString(Latdegres) + "º " + Convert.ToString(Latmin) + "' " + Convert.ToString(Latsec) + "''";
+                    Longitude_in_WGS_84 = Convert.ToString(Londegres) + "º" + Convert.ToString(Lonmin) + "' " + Convert.ToString(Lonsec) + "''";
+                }
+
+            */
+
+            return newposition;
+        }
+
+        //DATA ITEM I010/060
+        public string VMode3A;
+        public string GMode3A;
+        public string LMode3A;
+        public string Mode3A;
+
+        private int Mode3ACodeinOctalRepresentation(string[] data, int position)
+        {
+            string octetNum1 = data[position];
+            string octetNum2 = data[position + 1];
+
+            string V = octetNum1.Substring(0, 1);
+
+            if (V == "0") VMode3A = "V: Code validated";
+            else VMode3A = "V: Code not validated";
+
+            string G = octetNum1.Substring(1, 1);
+
+            if (G == "0") GMode3A = "G: Default";
+            else GMode3A = "G: Garbled code";
+
+            string L = octetNum1.Substring(2, 1);
+
+            if (L == "0") LMode3A = "L: Mode-3/A code derived from the reply of the transponder";
+            else LMode3A = "L: Mode-3/A code not extracted during the last scan";
+
+
         }
 
         public void UTM2WGS84()
