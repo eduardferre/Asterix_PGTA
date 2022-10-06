@@ -72,9 +72,29 @@ namespace ClassLibrary
             }
             if (FSPEC[2] == "1")
             {
-                int pos = TargetReportDescriptor(data, position);
-                position = pos;
+                position = TargetReportDescriptor(data, position);
             }
+            if (FSPEC[3] == "1")
+            {
+                TimeofDay(data, positon);
+                position = position;
+            }
+            if (FSPEC[4] == "1")
+            {
+                PositioninWGS84Coordinates(data, position);
+                position = position;
+            }
+            if (FSPEC[5] == "1")
+            {
+                MeasuredPositioninPolarCoordinates(data, position);
+                position = position + 4;
+            }
+            if (FSPEC[6] == "1")
+            {
+                PositioninCartesianCoordinates(data, position);
+                position = position;
+            }
+            
 
         }
 
@@ -109,6 +129,7 @@ namespace ClassLibrary
             }
         }
 
+        //DATA ITEM: I010/020
         public string TYP;
         public string DCR;
         public string CHN;
@@ -123,7 +144,6 @@ namespace ClassLibrary
 
         public string SPI;
 
-        //DATA ITEM: I010/020
         private int TargetReportDescriptor(string[] data, int position)
         {
             int newposition = position;
@@ -216,6 +236,21 @@ namespace ClassLibrary
             }
 
             return newposition + 1;
+        }
+
+        //DATA ITEM: I010/040
+        public string RHO;
+        public string THETA;
+        public string PositioninPolarCoordinates
+
+        private void MeasuredPositioninPolarCoordinates(string[] data, int position) 
+        {
+            double range = Convert.ToInt32(string.Concat(data[position], data[position + 1]), 2)// RHO needs 2 octets
+            
+            if (range >= 65536) this.RHO = "RHO is equal or exceeds maximum range (65536m ≈ 35.4NM)";
+            else this.RHO = "ρ = " + Convert.ToString(range) + "m";
+            this.THETA = "θ = " + String.Format("{0:0.00}", Convert.ToDouble(Convert.ToInt32(string.Concat(data[position + 2], data[position + 3]), 2)) * (360 / (Math.Pow(2, 16)))) + "º";
+            this.PositioninPolarCoordinates = this.RHO + ", " + this.THETA;
         }
 
         public void UTM2WGS84()
