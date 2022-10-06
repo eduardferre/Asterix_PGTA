@@ -245,12 +245,35 @@ namespace ClassLibrary
 
         private void MeasuredPositioninPolarCoordinates(string[] data, int position) 
         {
-            double range = Convert.ToInt32(string.Concat(data[position], data[position + 1]), 2)// RHO needs 2 octets
+            double range = Convert.ToInt32(string.Concat(data[position], data[position + 1]), 2); // RHO 2 octets
             
             if (range >= 65536) this.RHO = "RHO is equal or exceeds maximum range (65536m ≈ 35.4NM)";
             else this.RHO = "ρ = " + Convert.ToString(range) + "m";
-            this.THETA = "θ = " + String.Format("{0:0.00}", Convert.ToDouble(Convert.ToInt32(string.Concat(data[position + 2], data[position + 3]), 2)) * (360 / (Math.Pow(2, 16)))) + "º";
+            this.THETA = "θ = " + String.Format("{0:0.00}", Convert.ToDouble(Convert.ToInt32(string.Concat(data[position + 2], data[position + 3]), 2)) * (360 / (Math.Pow(2, 16)))) + "º"; // THETA 2 octets
             this.PositioninPolarCoordinates = this.RHO + ", " + this.THETA;
+        }
+
+        //DATA ITEM: I010/041
+        public string LatitudeinWGS84;
+        public string LongitudeinWGS84;
+        public double LatitudeMapWGS84;
+        public double LongitudeMapWGS84;
+
+        private void PositioninWGS84Coordinates(string[] data, int position) 
+        {
+            int newposition = position + 4;
+            double latitude = Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1], data[position + 2], data[position + 3]))) * (180 / (Math.Pow(2, 31)));
+            double longitude = Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[newposition], data[newposition + 1], data[newposition + 2], data[newposition + 3]))) * (180 / (Math.Pow(2, 31)));;
+
+            int latitudeDeg = Convert.ToInt32(Math.Truncate(latitude));
+            int latitudeMin = Convert.ToInt32(Math.Truncate((latitude - latitudeDeg) * 60));
+            double latitudeSec = Math.Round(((latitude - (latitudeDeg +  (Convert.ToDouble(latitudeMin) / 60))) * 3600), 5);
+            int longitudeDeg = Convert.ToInt32(Math.Truncate(longitude));
+            int longitudeMin = Convert.ToInt32(Math.Truncate((longitude - longitudeDeg) * 60));
+            double longitudeSec = Math.Round(((longitude - (longitudeDeg +  (Convert.ToDouble(longitudeMin) / 60))) * 3600), 5);
+            
+            this.LatitudeinWGS84 = Convert.ToString(latitudeDeg) + "º " + Convert.ToString(latitudeMin) + "' " + Convert.ToString(latitudeSec) + "''";
+            this.LongitudeinWGS84 = Convert.ToString(longitudeDeg) + "º " + Convert.ToString(longitudeMin) + "' " + Convert.ToString(longitudeSec) + "''";
         }
 
         public void UTM2WGS84()
