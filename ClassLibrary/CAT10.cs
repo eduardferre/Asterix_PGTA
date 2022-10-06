@@ -77,22 +77,20 @@ namespace ClassLibrary
             if (FSPEC[3] == "1")
             {
                 TimeofDay(data, positon);
-                position = position;
+                position = position + 3;
             }
             if (FSPEC[4] == "1")
             {
-                PositioninWGS84Coordinates(data, position);
-                position = position;
+                position = PositioninWGS84Coordinates(data, position);
             }
             if (FSPEC[5] == "1")
             {
-                MeasuredPositioninPolarCoordinates(data, position);
-                position = position + 4;
+                position = MeasuredPositioninPolarCoordinates(data, position);
             }
             if (FSPEC[6] == "1")
             {
                 PositioninCartesianCoordinates(data, position);
-                position = position;
+                position = position + 4;
             }
             
 
@@ -249,8 +247,12 @@ namespace ClassLibrary
             
             if (range >= 65536) this.RHO = "RHO is equal or exceeds maximum range (65536m ≈ 35.4NM)";
             else this.RHO = "ρ = " + Convert.ToString(range) + "m";
+            
             this.THETA = "θ = " + String.Format("{0:0.00}", Convert.ToDouble(Convert.ToInt32(string.Concat(data[position + 2], data[position + 3]), 2)) * (360 / (Math.Pow(2, 16)))) + "º"; // THETA 2 octets
+            
             this.PositioninPolarCoordinates = this.RHO + ", " + this.THETA;
+
+            return position + 4;
         }
 
         //DATA ITEM: I010/041
@@ -259,11 +261,11 @@ namespace ClassLibrary
         public double LatitudeMapWGS84;
         public double LongitudeMapWGS84;
 
-        private void PositioninWGS84Coordinates(string[] data, int position) 
+        private int PositioninWGS84Coordinates(string[] data, int position) 
         {
             int newposition = position + 4;
-            double latitude = Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1], data[position + 2], data[position + 3]))) * (180 / (Math.Pow(2, 31)));
-            double longitude = Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[newposition], data[newposition + 1], data[newposition + 2], data[newposition + 3]))) * (180 / (Math.Pow(2, 31)));;
+            double latitude = Convert.ToDouble(BinTwosComplementToSignedDecimal(data[position]) + BinTwosComplementToSignedDecimal(data[position + 1]) + BinTwosComplementToSignedDecimal(data[position + 2]) + BinTwosComplementToSignedDecimal(data[position + 3])) * (180 / (Math.Pow(2, 31)));
+            double longitude = Convert.ToDouble(BinTwosComplementToSignedDecimal(data[newposition]) + BinTwosComplementToSignedDecimal(data[newposition + 1]) + BinTwosComplementToSignedDecimal(data[newposition + 2]) + BinTwosComplementToSignedDecimal(data[newposition + 3])) * (180 / (Math.Pow(2, 31)));
 
             int latitudeDeg = Convert.ToInt32(Math.Truncate(latitude));
             int latitudeMin = Convert.ToInt32(Math.Truncate((latitude - latitudeDeg) * 60));
@@ -274,6 +276,8 @@ namespace ClassLibrary
             
             this.LatitudeinWGS84 = Convert.ToString(latitudeDeg) + "º " + Convert.ToString(latitudeMin) + "' " + Convert.ToString(latitudeSec) + "''";
             this.LongitudeinWGS84 = Convert.ToString(longitudeDeg) + "º " + Convert.ToString(longitudeMin) + "' " + Convert.ToString(longitudeSec) + "''";
+
+            return newposition;
         }
 
         public void UTM2WGS84()
