@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 
 namespace ClassLibrary
@@ -52,8 +53,6 @@ namespace ClassLibrary
             return msgDecimal;
         }
 
-
-
         readonly string[] FSPEC; 
         string [] data; //octets
         int position; //one octet
@@ -62,13 +61,11 @@ namespace ClassLibrary
         {
             if (FSPEC[0] == "1") 
             {
-                DataSourceIdentifier(data, position);
-                position = position + 2;
+                position = DataSourceIdentifier(data, position);
             } 
             if (FSPEC[1] == "1") 
             { 
-                MessageType(data, position);
-                position = position + 1;
+                position = MessageType(data, position);
             }
             if (FSPEC[2] == "1")
             {
@@ -76,8 +73,7 @@ namespace ClassLibrary
             }
             if (FSPEC[3] == "1")
             {
-                TimeofDay(data, positon);
-                position = position + 3;
+                position = TimeofDay(data, position);
             }
             if (FSPEC[4] == "1")
             {
@@ -91,25 +87,47 @@ namespace ClassLibrary
             {
                 position = PositioninCartesianCoordinates(data, position);
             }
-            
+            if (FSPEC.Length > 8)
+            {
+                if (FSPEC[7] == "1") {
+                    //position = TrackVelocityInPolarCoordinates(data, position); 
+                } 
+                if (FSPEC[8] == "1") {
+                    //position = TrackVelocityInCartesianCoordinates(data, position); 
+                } 
+                if (FSPEC[9] == "1") {
+                    position = TrackNumber(data, position); 
+                } 
+                if (FSPEC[10] == "1") {
+                    position = TrackStatus(data, position); 
+                }
+                if (FSPEC[11] == "1") {
+                    position = Mode3ACodeinOctalRepresentation(data, position); 
+                } 
+                if (FSPEC[12] == "1") {
+                    position = TargetAddress(data, position); 
+                } 
+                if (FSPEC[13] == "1") {
+                    position = TargetIdentification(data, position); 
+                } 
+            }
 
         }
 
         //DATA ITEM: I010/010
         public string SAC;
         public string SIC;
-
-        private void DataSourceIdentifier(string[] data, int position)
+        private int DataSourceIdentifier(string[] data, int position)
         {
             this.SAC = Convert.ToString(Convert.ToInt32(data[position], 2));
             this.SIC = Convert.ToString(Convert.ToInt32(data[position + 1], 2));
+            position = position + 2;
+            return position;
         }
-
 
         //DATA ITEM: I010/000
         public string messageType;
-
-        private void MessageType(string[] data, int position)
+        private int MessageType(string[] data, int position)
         {
             string messageType = data[position];
             if (messageType == "00") {
@@ -124,6 +142,8 @@ namespace ClassLibrary
             if (messageType == "11") {
                 this.messageType = "Event-triggered Status Message"; 
             }
+            position = position + 1;
+            return position;
         }
 
         //DATA ITEM: I010/020
@@ -132,15 +152,12 @@ namespace ClassLibrary
         public string CHN;
         public string GBS;
         public string CRT;
-
         public string SIM;
         public string TST;
         public string RAB;
         public string LOP;
         public string TOT;
-
         public string SPI;
-
         private int TargetReportDescriptor(string[] data, int position)
         {
             int newposition = position;
@@ -235,12 +252,23 @@ namespace ClassLibrary
             return newposition + 1;
         }
 
+        //DATA ITEM: I010/140
+        public string TimeOfDay;
+        private int TimeofDay(string[] data, int position)
+        {
+            int number = Convert.ToInt32(string.Concat(data[position], data[position + 1], data[position + 2]), 2);
+            double seconds = Convert.ToDouble(number) / 128;
+            TimeOfDay = TimeSpan.FromSeconds(seconds).ToString(@"hh\:mm\:ss\:fff");
+            position = position + 3;
+            return position;
+        }
+
         //DATA ITEM: I010/040
         public string RHO;
         public string THETA;
-        public string PositioninPolarCoordinates
+        public string PositioninPolarCoordinates;
 
-        private void MeasuredPositioninPolarCoordinates(string[] data, int position) 
+        private int MeasuredPositioninPolarCoordinates(string[] data, int position) 
         {
             double range = Convert.ToInt32(string.Concat(data[position], data[position + 1]), 2); // RHO 2 octets
             
@@ -259,7 +287,6 @@ namespace ClassLibrary
         public string LongitudeinWGS84;
         public double LatitudeMapWGS84 = -200; //For the map
         public double LongitudeMapWGS84 = -200; //For the map
-
         private int PositioninWGS84Coordinates(string[] data, int position) 
         {
             int newposition = position + 4;
@@ -283,7 +310,6 @@ namespace ClassLibrary
         public double XMap = -99999; //For the map
         public double YMap = -99999; //For the map
         public string PositioninCartesianCoordinates;
-
         private int PositioninCartesianCoordinates(string[] data, int position)
         {
             int newposition = position + 4;
@@ -322,17 +348,151 @@ namespace ClassLibrary
             return newposition;
         }
 
+        //DATA ITEM: I010/161
+        public string TrackNum;
+        private int TrackNumber(string[] data, int position)
+        {
+            TrackNum = Convert.ToString(Convert.ToInt32(string.Concat(data[position], data[position + 1]), 2));
+            position = position + 2;
+            return position;
+        }
+
+        //DATA ITEM: I010/170
+        public string CNF;
+        public string TRE;
+        public string CST;
+        public string MAH;
+        public string TCC;
+        public string STH;
+        public string TOM;
+        public string DOU;
+        public string MRS;
+        public string GHO;
+        private int TrackStatus(string[] data, int position)
+        {
+            char[] octet = data[position].ToCharArray(0, 8);
+            if (octet[0] == '0') { 
+                CNF = "Confirmed track"; 
+            }
+            else { 
+                CNF = "Track in initialisation phase"; 
+            }
+            if (octet[1] == '0') { 
+                TRE = "Default"; 
+            }
+            else { 
+                TRE = "Last report for a track"; 
+            }
+            string crt = string.Concat(octet[2], octet[3]);
+            if (crt == "00") { 
+                CST = "No extrapolation"; 
+            }
+            else if (crt == "01") {
+                CST = "Predictable extrapolation due to sensor refresh period"; 
+            }
+            else if (crt == "10") {
+                CST = "Predictable extrapolation in masked area"; 
+            }
+            else if (crt == "11") {
+                CST = "Extrapolation due to unpredictable absence of detection"; 
+            }
+            if (octet[4] == '0') { 
+                MAH = "Default"; 
+            }
+            else { 
+                MAH = "Horizontal manoeuvre"; 
+            }
+            if (octet[5] == '0') {
+                TCC = "Tracking performed in 'Sensor Plane', i.e. neither slant range correction nor projection was applied."; 
+            }
+            else { 
+                TCC = "Slant range correction and a suitable projection technique are used to track in a 2D.reference plane, tangential to the earth model at the Sensor Site co-ordinates."; 
+            }
+            if (octet[6] == '0') {
+                STH = "Measured position"; 
+            }
+            else {
+                STH = "Smoothed position"; 
+            }
+            position = position + 2;
+
+            if (octet[7] == '1')
+            {
+                octet = data[position].ToCharArray(0, 8);
+                string tom = string.Concat(octet[0], octet[1]);
+                if (tom == "00") { 
+                    TOM = "Unknown type of movement"; 
+                }
+                else if (tom == "01") {
+                    TOM = "Taking-off"; 
+                }
+                else if (tom == "10") { 
+                    TOM = "Landing"; 
+                }
+                else if (tom == "11") { 
+                    TOM = "Other types of movement"; 
+                }
+                string dou = string.Concat(octet[2], octet[3], octet[4]);
+                if (dou == "000") { 
+                    DOU = "No doubt"; 
+                }
+                else if (dou == "001") { 
+                    DOU = "Doubtful correlation (undetermined reason)"; 
+                }
+                else if (dou == "010") {
+                    DOU = "Doubtful correlation in clutter"; 
+                }
+                else if (dou == "011") {
+                    DOU = "Loss of accuracy"; 
+                }
+                else if (dou == "100") {
+                    DOU = "Loss of accuracy in clutter"; 
+                }
+                else if (dou == "101") {
+                    DOU = "Unstable track"; 
+                }
+                else if (dou == "110") { 
+                    DOU = "Previously coasted"; 
+                }
+                string mrs = string.Concat(octet[5], octet[6]);
+                if (mrs == "00") { 
+                    MRS = "Merge or split indication undetermined"; 
+                }
+                else if (mrs == "01") {
+                    MRS = "Track merged by association to plot"; 
+                }
+                else if (mrs == "10") { 
+                    MRS = "Track merged by non-association to plot"; 
+                }
+                else if (mrs == "11") {
+                    MRS = "Split track"; 
+                }
+                position = position + 2;
+
+                if (octet[7] == '1')
+                {
+                    octet = data[position].ToCharArray(0, 8);
+                    if (octet[0] == '0') { 
+                        GHO = "GHO: Default"; 
+                    }
+                    else { 
+                        GHO = "Ghost track"; 
+                    }
+                    position = position + 2;
+                }
+            }
+            return position;
+        }
+
         //DATA ITEM I010/060
         public string VMode3A;
         public string GMode3A;
         public string LMode3A;
         public string Mode3A;
-
         private int Mode3ACodeinOctalRepresentation(string[] data, int position)
         {
             string octetNum1 = data[position];
             string octetNum2 = data[position + 1];
-
             string V = octetNum1.Substring(0, 1);
 
             if (V == "0") VMode3A = "V: Code validated";
@@ -348,7 +508,52 @@ namespace ClassLibrary
             if (L == "0") LMode3A = "L: Mode-3/A code derived from the reply of the transponder";
             else LMode3A = "L: Mode-3/A code not extracted during the last scan";
 
+            return position;
+        }
 
+        public string BinarytoHexadecimal(string binaryNumber)
+        {
+            string hexadecimalNumber = string.Format("{0:x}", Convert.ToInt32(binaryNumber, 2));
+            return hexadecimalNumber;
+        }
+
+        //DATA ITEM: I010/220
+        public string TargetAdd; //In Hexadecimal 
+        private int TargetAddress(string[] data, int position)
+        {
+            TargetAdd = string.Concat(BinarytoHexadecimal(data[position]), BinarytoHexadecimal(data[position + 1]), BinarytoHexadecimal(data[position + 2]));
+            position = position + 3;
+            return position;
+        }
+
+        public string ComputeCharacter(string BinaryNumber)
+        {
+            int character = Convert.ToInt32(BinaryNumber, 2);
+            List<string> codelist = new List<string>() { "", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "", "", "", "", "", "" };
+            return codelist[character];
+        }
+
+        //DATA ITEM: I010/245
+        public string STI;
+        public string TargetId;
+        private int TargetIdentification(string[] data, int position)
+        {
+            STI = data[position];
+            if (STI == "00000000") {
+                STI = "Callsign or registration downlinked from transponder"; 
+            }
+            else if (STI == "01000000") {
+                STI = "Callsign not downlinked from transponder"; 
+            }
+            else if (STI == "10000000") {
+                STI = "Registration not downlinked from transponder"; 
+            }
+            string characters = string.Concat(data[position + 1], data[position + 2], data[position + 3], data[position + 4], data[position + 5], data[position + 6]);
+            for (int i = 0; i < 8; i++) {
+                TargetId = Convert.ToString(ComputeCharacter(characters.Substring(i * 6, 6))); 
+            }
+            position = position + 7;
+            return position;
         }
 
         public void UTM2WGS84()
