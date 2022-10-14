@@ -556,6 +556,35 @@ namespace ClassLibrary
             return position;
         }
 
+        //DATA ITEM: I010/270 
+        public int targetLength;
+        public double targetOrientation;
+        public int targetLenght2;
+        public int TargetSizeOrientation(string[] data, int position)
+        {
+            targetLength = Convert.ToInt32(data[position][0]) * 64 + Convert.ToInt32(data[position][1]) * 32 + Convert.ToInt32(data[position][2]) * 16 + Convert.ToInt32(data[position][3]) * 8 + Convert.ToInt32(data[position][4]) * 4 + Convert.ToInt32(data[position][5]) * 2 + Convert.ToInt32(data[position][6]);
+            if (data[position][7] == '1')
+            {
+                position = +1;
+            }
+            else
+            {
+                return position;
+            }
+            targetOrientation = Convert.ToInt32(data[position][0]) * 64 * 2.81 + Convert.ToInt32(data[position][1]) * 32 * 2.81 + Convert.ToInt32(data[position][2]) * 16 * 2.81 + Convert.ToInt32(data[position][3]) * 8 * 2.81 + Convert.ToInt32(data[position][4]) * 4 * 2.81 + Convert.ToInt32(data[position][5]) * 2 * 2.81 + Convert.ToInt32(data[position][6]) * 2.81;
+            if (data[position][7] == '1')
+            {
+                position = +1;
+            }
+            else
+            {
+                return position;
+            }
+            targetLenght2 = Convert.ToInt32(data[position][0]) * 64 + Convert.ToInt32(data[position][1]) * 32 + Convert.ToInt32(data[position][2]) * 16 + Convert.ToInt32(data[position][3]) * 8 + Convert.ToInt32(data[position][4]) * 4 + Convert.ToInt32(data[position][5]) * 2 + Convert.ToInt32(data[position][6]);
+            position += 1;
+            return position;
+        }
+
         public void UTM2WGS84()
         {
         }

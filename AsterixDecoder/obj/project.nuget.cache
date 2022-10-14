@@ -1,13 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rwt83ciaRuOsj1nTICCq0SyJSk7ZS1MpWEkkZKC0hIe7hHfwuLWbclLrWuki8OfSWl828idJvih6+PcwigRPFg==",
+  "dgSpecHash": "iu5L57v+Ygf6cOPUBJMVqu4AYqCdiR2m9QRZfiemWpAsTDARsfX5lfXmUtsJcv3i/FLzFZ87L9GsMyfxRMWDdg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Eduard\\Desktop\\Asterix_PGTA\\AsterixDecoder\\AsterixDecoder.csproj",
-  "expectedPackageFiles": [
-    "C:\\Users\\Eduard\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.29\\microsoft.netcore.app.host.win-x64.3.1.29.nupkg.sha512",
-    "C:\\Users\\Eduard\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
-    "C:\\Users\\Eduard\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
-    "C:\\Users\\Eduard\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512"
-  ],
+  "projectFilePath": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\AsterixDecoder\\AsterixDecoder.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }
