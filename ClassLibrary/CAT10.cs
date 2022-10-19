@@ -24,9 +24,25 @@ namespace ClassLibrary
             return msgBin;
         }
 
+        public string DecimaltoOctal() 
+        {
+
+        }
+
+        public string BinarytoHexadecimal(string binaryNumber)
+        {
+            string hexadecimalNumber = string.Format("{0:x}", Convert.ToInt32(binaryNumber, 2));
+            return hexadecimalNumber;
+        }
+
+        public string ComputeCharacter(string BinaryNumber)
+        {
+            int character = Convert.ToInt32(BinaryNumber, 2);
+            List<string> codelist = new List<string>() { "", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "", "", "", "", "", "" };
+            return codelist[character];
+        }
         
-       
-       public static string[] BinTwosComplementToSignedDecimal(string[] msgBinTwos) { 
+        public static string[] BinTwosComplementToSignedDecimal(string[] msgBinTwos) { 
             string[] msgDecimal = new string[msgBinTwos.Length];
             for (int i = 0; i < msgBinTwos.Length; i++)
             {
@@ -35,7 +51,7 @@ namespace ClassLibrary
                 Console.WriteLine(msgBinTwos[i][0]);
                 if (msgBinTwos[i][0] == '1')
                 {
-                    for (int o = 0; o < 8; o++)
+                    for (int o = 0; o < msgBinTwos[i].Length; o++)
                     {
                         if(msgBinTwos[i][o] == '1') { buffer += "0"; }
                         else if (msgBinTwos[i][o] == '0') { buffer += "1"; }
@@ -252,16 +268,6 @@ namespace ClassLibrary
             return newposition + 1;
         }
 
-        //DATA ITEM: I010/140
-        public string TimeOfDay;
-        private int TimeofDay(string[] data, int position)
-        {
-            int number = Convert.ToInt32(string.Concat(data[position], data[position + 1], data[position + 2]), 2);
-            double seconds = Convert.ToDouble(number) / 128;
-            TimeOfDay = TimeSpan.FromSeconds(seconds).ToString(@"hh\:mm\:ss\:fff");
-            position = position + 3;
-            return position;
-        }
 
         //DATA ITEM: I010/040
         public string RHO;
@@ -290,8 +296,8 @@ namespace ClassLibrary
         private int PositioninWGS84Coordinates(string[] data, int position) 
         {
             int newposition = position + 4;
-            double latitude = Convert.ToDouble(BinTwosComplementToSignedDecimal(data[position]) + BinTwosComplementToSignedDecimal(data[position + 1]) + BinTwosComplementToSignedDecimal(data[position + 2]) + BinTwosComplementToSignedDecimal(data[position + 3])) * (180 / (Math.Pow(2, 31)));
-            double longitude = Convert.ToDouble(BinTwosComplementToSignedDecimal(data[newposition]) + BinTwosComplementToSignedDecimal(data[newposition + 1]) + BinTwosComplementToSignedDecimal(data[newposition + 2]) + BinTwosComplementToSignedDecimal(data[newposition + 3])) * (180 / (Math.Pow(2, 31)));
+            double latitude = Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1], data[position + 2], data[position + 3]))) * (180 / (Math.Pow(2, 31)));
+            double longitude = Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[newposition], data[newposition + 1], data[newposition + 2], data[newposition + 3]))) * (180 / (Math.Pow(2, 31)));
 
             int latitudeDeg = Convert.ToInt32(Math.Truncate(latitude));
             int latitudeMin = Convert.ToInt32(Math.Truncate((latitude - latitudeDeg) * 60));
@@ -313,47 +319,144 @@ namespace ClassLibrary
         private int PositioninCartesianCoordinates(string[] data, int position)
         {
             int newposition = position + 4;
-            this.XMap = Convert.ToDouble(BinTwosComplementToSignedDecimal(data[position]) + BinTwosComplementToSignedDecimal(data[position + 1]));
-            this.YMap = Convert.ToDouble(BinTwosComplementToSignedDecimal(data[position + 2]) + BinTwosComplementToSignedDecimal(data[position + 3]));
+            this.XMap = Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1])));
+            this.YMap = Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position + 2], data[position + 3])));
 
             string X = Convert.ToString(this.XMap);
             string Y = Convert.ToString(this.YMap);
 
-            PositioninCartesianCoordinates = "X Component = " + XMap + ", Y Component = " + YMap;
+            this.PositioninCartesianCoordinates = "X Component = " + XMap + ", Y Component = " + YMap;
 
-            Point MapPoint = new Point(XMap, YMap);
+            //Point MapPoint = new Point(this.XMap, this.YMap);
 
-            /*
-                WSG84 FROM CARTESIAN
-
-                PointLatLng position = lib.ComputeWGS_84_from_Cartesian(p, this.SIC); //Compute WGS84 position from cartesian position
-                Set_WGS84_Coordinates(position); //Apply computed WGS84 position to this message
-
-                 public void Set_WGS84_Coordinates(PointLatLng pos)
-                {
-                    LatitudeWGS_84_map=pos.Lat;
-                    LongitudeWGS_84_map=pos.Lng;
-                    int Latdegres = Convert.ToInt32(Math.Truncate(LatitudeWGS_84_map));
-                    int Latmin = Convert.ToInt32(Math.Truncate((LatitudeWGS_84_map - Latdegres) * 60));
-                    double Latsec = Math.Round(((LatitudeWGS_84_map - (Latdegres + (Convert.ToDouble(Latmin) / 60))) * 3600), 5);
-                    int Londegres = Convert.ToInt32(Math.Truncate(LongitudeWGS_84_map));
-                    int Lonmin = Convert.ToInt32(Math.Truncate((LongitudeWGS_84_map - Londegres) * 60));
-                    double Lonsec = Math.Round(((LongitudeWGS_84_map - (Londegres + (Convert.ToDouble(Lonmin) / 60))) * 3600), 5);
-                    Latitude_in_WGS_84 = Convert.ToString(Latdegres) + "º " + Convert.ToString(Latmin) + "' " + Convert.ToString(Latsec) + "''";
-                    Longitude_in_WGS_84 = Convert.ToString(Londegres) + "º" + Convert.ToString(Lonmin) + "' " + Convert.ToString(Lonsec) + "''";
-                }
-
-            */
+            //PointLatLng position = lib.ComputeWGS_84_from_Cartesian(MapPoint, this.SIC); //Compute WGS84 position from cartesian position
+            //Set_WGS84_Coordinates(position); //Apply computed WGS84 position to this message
 
             return newposition;
+        }
+
+        /*
+        WSG84 FROM CARTESIAN
+        public PointLatLng ComputeWGS_84_from_Cartesian(Point point, string SIC)
+        {
+            PointLatLng position = new PointLatLng();
+            
+            double X_pos = position.X;
+            double Y_pos = position.Y;
+        }
+
+        public void Set_WGS84_Coordinates(PointLatLng pos)
+        {
+            LatitudeWGS_84_map=pos.Lat;
+            LongitudeWGS_84_map=pos.Lng;
+            int Latdegres = Convert.ToInt32(Math.Truncate(LatitudeWGS_84_map));
+            int Latmin = Convert.ToInt32(Math.Truncate((LatitudeWGS_84_map - Latdegres) * 60));
+            double Latsec = Math.Round(((LatitudeWGS_84_map - (Latdegres + (Convert.ToDouble(Latmin) / 60))) * 3600), 5);
+            int Londegres = Convert.ToInt32(Math.Truncate(LongitudeWGS_84_map));
+            int Lonmin = Convert.ToInt32(Math.Truncate((LongitudeWGS_84_map - Londegres) * 60));
+            double Lonsec = Math.Round(((LongitudeWGS_84_map - (Londegres + (Convert.ToDouble(Lonmin) / 60))) * 3600), 5);
+            Latitude_in_WGS_84 = Convert.ToString(Latdegres) + "º " + Convert.ToString(Latmin) + "' " + Convert.ToString(Latsec) + "''";
+            Longitude_in_WGS_84 = Convert.ToString(Londegres) + "º" + Convert.ToString(Lonmin) + "' " + Convert.ToString(Lonsec) + "''";
+        }
+        */
+
+        //DATA ITEM I010/060
+        public string VMode3A;
+        public string GMode3A;
+        public string LMode3A;
+        public string Mode3A;
+        private int Mode3ACodeinOctalRepresentation(string[] data, int position)
+        {
+            string octetNum1 = data[position];
+            string octetNum2 = data[position + 1];
+            string V = octetNum1.Substring(0, 1);
+
+            if (V == "0") this.VMode3A = "V: Code validated";
+            else this.VMode3A = "V: Code not validated";
+
+            string G = octetNum1.Substring(1, 1);
+
+            if (G == "0") this.GMode3A = "G: Default";
+            else this.GMode3A = "G: Garbled code";
+
+            string L = octetNum1.Substring(2, 1);
+
+            if (L == "0") this.LMode3A = "L: Mode-3/A code derived from the reply of the transponder";
+            else this.LMode3A = "L: Mode-3/A code not extracted during the last scan";
+
+            //!this.Mode3A = Convert.ToString(lib.ConvertDecimalToOctal(Convert.ToInt32(string.Concat(message[pos], message[pos + 1]).Substring(4, 12), 2))).PadLeft(4,'0');
+            
+            position += 2;
+            return position;
+        }
+
+        //DATA ITEM: I010/090
+        public string VFlightLevel;
+        public string GFlightLevel;
+        public string FlightLevel;
+        public string FlightLevelInfo;
+        public string FlightLevelFT;
+        private int FlightlevelinBinaryRepresentation(string[] data, int position) 
+        {
+            char[] octet = data[position].ToCharArray(0, 8);
+
+            if (octet[0] == "0") this.VFlightLevel = "Code validated";
+            else this.VFlightLevel = "Code not validated";
+
+            if(octet[1] == 0) this.GFlightLevel = "Default";
+            else this.GFlightLevel = "Garbled code";
+
+            this.FlightLevel = Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position],  data[position + 1]).Substring(2, 14))) * 0.25);
+
+            this.FlightLevelFT =  Convert.ToString(Convert.ToDouble(FlightLevel) * 100) + " ft";
+
+            this.FlightLevelInfo = this.VFlightLevel + ", " + this.GFlightLevel + ", FL" + this.FlightLevel;
+
+            position += 2;
+            return position;
+        }
+
+        //DATA ITEM: I010/091
+        public string MeasuredHeight;
+        private int MeasuredHeight(string[] data, int position)
+        {
+            this.MeasuredHeight = Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1]))) * 6.25) + " ft";
+            
+            position += 2;
+            return position;
+        }
+
+        //DATA ITEM: I010/131
+        public string PAM;
+        private int AmplitudeofPrimaryPlot(string[] data, int position)
+        {
+            double PAM = Convert.ToInt32(data[position], 2);
+
+            if (PAM == 0) this.PAM = "PAM: 0";
+            else this.PAM = "PAM: " + Convert.ToString(Convert.ToInt32(data[position], 2));
+            
+            position += 1;
+            return position;
+        }
+
+        //DATA ITEM: I010/140
+        public string TimeOfDay;
+        private int TimeofDay(string[] data, int position)
+        {
+            int number = Convert.ToInt32(string.Concat(data[position], data[position + 1], data[position + 2]), 2);
+            double seconds = Convert.ToDouble(number) / 128;
+            TimeOfDay = TimeSpan.FromSeconds(seconds).ToString(@"hh\:mm\:ss\:fff");
+            position = position + 3;
+            return position;
         }
 
         //DATA ITEM: I010/161
         public string TrackNum;
         private int TrackNumber(string[] data, int position)
         {
-            TrackNum = Convert.ToString(Convert.ToInt32(string.Concat(data[position], data[position + 1]), 2));
-            position = position + 2;
+            this.TrackNum = Convert.ToString(Convert.ToInt32(string.Concat(data[position], data[position + 1]), 2));
+            
+            position += 2;
             return position;
         }
 
@@ -371,166 +474,91 @@ namespace ClassLibrary
         private int TrackStatus(string[] data, int position)
         {
             char[] octet = data[position].ToCharArray(0, 8);
-            if (octet[0] == '0') { 
-                CNF = "Confirmed track"; 
-            }
-            else { 
-                CNF = "Track in initialisation phase"; 
-            }
-            if (octet[1] == '0') { 
-                TRE = "Default"; 
-            }
-            else { 
-                TRE = "Last report for a track"; 
-            }
+            if (octet[0] == '0') this.CNF = "Confirmed track";
+            else this.CNF = "Track in initialisation phase";
+            
+            if (octet[1] == '0') this.TRE = "Default";
+            else this.TRE = "Last report for a track";
+
             string crt = string.Concat(octet[2], octet[3]);
-            if (crt == "00") { 
-                CST = "No extrapolation"; 
-            }
-            else if (crt == "01") {
-                CST = "Predictable extrapolation due to sensor refresh period"; 
-            }
-            else if (crt == "10") {
-                CST = "Predictable extrapolation in masked area"; 
-            }
-            else if (crt == "11") {
-                CST = "Extrapolation due to unpredictable absence of detection"; 
-            }
-            if (octet[4] == '0') { 
-                MAH = "Default"; 
-            }
-            else { 
-                MAH = "Horizontal manoeuvre"; 
-            }
-            if (octet[5] == '0') {
-                TCC = "Tracking performed in 'Sensor Plane', i.e. neither slant range correction nor projection was applied."; 
-            }
-            else { 
-                TCC = "Slant range correction and a suitable projection technique are used to track in a 2D.reference plane, tangential to the earth model at the Sensor Site co-ordinates."; 
-            }
-            if (octet[6] == '0') {
-                STH = "Measured position"; 
-            }
-            else {
-                STH = "Smoothed position"; 
-            }
+            if (crt == "00") this.CST = "No extrapolation";
+            else if (crt == "01") this.CST = "Predictable extrapolation due to sensor refresh period"; 
+            else if (crt == "10") this.CST = "Predictable extrapolation in masked area"; 
+            else if (crt == "11") this.CST = "Extrapolation due to unpredictable absence of detection"; 
+            
+            if (octet[4] == '0') this.MAH = "Default";
+            else this.MAH = "Horizontal manoeuvre";
+
+            if (octet[5] == '0') this.TCC = "Tracking performed in 'Sensor Plane', i.e. neither slant range correction nor projection was applied."; 
+            else this.TCC = "Slant range correction and a suitable projection technique are used to track in a 2D.reference plane, tangential to the earth model at the Sensor Site co-ordinates."; 
+            
+            if (octet[6] == '0') this.STH = "Measured position"; 
+            else this.STH = "Smoothed position"; 
+            
             position = position + 2;
 
             if (octet[7] == '1')
             {
                 octet = data[position].ToCharArray(0, 8);
                 string tom = string.Concat(octet[0], octet[1]);
-                if (tom == "00") { 
-                    TOM = "Unknown type of movement"; 
-                }
-                else if (tom == "01") {
-                    TOM = "Taking-off"; 
-                }
-                else if (tom == "10") { 
-                    TOM = "Landing"; 
-                }
-                else if (tom == "11") { 
-                    TOM = "Other types of movement"; 
-                }
+                if (tom == "00") this.TOM = "Unknown type of movement";
+                else if (tom == "01") this.TOM = "Taking-off"; 
+                else if (tom == "10") this.TOM = "Landing"; 
+                else if (tom == "11") this.TOM = "Other types of movement"; 
+
                 string dou = string.Concat(octet[2], octet[3], octet[4]);
-                if (dou == "000") { 
-                    DOU = "No doubt"; 
-                }
-                else if (dou == "001") { 
-                    DOU = "Doubtful correlation (undetermined reason)"; 
-                }
-                else if (dou == "010") {
-                    DOU = "Doubtful correlation in clutter"; 
-                }
-                else if (dou == "011") {
-                    DOU = "Loss of accuracy"; 
-                }
-                else if (dou == "100") {
-                    DOU = "Loss of accuracy in clutter"; 
-                }
-                else if (dou == "101") {
-                    DOU = "Unstable track"; 
-                }
-                else if (dou == "110") { 
-                    DOU = "Previously coasted"; 
-                }
+                if (dou == "000") this.DOU = "No doubt"; 
+                else if (dou == "001") this.DOU = "Doubtful correlation (undetermined reason)"; 
+                else if (dou == "010") this.DOU = "Doubtful correlation in clutter"; 
+                else if (dou == "011") this.DOU = "Loss of accuracy"; 
+                else if (dou == "100") this.DOU = "Loss of accuracy in clutter"; 
+                else if (dou == "101") this.DOU = "Unstable track"; 
+                else if (dou == "110") this.DOU = "Previously coasted";
+
                 string mrs = string.Concat(octet[5], octet[6]);
-                if (mrs == "00") { 
-                    MRS = "Merge or split indication undetermined"; 
-                }
-                else if (mrs == "01") {
-                    MRS = "Track merged by association to plot"; 
-                }
-                else if (mrs == "10") { 
-                    MRS = "Track merged by non-association to plot"; 
-                }
-                else if (mrs == "11") {
-                    MRS = "Split track"; 
-                }
+                if (mrs == "00") this.MRS = "Merge or split indication undetermined"; 
+                else if (mrs == "01") this.MRS = "Track merged by association to plot"; 
+                else if (mrs == "10") this.MRS = "Track merged by non-association to plot"; 
+                else if (mrs == "11") this.MRS = "Split track"; 
+
                 position = position + 2;
 
                 if (octet[7] == '1')
                 {
                     octet = data[position].ToCharArray(0, 8);
-                    if (octet[0] == '0') { 
-                        GHO = "GHO: Default"; 
-                    }
-                    else { 
-                        GHO = "Ghost track"; 
-                    }
+                    if (octet[0] == '0') this.GHO = "GHO: Default";
+                    else this.GHO = "Ghost track";
+
                     position = position + 2;
                 }
             }
             return position;
         }
 
-        //DATA ITEM I010/060
-        public string VMode3A;
-        public string GMode3A;
-        public string LMode3A;
-        public string Mode3A;
-        private int Mode3ACodeinOctalRepresentation(string[] data, int position)
+        //DATA ITEM: I010/200
+        public string GroundSpeed;
+        public string TrackAngle;
+        public string TrackVelocityPolarCoordinates;
+        private int TrackVelocityInPolarCoordinates(string[] data, int position)
         {
-            string octetNum1 = data[position];
-            string octetNum2 = data[position + 1];
-            string V = octetNum1.Substring(0, 1);
+            double groundSpeed = Convert.ToDouble(Convert.ToInt32(string.Concat(data[position], data[position + 1]), 2)) * Math.Pow(2, -14);
+            
+            //!FALTA
 
-            if (V == "0") VMode3A = "V: Code validated";
-            else VMode3A = "V: Code not validated";
-
-            string G = octetNum1.Substring(1, 1);
-
-            if (G == "0") GMode3A = "G: Default";
-            else GMode3A = "G: Garbled code";
-
-            string L = octetNum1.Substring(2, 1);
-
-            if (L == "0") LMode3A = "L: Mode-3/A code derived from the reply of the transponder";
-            else LMode3A = "L: Mode-3/A code not extracted during the last scan";
-
-            return position;
         }
 
-        public string BinarytoHexadecimal(string binaryNumber)
-        {
-            string hexadecimalNumber = string.Format("{0:x}", Convert.ToInt32(binaryNumber, 2));
-            return hexadecimalNumber;
-        }
+        //DATA ITEM: I010/202
+
+        //DATA ITEM: I010/210
+
 
         //DATA ITEM: I010/220
         public string TargetAdd; //In Hexadecimal 
         private int TargetAddress(string[] data, int position)
         {
-            TargetAdd = string.Concat(BinarytoHexadecimal(data[position]), BinarytoHexadecimal(data[position + 1]), BinarytoHexadecimal(data[position + 2]));
-            position = position + 3;
+            this.TargetAdd = string.Concat(BinarytoHexadecimal(data[position]), BinarytoHexadecimal(data[position + 1]), BinarytoHexadecimal(data[position + 2]));
+            position += 3;
             return position;
-        }
-
-        public string ComputeCharacter(string BinaryNumber)
-        {
-            int character = Convert.ToInt32(BinaryNumber, 2);
-            List<string> codelist = new List<string>() { "", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "", "", "", "", "", "" };
-            return codelist[character];
         }
 
         //DATA ITEM: I010/245
@@ -538,21 +566,15 @@ namespace ClassLibrary
         public string TargetId;
         private int TargetIdentification(string[] data, int position)
         {
-            STI = data[position];
-            if (STI == "00000000") {
-                STI = "Callsign or registration downlinked from transponder"; 
-            }
-            else if (STI == "01000000") {
-                STI = "Callsign not downlinked from transponder"; 
-            }
-            else if (STI == "10000000") {
-                STI = "Registration not downlinked from transponder"; 
-            }
+            string sti = data[position];
+            if (sti == "00000000") this.STI = "Callsign or registration downlinked from transponder";
+            else if (sti == "01000000") this.STI = "Callsign not downlinked from transponder"; 
+            else if (sti == "10000000") this.STI = "Registration not downlinked from transponder"; 
+
             string characters = string.Concat(data[position + 1], data[position + 2], data[position + 3], data[position + 4], data[position + 5], data[position + 6]);
-            for (int i = 0; i < 8; i++) {
-                TargetId = Convert.ToString(ComputeCharacter(characters.Substring(i * 6, 6))); 
-            }
-            position = position + 7;
+            for (int i = 0; i < 8; i++) this.TargetId = Convert.ToString(ComputeCharacter(characters.Substring(i * 6, 6))); 
+            
+            position += 7;
             return position;
         }
 
@@ -562,25 +584,16 @@ namespace ClassLibrary
         public int targetLenght2;
         public int TargetSizeOrientation(string[] data, int position)
         {
-            targetLength = Convert.ToInt32(data[position][0]) * 64 + Convert.ToInt32(data[position][1]) * 32 + Convert.ToInt32(data[position][2]) * 16 + Convert.ToInt32(data[position][3]) * 8 + Convert.ToInt32(data[position][4]) * 4 + Convert.ToInt32(data[position][5]) * 2 + Convert.ToInt32(data[position][6]);
-            if (data[position][7] == '1')
-            {
-                position = +1;
-            }
-            else
-            {
-                return position;
-            }
-            targetOrientation = Convert.ToInt32(data[position][0]) * 64 * 2.81 + Convert.ToInt32(data[position][1]) * 32 * 2.81 + Convert.ToInt32(data[position][2]) * 16 * 2.81 + Convert.ToInt32(data[position][3]) * 8 * 2.81 + Convert.ToInt32(data[position][4]) * 4 * 2.81 + Convert.ToInt32(data[position][5]) * 2 * 2.81 + Convert.ToInt32(data[position][6]) * 2.81;
-            if (data[position][7] == '1')
-            {
-                position = +1;
-            }
-            else
-            {
-                return position;
-            }
-            targetLenght2 = Convert.ToInt32(data[position][0]) * 64 + Convert.ToInt32(data[position][1]) * 32 + Convert.ToInt32(data[position][2]) * 16 + Convert.ToInt32(data[position][3]) * 8 + Convert.ToInt32(data[position][4]) * 4 + Convert.ToInt32(data[position][5]) * 2 + Convert.ToInt32(data[position][6]);
+            this.targetLength = Convert.ToInt32(data[position][0]) * 64 + Convert.ToInt32(data[position][1]) * 32 + Convert.ToInt32(data[position][2]) * 16 + Convert.ToInt32(data[position][3]) * 8 + Convert.ToInt32(data[position][4]) * 4 + Convert.ToInt32(data[position][5]) * 2 + Convert.ToInt32(data[position][6]);
+            if (data[position][7] == '1') position = +1;
+            else return position;
+            
+            this.targetOrientation = Convert.ToInt32(data[position][0]) * 64 * 2.81 + Convert.ToInt32(data[position][1]) * 32 * 2.81 + Convert.ToInt32(data[position][2]) * 16 * 2.81 + Convert.ToInt32(data[position][3]) * 8 * 2.81 + Convert.ToInt32(data[position][4]) * 4 * 2.81 + Convert.ToInt32(data[position][5]) * 2 * 2.81 + Convert.ToInt32(data[position][6]) * 2.81;
+            if (data[position][7] == '1') position = +1;
+            else return position;
+            
+            this.targetLenght2 = Convert.ToInt32(data[position][0]) * 64 + Convert.ToInt32(data[position][1]) * 32 + Convert.ToInt32(data[position][2]) * 16 + Convert.ToInt32(data[position][3]) * 8 + Convert.ToInt32(data[position][4]) * 4 + Convert.ToInt32(data[position][5]) * 2 + Convert.ToInt32(data[position][6]);
+            
             position += 1;
             return position;
         }
