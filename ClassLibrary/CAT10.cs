@@ -26,7 +26,7 @@ namespace ClassLibrary
 
         public string DecimaltoOctal() 
         {
-
+            return;
         }
 
         public string BinarytoHexadecimal(string binaryNumber)
@@ -42,30 +42,26 @@ namespace ClassLibrary
             return codelist[character];
         }
         
-        public static string[] BinTwosComplementToSignedDecimal(string[] msgBinTwos) { 
-            string[] msgDecimal = new string[msgBinTwos.Length];
-            for (int i = 0; i < msgBinTwos.Length; i++)
+        public static string BinTwosComplementToSignedDecimal(string msgBinTwos) {
+            string msgDecimal;
+            String buffer = "";
+            int result = 0;
+            if (msgBinTwos[0] == '1')
             {
-                String buffer = "";
-                int result = 0;
-                Console.WriteLine(msgBinTwos[i][0]);
-                if (msgBinTwos[i][0] == '1')
+                for (int o = 0; o < msgBinTwos.Length; o++)
                 {
-                    for (int o = 0; o < msgBinTwos[i].Length; o++)
-                    {
-                        if(msgBinTwos[i][o] == '1') { buffer += "0"; }
-                        else if (msgBinTwos[i][o] == '0') { buffer += "1"; }
-                    }
-                    result = Convert.ToInt32(buffer, 2);
-                    result += 1;
-                    result = result * (-1);
+                    if (msgBinTwos[o] == '1') { buffer += "0"; }
+                    else if (msgBinTwos[o] == '0') { buffer += "1"; }
                 }
-                else
-                {
-                    result = Convert.ToInt32(msgBinTwos[i], 2);
-                }
-                msgDecimal[i] = Convert.ToString(result);
+                result = Convert.ToInt32(buffer, 2);
+                result += 1;
+                result = result * (-1);
             }
+            else
+            {
+                result = Convert.ToInt32(msgBinTwos, 2);
+            }
+            msgDecimal = Convert.ToString(result);
             return msgDecimal;
         }
 
@@ -315,7 +311,7 @@ namespace ClassLibrary
         //DATA ITEM: I010/42
         public double XMap = -99999; //For the map
         public double YMap = -99999; //For the map
-        public string PositioninCartesianCoordinates;
+        public string positioninCartesianCoordinates;
         private int PositioninCartesianCoordinates(string[] data, int position)
         {
             int newposition = position + 4;
@@ -325,7 +321,7 @@ namespace ClassLibrary
             string X = Convert.ToString(this.XMap);
             string Y = Convert.ToString(this.YMap);
 
-            this.PositioninCartesianCoordinates = "X Component = " + XMap + ", Y Component = " + YMap;
+            positioninCartesianCoordinates = "X Component = " + XMap + ", Y Component = " + YMap;
 
             //Point MapPoint = new Point(this.XMap, this.YMap);
 
@@ -400,7 +396,7 @@ namespace ClassLibrary
         {
             char[] octet = data[position].ToCharArray(0, 8);
 
-            if (octet[0] == "0") this.VFlightLevel = "Code validated";
+            if (octet[0] == '0') this.VFlightLevel = "Code validated";
             else this.VFlightLevel = "Code not validated";
 
             if(octet[1] == 0) this.GFlightLevel = "Default";
@@ -417,10 +413,10 @@ namespace ClassLibrary
         }
 
         //DATA ITEM: I010/091
-        public string MeasuredHeight;
+        public string measuredHeight;
         private int MeasuredHeight(string[] data, int position)
         {
-            this.MeasuredHeight = Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1]))) * 6.25) + " ft";
+            measuredHeight = Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1]))) * 6.25) + " ft";
             
             position += 2;
             return position;
@@ -548,9 +544,35 @@ namespace ClassLibrary
         }
 
         //DATA ITEM: I010/202
-
+        public string Vx;
+        public string Vy;
+        public string TrackVelocityinCartesianCoordinates;
+        private int TrackVelocityCartesianCoordinates(string[] data, int position)
+        {
+            double vx = Convert.ToInt32(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1])))*0.25;
+            Vx = "Vx: " + Convert.ToString(vx) + " m/s, ";
+            double vy = Convert.ToInt32(BinTwosComplementToSignedDecimal(string.Concat(data[position + 2], data[position + 3]))) * 0.25;
+            Vy = "Vy: " + Convert.ToString(vy) + " m/s";
+            TrackVelocityinCartesianCoordinates = Vx + Vy;
+            position += 4;
+            return position;
+        }
         //DATA ITEM: I010/210
-
+        public string Ax;
+        public string Ay;
+        public string Calculated_Acceleration;
+        private int CalculatedAcceleration(string[] data, int position)
+        {
+            double ax = Convert.ToInt32(BinTwosComplementToSignedDecimal(data[position])) * 0.25;
+            double ay = Convert.ToInt32(BinTwosComplementToSignedDecimal(data[position + 1])) * 0.25;
+            if (ax >= 31 || ax <= -31) { Ax = "Ax exceed the max value"; }
+            else { Ax = "Ax: " + Convert.ToString(ax) + "m/s^2"; }
+            if (ay >= 31 || ax <= -31) { Ay = "Ay exceed the max value"; }
+            else { Ay = "Ay: " + Convert.ToString(ay) + "m/s^2"; }
+            Calculated_Acceleration = Ax + " " + Ay;
+            position += 2;
+            return position;
+        }
 
         //DATA ITEM: I010/220
         public string TargetAdd; //In Hexadecimal 
@@ -578,6 +600,26 @@ namespace ClassLibrary
             return position;
         }
 
+        //DATA ITEM: I010/250 
+        public string[] MBData;
+        public string[] BDS1;
+        public string[] BDS2;
+        public int modeSrep;
+        private int ModeSMBData(string[] data, int position)
+        {
+            modeSrep = Convert.ToInt32(data[position], 2);
+            if (modeSrep < 0) { MBData = new string[modeSrep]; BDS1 = new string[modeSrep]; BDS2 = new string[modeSrep]; }
+            position++;
+            for (int i = 0; i < modeSrep; i++)
+            {
+                MBData[i] = String.Concat(data[position], data[position + 1], data[position + 2], data[position + 3], data[position + 4], data[position + 5], data[position + 6]);
+                BDS1[1] = data[position + 7].Substring(0, 4);
+                BDS2[1] = data[position + 7].Substring(4, 4);
+                position += 8;
+            }
+            return position;
+        }
+
         //DATA ITEM: I010/270 
         public int targetLength;
         public double targetOrientation;
@@ -595,6 +637,107 @@ namespace ClassLibrary
             this.targetLenght2 = Convert.ToInt32(data[position][0]) * 64 + Convert.ToInt32(data[position][1]) * 32 + Convert.ToInt32(data[position][2]) * 16 + Convert.ToInt32(data[position][3]) * 8 + Convert.ToInt32(data[position][4]) * 4 + Convert.ToInt32(data[position][5]) * 2 + Convert.ToInt32(data[position][6]);
             
             position += 1;
+            return position;
+        }
+
+        //DATA ITEM: I010/280 
+        public int REPPresence = 0;
+        public string[] DRHO;
+        public string[] DTHETA;
+        private int Presence(string[] data, int position)
+        {
+            REPPresence = Convert.ToInt32(string.Concat(data[position]), 2);
+            position++;
+            for (int i = 0; i < REPPresence; i++)
+            {
+                DRHO[i] = Convert.ToString(Convert.ToInt32(data[position], 2)) + "m";
+                DTHETA[i] = Convert.ToString(Convert.ToDouble(Convert.ToInt32(data[position + 1], 2)) * 0.15) + "º";
+                position += 2;
+            }
+            return position;
+        }
+
+        //DATA ITEM: I010/300
+        public string VFI;
+        private int VehicleFleetIdentificatior(string[] data, int position)
+        {
+            int vfi = Convert.ToInt32(data[position], 2);
+            if (vfi == 0) { VFI = "Unknown"; }
+            else if (vfi == 1) { VFI = "ATC equipment maintenance"; }
+            else if (vfi == 2) { VFI = "Airport maintenance"; }
+            else if (vfi == 3) { VFI = "Fire"; }
+            else if (vfi == 4) { VFI = "Bird scarer"; }
+            else if (vfi == 5) { VFI = "Snow plough"; }
+            else if (vfi == 6) { VFI = "Runway sweeper"; }
+            else if (vfi == 7) { VFI = "Emergency"; }
+            else if (vfi == 8) { VFI = "Police"; }
+            else if (vfi == 9) { VFI = "Bus"; }
+            else if (vfi == 10) { VFI = "Tug (push/tow)"; }
+            else if (vfi == 11) { VFI = "Grass cutter"; }
+            else if (vfi == 12) { VFI = "Fuel"; }
+            else if (vfi == 13) { VFI = "Baggage"; }
+            else if (vfi == 14) { VFI = "Catering"; }
+            else if (vfi == 15) { VFI = "Aircraft maintenance"; }
+            else if (vfi == 16) { VFI = "Flyco (follow me)"; }
+            position = position++;
+            return position;
+        }
+
+        //DATA ITEM: I010/300
+        public string TRB;
+        public string MSG;
+        public string preProgrammedMessage;
+        private int PreProgrammedMessage(string[] data, int position)
+        {
+            char[] OctetoChar = data[position].ToCharArray(0, 8);
+            if (OctetoChar[0] == '0') { TRB = "Trouble: Default"; }
+            else if (OctetoChar[0] == '1') { TRB = "Trouble: In Trouble"; }
+            int msg = Convert.ToInt32(data[position].Substring(1, 7), 2);
+            if (msg == 1) { MSG = "Message: Towing aircraft"; }
+            else if (msg == 2) { MSG = "Message: “Follow me” operation"; }
+            else if (msg == 3) { MSG = "Message: Runway check"; }
+            else if (msg == 4) { MSG = "Message: Emergency operation (fire, medical…)"; }
+            else if (msg == 5) { MSG = "Message: Work in progress (maintenance, birds scarer, sweepers…)"; }
+            position++;
+            preProgrammedMessage = TRB + " " + MSG;
+            return position;
+        }
+
+        //DATA ITEM: I010/300
+        public string DeviationX;
+        public string DeviationY;
+        public string CovarianceXY;
+        private int StandardDeviationOfPosition(string[] data, int position)
+        {
+            DeviationX = "Standard Deviation of X component (σx):" + Convert.ToString(Convert.ToDouble(Convert.ToInt32(data[position], 2)) * 0.25) + "m";
+            DeviationY = "Standard Deviation of Y component (σy): " + Convert.ToString(Convert.ToDouble(Convert.ToInt32(data[position + 1], 2)) * 0.25) + "m";
+            CovarianceXY = "Covariance (σxy): " + Convert.ToString(Convert.ToInt32(BinTwosComplementToSignedDecimal(string.Concat(data[position + 2], data[position + 3]))) * 0.25) + "m^2";
+            position += 4;
+            return position;
+        }
+
+        //DATA ITEM: I010/300
+        public string NOGO;
+        public string OVL;
+        public string TSV;
+        public string DIV;
+        public string TIF;
+        private int Compute_System_Status(string[] data, int position)
+        {
+            char[] OctetoChar = data[position].ToCharArray(0, 8);
+            int nogo = Convert.ToInt32(string.Concat(OctetoChar[0], OctetoChar[1]), 2);
+            if (nogo == 0) { NOGO = "Operational Release Status of the System (NOGO): Operational"; }
+            else if (nogo == 1) { NOGO = "Operational Release Status of the System (NOGO): Degraded"; }
+            else if (nogo == 2) { NOGO = "Operational Release Status of the System (NOGO): NOGO"; }
+            if (OctetoChar[2] == '0') { OVL = "Overload indicator: No overload"; }
+            else if (OctetoChar[2] == '1') { OVL = "Overload indicator: Overload"; }
+            if (OctetoChar[3] == '0') { TSV = "Time Source Validity: Valid"; }
+            else if (OctetoChar[3] == '1') { TSV = "Time Source Validity: Invalid"; }
+            if (OctetoChar[4] == '0') { DIV = "DIV: Normal Operation"; }
+            else if (OctetoChar[4] == '1') { DIV = "DIV: Diversity degraded"; }
+            if (OctetoChar[5] == '0') { TIF = "TIF: Test Target Operative"; }
+            else if (OctetoChar[5] == '1') { TIF = "TIF: Test Target Failure"; }
+            position = position++;
             return position;
         }
 
