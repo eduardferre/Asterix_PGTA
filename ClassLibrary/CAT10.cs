@@ -571,13 +571,13 @@ namespace ClassLibrary
             double groundSpeed_meters = groundSpeed * 1852;
 
             if (groundSpeed >= 2) this.GroundSpeed = "Ground Speed is equal or higher than the maximum available value (2 NM/s), ";
-            else this.GroundSpeed = "GroundSpeed: " + String.Format("{0:0.00}", meters) + " m/s, ";
+            else this.GroundSpeed = "GroundSpeed: " + String.Format("{0:0.00}", groundSpeed_meters) + " m/s, ";
 
             this.TrackAngle = "TrackAngle: " + String.Format("{0:0.00}", (Convert.ToInt32(string.Concat(data[position + 2], data[position + 3]),2)) * (360 / (Math.Pow(2, 16)))) + "°";
             this.TrackVelocityPolarCoordinates = this.GroundSpeed + this.TrackAngle;
 
-            posiiton = posiiton + 4;
-            return posiiton;
+            position = position + 4;
+            return position;
 
         }
 
@@ -586,7 +586,7 @@ namespace ClassLibrary
         public string Vy;
         public string TrackVelocityinCartesianCoordinates;
 
-        private int TrackVelocityCartesianCoordinates(string[] data, int position)
+        private int TrackVelocityInCartesianCoordinates(string[] data, int position)
         {
             double vx = Convert.ToInt32(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1])))*0.25;
             this.Vx = "Vx: " + Convert.ToString(vx) + " m/s, ";
