@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 
 namespace ClassLibrary
 {
     public class CAT10
     {
-        public static string[] HexToBinary(string msgHexa)
+        public static string HexToBinary(string msgHexa)
         {
             string[] msgBin = new string[msgHexa.Length];
+            string msgBinReal = "";
             for (int i = 0; i < msgHexa.Length; i++) {
                // if (msghexa[i].Length == 1){
                //     msghexa[i] = string.Concat('0', msghexa[i]);
@@ -19,8 +21,10 @@ namespace ClassLibrary
                 {
                     msgBin[i] = string.Concat('0', msgBin[i]);
                 }
+
+                msgBinReal = string.Concat(msgBinReal, msgBin[i]);
             }
-            return msgBin;
+            return msgBinReal;
         }
 
         public int DecimalToOctal(int decimalNum) 
@@ -91,17 +95,19 @@ namespace ClassLibrary
             return FSPECNum;
         }
 
-        readonly string[] FSPEC; 
-        string[] data; //octets
+        readonly string[] FSPEC;
         int position; //one octet
         public string CAT = "10";
 
-        public void DecodeCAT10(string[] datamesaje, int position)
+        public void DecodeCAT10(string[] dataMessage, int position)
         {
-            string FSPECNum = FSPECnum(datamesaje);
+            string FSPECNum = FSPECnum(dataMessage);
             position = 3 + FSPECNum.Length / 7;
             char[] FSPEC = FSPECNum.ToCharArray(0, FSPECNum.Length);
-            for (int i = 0; i < datamesaje.Length; i++) this.data = HexToBinary(datamesaje[i]);
+
+            string[] data = new string[dataMessage.Length];
+
+            for (int i = 0; i < dataMessage.Length; i++) data[i] = HexToBinary(dataMessage[i]).ToString();
 
             if (FSPEC[0] == '1') this.position = DataSourceIdentifier(data, position);
             if (FSPEC[1] == '1') this.position = MessageType(data, position);
