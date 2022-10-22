@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using ClassLibrary;
 
 namespace ConsoleApp1
@@ -40,6 +41,8 @@ namespace ConsoleApp1
                 for(int j = 0; j < byteSelect.Length; j++)
                 {
                     arrayHex[j] = byteSelect[j].ToString("X");
+
+                    if (arrayHex[j].Length <= 1) arrayHex[j] = string.Concat('0', arrayHex[j]);
                 }
 
                 listHex.Add(arrayHex);
@@ -56,8 +59,6 @@ namespace ConsoleApp1
             Console.WriteLine("CAT" + CAT + ", lenght: " + lenght);
 
             cat10.DecodeCAT10(arrayMsg, 0);
-
-            Console.WriteLine(cat10.CNF);
         }
 
         

@@ -8,6 +8,8 @@ namespace ClassLibrary
 {
     public class CAT10
     {
+        #region Extra Functions for Decoding Parameters
+
         public static string HexToBinary(string msgHexa)
         {
             string[] msgBin = new string[msgHexa.Length];
@@ -25,6 +27,42 @@ namespace ClassLibrary
                 msgBinReal = string.Concat(msgBinReal, msgBin[i]);
             }
             return msgBinReal;
+        }
+
+        public string HexToBinary1(string octeto)
+        {
+            StringBuilder Octeto1 = new StringBuilder();
+            StringBuilder Octeto2 = new StringBuilder();
+            int i = 0;
+
+            foreach (char a in octeto)
+            {
+                if (i == 0) { 
+                    int len = Octeto1.Append(Convert.ToString(Convert.ToInt32(Convert.ToString(a), 16), 2)).ToString().Length;
+
+                    while (len < 4)
+                    {
+                        Octeto1.Insert(0, '0');
+                        len = Octeto1.Length;
+                    }
+                    i++;
+                }
+                else
+                {
+                    int len = Octeto2.Append(Convert.ToString(Convert.ToInt32(Convert.ToString(a), 16), 2)).ToString().Length;
+
+                    while (len < 4)
+                    {
+                        Octeto2.Insert(0, '0');
+                        len = Octeto2.Length;
+                    }
+                }
+
+            }
+
+            string oct = Octeto1.Append(Octeto2).ToString();
+
+            return oct;
         }
 
         public int DecimalToOctal(int decimalNum) 
@@ -95,6 +133,18 @@ namespace ClassLibrary
             return FSPECNum;
         }
 
+        public void UTM2WGS84()
+        {
+        }
+
+        public void LLA2UTM()
+        {
+        }
+
+        #endregion
+
+        #region CAT10 Decoding Procedure 
+
         readonly string[] FSPEC;
         int position; //one octet
         public string CAT = "10";
@@ -107,46 +157,51 @@ namespace ClassLibrary
 
             string[] data = new string[dataMessage.Length];
 
-            for (int i = 0; i < dataMessage.Length; i++) data[i] = HexToBinary(dataMessage[i]).ToString();
+            for (int i = 0; i < dataMessage.Length; i++)
+            {
+                data[i] = HexToBinary1(dataMessage[i]);
+            }
 
-            if (FSPEC[0] == '1') this.position = DataSourceIdentifier(data, position);
-            if (FSPEC[1] == '1') this.position = MessageType(data, position);
-            if (FSPEC[2] == '1') this.position = TargetReportDescriptor(data, position);
-            if (FSPEC[3] == '1') this.position = TimeofDay(data, position);
-            if (FSPEC[4] == '1') this.position = PositioninWGS84Coordinates(data, position);
-            if (FSPEC[5] == '1') this.position = MeasuredPositioninPolarCoordinates(data, position);
-            if (FSPEC[6] == '1') this.position = PositioninCartesianCoordinates(data, position);
+            if (FSPEC[0] == '1') position = DataSourceIdentifier(data, position);
+            if (FSPEC[1] == '1') position = MessageType(data, position);
+            if (FSPEC[2] == '1') position = TargetReportDescriptor(data, position);
+            if (FSPEC[3] == '1') position = TimeofDay(data, position);
+            if (FSPEC[4] == '1') position = PositioninWGS84Coordinates(data, position);
+            if (FSPEC[5] == '1') position = PositioninPolarCoordinates(data, position);
+            if (FSPEC[6] == '1') position = PositioninCartesianCoordinates(data, position);
             
             if (FSPEC.Length > 8)
             {
-                if (FSPEC[7] == '1') this.position = TrackVelocityInPolarCoordinates(data, position); 
-                if (FSPEC[8] == '1') this.position = TrackVelocityInCartesianCoordinates(data, position); 
-                if (FSPEC[9] == '1') this.position = TrackNumber(data, position); 
-                if (FSPEC[10] == '1') this.position = TrackStatus(data, position);
-                if (FSPEC[11] == '1') this.position = Mode3ACodeinOctalRepresentation(data, position); 
-                if (FSPEC[12] == '1') this.position = TargetAddress(data, position); 
-                if (FSPEC[13] == '1') this.position = TargetIdentification(data, position); 
+                if (FSPEC[7] == '1') position = TrackVelocityInPolarCoordinates(data, position); 
+                if (FSPEC[8] == '1') position = TrackVelocityInCartesianCoordinates(data, position); 
+                if (FSPEC[9] == '1') position = TrackNumber(data, position); 
+                if (FSPEC[10] == '1') position = TrackStatus(data, position);
+                if (FSPEC[11] == '1') position = Mode3ACodeinOctalRepresentation(data, position); 
+                if (FSPEC[12] == '1') position = TargetAddress(data, position); 
+                if (FSPEC[13] == '1') position = TargetIdentification(data, position); 
             }
 
             if (FSPEC.Length > 15)
             {
-                if (FSPEC[14] == '1') this.position = ModeSMBData(data, position); 
-                if (FSPEC[15] == '1') this.position = VehicleFleetIdentificatior(data, position); 
-                if (FSPEC[16] == '1') this.position = FlightlevelinBinaryRepresentation(data, position);
-                if (FSPEC[17] == '1') this.position = MeasuredHeight(data, position);
-                if (FSPEC[18] == '1') this.position = TargetSizeOrientation(data, position);
-                if (FSPEC[19] == '1') this.position = SystemStatus(data, position);
-                if (FSPEC[20] == '1') this.position = PreProgrammedMessage(data, position);
+                if (FSPEC[14] == '1') position = ModeSMBData(data, position); 
+                if (FSPEC[15] == '1') position = VehicleFleetIdentificatior(data, position); 
+                if (FSPEC[16] == '1') position = FlightlevelinBinaryRepresentation(data, position);
+                if (FSPEC[17] == '1') position = MeasuredHeight(data, position);
+                if (FSPEC[18] == '1') position = TargetSizeOrientation(data, position);
+                if (FSPEC[19] == '1') position = SystemStatus(data, position);
+                if (FSPEC[20] == '1') position = PreProgrammedMessage(data, position);
             }
 
             if (FSPEC.Length > 22)
             {
-                if (FSPEC[21] == '1') this.position = StandardDeviationOfPosition(data, position);
-                if (FSPEC[22] == '1') this.position = Presence(data, position);
-                if (FSPEC[23] == '1') this.position = AmplitudeofPrimaryPlot(data, position);
-                if (FSPEC[24] == '1') this.position = CalculatedAcceleration(data, position);
+                if (FSPEC[21] == '1') position = StandardDeviationOfPosition(data, position);
+                if (FSPEC[22] == '1') position = Presence(data, position);
+                if (FSPEC[23] == '1') position = AmplitudeofPrimaryPlot(data, position);
+                if (FSPEC[24] == '1') position = CalculatedAcceleration(data, position);
             }
         }
+
+        #endregion
 
         #region DATA ITEMS DEFINITION & PARAMETER CALCULATION
 
@@ -155,19 +210,14 @@ namespace ClassLibrary
 
         private int MessageType(string[] data, int position)
         {
-            string messageType = data[position];
-            if (messageType == "00") {
-                this.messageType = "Target Report"; 
-            }
-            if (messageType == "01") {
-                this.messageType = "Start of Update Cycle"; 
-            }
-            if (messageType == "10") {
-                this.messageType = "Periodic Status Message"; 
-            }
-            if (messageType == "11") {
-                this.messageType = "Event-triggered Status Message"; 
-            }
+            int messageType = Convert.ToInt32(data[position], 2);
+            if (messageType == 1) this.messageType = "Target Report";
+            if (messageType == 2) this.messageType = "Start of Update Cycle";
+            if (messageType == 3) this.messageType = "Periodic Status Message";
+            if (messageType == 4) this.messageType = "Event-triggered Status Message"; 
+
+            Console.WriteLine("MessageType: " + this.messageType);
+
             position = position + 1;
             return position;
         }
@@ -179,6 +229,10 @@ namespace ClassLibrary
         {
             this.SAC = Convert.ToString(Convert.ToInt32(data[position], 2));
             this.SIC = Convert.ToString(Convert.ToInt32(data[position + 1], 2));
+
+            Console.WriteLine("SAC: " + this.SAC);
+            Console.WriteLine("SIC: " + this.SIC);
+
             position = position + 2;
             return position;
         }
@@ -287,6 +341,18 @@ namespace ClassLibrary
                 }
             }
 
+            Console.WriteLine("TYP: " + this.TYP);
+            Console.WriteLine("DCR: " + this.DCR);
+            Console.WriteLine("CHN: " + this.CHN);
+            Console.WriteLine("GBS: " + this.GBS);
+            Console.WriteLine("CRT: " + this.CRT);
+            Console.WriteLine("SIM: " + this.SIM);
+            Console.WriteLine("TST: " + this.TST);
+            Console.WriteLine("RAB: " + this.RAB);
+            Console.WriteLine("LOP: " + this.LOP);
+            Console.WriteLine("TOT: " + this.TOT);
+            Console.WriteLine("SPI: " + this.SPI);
+
             return newposition + 1;
         }
 
@@ -294,9 +360,9 @@ namespace ClassLibrary
         //DATA ITEM: I010/040
         public string RHO;
         public string THETA;
-        public string PositioninPolarCoordinates;
+        public string positioninPolarCoordinates;
 
-        private int MeasuredPositioninPolarCoordinates(string[] data, int position) 
+        private int PositioninPolarCoordinates(string[] data, int position) 
         {
             double range = Convert.ToInt32(string.Concat(data[position], data[position + 1]), 2); // RHO 2 octets
             
@@ -305,7 +371,11 @@ namespace ClassLibrary
             
             this.THETA = "θ = " + String.Format("{0:0.00}", Convert.ToDouble(Convert.ToInt32(string.Concat(data[position + 2], data[position + 3]), 2)) * (360 / (Math.Pow(2, 16)))) + "º"; // THETA 2 octets
             
-            this.PositioninPolarCoordinates = this.RHO + ", " + this.THETA;
+            this.positioninPolarCoordinates = this.RHO + ", " + this.THETA;
+
+            Console.WriteLine("RHO: " + this.RHO);
+            Console.WriteLine("THETA: " + this.THETA);
+            Console.WriteLine("Pos. in PolarCoords: " + this.positioninPolarCoordinates);
 
             return position + 4;
         }
@@ -332,6 +402,9 @@ namespace ClassLibrary
             this.LatitudeinWGS84 = Convert.ToString(latitudeDeg) + "º " + Convert.ToString(latitudeMin) + "' " + Convert.ToString(latitudeSec) + "''";
             this.LongitudeinWGS84 = Convert.ToString(longitudeDeg) + "º " + Convert.ToString(longitudeMin) + "' " + Convert.ToString(longitudeSec) + "''";
 
+            Console.WriteLine("LatWGS84: " + this.LatitudeinWGS84);
+            Console.WriteLine("LongWGS84: " + this.LongitudeinWGS84);
+
             return newposition;
         }
 
@@ -355,6 +428,8 @@ namespace ClassLibrary
 
             //PointLatLng position = lib.ComputeWGS_84_from_Cartesian(MapPoint, this.SIC); //Compute WGS84 position from cartesian position
             //Set_WGS84_Coordinates(position); //Apply computed WGS84 position to this message
+
+            Console.WriteLine("Pos. in CartesianCoords: " + this.positioninCartesianCoordinates);
 
             return newposition;
         }
@@ -410,7 +485,12 @@ namespace ClassLibrary
             else this.LMode3A = "L: Mode-3/A code not extracted during the last scan";
 
             this.Mode3A = Convert.ToString(DecimalToOctal(Convert.ToInt32(string.Concat(data[position], data[position + 1]).Substring(4, 12), 2))).PadLeft(4,'0');
-            
+
+            Console.WriteLine("VMode3A: " + this.VMode3A);
+            Console.WriteLine("GMode3A: " + this.GMode3A);
+            Console.WriteLine("LMode3A: " + this.LMode3A);
+            Console.WriteLine("Mode3A: " + this.Mode3A);
+
             position = position + 2;
             return position;
         }
@@ -438,6 +518,12 @@ namespace ClassLibrary
 
             this.FlightLevelInfo = this.VFlightLevel + ", " + this.GFlightLevel + ", FL" + this.FlightLevel;
 
+            Console.WriteLine("VFlight: " + this.VFlightLevel);
+            Console.WriteLine("GFlight: " + this.GFlightLevel);
+            Console.WriteLine("FlightLevel: " + this.FlightLevel);
+            Console.WriteLine("FlightLevelInfo: " + this.FlightLevelInfo);
+            Console.WriteLine("FlightLevelFT: " + this.FlightLevelFT);
+
             position += 2;
             return position;
         }
@@ -447,8 +533,10 @@ namespace ClassLibrary
 
         private int MeasuredHeight(string[] data, int position)
         {
-            measuredHeight = Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1]))) * 6.25) + " ft";
-            
+            this.measuredHeight = Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1]))) * 6.25) + " ft";
+
+            Console.WriteLine("MeasuredHeight: " + this.measuredHeight);
+
             position += 2;
             return position;
         }
@@ -462,7 +550,9 @@ namespace ClassLibrary
 
             if (PAM == 0) this.PAM = "PAM: 0";
             else this.PAM = "PAM: " + Convert.ToString(Convert.ToInt32(data[position], 2));
-            
+
+            Console.WriteLine("PAM: " + this.PAM);
+
             position += 1;
             return position;
         }
@@ -474,7 +564,11 @@ namespace ClassLibrary
         {
             int number = Convert.ToInt32(string.Concat(data[position], data[position + 1], data[position + 2]), 2);
             double seconds = Convert.ToDouble(number) / 128;
-            TimeOfDay = TimeSpan.FromSeconds(seconds).ToString(@"hh\:mm\:ss\:fff");
+            
+            this.TimeOfDay = TimeSpan.FromSeconds(seconds).ToString(@"hh\:mm\:ss\:fff");
+
+            Console.WriteLine("TimeOfDay: " + this.TimeOfDay);
+
             position = position + 3;
             return position;
         }
@@ -485,7 +579,9 @@ namespace ClassLibrary
         private int TrackNumber(string[] data, int position)
         {
             this.TrackNum = Convert.ToString(Convert.ToInt32(string.Concat(data[position], data[position + 1]), 2));
-            
+
+            Console.WriteLine("TrackNum: " + this.TrackNum);
+
             position += 2;
             return position;
         }
@@ -526,7 +622,7 @@ namespace ClassLibrary
             if (octet[6] == '0') this.STH = "Measured position"; 
             else this.STH = "Smoothed position"; 
             
-            position = position + 2;
+            position = position + 1;
 
             if (octet[7] == '1')
             {
@@ -552,7 +648,7 @@ namespace ClassLibrary
                 else if (mrs == "10") this.MRS = "Track merged by non-association to plot"; 
                 else if (mrs == "11") this.MRS = "Split track"; 
 
-                position = position + 2;
+                position = position + 1;
 
                 if (octet[7] == '1')
                 {
@@ -560,9 +656,21 @@ namespace ClassLibrary
                     if (octet[0] == '0') this.GHO = "GHO: Default";
                     else this.GHO = "Ghost track";
 
-                    position = position + 2;
+                    position = position + 1;
                 }
             }
+
+            Console.WriteLine("CNF: " + this.CNF);
+            Console.WriteLine("TRE: " + this.TRE);
+            Console.WriteLine("CST: " + this.CST);
+            Console.WriteLine("MAH: " + this.MAH);
+            Console.WriteLine("TCC: " + this.TCC);
+            Console.WriteLine("STH: " + this.STH);
+            Console.WriteLine("TOM: " + this.TOM);
+            Console.WriteLine("DOU: " + this.DOU);
+            Console.WriteLine("MRS: " + this.MRS);
+            Console.WriteLine("GHO: " + this.GHO);
+
             return position;
         }
 
@@ -582,15 +690,18 @@ namespace ClassLibrary
             this.TrackAngle = "TrackAngle: " + String.Format("{0:0.00}", (Convert.ToInt32(string.Concat(data[position + 2], data[position + 3]),2)) * (360 / (Math.Pow(2, 16)))) + "°";
             this.TrackVelocityPolarCoordinates = this.GroundSpeed + this.TrackAngle;
 
+            Console.WriteLine("GroundSpeed: " + this.GroundSpeed);
+            Console.WriteLine("TrackAngle: " + this.TrackAngle);
+            Console.WriteLine("TrackVelPolar: " + this.TrackVelocityPolarCoordinates);
+
             position = position + 4;
             return position;
-
         }
 
         //DATA ITEM: I010/202
         public string Vx;
         public string Vy;
-        public string TrackVelocityinCartesianCoordinates;
+        public string TrackVelocityCartesianCoordinates;
 
         private int TrackVelocityInCartesianCoordinates(string[] data, int position)
         {
@@ -600,8 +711,12 @@ namespace ClassLibrary
             double vy = Convert.ToInt32(BinTwosComplementToSignedDecimal(string.Concat(data[position + 2], data[position + 3]))) * 0.25;
             this.Vy = "Vy: " + Convert.ToString(vy) + " m/s";
             
-            this.TrackVelocityinCartesianCoordinates = this.Vx + this.Vy;
-            
+            this.TrackVelocityCartesianCoordinates = this.Vx + this.Vy;
+
+            Console.WriteLine("Vx: " + this.Vx);
+            Console.WriteLine("Vy: " + this.Vy);
+            Console.WriteLine("TrackVelCartesian: " + this.TrackVelocityCartesianCoordinates);
+
             position = position + 4;
             return position;
         }
@@ -623,6 +738,11 @@ namespace ClassLibrary
             else { this.Ay = "Ay: " + Convert.ToString(ay) + "m/s^2"; }
             
             this.Calculated_Acceleration = this.Ax + " " + this.Ay;
+
+            Console.WriteLine("Ax: " + this.Ax);
+            Console.WriteLine("Ay: " + this.Ay);
+            Console.WriteLine("CalcAcc: " + this.Calculated_Acceleration);
+
             position = position + 2;
             return position;
         }
@@ -633,6 +753,9 @@ namespace ClassLibrary
         private int TargetAddress(string[] data, int position)
         {
             this.TargetAdd = string.Concat(BinarytoHexadecimal(data[position]), BinarytoHexadecimal(data[position + 1]), BinarytoHexadecimal(data[position + 2]));
+
+            Console.WriteLine("TargetAdd: " + this.TargetAdd);
+
             position = position + 3;
             return position;
         }
@@ -649,8 +772,11 @@ namespace ClassLibrary
             else if (sti == "10000000") this.STI = "Registration not downlinked from transponder"; 
 
             string characters = string.Concat(data[position + 1], data[position + 2], data[position + 3], data[position + 4], data[position + 5], data[position + 6]);
-            for (int i = 0; i < 8; i++) this.TargetId = Convert.ToString(ComputeCharacter(characters.Substring(i * 6, 6))); 
-            
+            for (int i = 0; i < 8; i++) this.TargetId = Convert.ToString(ComputeCharacter(characters.Substring(i * 6, 6)));
+
+            Console.WriteLine("STI: " + this.STI);
+            Console.WriteLine("TargetId: " + this.TargetId);
+
             position = position + 7;
             return position;
         }
@@ -663,8 +789,8 @@ namespace ClassLibrary
 
         private int ModeSMBData(string[] data, int position)
         {
-            modeSrep = Convert.ToInt32(data[position], 2);
-            if (modeSrep < 0) { this.MBData = new string[modeSrep]; BDS1 = new string[modeSrep]; BDS2 = new string[modeSrep]; }
+            this.modeSrep = Convert.ToInt32(data[position], 2);
+            if (this.modeSrep < 0) { this.MBData = new string[this.modeSrep]; this.BDS1 = new string[this.modeSrep]; this.BDS2 = new string[this.modeSrep]; }
             
             position =  position + 1;
 
@@ -676,6 +802,11 @@ namespace ClassLibrary
 
                 position = position + 8;
             }
+
+            Console.WriteLine("MBData: " + this.MBData);
+            Console.WriteLine("BSD1: " + this.BDS1);
+            Console.WriteLine("BSD2: " + this.BDS2);
+            Console.WriteLine("modeSrep: " + this.modeSrep);
 
             return position;
         }
@@ -696,7 +827,11 @@ namespace ClassLibrary
             else return position;
             
             this.targetLenght2 = Convert.ToInt32(data[position][0]) * 64 + Convert.ToInt32(data[position][1]) * 32 + Convert.ToInt32(data[position][2]) * 16 + Convert.ToInt32(data[position][3]) * 8 + Convert.ToInt32(data[position][4]) * 4 + Convert.ToInt32(data[position][5]) * 2 + Convert.ToInt32(data[position][6]);
-            
+
+            Console.WriteLine("targetLength: " + this.targetLength);
+            Console.WriteLine("targetOrientation: " + this.targetOrientation);
+            Console.WriteLine("targetLenght2: " + this.targetLenght2);
+
             position = position + 1;
             return position;
         }
@@ -718,6 +853,10 @@ namespace ClassLibrary
                 
                 position = position + 2;
             }
+
+            Console.WriteLine("REPPresence: " + this.REPPresence);
+            Console.WriteLine("DRHO: " + this.DRHO);
+            Console.WriteLine("THETA: " + this.DTHETA);
 
             return position;
         }
@@ -746,7 +885,9 @@ namespace ClassLibrary
             else if (vfi == 14) this.VFI = "Catering";
             else if (vfi == 15) this.VFI = "Aircraft maintenance";
             else if (vfi == 16) this.VFI = "Flyco (follow me)";
-            
+
+            Console.WriteLine("VFI: " + this.VFI);
+
             position = position + 1;
             return position;
         }
@@ -769,10 +910,15 @@ namespace ClassLibrary
             else if (msg == 2) this.MSG = "Message: “Follow me” operation"; 
             else if (msg == 3) this.MSG = "Message: Runway check"; 
             else if (msg == 4) this.MSG = "Message: Emergency operation (fire, medical…)"; 
-            else if (msg == 5) this.MSG = "Message: Work in progress (maintenance, birds scarer, sweepers…)"; 
-            
+            else if (msg == 5) this.MSG = "Message: Work in progress (maintenance, birds scarer, sweepers…)";
+
+            this.preProgrammedMessage = TRB + " " + MSG;
+
+            Console.WriteLine("TRB: " + this.TRB);
+            Console.WriteLine("MSG: " + this.MSG);
+            Console.WriteLine("preProgramMsg: " + this.preProgrammedMessage);
+
             position = position + 1;
-            preProgrammedMessage = TRB + " " + MSG;
             return position;
         }
 
@@ -786,7 +932,11 @@ namespace ClassLibrary
             DeviationX = "Standard Deviation of X component (σx):" + Convert.ToString(Convert.ToDouble(Convert.ToInt32(data[position], 2)) * 0.25) + "m";
             DeviationY = "Standard Deviation of Y component (σy): " + Convert.ToString(Convert.ToDouble(Convert.ToInt32(data[position + 1], 2)) * 0.25) + "m";
             CovarianceXY = "Covariance (σxy): " + Convert.ToString(Convert.ToInt32(BinTwosComplementToSignedDecimal(string.Concat(data[position + 2], data[position + 3]))) * 0.25) + "m^2";
-            
+
+            Console.WriteLine("DevX: " + this.DeviationX);
+            Console.WriteLine("DevY: " + this.DeviationY);
+            Console.WriteLine("CovXY: " + this.CovarianceXY);
+
             position = position + 4;
             return position;
         }
@@ -817,20 +967,18 @@ namespace ClassLibrary
             else if (OctetoChar[4] == '1') this.DIV = "DIV: Diversity degraded"; 
             
             if (OctetoChar[5] == '0') this.TIF = "TIF: Test Target Operative";
-            else if (OctetoChar[5] == '1') this.TIF = "TIF: Test Target Failure"; 
-            
+            else if (OctetoChar[5] == '1') this.TIF = "TIF: Test Target Failure";
+
+            Console.WriteLine("NOGO: " + this.NOGO);
+            Console.WriteLine("OVL: " + this.OVL);
+            Console.WriteLine("TSV: " + this.TSV);
+            Console.WriteLine("DIV: " + this.DIV);
+            Console.WriteLine("TIF: " + this.TIF);
+
             position = position + 1;
             return position;
         }
 
         #endregion
-
-        public void UTM2WGS84()
-        {
-        }
-
-        public void LLA2UTM()
-        {
-        }
     }
 }

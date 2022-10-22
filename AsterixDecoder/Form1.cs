@@ -64,13 +64,13 @@ namespace AsterixDecoder
             if (Message.positioninCartesianCoordinates != null) row.Cells["Position in Cartesian Co-ordinates"].Value = Message.positioninCartesianCoordinates; 
             else row.Cells["Position in Cartesian Co-ordinates"].Value = "No Data"; 
 
-            if (Message.PositioninPolarCoordinates != null) row.Cells["Position in Polar Co-ordinates"].Value = Message.PositioninPolarCoordinates;
+            if (Message.positioninPolarCoordinates != null) row.Cells["Position in Polar Co-ordinates"].Value = Message.positioninPolarCoordinates;
             else row.Cells["Position in Polar Co-ordinates"].Value = "No Data";
 
             if (Message.TrackVelocityPolarCoordinates != null) row.Cells["Track Velocity in Polar Coordinates"].Value = Message.TrackVelocityPolarCoordinates;
             else row.Cells["Track Velocity in Polar Coordinates"].Value = "No Data";
 
-            if (Message.TrackVelocityinCartesianCoordinates != null) { row.Cells["Track Velocity in\nCartesian\nCoordinates"].Value = Message.TrackVelocityinCartesianCoordinates; }
+            if (Message.TrackVelocityCartesianCoordinates != null) { row.Cells["Track Velocity in\nCartesian\nCoordinates"].Value = Message.TrackVelocityCartesianCoordinates; }
             else { row.Cells["Track Velocity in\nCartesian\nCoordinates"].Value = "No Data"; }
 
             if (Message.targetOrientation != null) row.Cells["Target Size and Orientation"].Value = Message.targetOrientation;
