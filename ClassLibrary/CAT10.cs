@@ -8,14 +8,14 @@ namespace ClassLibrary
     public class CAT10
     {
 
-        public static string[] HexToBinary(string[] msgHexa)
+        public static string[] HexToBinary(string msgHexa)
         {
             string[] msgBin = new string[msgHexa.Length];
             for (int i = 0; i < msgHexa.Length; i++) {
                // if (msghexa[i].Length == 1){
                //     msghexa[i] = string.Concat('0', msghexa[i]);
                // }
-                msgBin[i] = Convert.ToString(Convert.ToInt32(msgHexa[i],16),2); 
+                msgBin[i] = Convert.ToString(Convert.ToInt32(msgHexa,16),2); 
                 while (msgBin[i].Length < 8)
                 {
                     msgBin[i] = string.Concat('0', msgBin[i]);
@@ -75,48 +75,71 @@ namespace ClassLibrary
             return msgDecimal;
         }
 
-        readonly string[] FSPEC; 
-        string [] data; //octets
-        int position; //one octet
-
-        public void DecodeCAT10(string[] fspec, int position)
+        public string FSPECnum (string[] message)
         {
-            if (FSPEC[0] == "1") this.position = DataSourceIdentifier(data, position);
-            if (FSPEC[1] == "1") this.position = MessageType(data, position);
-            if (FSPEC[2] == "1") this.position = TargetReportDescriptor(data, position);
-            if (FSPEC[3] == "1") this.position = TimeofDay(data, position);
-            if (FSPEC[4] == "1") this.position = PositioninWGS84Coordinates(data, position);
-            if (FSPEC[5] == "1") this.position = MeasuredPositioninPolarCoordinates(data, position);
-            if (FSPEC[6] == "1") this.position = PositioninCartesianCoordinates(data, position);
+            int position = 3;
+            string FSPECNum = "";
+            bool end = true;
+            while (end == true)
+            {
+                string newOctet = Convert.ToString(Convert.ToInt32(message[position], 16), 2).PadLeft(8, '0');
+                FSPECNum = FSPECNum + newOctet.Substring(0, 7);
+                if (newOctet.Substring(7, 1) == "1")
+                    position = position + 1;
+                else
+                    end = false;
+            }
+            return FSPECNum;
+        }
+
+        readonly string[] FSPEC; 
+        string[] data; //octets
+        int position; //one octet
+        public string CAT = "10";
+
+        public void DecodeCAT10(string[] datamesaje, int position)
+        {
+            string FSPECNum = FSPECnum(datamesaje);
+            position = 3 + FSPECNum.Length / 7;
+            char[] FSPEC = FSPECNum.ToCharArray(0, FSPECNum.Length);
+            for (int i = 0; i < datamesaje.Length; i++) this.data = HexToBinary(datamesaje[i]);
+
+            if (FSPEC[0] == '1') this.position = DataSourceIdentifier(data, position);
+            if (FSPEC[1] == '1') this.position = MessageType(data, position);
+            if (FSPEC[2] == '1') this.position = TargetReportDescriptor(data, position);
+            if (FSPEC[3] == '1') this.position = TimeofDay(data, position);
+            if (FSPEC[4] == '1') this.position = PositioninWGS84Coordinates(data, position);
+            if (FSPEC[5] == '1') this.position = MeasuredPositioninPolarCoordinates(data, position);
+            if (FSPEC[6] == '1') this.position = PositioninCartesianCoordinates(data, position);
             
             if (FSPEC.Length > 8)
             {
-                //if (FSPEC[7] == "1") this.position = TrackVelocityInPolarCoordinates(data, position); 
-                //if (FSPEC[8] == "1") this.position = TrackVelocityInCartesianCoordinates(data, position); 
-                if (FSPEC[9] == "1") this.position = TrackNumber(data, position); 
-                if (FSPEC[10] == "1") this.position = TrackStatus(data, position);
-                if (FSPEC[11] == "1") this.position = Mode3ACodeinOctalRepresentation(data, position); 
-                if (FSPEC[12] == "1") this.position = TargetAddress(data, position); 
-                if (FSPEC[13] == "1") this.position = TargetIdentification(data, position); 
+                //if (FSPEC[7] == '1') this.position = TrackVelocityInPolarCoordinates(data, position); 
+                //if (FSPEC[8] == '1') this.position = TrackVelocityInCartesianCoordinates(data, position); 
+                if (FSPEC[9] == '1') this.position = TrackNumber(data, position); 
+                if (FSPEC[10] == '1') this.position = TrackStatus(data, position);
+                if (FSPEC[11] == '1') this.position = Mode3ACodeinOctalRepresentation(data, position); 
+                if (FSPEC[12] == '1') this.position = TargetAddress(data, position); 
+                if (FSPEC[13] == '1') this.position = TargetIdentification(data, position); 
             }
 
             if (FSPEC.Length > 15)
             {
-                if (FSPEC[14] == "1") this.position = ModeSMBData(data, position); 
-                if (FSPEC[15] == "1") this.position = VehicleFleetIdentificatior(data, position); 
-                if (FSPEC[16] == "1") this.position = FlightlevelinBinaryRepresentation(data, position);
-                if (FSPEC[17] == "1") this.position = MeasuredHeight(data, position);
-                if (FSPEC[18] == "1") this.position = TargetSizeOrientation(data, position);
-                if (FSPEC[19] == "1") this.position = SystemStatus(data, position);
-                if (FSPEC[20] == "1") this.position = PreProgrammedMessage(data, position);
+                if (FSPEC[14] == '1') this.position = ModeSMBData(data, position); 
+                if (FSPEC[15] == '1') this.position = VehicleFleetIdentificatior(data, position); 
+                if (FSPEC[16] == '1') this.position = FlightlevelinBinaryRepresentation(data, position);
+                if (FSPEC[17] == '1') this.position = MeasuredHeight(data, position);
+                if (FSPEC[18] == '1') this.position = TargetSizeOrientation(data, position);
+                if (FSPEC[19] == '1') this.position = SystemStatus(data, position);
+                if (FSPEC[20] == '1') this.position = PreProgrammedMessage(data, position);
             }
 
             if (FSPEC.Length > 22)
             {
-                if (FSPEC[21] == "1") this.position = StandardDeviationOfPosition(data, position);
-                if (FSPEC[22] == "1") this.position = Presence(data, position);
-                if (FSPEC[23] == "1") this.position = AmplitudeofPrimaryPlot(data, position);
-                if (FSPEC[24] == "1") this.position = CalculatedAcceleration(data, position);
+                if (FSPEC[21] == '1') this.position = StandardDeviationOfPosition(data, position);
+                if (FSPEC[22] == '1') this.position = Presence(data, position);
+                if (FSPEC[23] == '1') this.position = AmplitudeofPrimaryPlot(data, position);
+                if (FSPEC[24] == '1') this.position = CalculatedAcceleration(data, position);
             }
         }
 
