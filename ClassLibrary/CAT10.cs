@@ -24,9 +24,19 @@ namespace ClassLibrary
             return msgBin;
         }
 
-        public string DecimaltoOctal() 
+        public int DecimalToOctal(int decimalNum) 
         {
-            return;
+            int octal = 0;
+            int i = 1;
+
+            while (decimalNum != 0)
+            {
+                octal = octal + (decimalNum % 8) * i;
+                decimalNum = decimalNum / 8;
+                i = i*10;
+            }
+
+            return octal;
         }
 
         public string BinarytoHexadecimal(string binaryNumber)
@@ -71,59 +81,43 @@ namespace ClassLibrary
 
         public void DecodeCAT10(string[] fspec, int position)
         {
-            if (FSPEC[0] == "1") 
-            {
-                position = DataSourceIdentifier(data, position);
-            } 
-            if (FSPEC[1] == "1") 
-            { 
-                position = MessageType(data, position);
-            }
-            if (FSPEC[2] == "1")
-            {
-                position = TargetReportDescriptor(data, position);
-            }
-            if (FSPEC[3] == "1")
-            {
-                position = TimeofDay(data, position);
-            }
-            if (FSPEC[4] == "1")
-            {
-                position = PositioninWGS84Coordinates(data, position);
-            }
-            if (FSPEC[5] == "1")
-            {
-                position = MeasuredPositioninPolarCoordinates(data, position);
-            }
-            if (FSPEC[6] == "1")
-            {
-                position = PositioninCartesianCoordinates(data, position);
-            }
+            if (FSPEC[0] == "1") this.position = DataSourceIdentifier(data, position);
+            if (FSPEC[1] == "1") this.position = MessageType(data, position);
+            if (FSPEC[2] == "1") this.position = TargetReportDescriptor(data, position);
+            if (FSPEC[3] == "1") this.position = TimeofDay(data, position);
+            if (FSPEC[4] == "1") this.position = PositioninWGS84Coordinates(data, position);
+            if (FSPEC[5] == "1") this.position = MeasuredPositioninPolarCoordinates(data, position);
+            if (FSPEC[6] == "1") this.position = PositioninCartesianCoordinates(data, position);
+            
             if (FSPEC.Length > 8)
             {
-                if (FSPEC[7] == "1") {
-                    //position = TrackVelocityInPolarCoordinates(data, position); 
-                } 
-                if (FSPEC[8] == "1") {
-                    //position = TrackVelocityInCartesianCoordinates(data, position); 
-                } 
-                if (FSPEC[9] == "1") {
-                    position = TrackNumber(data, position); 
-                } 
-                if (FSPEC[10] == "1") {
-                    position = TrackStatus(data, position); 
-                }
-                if (FSPEC[11] == "1") {
-                    position = Mode3ACodeinOctalRepresentation(data, position); 
-                } 
-                if (FSPEC[12] == "1") {
-                    position = TargetAddress(data, position); 
-                } 
-                if (FSPEC[13] == "1") {
-                    position = TargetIdentification(data, position); 
-                } 
+                //if (FSPEC[7] == "1") this.position = TrackVelocityInPolarCoordinates(data, position); 
+                //if (FSPEC[8] == "1") this.position = TrackVelocityInCartesianCoordinates(data, position); 
+                if (FSPEC[9] == "1") this.position = TrackNumber(data, position); 
+                if (FSPEC[10] == "1") this.position = TrackStatus(data, position);
+                if (FSPEC[11] == "1") this.position = Mode3ACodeinOctalRepresentation(data, position); 
+                if (FSPEC[12] == "1") this.position = TargetAddress(data, position); 
+                if (FSPEC[13] == "1") this.position = TargetIdentification(data, position); 
             }
 
+            if (FSPEC.Length > 15)
+            {
+                if (FSPEC[14] == "1") this.position = ModeSMBData(data, position); 
+                if (FSPEC[15] == "1") this.position = VehicleFleetIdentificatior(data, position); 
+                if (FSPEC[16] == "1") this.position = FlightlevelinBinaryRepresentation(data, position);
+                if (FSPEC[17] == "1") this.position = MeasuredHeight(data, position);
+                if (FSPEC[18] == "1") this.position = TargetSizeOrientation(data, position);
+                if (FSPEC[19] == "1") this.position = SystemStatus(data, position);
+                if (FSPEC[20] == "1") this.position = PreProgrammedMessage(data, position);
+            }
+
+            if (FSPEC.Length > 22)
+            {
+                if (FSPEC[21] == "1") this.position = StandardDeviationOfPosition(data, position);
+                if (FSPEC[22] == "1") this.position = Presence(data, position);
+                if (FSPEC[23] == "1") this.position = AmplitudeofPrimaryPlot(data, position);
+                if (FSPEC[24] == "1") this.position = CalculatedAcceleration(data, position);
+            }
         }
 
         //DATA ITEM: I010/010
@@ -380,7 +374,7 @@ namespace ClassLibrary
             if (L == "0") this.LMode3A = "L: Mode-3/A code derived from the reply of the transponder";
             else this.LMode3A = "L: Mode-3/A code not extracted during the last scan";
 
-            //!this.Mode3A = Convert.ToString(lib.ConvertDecimalToOctal(Convert.ToInt32(string.Concat(message[pos], message[pos + 1]).Substring(4, 12), 2))).PadLeft(4,'0');
+            //!this.Mode3A = Convert.ToString(DecimalToOctal(Convert.ToInt32(string.Concat(message[pos], message[pos + 1]).Substring(4, 12), 2))).PadLeft(4,'0');
             
             position += 2;
             return position;
@@ -538,8 +532,9 @@ namespace ClassLibrary
         private int TrackVelocityInPolarCoordinates(string[] data, int position)
         {
             double groundSpeed = Convert.ToDouble(Convert.ToInt32(string.Concat(data[position], data[position + 1]), 2)) * Math.Pow(2, -14);
-            
+
             //!FALTA
+            return 0;
 
         }
 
@@ -557,6 +552,7 @@ namespace ClassLibrary
             position += 4;
             return position;
         }
+
         //DATA ITEM: I010/210
         public string Ax;
         public string Ay;
@@ -565,10 +561,13 @@ namespace ClassLibrary
         {
             double ax = Convert.ToInt32(BinTwosComplementToSignedDecimal(data[position])) * 0.25;
             double ay = Convert.ToInt32(BinTwosComplementToSignedDecimal(data[position + 1])) * 0.25;
+            
             if (ax >= 31 || ax <= -31) { Ax = "Ax exceed the max value"; }
             else { Ax = "Ax: " + Convert.ToString(ax) + "m/s^2"; }
+            
             if (ay >= 31 || ax <= -31) { Ay = "Ay exceed the max value"; }
             else { Ay = "Ay: " + Convert.ToString(ay) + "m/s^2"; }
+            
             Calculated_Acceleration = Ax + " " + Ay;
             position += 2;
             return position;
@@ -662,48 +661,54 @@ namespace ClassLibrary
         private int VehicleFleetIdentificatior(string[] data, int position)
         {
             int vfi = Convert.ToInt32(data[position], 2);
+            
             if (vfi == 0) { VFI = "Unknown"; }
-            else if (vfi == 1) { VFI = "ATC equipment maintenance"; }
-            else if (vfi == 2) { VFI = "Airport maintenance"; }
-            else if (vfi == 3) { VFI = "Fire"; }
-            else if (vfi == 4) { VFI = "Bird scarer"; }
-            else if (vfi == 5) { VFI = "Snow plough"; }
-            else if (vfi == 6) { VFI = "Runway sweeper"; }
-            else if (vfi == 7) { VFI = "Emergency"; }
-            else if (vfi == 8) { VFI = "Police"; }
-            else if (vfi == 9) { VFI = "Bus"; }
-            else if (vfi == 10) { VFI = "Tug (push/tow)"; }
-            else if (vfi == 11) { VFI = "Grass cutter"; }
-            else if (vfi == 12) { VFI = "Fuel"; }
-            else if (vfi == 13) { VFI = "Baggage"; }
-            else if (vfi == 14) { VFI = "Catering"; }
-            else if (vfi == 15) { VFI = "Aircraft maintenance"; }
-            else if (vfi == 16) { VFI = "Flyco (follow me)"; }
+            else if (vfi == 1) this.VFI = "ATC equipment maintenance"; 
+            else if (vfi == 2) this.VFI = "Airport maintenance"; 
+            else if (vfi == 3) this.VFI = "Fire";
+            else if (vfi == 4) this.VFI = "Bird scarer";
+            else if (vfi == 5) this.VFI = "Snow plough"; 
+            else if (vfi == 6) this.VFI = "Runway sweeper";
+            else if (vfi == 7) this.VFI = "Emergency";
+            else if (vfi == 8) this.VFI = "Police";
+            else if (vfi == 9) this.VFI = "Bus";
+            else if (vfi == 10) this.VFI = "Tug (push/tow)";
+            else if (vfi == 11) this.VFI = "Grass cutter";
+            else if (vfi == 12) this.VFI = "Fuel";
+            else if (vfi == 13) this.VFI = "Baggage";
+            else if (vfi == 14) this.VFI = "Catering";
+            else if (vfi == 15) this.VFI = "Aircraft maintenance";
+            else if (vfi == 16) this.VFI = "Flyco (follow me)";
+            
             position = position++;
             return position;
         }
 
-        //DATA ITEM: I010/300
+        //DATA ITEM: I010/310
         public string TRB;
         public string MSG;
         public string preProgrammedMessage;
         private int PreProgrammedMessage(string[] data, int position)
         {
             char[] OctetoChar = data[position].ToCharArray(0, 8);
-            if (OctetoChar[0] == '0') { TRB = "Trouble: Default"; }
-            else if (OctetoChar[0] == '1') { TRB = "Trouble: In Trouble"; }
+            
+            if (OctetoChar[0] == '0') this.TRB = "Trouble: Default"; 
+            else if (OctetoChar[0] == '1') this.TRB = "Trouble: In Trouble"; 
+            
             int msg = Convert.ToInt32(data[position].Substring(1, 7), 2);
-            if (msg == 1) { MSG = "Message: Towing aircraft"; }
-            else if (msg == 2) { MSG = "Message: “Follow me” operation"; }
-            else if (msg == 3) { MSG = "Message: Runway check"; }
-            else if (msg == 4) { MSG = "Message: Emergency operation (fire, medical…)"; }
-            else if (msg == 5) { MSG = "Message: Work in progress (maintenance, birds scarer, sweepers…)"; }
+            
+            if (msg == 1) this.MSG = "Message: Towing aircraft"; 
+            else if (msg == 2) this.MSG = "Message: “Follow me” operation"; 
+            else if (msg == 3) this.MSG = "Message: Runway check"; 
+            else if (msg == 4) this.MSG = "Message: Emergency operation (fire, medical…)"; 
+            else if (msg == 5) this.MSG = "Message: Work in progress (maintenance, birds scarer, sweepers…)"; 
+            
             position++;
             preProgrammedMessage = TRB + " " + MSG;
             return position;
         }
 
-        //DATA ITEM: I010/300
+        //DATA ITEM: I010/500
         public string DeviationX;
         public string DeviationY;
         public string CovarianceXY;
@@ -716,27 +721,33 @@ namespace ClassLibrary
             return position;
         }
 
-        //DATA ITEM: I010/300
+        //DATA ITEM: I010/550
         public string NOGO;
         public string OVL;
         public string TSV;
         public string DIV;
         public string TIF;
-        private int Compute_System_Status(string[] data, int position)
+        private int SystemStatus(string[] data, int position)
         {
             char[] OctetoChar = data[position].ToCharArray(0, 8);
             int nogo = Convert.ToInt32(string.Concat(OctetoChar[0], OctetoChar[1]), 2);
-            if (nogo == 0) { NOGO = "Operational Release Status of the System (NOGO): Operational"; }
-            else if (nogo == 1) { NOGO = "Operational Release Status of the System (NOGO): Degraded"; }
-            else if (nogo == 2) { NOGO = "Operational Release Status of the System (NOGO): NOGO"; }
-            if (OctetoChar[2] == '0') { OVL = "Overload indicator: No overload"; }
-            else if (OctetoChar[2] == '1') { OVL = "Overload indicator: Overload"; }
-            if (OctetoChar[3] == '0') { TSV = "Time Source Validity: Valid"; }
-            else if (OctetoChar[3] == '1') { TSV = "Time Source Validity: Invalid"; }
-            if (OctetoChar[4] == '0') { DIV = "DIV: Normal Operation"; }
-            else if (OctetoChar[4] == '1') { DIV = "DIV: Diversity degraded"; }
-            if (OctetoChar[5] == '0') { TIF = "TIF: Test Target Operative"; }
-            else if (OctetoChar[5] == '1') { TIF = "TIF: Test Target Failure"; }
+            
+            if (nogo == 0) this.NOGO = "Operational Release Status of the System (NOGO): Operational"; 
+            else if (nogo == 1) this.NOGO = "Operational Release Status of the System (NOGO): Degraded"; 
+            else if (nogo == 2) this.NOGO = "Operational Release Status of the System (NOGO): NOGO"; 
+            
+            if (OctetoChar[2] == '0') this.OVL = "Overload indicator: No overload"; 
+            else if (OctetoChar[2] == '1') this.OVL = "Overload indicator: Overload"; 
+            
+            if (OctetoChar[3] == '0') this.TSV = "Time Source Validity: Valid"; 
+            else if (OctetoChar[3] == '1') this.TSV = "Time Source Validity: Invalid"; 
+            
+            if (OctetoChar[4] == '0') this.DIV = "DIV: Normal Operation"; 
+            else if (OctetoChar[4] == '1') this.DIV = "DIV: Diversity degraded"; 
+            
+            if (OctetoChar[5] == '0') this.TIF = "TIF: Test Target Operative";
+            else if (OctetoChar[5] == '1') this.TIF = "TIF: Test Target Failure"; 
+            
             position = position++;
             return position;
         }
