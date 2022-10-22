@@ -143,19 +143,9 @@ namespace ClassLibrary
             }
         }
 
-        //DATA ITEM: I010/010
-        public string SAC;
-        public string SIC;
-        private int DataSourceIdentifier(string[] data, int position)
-        {
-            this.SAC = Convert.ToString(Convert.ToInt32(data[position], 2));
-            this.SIC = Convert.ToString(Convert.ToInt32(data[position + 1], 2));
-            position = position + 2;
-            return position;
-        }
-
         //DATA ITEM: I010/000
         public string messageType;
+
         private int MessageType(string[] data, int position)
         {
             string messageType = data[position];
@@ -175,6 +165,17 @@ namespace ClassLibrary
             return position;
         }
 
+        //DATA ITEM: I010/010
+        public string SAC;
+        public string SIC;
+        private int DataSourceIdentifier(string[] data, int position)
+        {
+            this.SAC = Convert.ToString(Convert.ToInt32(data[position], 2));
+            this.SIC = Convert.ToString(Convert.ToInt32(data[position + 1], 2));
+            position = position + 2;
+            return position;
+        }
+
         //DATA ITEM: I010/020
         public string TYP;
         public string DCR;
@@ -187,6 +188,7 @@ namespace ClassLibrary
         public string LOP;
         public string TOT;
         public string SPI;
+
         private int TargetReportDescriptor(string[] data, int position)
         {
             int newposition = position;
@@ -306,6 +308,7 @@ namespace ClassLibrary
         public string LongitudeinWGS84;
         public double LatitudeMapWGS84 = -200; //For the map
         public double LongitudeMapWGS84 = -200; //For the map
+
         private int PositioninWGS84Coordinates(string[] data, int position) 
         {
             int newposition = position + 4;
@@ -329,6 +332,7 @@ namespace ClassLibrary
         public double XMap = -99999; //For the map
         public double YMap = -99999; //For the map
         public string positioninCartesianCoordinates;
+
         private int PositioninCartesianCoordinates(string[] data, int position)
         {
             int newposition = position + 4;
@@ -378,6 +382,7 @@ namespace ClassLibrary
         public string GMode3A;
         public string LMode3A;
         public string Mode3A;
+
         private int Mode3ACodeinOctalRepresentation(string[] data, int position)
         {
             string octetNum1 = data[position];
@@ -397,7 +402,7 @@ namespace ClassLibrary
             if (L == "0") this.LMode3A = "L: Mode-3/A code derived from the reply of the transponder";
             else this.LMode3A = "L: Mode-3/A code not extracted during the last scan";
 
-            //!this.Mode3A = Convert.ToString(DecimalToOctal(Convert.ToInt32(string.Concat(message[pos], message[pos + 1]).Substring(4, 12), 2))).PadLeft(4,'0');
+            this.Mode3A = Convert.ToString(DecimalToOctal(Convert.ToInt32(string.Concat(message[pos], message[pos + 1]).Substring(4, 12), 2))).PadLeft(4,'0');
             
             position += 2;
             return position;
@@ -409,6 +414,7 @@ namespace ClassLibrary
         public string FlightLevel;
         public string FlightLevelInfo;
         public string FlightLevelFT;
+
         private int FlightlevelinBinaryRepresentation(string[] data, int position) 
         {
             char[] octet = data[position].ToCharArray(0, 8);
@@ -431,6 +437,7 @@ namespace ClassLibrary
 
         //DATA ITEM: I010/091
         public string measuredHeight;
+
         private int MeasuredHeight(string[] data, int position)
         {
             measuredHeight = Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1]))) * 6.25) + " ft";
@@ -441,6 +448,7 @@ namespace ClassLibrary
 
         //DATA ITEM: I010/131
         public string PAM;
+
         private int AmplitudeofPrimaryPlot(string[] data, int position)
         {
             double PAM = Convert.ToInt32(data[position], 2);
@@ -454,6 +462,7 @@ namespace ClassLibrary
 
         //DATA ITEM: I010/140
         public string TimeOfDay;
+
         private int TimeofDay(string[] data, int position)
         {
             int number = Convert.ToInt32(string.Concat(data[position], data[position + 1], data[position + 2]), 2);
@@ -465,6 +474,7 @@ namespace ClassLibrary
 
         //DATA ITEM: I010/161
         public string TrackNum;
+
         private int TrackNumber(string[] data, int position)
         {
             this.TrackNum = Convert.ToString(Convert.ToInt32(string.Concat(data[position], data[position + 1]), 2));
@@ -484,6 +494,7 @@ namespace ClassLibrary
         public string DOU;
         public string MRS;
         public string GHO;
+
         private int TrackStatus(string[] data, int position)
         {
             char[] octet = data[position].ToCharArray(0, 8);
@@ -552,12 +563,20 @@ namespace ClassLibrary
         public string GroundSpeed;
         public string TrackAngle;
         public string TrackVelocityPolarCoordinates;
+
         private int TrackVelocityInPolarCoordinates(string[] data, int position)
         {
             double groundSpeed = Convert.ToDouble(Convert.ToInt32(string.Concat(data[position], data[position + 1]), 2)) * Math.Pow(2, -14);
+            double groundSpeed_meters = groundSpeed * 1852;
 
-            //!FALTA
-            return 0;
+            if (groundSpeed >= 2) this.GroundSpeed = "Ground Speed is equal or higher than the maximum available value (2 NM/s), ";
+            else this.GroundSpeed = "GroundSpeed: " + String.Format("{0:0.00}", meters) + " m/s, ";
+
+            this.TrackAngle = "TrackAngle: " + String.Format("{0:0.00}", (Convert.ToInt32(string.Concat(data[position + 2], data[position + 3]),2)) * (360 / (Math.Pow(2, 16)))) + "°";
+            this.TrackVelocityPolarCoordinates = this.GroundSpeed + this.TrackAngle;
+
+            posiiton = posiiton + 4;
+            return posiiton;
 
         }
 
@@ -565,6 +584,7 @@ namespace ClassLibrary
         public string Vx;
         public string Vy;
         public string TrackVelocityinCartesianCoordinates;
+
         private int TrackVelocityCartesianCoordinates(string[] data, int position)
         {
             double vx = Convert.ToInt32(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1])))*0.25;
@@ -572,7 +592,7 @@ namespace ClassLibrary
             double vy = Convert.ToInt32(BinTwosComplementToSignedDecimal(string.Concat(data[position + 2], data[position + 3]))) * 0.25;
             Vy = "Vy: " + Convert.ToString(vy) + " m/s";
             TrackVelocityinCartesianCoordinates = Vx + Vy;
-            position += 4;
+            position = position + 4;
             return position;
         }
 
@@ -580,6 +600,7 @@ namespace ClassLibrary
         public string Ax;
         public string Ay;
         public string Calculated_Acceleration;
+
         private int CalculatedAcceleration(string[] data, int position)
         {
             double ax = Convert.ToInt32(BinTwosComplementToSignedDecimal(data[position])) * 0.25;
@@ -592,22 +613,24 @@ namespace ClassLibrary
             else { Ay = "Ay: " + Convert.ToString(ay) + "m/s^2"; }
             
             Calculated_Acceleration = Ax + " " + Ay;
-            position += 2;
+            position = position + 2;
             return position;
         }
 
         //DATA ITEM: I010/220
         public string TargetAdd; //In Hexadecimal 
+
         private int TargetAddress(string[] data, int position)
         {
             this.TargetAdd = string.Concat(BinarytoHexadecimal(data[position]), BinarytoHexadecimal(data[position + 1]), BinarytoHexadecimal(data[position + 2]));
-            position += 3;
+            position = position + 3;
             return position;
         }
 
         //DATA ITEM: I010/245
         public string STI;
         public string TargetId;
+
         private int TargetIdentification(string[] data, int position)
         {
             string sti = data[position];
@@ -618,7 +641,7 @@ namespace ClassLibrary
             string characters = string.Concat(data[position + 1], data[position + 2], data[position + 3], data[position + 4], data[position + 5], data[position + 6]);
             for (int i = 0; i < 8; i++) this.TargetId = Convert.ToString(ComputeCharacter(characters.Substring(i * 6, 6))); 
             
-            position += 7;
+            position = position + 7;
             return position;
         }
 
@@ -627,18 +650,22 @@ namespace ClassLibrary
         public string[] BDS1;
         public string[] BDS2;
         public int modeSrep;
+
         private int ModeSMBData(string[] data, int position)
         {
             modeSrep = Convert.ToInt32(data[position], 2);
             if (modeSrep < 0) { MBData = new string[modeSrep]; BDS1 = new string[modeSrep]; BDS2 = new string[modeSrep]; }
-            position++;
+            
+            position =  position + 1;
+
             for (int i = 0; i < modeSrep; i++)
             {
                 MBData[i] = String.Concat(data[position], data[position + 1], data[position + 2], data[position + 3], data[position + 4], data[position + 5], data[position + 6]);
                 BDS1[1] = data[position + 7].Substring(0, 4);
                 BDS2[1] = data[position + 7].Substring(4, 4);
-                position += 8;
+                position = position + 8;
             }
+
             return position;
         }
 
@@ -646,19 +673,20 @@ namespace ClassLibrary
         public int targetLength;
         public double targetOrientation;
         public int targetLenght2;
+
         public int TargetSizeOrientation(string[] data, int position)
         {
             this.targetLength = Convert.ToInt32(data[position][0]) * 64 + Convert.ToInt32(data[position][1]) * 32 + Convert.ToInt32(data[position][2]) * 16 + Convert.ToInt32(data[position][3]) * 8 + Convert.ToInt32(data[position][4]) * 4 + Convert.ToInt32(data[position][5]) * 2 + Convert.ToInt32(data[position][6]);
-            if (data[position][7] == '1') position = +1;
+            if (data[position][7] == '1') position = position + 1;
             else return position;
             
             this.targetOrientation = Convert.ToInt32(data[position][0]) * 64 * 2.81 + Convert.ToInt32(data[position][1]) * 32 * 2.81 + Convert.ToInt32(data[position][2]) * 16 * 2.81 + Convert.ToInt32(data[position][3]) * 8 * 2.81 + Convert.ToInt32(data[position][4]) * 4 * 2.81 + Convert.ToInt32(data[position][5]) * 2 * 2.81 + Convert.ToInt32(data[position][6]) * 2.81;
-            if (data[position][7] == '1') position = +1;
+            if (data[position][7] == '1') position = position + 1;
             else return position;
             
             this.targetLenght2 = Convert.ToInt32(data[position][0]) * 64 + Convert.ToInt32(data[position][1]) * 32 + Convert.ToInt32(data[position][2]) * 16 + Convert.ToInt32(data[position][3]) * 8 + Convert.ToInt32(data[position][4]) * 4 + Convert.ToInt32(data[position][5]) * 2 + Convert.ToInt32(data[position][6]);
             
-            position += 1;
+            position = position + 1;
             return position;
         }
 
@@ -666,26 +694,30 @@ namespace ClassLibrary
         public int REPPresence = 0;
         public string[] DRHO;
         public string[] DTHETA;
+
         private int Presence(string[] data, int position)
         {
             REPPresence = Convert.ToInt32(string.Concat(data[position]), 2);
-            position++;
+            position = position + 1;
+
             for (int i = 0; i < REPPresence; i++)
             {
                 DRHO[i] = Convert.ToString(Convert.ToInt32(data[position], 2)) + "m";
                 DTHETA[i] = Convert.ToString(Convert.ToDouble(Convert.ToInt32(data[position + 1], 2)) * 0.15) + "º";
-                position += 2;
+                position = position + 2;
             }
+
             return position;
         }
 
         //DATA ITEM: I010/300
         public string VFI;
+
         private int VehicleFleetIdentificatior(string[] data, int position)
         {
             int vfi = Convert.ToInt32(data[position], 2);
             
-            if (vfi == 0) { VFI = "Unknown"; }
+            if (vfi == 0) { this.VFI = "Unknown"; }
             else if (vfi == 1) this.VFI = "ATC equipment maintenance"; 
             else if (vfi == 2) this.VFI = "Airport maintenance"; 
             else if (vfi == 3) this.VFI = "Fire";
@@ -703,7 +735,7 @@ namespace ClassLibrary
             else if (vfi == 15) this.VFI = "Aircraft maintenance";
             else if (vfi == 16) this.VFI = "Flyco (follow me)";
             
-            position = position++;
+            position = position + 1;
             return position;
         }
 
@@ -711,6 +743,7 @@ namespace ClassLibrary
         public string TRB;
         public string MSG;
         public string preProgrammedMessage;
+
         private int PreProgrammedMessage(string[] data, int position)
         {
             char[] OctetoChar = data[position].ToCharArray(0, 8);
@@ -726,7 +759,7 @@ namespace ClassLibrary
             else if (msg == 4) this.MSG = "Message: Emergency operation (fire, medical…)"; 
             else if (msg == 5) this.MSG = "Message: Work in progress (maintenance, birds scarer, sweepers…)"; 
             
-            position++;
+            position = position + 1;
             preProgrammedMessage = TRB + " " + MSG;
             return position;
         }
@@ -735,12 +768,14 @@ namespace ClassLibrary
         public string DeviationX;
         public string DeviationY;
         public string CovarianceXY;
+
         private int StandardDeviationOfPosition(string[] data, int position)
         {
             DeviationX = "Standard Deviation of X component (σx):" + Convert.ToString(Convert.ToDouble(Convert.ToInt32(data[position], 2)) * 0.25) + "m";
             DeviationY = "Standard Deviation of Y component (σy): " + Convert.ToString(Convert.ToDouble(Convert.ToInt32(data[position + 1], 2)) * 0.25) + "m";
             CovarianceXY = "Covariance (σxy): " + Convert.ToString(Convert.ToInt32(BinTwosComplementToSignedDecimal(string.Concat(data[position + 2], data[position + 3]))) * 0.25) + "m^2";
-            position += 4;
+            
+            position = position + 4;
             return position;
         }
 
@@ -750,6 +785,7 @@ namespace ClassLibrary
         public string TSV;
         public string DIV;
         public string TIF;
+
         private int SystemStatus(string[] data, int position)
         {
             char[] OctetoChar = data[position].ToCharArray(0, 8);
@@ -771,7 +807,7 @@ namespace ClassLibrary
             if (OctetoChar[5] == '0') this.TIF = "TIF: Test Target Operative";
             else if (OctetoChar[5] == '1') this.TIF = "TIF: Test Target Failure"; 
             
-            position = position++;
+            position = position + 1;
             return position;
         }
 
