@@ -7,7 +7,6 @@ namespace ClassLibrary
 {
     public class CAT10
     {
-
         public static string[] HexToBinary(string msgHexa)
         {
             string[] msgBin = new string[msgHexa.Length];
@@ -114,8 +113,8 @@ namespace ClassLibrary
             
             if (FSPEC.Length > 8)
             {
-                //if (FSPEC[7] == '1') this.position = TrackVelocityInPolarCoordinates(data, position); 
-                //if (FSPEC[8] == '1') this.position = TrackVelocityInCartesianCoordinates(data, position); 
+                if (FSPEC[7] == '1') this.position = TrackVelocityInPolarCoordinates(data, position); 
+                if (FSPEC[8] == '1') this.position = TrackVelocityInCartesianCoordinates(data, position); 
                 if (FSPEC[9] == '1') this.position = TrackNumber(data, position); 
                 if (FSPEC[10] == '1') this.position = TrackStatus(data, position);
                 if (FSPEC[11] == '1') this.position = Mode3ACodeinOctalRepresentation(data, position); 
@@ -142,6 +141,8 @@ namespace ClassLibrary
                 if (FSPEC[24] == '1') this.position = CalculatedAcceleration(data, position);
             }
         }
+
+        #region DATA ITEMS DEFINITION & PARAMETER CALCULATION
 
         //DATA ITEM: I010/000
         public string messageType;
@@ -402,9 +403,9 @@ namespace ClassLibrary
             if (L == "0") this.LMode3A = "L: Mode-3/A code derived from the reply of the transponder";
             else this.LMode3A = "L: Mode-3/A code not extracted during the last scan";
 
-            this.Mode3A = Convert.ToString(DecimalToOctal(Convert.ToInt32(string.Concat(message[pos], message[pos + 1]).Substring(4, 12), 2))).PadLeft(4,'0');
+            this.Mode3A = Convert.ToString(DecimalToOctal(Convert.ToInt32(string.Concat(data[position], data[position + 1]).Substring(4, 12), 2))).PadLeft(4,'0');
             
-            position += 2;
+            position = position + 2;
             return position;
         }
 
@@ -588,10 +589,13 @@ namespace ClassLibrary
         private int TrackVelocityCartesianCoordinates(string[] data, int position)
         {
             double vx = Convert.ToInt32(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1])))*0.25;
-            Vx = "Vx: " + Convert.ToString(vx) + " m/s, ";
+            this.Vx = "Vx: " + Convert.ToString(vx) + " m/s, ";
+            
             double vy = Convert.ToInt32(BinTwosComplementToSignedDecimal(string.Concat(data[position + 2], data[position + 3]))) * 0.25;
-            Vy = "Vy: " + Convert.ToString(vy) + " m/s";
-            TrackVelocityinCartesianCoordinates = Vx + Vy;
+            this.Vy = "Vy: " + Convert.ToString(vy) + " m/s";
+            
+            this.TrackVelocityinCartesianCoordinates = this.Vx + this.Vy;
+            
             position = position + 4;
             return position;
         }
@@ -606,13 +610,13 @@ namespace ClassLibrary
             double ax = Convert.ToInt32(BinTwosComplementToSignedDecimal(data[position])) * 0.25;
             double ay = Convert.ToInt32(BinTwosComplementToSignedDecimal(data[position + 1])) * 0.25;
             
-            if (ax >= 31 || ax <= -31) { Ax = "Ax exceed the max value"; }
-            else { Ax = "Ax: " + Convert.ToString(ax) + "m/s^2"; }
+            if (ax >= 31 || ax <= -31) { this.Ax = "Ax exceed the max value"; }
+            else { this.Ax = "Ax: " + Convert.ToString(ax) + "m/s^2"; }
             
-            if (ay >= 31 || ax <= -31) { Ay = "Ay exceed the max value"; }
-            else { Ay = "Ay: " + Convert.ToString(ay) + "m/s^2"; }
+            if (ay >= 31 || ax <= -31) { this.Ay = "Ay exceed the max value"; }
+            else { this.Ay = "Ay: " + Convert.ToString(ay) + "m/s^2"; }
             
-            Calculated_Acceleration = Ax + " " + Ay;
+            this.Calculated_Acceleration = this.Ax + " " + this.Ay;
             position = position + 2;
             return position;
         }
@@ -654,15 +658,16 @@ namespace ClassLibrary
         private int ModeSMBData(string[] data, int position)
         {
             modeSrep = Convert.ToInt32(data[position], 2);
-            if (modeSrep < 0) { MBData = new string[modeSrep]; BDS1 = new string[modeSrep]; BDS2 = new string[modeSrep]; }
+            if (modeSrep < 0) { this.MBData = new string[modeSrep]; BDS1 = new string[modeSrep]; BDS2 = new string[modeSrep]; }
             
             position =  position + 1;
 
             for (int i = 0; i < modeSrep; i++)
             {
-                MBData[i] = String.Concat(data[position], data[position + 1], data[position + 2], data[position + 3], data[position + 4], data[position + 5], data[position + 6]);
-                BDS1[1] = data[position + 7].Substring(0, 4);
-                BDS2[1] = data[position + 7].Substring(4, 4);
+                this.MBData[i] = String.Concat(data[position], data[position + 1], data[position + 2], data[position + 3], data[position + 4], data[position + 5], data[position + 6]);
+                this.BDS1[1] = data[position + 7].Substring(0, 4);
+                this.BDS2[1] = data[position + 7].Substring(4, 4);
+
                 position = position + 8;
             }
 
@@ -697,13 +702,14 @@ namespace ClassLibrary
 
         private int Presence(string[] data, int position)
         {
-            REPPresence = Convert.ToInt32(string.Concat(data[position]), 2);
+            this.REPPresence = Convert.ToInt32(string.Concat(data[position]), 2);
             position = position + 1;
 
             for (int i = 0; i < REPPresence; i++)
             {
-                DRHO[i] = Convert.ToString(Convert.ToInt32(data[position], 2)) + "m";
-                DTHETA[i] = Convert.ToString(Convert.ToDouble(Convert.ToInt32(data[position + 1], 2)) * 0.15) + "º";
+                this.DRHO[i] = Convert.ToString(Convert.ToInt32(data[position], 2)) + "m";
+                this.DTHETA[i] = Convert.ToString(Convert.ToDouble(Convert.ToInt32(data[position + 1], 2)) * 0.15) + "º";
+                
                 position = position + 2;
             }
 
@@ -810,6 +816,8 @@ namespace ClassLibrary
             position = position + 1;
             return position;
         }
+
+        #endregion
 
         public void UTM2WGS84()
         {
