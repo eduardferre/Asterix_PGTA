@@ -264,7 +264,7 @@ namespace ClassLibrary
             string TYP = octetNum1.Substring(0, 3); //The left first 3 bits (8, 7 & 6) represent TYP
 
             if (TYP == "000") this.TYP = "SSR MLAT";
-            if (TYP == "001") this.TYP = "MOde S MLAT";
+            if (TYP == "001") this.TYP = "Mode S MLAT";
             if (TYP == "010") this.TYP = "ADS-B";
             if (TYP == "011") this.TYP = "PSR";
             if (TYP == "100") this.TYP = "Magnetic Loop System";
