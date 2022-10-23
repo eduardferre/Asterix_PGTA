@@ -367,9 +367,9 @@ namespace ClassLibrary
             double range = Convert.ToInt32(string.Concat(data[position], data[position + 1]), 2); // RHO 2 octets
             
             if (range >= 65536) this.RHO = "RHO is equal or exceeds maximum range (65536m ≈ 35.4NM)";
-            else this.RHO = "ρ = " + Convert.ToString(range) + "m";
+            else this.RHO = "RHO = " + Convert.ToString(range) + "m";
             
-            this.THETA = "θ = " + String.Format("{0:0.00}", Convert.ToDouble(Convert.ToInt32(string.Concat(data[position + 2], data[position + 3]), 2)) * (360 / (Math.Pow(2, 16)))) + "º"; // THETA 2 octets
+            this.THETA = "THETA = " + String.Format("{0:0.00}", Convert.ToDouble(Convert.ToInt32(string.Concat(data[position + 2], data[position + 3]), 2)) * (360 / (Math.Pow(2, 16)))) + "º"; // THETA 2 octets
             
             this.positioninPolarCoordinates = this.RHO + ", " + this.THETA;
 
@@ -685,7 +685,7 @@ namespace ClassLibrary
             double groundSpeed_meters = groundSpeed * 1852;
 
             if (groundSpeed >= 2) this.GroundSpeed = "Ground Speed is equal or higher than the maximum available value (2 NM/s), ";
-            else this.GroundSpeed = "GroundSpeed: " + String.Format("{0:0.00}", groundSpeed_meters) + " m/s, ";
+            else this.GroundSpeed = "GroundSpeed: " + String.Format("{0:0.00}", groundSpeed_meters) + "m/s, ";
 
             this.TrackAngle = "TrackAngle: " + String.Format("{0:0.00}", (Convert.ToInt32(string.Concat(data[position + 2], data[position + 3]),2)) * (360 / (Math.Pow(2, 16)))) + "°";
             this.TrackVelocityPolarCoordinates = this.GroundSpeed + this.TrackAngle;
@@ -706,10 +706,10 @@ namespace ClassLibrary
         private int TrackVelocityInCartesianCoordinates(string[] data, int position)
         {
             double vx = Convert.ToInt32(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1])))*0.25;
-            this.Vx = "Vx: " + Convert.ToString(vx) + " m/s, ";
+            this.Vx = "Vx: " + Convert.ToString(vx) + "m/s, ";
             
             double vy = Convert.ToInt32(BinTwosComplementToSignedDecimal(string.Concat(data[position + 2], data[position + 3]))) * 0.25;
-            this.Vy = "Vy: " + Convert.ToString(vy) + " m/s";
+            this.Vy = "Vy: " + Convert.ToString(vy) + "m/s";
             
             this.TrackVelocityCartesianCoordinates = this.Vx + this.Vy;
 
@@ -732,10 +732,10 @@ namespace ClassLibrary
             double ay = Convert.ToInt32(BinTwosComplementToSignedDecimal(data[position + 1])) * 0.25;
             
             if (ax >= 31 || ax <= -31) { this.Ax = "Ax exceed the max value"; }
-            else { this.Ax = "Ax: " + Convert.ToString(ax) + "m/s^2"; }
+            else { this.Ax = "Ax: " + Convert.ToString(ax) + "m/s²"; }
             
             if (ay >= 31 || ax <= -31) { this.Ay = "Ay exceed the max value"; }
-            else { this.Ay = "Ay: " + Convert.ToString(ay) + "m/s^2"; }
+            else { this.Ay = "Ay: " + Convert.ToString(ay) + "m/s²"; }
             
             this.Calculated_Acceleration = this.Ax + " " + this.Ay;
 
@@ -812,25 +812,30 @@ namespace ClassLibrary
         }
 
         //DATA ITEM: I010/270 
-        public int targetLength;
-        public double targetOrientation;
-        public int targetLenght2;
+        public string targetLength;
+        public string targetOrientation;
+        public string targetWidth;
+        public string targetSizeOrientation;
 
         public int TargetSizeOrientation(string[] data, int position)
         {
-            this.targetLength = Convert.ToInt32(data[position][0]) * 64 + Convert.ToInt32(data[position][1]) * 32 + Convert.ToInt32(data[position][2]) * 16 + Convert.ToInt32(data[position][3]) * 8 + Convert.ToInt32(data[position][4]) * 4 + Convert.ToInt32(data[position][5]) * 2 + Convert.ToInt32(data[position][6]);
+            //this.targetLength = Convert.ToInt32(data[position][0]) * 64 + Convert.ToInt32(data[position][1]) * 32 + Convert.ToInt32(data[position][2]) * 16 + Convert.ToInt32(data[position][3]) * 8 + Convert.ToInt32(data[position][4]) * 4 + Convert.ToInt32(data[position][5]) * 2 + Convert.ToInt32(data[position][6]);
+            this.targetLength = "Target Length: " + Convert.ToString(Convert.ToInt32(data[position].Substring(0, 7), 2)) + "m";
             if (data[position][7] == '1') position = position + 1;
             else return position;
             
-            this.targetOrientation = Convert.ToInt32(data[position][0]) * 64 * 2.81 + Convert.ToInt32(data[position][1]) * 32 * 2.81 + Convert.ToInt32(data[position][2]) * 16 * 2.81 + Convert.ToInt32(data[position][3]) * 8 * 2.81 + Convert.ToInt32(data[position][4]) * 4 * 2.81 + Convert.ToInt32(data[position][5]) * 2 * 2.81 + Convert.ToInt32(data[position][6]) * 2.81;
+            this.targetOrientation = "Target Orientation: " + Convert.ToString(Convert.ToDouble(Convert.ToInt32(data[position].Substring(0, 7) ,2)) * 360 / 128) + "º";
             if (data[position][7] == '1') position = position + 1;
             else return position;
-            
-            this.targetLenght2 = Convert.ToInt32(data[position][0]) * 64 + Convert.ToInt32(data[position][1]) * 32 + Convert.ToInt32(data[position][2]) * 16 + Convert.ToInt32(data[position][3]) * 8 + Convert.ToInt32(data[position][4]) * 4 + Convert.ToInt32(data[position][5]) * 2 + Convert.ToInt32(data[position][6]);
+
+            this.targetWidth = "Target Width: " + Convert.ToString(Convert.ToInt32(data[position].Substring(0, 7), 2)) + "m";
+
+            this.targetSizeOrientation = this.targetLength + ", " + this.targetOrientation + ", " + this.targetWidth;
 
             Console.WriteLine("targetLength: " + this.targetLength);
             Console.WriteLine("targetOrientation: " + this.targetOrientation);
-            Console.WriteLine("targetLenght2: " + this.targetLenght2);
+            Console.WriteLine("targetWidth: " + this.targetWidth);
+            Console.WriteLine("targetSieOrientation: " + this.targetSizeOrientation);
 
             position = position + 1;
             return position;
