@@ -59,8 +59,8 @@ namespace ClassLibrary
             //only for the first message, let's see if it works
             for (i = 0; i < listHex.Count; i++)
             {
-                process = "Loading message " + Convert.ToString(i) + " of " + Convert.ToString(listHex.Count) + " messages...";
-                print(process);
+                //process = "Loading message " + Convert.ToString(i) + " of " + Convert.ToString(listHex.Count) + " messages...";
+                //print(process);
 
                 string[] arrayMsg = listHex[i];
                 int CAT = int.Parse(arrayMsg[0], System.Globalization.NumberStyles.HexNumber);
@@ -84,8 +84,8 @@ namespace ClassLibrary
                 }
             }
 
-            process = "DONE";
-            print(process);
+            //process = "DONE";
+            //print(process);
 
             return listCAT10;
         }

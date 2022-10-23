@@ -61,7 +61,10 @@
             // 
             // tableCAT10
             // 
+            this.tableCAT10.AllowUserToAddRows = false;
+            this.tableCAT10.AllowUserToDeleteRows = false;
             this.tableCAT10.AllowUserToOrderColumns = true;
+            this.tableCAT10.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.tableCAT10.BackgroundColor = System.Drawing.Color.LightSteelBlue;
             this.tableCAT10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.tableCAT10.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
@@ -106,34 +109,41 @@
             this.tableCAT10.Location = new System.Drawing.Point(20, 9);
             this.tableCAT10.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableCAT10.Name = "tableCAT10";
-            this.tableCAT10.RowHeadersWidth = 51;
+            this.tableCAT10.ReadOnly = true;
+            this.tableCAT10.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.tableCAT10.RowTemplate.Height = 29;
-            this.tableCAT10.Size = new System.Drawing.Size(1502, 308);
-            this.tableCAT10.TabIndex = 0;            // 
+            this.tableCAT10.Size = new System.Drawing.Size(800, 300);
+            this.tableCAT10.TabIndex = 0;
+            // 
             // Category
             // 
             this.Category.HeaderText = "Category";
             this.Category.Name = "Category";
+            this.Category.ReadOnly = true;
+            this.Category.Width = 80;
             // 
             // SAC
             // 
             this.SAC.HeaderText = "SAC";
             this.SAC.MinimumWidth = 6;
             this.SAC.Name = "SAC";
-            this.SAC.Width = 125;
+            this.SAC.ReadOnly = true;
+            this.SAC.Width = 54;
             // 
             // SIC
             // 
             this.SIC.HeaderText = "SIC";
             this.SIC.MinimumWidth = 6;
             this.SIC.Name = "SIC";
-            this.SIC.Width = 125;
+            this.SIC.ReadOnly = true;
+            this.SIC.Width = 49;
             // 
             // TargetIdentification
             // 
             this.TargetIdentification.HeaderText = "Target Identification";
             this.TargetIdentification.MinimumWidth = 6;
             this.TargetIdentification.Name = "TargetIdentification";
+            this.TargetIdentification.ReadOnly = true;
             this.TargetIdentification.Width = 125;
             // 
             // TrackNumber
@@ -141,167 +151,189 @@
             this.TrackNumber.HeaderText = "Track Number";
             this.TrackNumber.MinimumWidth = 6;
             this.TrackNumber.Name = "TrackNumber";
-            this.TrackNumber.Width = 125;
+            this.TrackNumber.ReadOnly = true;
+            this.TrackNumber.Width = 97;
             // 
             // TargetReport
             // 
             this.TargetReport.HeaderText = "Target Report";
             this.TargetReport.MinimumWidth = 6;
             this.TargetReport.Name = "TargetReport";
-            this.TargetReport.Width = 125;
+            this.TargetReport.ReadOnly = true;
+            this.TargetReport.Width = 94;
             // 
             // MessageType
             // 
             this.MessageType.HeaderText = "Message Type";
             this.MessageType.MinimumWidth = 6;
             this.MessageType.Name = "MessageType";
-            this.MessageType.Width = 125;
+            this.MessageType.ReadOnly = true;
+            this.MessageType.Width = 97;
             // 
             // FlightLevel
             // 
             this.FlightLevel.HeaderText = "Flight Level";
             this.FlightLevel.MinimumWidth = 6;
             this.FlightLevel.Name = "FlightLevel";
-            this.FlightLevel.Width = 125;
+            this.FlightLevel.ReadOnly = true;
+            this.FlightLevel.Width = 85;
             // 
             // TimeofDay
             // 
             this.TimeofDay.HeaderText = "Time of Day";
             this.TimeofDay.MinimumWidth = 6;
             this.TimeofDay.Name = "TimeofDay";
-            this.TimeofDay.Width = 125;
+            this.TimeofDay.ReadOnly = true;
+            this.TimeofDay.Width = 70;
             // 
             // TrackStatus
             // 
             this.TrackStatus.HeaderText = "Track Status";
             this.TrackStatus.MinimumWidth = 6;
             this.TrackStatus.Name = "TrackStatus";
-            this.TrackStatus.Width = 125;
+            this.TrackStatus.ReadOnly = true;
+            this.TrackStatus.Width = 87;
             // 
             // PositioninWGS84Coordinates
             // 
             this.PositioninWGS84Coordinates.HeaderText = "Position in WGS-84 Co-ordinates";
             this.PositioninWGS84Coordinates.MinimumWidth = 6;
             this.PositioninWGS84Coordinates.Name = "PositioninWGS84Coordinates";
-            this.PositioninWGS84Coordinates.Width = 125;
+            this.PositioninWGS84Coordinates.ReadOnly = true;
+            this.PositioninWGS84Coordinates.Width = 187;
             // 
             // PositioninCartesianCoordinates
             // 
             this.PositioninCartesianCoordinates.HeaderText = "Position in Cartesian Co-ordinates";
             this.PositioninCartesianCoordinates.MinimumWidth = 6;
             this.PositioninCartesianCoordinates.Name = "PositioninCartesianCoordinates";
-            this.PositioninCartesianCoordinates.Width = 125;
+            this.PositioninCartesianCoordinates.ReadOnly = true;
+            this.PositioninCartesianCoordinates.Width = 193;
             // 
             // PositioninPolarCoordinates
             // 
             this.PositioninPolarCoordinates.HeaderText = "Position in Polar Co-ordinates";
             this.PositioninPolarCoordinates.MinimumWidth = 6;
             this.PositioninPolarCoordinates.Name = "PositioninPolarCoordinates";
-            this.PositioninPolarCoordinates.Width = 125;
+            this.PositioninPolarCoordinates.ReadOnly = true;
+            this.PositioninPolarCoordinates.Width = 173;
             // 
             // TrackVelocityinPolarCoordinates
             // 
             this.TrackVelocityinPolarCoordinates.HeaderText = "Track Velocity in Polar Coordinates";
             this.TrackVelocityinPolarCoordinates.MinimumWidth = 6;
             this.TrackVelocityinPolarCoordinates.Name = "TrackVelocityinPolarCoordinates";
-            this.TrackVelocityinPolarCoordinates.Width = 125;
+            this.TrackVelocityinPolarCoordinates.ReadOnly = true;
+            this.TrackVelocityinPolarCoordinates.Width = 136;
             // 
             // TrackVelocityinCartesianCoordinates
             // 
             this.TrackVelocityinCartesianCoordinates.HeaderText = "Track Velocity in Cartesian Coordinates";
             this.TrackVelocityinCartesianCoordinates.MinimumWidth = 6;
             this.TrackVelocityinCartesianCoordinates.Name = "TrackVelocityinCartesianCoordinates";
-            this.TrackVelocityinCartesianCoordinates.Width = 125;
+            this.TrackVelocityinCartesianCoordinates.ReadOnly = true;
+            this.TrackVelocityinCartesianCoordinates.Width = 156;
             // 
             // TargetSizeandOrientation
             // 
             this.TargetSizeandOrientation.HeaderText = "Target Size and Orientation";
             this.TargetSizeandOrientation.MinimumWidth = 6;
             this.TargetSizeandOrientation.Name = "TargetSizeandOrientation";
-            this.TargetSizeandOrientation.Width = 125;
+            this.TargetSizeandOrientation.ReadOnly = true;
+            this.TargetSizeandOrientation.Width = 158;
             // 
             // TargetAddress
             // 
             this.TargetAddress.HeaderText = "Target Address";
             this.TargetAddress.MinimumWidth = 6;
             this.TargetAddress.Name = "TargetAddress";
-            this.TargetAddress.Width = 125;
+            this.TargetAddress.ReadOnly = true;
             // 
             // SystemStatus
             // 
             this.SystemStatus.HeaderText = "System Status";
             this.SystemStatus.MinimumWidth = 6;
             this.SystemStatus.Name = "SystemStatus";
-            this.SystemStatus.Width = 125;
+            this.SystemStatus.ReadOnly = true;
+            this.SystemStatus.Width = 97;
             // 
             // VehicleFleetIdentification
             // 
             this.VehicleFleetIdentification.HeaderText = "Vehicle Fleet Identification";
             this.VehicleFleetIdentification.MinimumWidth = 6;
             this.VehicleFleetIdentification.Name = "VehicleFleetIdentification";
-            this.VehicleFleetIdentification.Width = 125;
+            this.VehicleFleetIdentification.ReadOnly = true;
+            this.VehicleFleetIdentification.Width = 155;
             // 
             // PreprogrammedMessage
             // 
             this.PreprogrammedMessage.HeaderText = "Pre-programmed Message";
             this.PreprogrammedMessage.MinimumWidth = 6;
             this.PreprogrammedMessage.Name = "PreprogrammedMessage";
-            this.PreprogrammedMessage.Width = 125;
+            this.PreprogrammedMessage.ReadOnly = true;
+            this.PreprogrammedMessage.Width = 158;
             // 
             // MeasuredHeight
             // 
             this.MeasuredHeight.HeaderText = "Measured Height";
             this.MeasuredHeight.MinimumWidth = 6;
             this.MeasuredHeight.Name = "MeasuredHeight";
-            this.MeasuredHeight.Width = 125;
+            this.MeasuredHeight.ReadOnly = true;
+            this.MeasuredHeight.Width = 113;
             // 
             // Mode3ACode
             // 
             this.Mode3ACode.HeaderText = "Mode-3A Code";
             this.Mode3ACode.MinimumWidth = 6;
             this.Mode3ACode.Name = "Mode3ACode";
-            this.Mode3ACode.Width = 125;
+            this.Mode3ACode.ReadOnly = true;
+            this.Mode3ACode.Width = 104;
             // 
             // ModeSMBData
             // 
             this.ModeSMBData.HeaderText = "Mode S MB Data";
             this.ModeSMBData.MinimumWidth = 6;
             this.ModeSMBData.Name = "ModeSMBData";
-            this.ModeSMBData.Width = 125;
+            this.ModeSMBData.ReadOnly = true;
+            this.ModeSMBData.Width = 88;
             // 
             // StandardDeviationofPosition
             // 
             this.StandardDeviationofPosition.HeaderText = "Standard Deviation of Position";
             this.StandardDeviationofPosition.MinimumWidth = 6;
             this.StandardDeviationofPosition.Name = "StandardDeviationofPosition";
-            this.StandardDeviationofPosition.Width = 125;
+            this.StandardDeviationofPosition.ReadOnly = true;
+            this.StandardDeviationofPosition.Width = 136;
             // 
             // Presence
             // 
             this.Presence.HeaderText = "Presence";
             this.Presence.MinimumWidth = 6;
             this.Presence.Name = "Presence";
-            this.Presence.Width = 125;
+            this.Presence.ReadOnly = true;
+            this.Presence.Width = 79;
             // 
             // AmplitudeofPrimaryPlot
             // 
             this.AmplitudeofPrimaryPlot.HeaderText = "Amplitude of Primary Plot";
             this.AmplitudeofPrimaryPlot.MinimumWidth = 6;
             this.AmplitudeofPrimaryPlot.Name = "AmplitudeofPrimaryPlot";
-            this.AmplitudeofPrimaryPlot.Width = 125;
+            this.AmplitudeofPrimaryPlot.ReadOnly = true;
+            this.AmplitudeofPrimaryPlot.Width = 136;
             // 
             // CalculatedAcceleration
             // 
             this.CalculatedAcceleration.HeaderText = "Calculated Acceleration";
             this.CalculatedAcceleration.MinimumWidth = 6;
             this.CalculatedAcceleration.Name = "CalculatedAcceleration";
-            this.CalculatedAcceleration.Width = 125;
+            this.CalculatedAcceleration.ReadOnly = true;
+            this.CalculatedAcceleration.Width = 143;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1199, 338);
+            this.ClientSize = new System.Drawing.Size(848, 338);
             this.Controls.Add(this.tableCAT10);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";

@@ -236,10 +236,8 @@ namespace ClassLibrary
             this.SAC = Convert.ToString(Convert.ToInt32(data[position], 2));
             this.SIC = Convert.ToString(Convert.ToInt32(data[position + 1], 2));
 
-            this.airportCode = 
-
             //Console.WriteLine("SAC: " + this.SAC);
-            ////Console.WriteLine("SIC: " + this.SIC);
+            //Console.WriteLine("SIC: " + this.SIC);
 
             position = position + 2;
             return position;
