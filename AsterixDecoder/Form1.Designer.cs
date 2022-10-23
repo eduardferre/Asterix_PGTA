@@ -29,6 +29,7 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableCAT10 = new System.Windows.Forms.DataGridView();
+            this.Category = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SAC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SIC = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TargetIdentification = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -74,6 +75,7 @@
             this.tableCAT10.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.tableCAT10.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tableCAT10.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Category,
             this.SAC,
             this.SIC,
             this.TargetIdentification,
@@ -101,12 +103,17 @@
             this.AmplitudeofPrimaryPlot,
             this.CalculatedAcceleration});
             this.tableCAT10.GridColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.tableCAT10.Location = new System.Drawing.Point(21, 12);
+            this.tableCAT10.Location = new System.Drawing.Point(20, 9);
+            this.tableCAT10.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableCAT10.Name = "tableCAT10";
             this.tableCAT10.RowHeadersWidth = 51;
             this.tableCAT10.RowTemplate.Height = 29;
-            this.tableCAT10.Size = new System.Drawing.Size(1717, 411);
-            this.tableCAT10.TabIndex = 0;
+            this.tableCAT10.Size = new System.Drawing.Size(1502, 308);
+            this.tableCAT10.TabIndex = 0;            // 
+            // Category
+            // 
+            this.Category.HeaderText = "Category";
+            this.Category.Name = "Category";
             // 
             // SAC
             // 
@@ -292,10 +299,11 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1764, 450);
+            this.ClientSize = new System.Drawing.Size(1199, 338);
             this.Controls.Add(this.tableCAT10);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -307,6 +315,7 @@
         #endregion
 
         private System.Windows.Forms.DataGridView tableCAT10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Category;
         private System.Windows.Forms.DataGridViewTextBoxColumn SAC;
         private System.Windows.Forms.DataGridViewTextBoxColumn SIC;
         private System.Windows.Forms.DataGridViewTextBoxColumn TargetIdentification;

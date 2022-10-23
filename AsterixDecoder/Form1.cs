@@ -21,12 +21,23 @@ namespace AsterixDecoder
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            DecodeFiles decode = new DecodeFiles();
 
+            List<CAT10> listCAT10 = decode.Read();
+
+            foreach (CAT10 msg in listCAT10)
+            {
+                AddRowT(msg);
+            }
         }
         
         public void AddRowT(CAT10 Message)
         {
-            DataGridViewRow row = new DataGridViewRow();
+            int rowId = tableCAT10.Rows.Add();
+
+            DataGridViewRow row = tableCAT10.Rows[rowId];
+            if (Message.CAT != null) row.Cells["Category"].Value = Message.CAT;
+
             if (Message.SAC != null) row.Cells["SAC"].Value = Message.SAC; 
             else row.Cells["SAC"].Value = "No Data"; 
 
@@ -111,6 +122,5 @@ namespace AsterixDecoder
 
             tableCAT10.Rows.Add(row);
         }
-
     }
 }

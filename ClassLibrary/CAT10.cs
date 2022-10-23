@@ -8,6 +8,16 @@ namespace ClassLibrary
 {
     public class CAT10
     {
+        #region Principal Parameters of CAT10
+
+        readonly string[] FSPEC;
+        public int msgNum;
+        public int msgCAT10Num;
+        public int airportCode;
+        public string CAT = "10";
+
+        #endregion
+
         #region Extra Functions for Decoding Parameters
 
         public static string HexToBinary(string msgHexa)
@@ -145,10 +155,6 @@ namespace ClassLibrary
 
         #region CAT10 Decoding Procedure 
 
-        readonly string[] FSPEC;
-        int position; //one octet
-        public string CAT = "10";
-
         public void DecodeCAT10(string[] dataMessage, int position)
         {
             string FSPECNum = FSPECnum(dataMessage);
@@ -216,7 +222,7 @@ namespace ClassLibrary
             if (messageType == 3) this.messageType = "Periodic Status Message";
             if (messageType == 4) this.messageType = "Event-triggered Status Message"; 
 
-            Console.WriteLine("MessageType: " + this.messageType);
+            //Console.WriteLine("MessageType: " + this.messageType);
 
             position = position + 1;
             return position;
@@ -230,8 +236,10 @@ namespace ClassLibrary
             this.SAC = Convert.ToString(Convert.ToInt32(data[position], 2));
             this.SIC = Convert.ToString(Convert.ToInt32(data[position + 1], 2));
 
-            Console.WriteLine("SAC: " + this.SAC);
-            Console.WriteLine("SIC: " + this.SIC);
+            this.airportCode = 
+
+            //Console.WriteLine("SAC: " + this.SAC);
+            ////Console.WriteLine("SIC: " + this.SIC);
 
             position = position + 2;
             return position;
@@ -341,17 +349,17 @@ namespace ClassLibrary
                 }
             }
 
-            Console.WriteLine("TYP: " + this.TYP);
-            Console.WriteLine("DCR: " + this.DCR);
-            Console.WriteLine("CHN: " + this.CHN);
-            Console.WriteLine("GBS: " + this.GBS);
-            Console.WriteLine("CRT: " + this.CRT);
-            Console.WriteLine("SIM: " + this.SIM);
-            Console.WriteLine("TST: " + this.TST);
-            Console.WriteLine("RAB: " + this.RAB);
-            Console.WriteLine("LOP: " + this.LOP);
-            Console.WriteLine("TOT: " + this.TOT);
-            Console.WriteLine("SPI: " + this.SPI);
+            //Console.WriteLine("TYP: " + this.TYP);
+            //Console.WriteLine("DCR: " + this.DCR);
+            //Console.WriteLine("CHN: " + this.CHN);
+            //Console.WriteLine("GBS: " + this.GBS);
+            //Console.WriteLine("CRT: " + this.CRT);
+            //Console.WriteLine("SIM: " + this.SIM);
+            //Console.WriteLine("TST: " + this.TST);
+            //Console.WriteLine("RAB: " + this.RAB);
+            //Console.WriteLine("LOP: " + this.LOP);
+            //Console.WriteLine("TOT: " + this.TOT);
+            //Console.WriteLine("SPI: " + this.SPI);
 
             return newposition + 1;
         }
@@ -373,9 +381,9 @@ namespace ClassLibrary
             
             this.positioninPolarCoordinates = this.RHO + ", " + this.THETA;
 
-            Console.WriteLine("RHO: " + this.RHO);
-            Console.WriteLine("THETA: " + this.THETA);
-            Console.WriteLine("Pos. in PolarCoords: " + this.positioninPolarCoordinates);
+            //Console.WriteLine("RHO: " + this.RHO);
+            //Console.WriteLine("THETA: " + this.THETA);
+            //Console.WriteLine("Pos. in PolarCoords: " + this.positioninPolarCoordinates);
 
             return position + 4;
         }
@@ -402,8 +410,8 @@ namespace ClassLibrary
             this.LatitudeinWGS84 = Convert.ToString(latitudeDeg) + "º " + Convert.ToString(latitudeMin) + "' " + Convert.ToString(latitudeSec) + "''";
             this.LongitudeinWGS84 = Convert.ToString(longitudeDeg) + "º " + Convert.ToString(longitudeMin) + "' " + Convert.ToString(longitudeSec) + "''";
 
-            Console.WriteLine("LatWGS84: " + this.LatitudeinWGS84);
-            Console.WriteLine("LongWGS84: " + this.LongitudeinWGS84);
+            //Console.WriteLine("LatWGS84: " + this.LatitudeinWGS84);
+            //Console.WriteLine("LongWGS84: " + this.LongitudeinWGS84);
 
             return newposition;
         }
@@ -429,7 +437,7 @@ namespace ClassLibrary
             //PointLatLng position = lib.ComputeWGS_84_from_Cartesian(MapPoint, this.SIC); //Compute WGS84 position from cartesian position
             //Set_WGS84_Coordinates(position); //Apply computed WGS84 position to this message
 
-            Console.WriteLine("Pos. in CartesianCoords: " + this.positioninCartesianCoordinates);
+            //Console.WriteLine("Pos. in CartesianCoords: " + this.positioninCartesianCoordinates);
 
             return newposition;
         }
@@ -486,10 +494,10 @@ namespace ClassLibrary
 
             this.Mode3A = Convert.ToString(DecimalToOctal(Convert.ToInt32(string.Concat(data[position], data[position + 1]).Substring(4, 12), 2))).PadLeft(4,'0');
 
-            Console.WriteLine("VMode3A: " + this.VMode3A);
-            Console.WriteLine("GMode3A: " + this.GMode3A);
-            Console.WriteLine("LMode3A: " + this.LMode3A);
-            Console.WriteLine("Mode3A: " + this.Mode3A);
+            //Console.WriteLine("VMode3A: " + this.VMode3A);
+            //Console.WriteLine("GMode3A: " + this.GMode3A);
+            //Console.WriteLine("LMode3A: " + this.LMode3A);
+            //Console.WriteLine("Mode3A: " + this.Mode3A);
 
             position = position + 2;
             return position;
@@ -518,11 +526,11 @@ namespace ClassLibrary
 
             this.FlightLevelInfo = this.VFlightLevel + ", " + this.GFlightLevel + ", FL" + this.FlightLevel;
 
-            Console.WriteLine("VFlight: " + this.VFlightLevel);
-            Console.WriteLine("GFlight: " + this.GFlightLevel);
-            Console.WriteLine("FlightLevel: " + this.FlightLevel);
-            Console.WriteLine("FlightLevelInfo: " + this.FlightLevelInfo);
-            Console.WriteLine("FlightLevelFT: " + this.FlightLevelFT);
+            //Console.WriteLine("VFlight: " + this.VFlightLevel);
+            //Console.WriteLine("GFlight: " + this.GFlightLevel);
+            //Console.WriteLine("FlightLevel: " + this.FlightLevel);
+            //Console.WriteLine("FlightLevelInfo: " + this.FlightLevelInfo);
+            //Console.WriteLine("FlightLevelFT: " + this.FlightLevelFT);
 
             position += 2;
             return position;
@@ -535,7 +543,7 @@ namespace ClassLibrary
         {
             this.measuredHeight = Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1]))) * 6.25) + " ft";
 
-            Console.WriteLine("MeasuredHeight: " + this.measuredHeight);
+            //Console.WriteLine("MeasuredHeight: " + this.measuredHeight);
 
             position += 2;
             return position;
@@ -551,7 +559,7 @@ namespace ClassLibrary
             if (PAM == 0) this.PAM = "PAM: 0";
             else this.PAM = "PAM: " + Convert.ToString(Convert.ToInt32(data[position], 2));
 
-            Console.WriteLine("PAM: " + this.PAM);
+            //Console.WriteLine("PAM: " + this.PAM);
 
             position += 1;
             return position;
@@ -567,7 +575,7 @@ namespace ClassLibrary
             
             this.TimeOfDay = TimeSpan.FromSeconds(seconds).ToString(@"hh\:mm\:ss\:fff");
 
-            Console.WriteLine("TimeOfDay: " + this.TimeOfDay);
+            //Console.WriteLine("TimeOfDay: " + this.TimeOfDay);
 
             position = position + 3;
             return position;
@@ -580,7 +588,7 @@ namespace ClassLibrary
         {
             this.TrackNum = Convert.ToString(Convert.ToInt32(string.Concat(data[position], data[position + 1]), 2));
 
-            Console.WriteLine("TrackNum: " + this.TrackNum);
+            //Console.WriteLine("TrackNum: " + this.TrackNum);
 
             position += 2;
             return position;
@@ -660,16 +668,16 @@ namespace ClassLibrary
                 }
             }
 
-            Console.WriteLine("CNF: " + this.CNF);
-            Console.WriteLine("TRE: " + this.TRE);
-            Console.WriteLine("CST: " + this.CST);
-            Console.WriteLine("MAH: " + this.MAH);
-            Console.WriteLine("TCC: " + this.TCC);
-            Console.WriteLine("STH: " + this.STH);
-            Console.WriteLine("TOM: " + this.TOM);
-            Console.WriteLine("DOU: " + this.DOU);
-            Console.WriteLine("MRS: " + this.MRS);
-            Console.WriteLine("GHO: " + this.GHO);
+            //Console.WriteLine("CNF: " + this.CNF);
+            //Console.WriteLine("TRE: " + this.TRE);
+            //Console.WriteLine("CST: " + this.CST);
+            //Console.WriteLine("MAH: " + this.MAH);
+            //Console.WriteLine("TCC: " + this.TCC);
+            //Console.WriteLine("STH: " + this.STH);
+            //Console.WriteLine("TOM: " + this.TOM);
+            //Console.WriteLine("DOU: " + this.DOU);
+            //Console.WriteLine("MRS: " + this.MRS);
+            //Console.WriteLine("GHO: " + this.GHO);
 
             return position;
         }
@@ -684,15 +692,15 @@ namespace ClassLibrary
             double groundSpeed = Convert.ToDouble(Convert.ToInt32(string.Concat(data[position], data[position + 1]), 2)) * Math.Pow(2, -14);
             double groundSpeed_meters = groundSpeed * 1852;
 
-            if (groundSpeed >= 2) this.GroundSpeed = "Ground Speed is equal or higher than the maximum available value (2 NM/s), ";
+            if (groundSpeed >= 2) this.GroundSpeed = "Ground Speed is equal or higher than the maximum available value (2NM/s), ";
             else this.GroundSpeed = "GroundSpeed: " + String.Format("{0:0.00}", groundSpeed_meters) + "m/s, ";
 
             this.TrackAngle = "TrackAngle: " + String.Format("{0:0.00}", (Convert.ToInt32(string.Concat(data[position + 2], data[position + 3]),2)) * (360 / (Math.Pow(2, 16)))) + "°";
             this.TrackVelocityPolarCoordinates = this.GroundSpeed + this.TrackAngle;
 
-            Console.WriteLine("GroundSpeed: " + this.GroundSpeed);
-            Console.WriteLine("TrackAngle: " + this.TrackAngle);
-            Console.WriteLine("TrackVelPolar: " + this.TrackVelocityPolarCoordinates);
+            //Console.WriteLine("GroundSpeed: " + this.GroundSpeed);
+            //Console.WriteLine("TrackAngle: " + this.TrackAngle);
+            //Console.WriteLine("TrackVelPolar: " + this.TrackVelocityPolarCoordinates);
 
             position = position + 4;
             return position;
@@ -713,9 +721,9 @@ namespace ClassLibrary
             
             this.TrackVelocityCartesianCoordinates = this.Vx + this.Vy;
 
-            Console.WriteLine("Vx: " + this.Vx);
-            Console.WriteLine("Vy: " + this.Vy);
-            Console.WriteLine("TrackVelCartesian: " + this.TrackVelocityCartesianCoordinates);
+            //Console.WriteLine("Vx: " + this.Vx);
+            //Console.WriteLine("Vy: " + this.Vy);
+            //Console.WriteLine("TrackVelCartesian: " + this.TrackVelocityCartesianCoordinates);
 
             position = position + 4;
             return position;
@@ -739,9 +747,9 @@ namespace ClassLibrary
             
             this.Calculated_Acceleration = this.Ax + " " + this.Ay;
 
-            Console.WriteLine("Ax: " + this.Ax);
-            Console.WriteLine("Ay: " + this.Ay);
-            Console.WriteLine("CalcAcc: " + this.Calculated_Acceleration);
+            //Console.WriteLine("Ax: " + this.Ax);
+            //Console.WriteLine("Ay: " + this.Ay);
+            //Console.WriteLine("CalcAcc: " + this.Calculated_Acceleration);
 
             position = position + 2;
             return position;
@@ -754,7 +762,7 @@ namespace ClassLibrary
         {
             this.TargetAdd = string.Concat(BinarytoHexadecimal(data[position]), BinarytoHexadecimal(data[position + 1]), BinarytoHexadecimal(data[position + 2]));
 
-            Console.WriteLine("TargetAdd: " + this.TargetAdd);
+            //Console.WriteLine("TargetAdd: " + this.TargetAdd);
 
             position = position + 3;
             return position;
@@ -774,8 +782,8 @@ namespace ClassLibrary
             string characters = string.Concat(data[position + 1], data[position + 2], data[position + 3], data[position + 4], data[position + 5], data[position + 6]);
             for (int i = 0; i < 8; i++) this.TargetId = Convert.ToString(ComputeCharacter(characters.Substring(i * 6, 6)));
 
-            Console.WriteLine("STI: " + this.STI);
-            Console.WriteLine("TargetId: " + this.TargetId);
+            //Console.WriteLine("STI: " + this.STI);
+            //Console.WriteLine("TargetId: " + this.TargetId);
 
             position = position + 7;
             return position;
@@ -803,10 +811,10 @@ namespace ClassLibrary
                 position = position + 8;
             }
 
-            Console.WriteLine("MBData: " + this.MBData);
-            Console.WriteLine("BSD1: " + this.BDS1);
-            Console.WriteLine("BSD2: " + this.BDS2);
-            Console.WriteLine("modeSrep: " + this.modeSrep);
+            //Console.WriteLine("MBData: " + this.MBData);
+            //Console.WriteLine("BSD1: " + this.BDS1);
+            //Console.WriteLine("BSD2: " + this.BDS2);
+            //Console.WriteLine("modeSrep: " + this.modeSrep);
 
             return position;
         }
@@ -832,10 +840,10 @@ namespace ClassLibrary
 
             this.targetSizeOrientation = this.targetLength + ", " + this.targetOrientation + ", " + this.targetWidth;
 
-            Console.WriteLine("targetLength: " + this.targetLength);
-            Console.WriteLine("targetOrientation: " + this.targetOrientation);
-            Console.WriteLine("targetWidth: " + this.targetWidth);
-            Console.WriteLine("targetSieOrientation: " + this.targetSizeOrientation);
+            //Console.WriteLine("targetLength: " + this.targetLength);
+            //Console.WriteLine("targetOrientation: " + this.targetOrientation);
+            //Console.WriteLine("targetWidth: " + this.targetWidth);
+            //Console.WriteLine("targetSieOrientation: " + this.targetSizeOrientation);
 
             position = position + 1;
             return position;
@@ -859,9 +867,9 @@ namespace ClassLibrary
                 position = position + 2;
             }
 
-            Console.WriteLine("REPPresence: " + this.REPPresence);
-            Console.WriteLine("DRHO: " + this.DRHO);
-            Console.WriteLine("THETA: " + this.DTHETA);
+            //Console.WriteLine("REPPresence: " + this.REPPresence);
+            //Console.WriteLine("DRHO: " + this.DRHO);
+            //Console.WriteLine("THETA: " + this.DTHETA);
 
             return position;
         }
@@ -891,7 +899,7 @@ namespace ClassLibrary
             else if (vfi == 15) this.VFI = "Aircraft maintenance";
             else if (vfi == 16) this.VFI = "Flyco (follow me)";
 
-            Console.WriteLine("VFI: " + this.VFI);
+            //Console.WriteLine("VFI: " + this.VFI);
 
             position = position + 1;
             return position;
@@ -919,9 +927,9 @@ namespace ClassLibrary
 
             this.preProgrammedMessage = TRB + " " + MSG;
 
-            Console.WriteLine("TRB: " + this.TRB);
-            Console.WriteLine("MSG: " + this.MSG);
-            Console.WriteLine("preProgramMsg: " + this.preProgrammedMessage);
+            //Console.WriteLine("TRB: " + this.TRB);
+            //Console.WriteLine("MSG: " + this.MSG);
+            //Console.WriteLine("preProgramMsg: " + this.preProgrammedMessage);
 
             position = position + 1;
             return position;
@@ -938,9 +946,9 @@ namespace ClassLibrary
             DeviationY = "Standard Deviation of Y component (σy): " + Convert.ToString(Convert.ToDouble(Convert.ToInt32(data[position + 1], 2)) * 0.25) + "m";
             CovarianceXY = "Covariance (σxy): " + Convert.ToString(Convert.ToInt32(BinTwosComplementToSignedDecimal(string.Concat(data[position + 2], data[position + 3]))) * 0.25) + "m^2";
 
-            Console.WriteLine("DevX: " + this.DeviationX);
-            Console.WriteLine("DevY: " + this.DeviationY);
-            Console.WriteLine("CovXY: " + this.CovarianceXY);
+            //Console.WriteLine("DevX: " + this.DeviationX);
+            //Console.WriteLine("DevY: " + this.DeviationY);
+            //Console.WriteLine("CovXY: " + this.CovarianceXY);
 
             position = position + 4;
             return position;
@@ -974,11 +982,11 @@ namespace ClassLibrary
             if (OctetoChar[5] == '0') this.TIF = "TIF: Test Target Operative";
             else if (OctetoChar[5] == '1') this.TIF = "TIF: Test Target Failure";
 
-            Console.WriteLine("NOGO: " + this.NOGO);
-            Console.WriteLine("OVL: " + this.OVL);
-            Console.WriteLine("TSV: " + this.TSV);
-            Console.WriteLine("DIV: " + this.DIV);
-            Console.WriteLine("TIF: " + this.TIF);
+            //Console.WriteLine("NOGO: " + this.NOGO);
+            //Console.WriteLine("OVL: " + this.OVL);
+            //Console.WriteLine("TSV: " + this.TSV);
+            //Console.WriteLine("DIV: " + this.DIV);
+            //Console.WriteLine("TIF: " + this.TIF);
 
             position = position + 1;
             return position;

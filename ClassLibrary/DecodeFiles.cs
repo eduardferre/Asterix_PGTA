@@ -6,37 +6,37 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using ClassLibrary;
 
-namespace ConsoleApp1
+namespace ClassLibrary
 {
-    class Program
+    public class DecodeFiles
     {
-        static void Main(string[] args)
-        {
-            int numberMsgs = 0;
-            int numberCAT10Msgs = 0;
-            string process;
+        public int numberMsgs = 0;
+        public int numberCAT10Msgs = 0;
+        public string process;
 
-            List<CAT10> listCAT10 = new List<CAT10>();
-            
+        List<CAT10> listCAT10 = new List<CAT10>();
+
+        public List<CAT10> Read()
+        {
             byte[] fileBytes = File.ReadAllBytes("C:\\Users\\Eduard\\Desktop\\Asterix_PGTA\\AsterixDecoder\\201002-lebl-080001_smr.ast");
             List<byte[]> listBytes = new List<byte[]>();
 
             int cont = fileBytes[1] * 256 + fileBytes[2];
             int i = 0;
 
-            while(i < fileBytes.Length)
+            while (i < fileBytes.Length)
             {
                 byte[] array = new byte[cont];
 
-                for(int j = 0; j < array.Length; j++)
+                for (int j = 0; j < array.Length; j++)
                 {
                     array[j] = fileBytes[i];
                     i++;
                 }
 
                 listBytes.Add(array);
-                
-                if(i + 2 < fileBytes.Length) cont = fileBytes[i + 1] * 256 + fileBytes[i + 2];
+
+                if (i + 2 < fileBytes.Length) cont = fileBytes[i + 1] * 256 + fileBytes[i + 2];
             }
 
             List<string[]> listHex = new List<string[]>();
@@ -46,7 +46,7 @@ namespace ConsoleApp1
                 byte[] byteSelect = listBytes[i];
                 string[] arrayHex = new string[byteSelect.Length];
 
-                for(int j = 0; j < byteSelect.Length; j++)
+                for (int j = 0; j < byteSelect.Length; j++)
                 {
                     arrayHex[j] = byteSelect[j].ToString("X");
 
@@ -86,9 +86,11 @@ namespace ConsoleApp1
 
             process = "DONE";
             print(process);
+
+            return listCAT10;
         }
 
-        static void print(string texto)
+        public void print(string texto)
         {
             Console.WriteLine(texto);
         }
