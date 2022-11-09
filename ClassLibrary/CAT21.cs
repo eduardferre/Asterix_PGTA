@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ClassLibrary
 {
-    puclic class CAT21
+    public class CAT21
     {
         #region Principal Parameters of CAT21
 
@@ -166,74 +166,74 @@ namespace ClassLibrary
                 data[i] = HexToBinary1(dataMessage[i]);
             }
 
-            if (FSPEC[0] == '1') position = DataSourceIdentifier(data, position);
-            if (FSPEC[1] == '1') position = MessageType(data, position);
-            if (FSPEC[2] == '1') position = TrackNumber(data, position);
-            if (FSPEC[3] == '1') position = ServiceIdentification(data, position);
-            if (FSPEC[4] == '1') position = TimeOfApplicabilityForPosition(data, position);
-            if (FSPEC[5] == '1') position = PositionInWGS84Coordinates(data, position);
-            if (FSPEC[6] == '1') position = PositionInWGS84CoordinatesHighResolution(data, position);
+            //if (FSPEC[0] == '1') position = DataSourceIdentifier(data, position);
+            //if (FSPEC[1] == '1') position = MessageType(data, position);
+            //if (FSPEC[2] == '1') position = TrackNumber(data, position);
+            //if (FSPEC[3] == '1') position = ServiceIdentification(data, position);
+            //if (FSPEC[4] == '1') position = TimeOfApplicabilityForPosition(data, position);
+            //if (FSPEC[5] == '1') position = PositionInWGS84Coordinates(data, position);
+            //if (FSPEC[6] == '1') position = PositionInWGS84CoordinatesHighResolution(data, position);
             
-            if (FSPEC.Length > 8)
-            {
-                if (FSPEC[7] == '1') position = TimeOfApplicabilityForVelocity(data, position); 
-                if (FSPEC[8] == '1') position = AirSpeed(data, position); 
-                if (FSPEC[9] == '1') position = TrueAirSpeed(data, position); 
-                if (FSPEC[10] == '1') position = TargetAddress(data, position);
-                if (FSPEC[11] == '1') position = TimeOfMessageReceptionOfPosition(data, position); 
-                if (FSPEC[12] == '1') position = TimeOfMessageReceptionOfPositionHighPrecision(data, position); 
-                if (FSPEC[13] == '1') position = TimeOfMessageReceptionOfVelocity(data, position); 
-            }
+            //if (FSPEC.Length > 8)
+            //{
+            //    if (FSPEC[7] == '1') position = TimeOfApplicabilityForVelocity(data, position); 
+            //    if (FSPEC[8] == '1') position = AirSpeed(data, position); 
+            //    if (FSPEC[9] == '1') position = TrueAirSpeed(data, position); 
+            //    if (FSPEC[10] == '1') position = TargetAddress(data, position);
+            //    if (FSPEC[11] == '1') position = TimeOfMessageReceptionOfPosition(data, position); 
+            //    if (FSPEC[12] == '1') position = TimeOfMessageReceptionOfPositionHighPrecision(data, position); 
+            //    if (FSPEC[13] == '1') position = TimeOfMessageReceptionOfVelocity(data, position); 
+            //}
 
-            if (FSPEC.Length > 15)
-            {
-                if (FSPEC[14] == '1') position = TimeOfMessageReceptionOfVelocityHighPrecision(data, position); 
-                if (FSPEC[15] == '1') position = GeometricHeight(data, position); 
-                if (FSPEC[16] == '1') position = QualityIndicators(data, position);
-                if (FSPEC[17] == '1') position = MOPSVersion(data, position);
-                if (FSPEC[18] == '1') position = Mode3ACode(data, position);
-                if (FSPEC[19] == '1') position = RollAngle(data, position);
-                if (FSPEC[20] == '1') position = FlightLevel(data, position);
-            }
+            //if (FSPEC.Length > 15)
+            //{
+            //    if (FSPEC[14] == '1') position = TimeOfMessageReceptionOfVelocityHighPrecision(data, position); 
+            //    if (FSPEC[15] == '1') position = GeometricHeight(data, position); 
+            //    if (FSPEC[16] == '1') position = QualityIndicators(data, position);
+            //    if (FSPEC[17] == '1') position = MOPSVersion(data, position);
+            //    if (FSPEC[18] == '1') position = Mode3ACode(data, position);
+            //    if (FSPEC[19] == '1') position = RollAngle(data, position);
+            //    if (FSPEC[20] == '1') position = FlightLevel(data, position);
+            //}
 
-            if (FSPEC.Length > 22)
-            {
-                if (FSPEC[21] == '1') position = MagneticHeading(data, position);
-                if (FSPEC[22] == '1') position = TargetStatus(data, position);
-                if (FSPEC[23] == '1') position = BarometricVerticalRate(data, position);
-                if (FSPEC[24] == '1') position = GeometricVerticalRate(data, position);
-                if (FSPEC[25] == '1') position = AirborneGroundVector(data, position);
-                if (FSPEC[26] == '1') position = TrackAngleRate(data, position);
-                if (FSPEC[27] == '1') position = TimeOfReportTransmission(data, position);
-            }
+            //if (FSPEC.Length > 22)
+            //{
+            //    if (FSPEC[21] == '1') position = MagneticHeading(data, position);
+            //    if (FSPEC[22] == '1') position = TargetStatus(data, position);
+            //    if (FSPEC[23] == '1') position = BarometricVerticalRate(data, position);
+            //    if (FSPEC[24] == '1') position = GeometricVerticalRate(data, position);
+            //    if (FSPEC[25] == '1') position = AirborneGroundVector(data, position);
+            //    if (FSPEC[26] == '1') position = TrackAngleRate(data, position);
+            //    if (FSPEC[27] == '1') position = TimeOfReportTransmission(data, position);
+            //}
 
-            if (FSPEC.Length > 29)
-            {
-                if (FSPEC[28] == '1') position = TargetIdentification(data, position);
-                if (FSPEC[29] == '1') position = EmitterCategory(data, position);
-                if (FSPEC[30] == '1') position = MetInformation(data, position);
-                if (FSPEC[31] == '1') position = SelectedAltitude(data, position);
-                if (FSPEC[32] == '1') position = FinalStateSelectedAltitude(data, position);
-                if (FSPEC[33] == '1') position = TrajectoryIntent(data, position);
-                if (FSPEC[34] == '1') position = ServiceManagement(data, position);
-            }
+            //if (FSPEC.Length > 29)
+            //{
+            //    if (FSPEC[28] == '1') position = TargetIdentification(data, position);
+            //    if (FSPEC[29] == '1') position = EmitterCategory(data, position);
+            //    if (FSPEC[30] == '1') position = MetInformation(data, position);
+            //    if (FSPEC[31] == '1') position = SelectedAltitude(data, position);
+            //    if (FSPEC[32] == '1') position = FinalStateSelectedAltitude(data, position);
+            //    if (FSPEC[33] == '1') position = TrajectoryIntent(data, position);
+            //    if (FSPEC[34] == '1') position = ServiceManagement(data, position);
+            //}
 
-            if (FSPEC.Length > 36)
-            {
-                if (FSPEC[35] == '1') position = AircraftOperationalStatus(data, position);
-                if (FSPEC[36] == '1') position = SurfaceCapabilitiesAndCharacteristics(data, position);
-                if (FSPEC[37] == '1') position = MessageAmplitude(data, position);
-                if (FSPEC[38] == '1') position = ModeSMBData(data, position);
-                if (FSPEC[39] == '1') position = ACASResolutionAdvisoryReport(data, position);
-                if (FSPEC[40] == '1') position = ReceiverID(data, position);
-                if (FSPEC[41] == '1') position = DataAges(data, position);
-            }
+            //if (FSPEC.Length > 36)
+            //{
+            //    if (FSPEC[35] == '1') position = AircraftOperationalStatus(data, position);
+            //    if (FSPEC[36] == '1') position = SurfaceCapabilitiesAndCharacteristics(data, position);
+            //    if (FSPEC[37] == '1') position = MessageAmplitude(data, position);
+            //    if (FSPEC[38] == '1') position = ModeSMBData(data, position);
+            //    if (FSPEC[39] == '1') position = ACASResolutionAdvisoryReport(data, position);
+            //    if (FSPEC[40] == '1') position = ReceiverID(data, position);
+            //    if (FSPEC[41] == '1') position = DataAges(data, position);
+            //}
 
-            if (FSPEC.Length > 43)
-            {
-                if (FSPEC[47] == '1') position = ReservedExpansionField(data, position);
-                if (FSPEC[48] == '1') position = SpecialPurposeField(data, position);
-            }
+            //if (FSPEC.Length > 43)
+            //{
+            //    if (FSPEC[47] == '1') position = ReservedExpansionField(data, position);
+            //    if (FSPEC[48] == '1') position = SpecialPurposeField(data, position);
+            //}
 
         }
 
@@ -265,23 +265,23 @@ namespace ClassLibrary
             else this.TC = "Reserved";
 
             string TS = octet.Substring(3, 1);
-            if (TS == '0') this.TS = "No capability to support Target State Reports";
+            if (TS == "0") this.TS = "No capability to support Target State Reports";
             else this.TS = "Capable of supporting target State Reports";
 
             string ARV = octet.Substring(4, 1);
-            if (ARV == '0') this.ARV = "No capability to generate ARV-Reports";
+            if (ARV == "0") this.ARV = "No capability to generate ARV-Reports";
             else this.ARV = "Capable of generate ARV-Reports";
 
             string CDTIA = octet.Substring(5, 1);
-            if (CDTIA == '0') this.CDTIA = "CDTI not operational";
+            if (CDTIA == "0") this.CDTIA = "CDTI not operational";
             else this.CDTIA = "CDTI operational";
 
             string NotTCAS = octet.Substring(6, 1);
-            if (NotTCAS == '0') this.NotTCAS = "TCAS operational";
-            else this.Not_TCAS = "TCAS not operational";
+            if (NotTCAS == "0") this.NotTCAS = "TCAS operational";
+            else this.NotTCAS = "TCAS not operational";
 
             string SA = octet.Substring(7, 1);
-            if (SA == '0') this.SA = "Antenna Diversity";
+            if (SA == "0") this.SA = "Antenna Diversity";
             else this.SA = "Single Antenna only";
 
             position = position + 1;

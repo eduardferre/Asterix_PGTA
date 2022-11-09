@@ -16,6 +16,7 @@ namespace ClassLibrary
 
         List<CAT10> listCAT10 = new List<CAT10>();
 
+
         public List<CAT10> Read()
         {
             byte[] fileBytes = File.ReadAllBytes("C:\\Users\\Eduard\\Desktop\\Asterix_PGTA\\AsterixDecoder\\201002-lebl-080001_smr.ast");
