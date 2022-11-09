@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CLassLibrary
 {
-    public CLass CAT21
+    public class CAT21
     {
         #region Principal Parameters of CAT21
 
@@ -306,11 +306,11 @@ namespace CLassLibrary
         }
 
         //DATA ITEM: I021/015
-        public string ServiceIdentification;
+        public string ServiceId;
 
         private int ServiceIdentification(string[] data, int position) 
         {
-            this.ServiceIdentification = Convert.ToString(Convert.ToInt32(data[position], 2));
+            this.ServiceId = Convert.ToString(Convert.ToInt32(data[position], 2));
             
             position = position + 1;
             return position;
@@ -406,7 +406,7 @@ namespace CLassLibrary
             if (RAB == 0) this.RAB = "Report from target transponder";
             else this.RAB = "Report from field monitor (fixed transponder)";
 
-            int FX1 = Convert.ToString(octetNum1.Substring(7, 1), 2);
+            int FX1 = Convert.ToInt32(octetNum1.Substring(7, 1), 2);
 
             if (FX1 == 1)
             {
@@ -414,23 +414,23 @@ namespace CLassLibrary
 
                 string octetNum1_1 = data[newposition];
                 
-                int DCR = Convert.ToString(octetNum1_1.Substring(0, 1), 2);
+                int DCR = Convert.ToInt32(octetNum1_1.Substring(0, 1), 2);
                 if (DCR == 0) this.DCR = "No differential correction (ADS-B)";
                 else this.DCR = "Differential correction (ADS-B)";
 
-                int GBS = Convert.ToString(octetNum1_1.Substring(1, 1), 2);
+                int GBS = Convert.ToInt32(octetNum1_1.Substring(1, 1), 2);
                 if (GBS == 0) this.GBS = "Ground Bit not set";
                 else this.GBS = "Ground Bit set";
 
-                int SIM = Convert.ToString(octetNum1_1.Substring(2, 1), 2);
+                int SIM = Convert.ToInt32(octetNum1_1.Substring(2, 1), 2);
                 if (SIM == 0) this.SIM = "Actual target report";
                 else this.SIM = "Simulated target report";
 
-                int TST = Convert.ToString(octetNum1_1.Substring(3, 1), 2);
+                int TST = Convert.ToInt32(octetNum1_1.Substring(3, 1), 2);
                 if (TST == '0') this.TST = "Default";
                 else this.TST = "Test Target";
 
-                int SAA = Convert.ToString(octetNum1_1.Substring(4, 1), 2);
+                int SAA = Convert.ToInt32(octetNum1_1.Substring(4, 1), 2);
                 if (SAA == '0') this.SAA = "Equipment capable to provide Selected Altitude";
                 else this.SAA = "Equipment not capable to provide Selected Altitude";
 
@@ -440,7 +440,7 @@ namespace CLassLibrary
                 else if (CL == 2) this.CL = "No information";
                 else this.CL = "Reserved for future use";
                 
-                int FX2 = Convert.ToInt32(octetNum1_1.Substring(7, 1));
+                int FX2 = Convert.ToInt32(octetNum1_1.Substring(7, 1), 2);
 
                 if (FX2 == 1)
                 {
@@ -450,27 +450,27 @@ namespace CLassLibrary
 
                     string spareBits = octetNum1_2.Substring(0, 2);
 
-                    int IPC = Convert.ToInt32(octetNum1_2.Substring(2, 1));
+                    int IPC = Convert.ToInt32(octetNum1_2.Substring(2, 1), 2);
                     if (IPC == 0) this.IPC = "Default";
                     else this.IPC = "Independent Position Check failed";
 
-                    int NOGO = Convert.ToInt32(octetNum1_2.Substring(3, 1));
+                    int NOGO = Convert.ToInt32(octetNum1_2.Substring(3, 1), 2);
                     if (NOGO == 0) this.NOGO = "NOGO-bit not set";
                     else this.NOGO = "NOGO-bit set";
 
-                    int CPR = Convert.ToInt32(octetNum1_2.Substring(4, 1));
-                    if (CPR == '0') this.CPR = "CPR Validation correct ";
+                    int CPR = Convert.ToInt32(octetNum1_2.Substring(4, 1), 2);
+                    if (CPR == 0) this.CPR = "CPR Validation correct ";
                     else this.CPR = "CPR Validation failed";
                     
-                    int LDPJ = Convert.ToInt32(octetNum1_2.Substring(5, 1));
-                    if (LDPJ == '0') this.LDPJ = "LDPJ not detected";
+                    int LDPJ = Convert.ToInt32(octetNum1_2.Substring(5, 1), 2);
+                    if (LDPJ == 0) this.LDPJ = "LDPJ not detected";
                     else this.LDPJ = "LDPJ detected";
 
-                    int RCF = Convert.ToInt32(octetNum1_2.Substring(6, 1));
-                    if (RCF == '0') this.RCF = "Default";
+                    int RCF = Convert.ToInt32(octetNum1_2.Substring(6, 1), 2);
+                    if (RCF == 0) this.RCF = "Default";
                     else this.RCF = "Range Check failed ";
 
-                    int FX2 = Convert.ToInt32(octetNum1_2.Substring(7, 1));
+                    int FX3 = Convert.ToInt32(octetNum1_2.Substring(7, 1), 2);
                 }
             }
 
@@ -485,53 +485,53 @@ namespace CLassLibrary
             this.Mode3A = Convert.ToString(DecimalToOctal(Convert.ToInt32(string.Concat(data[position], data[position + 1]).Substring(4, 12), 2))).PadLeft(4,'0');
             
             position = position + 2;
-            return pos; 
+            return position; 
         }
 
         //DATA ITEM: I021/071
-        public string TimeOfApplicabilityForPosition;
+        public string timeOfApplicabilityForPosition;
 
         private int TimeOfApplicabilityForPosition(string[] data, int position)
         {
             double seconds = Convert.ToDouble(Convert.ToInt32(string.Concat(data[position], data[position + 1], data[position + 2]), 2)) / 128;
             TimeSpan time = TimeSpan.FromSeconds(seconds);
 
-            this.TimeOfApplicabilityForPosition = time.ToString(@"hh\:mm\:ss\:fff");
+            this.timeOfApplicabilityForPosition = time.ToString(@"hh\:mm\:ss\:fff");
 
             position = position + 3;
             return position;
         }
 
         //DATA ITEM: I021/072
-        public string TimeOfApplicabilityForVelocity;
+        public string timeOfApplicabilityForVelocity;
 
         private int TimeOfApplicabilityForVelocity(string[] data, int position)
         {
             double seconds = Convert.ToDouble(Convert.ToInt32(string.Concat(data[position], data[position + 1], data[position + 2]), 2)) / 128;
             TimeSpan time = TimeSpan.FromSeconds(seconds);
             
-            this.TimeOfApplicabilityForVelocity = time.ToString(@"hh\:mm\:ss\:fff");
+            this.timeOfApplicabilityForVelocity = time.ToString(@"hh\:mm\:ss\:fff");
 
             position = position + 3;
             return position;
         }
 
         //DATA ITEM: I021/073
-        public string TimeOfMessageReceptionOfPosition;
+        public string timeOfMessageReceptionOfPosition;
 
         private int TimeOfMessageReceptionOfPosition(string[] data, int position)
         {
             double seconds = Convert.ToDouble(Convert.ToInt32(string.Concat(data[position], data[position + 1], data[position + 2]), 2)) / 128;
             TimeSpan time = TimeSpan.FromSeconds(seconds);
             
-            this.TimeOfMessageReceptionOfPosition = time.ToString(@"hh\:mm\:ss\:fff");
+            this.timeOfMessageReceptionOfPosition = time.ToString(@"hh\:mm\:ss\:fff");
             
             position = position + 3;
             return position;
         }
 
         //DATA ITEM: I021/074
-        public string TimeOfMessageReceptionOfPositionHighPrecision;
+        public string timeOfMessageReceptionOfPositionHighPrecision;
         public string FSI_Position;
 
         private int TimeOfMessageReceptionOfPositionHighPrecision(string[] data, int position)
@@ -539,9 +539,9 @@ namespace CLassLibrary
             string octet = string.Concat(data[position], data[position + 1], data[position + 2], data[position + 3]);
             
             FSI_Position = octet.Substring(0, 2);
-            int time = Convert.ToDouble(Convert.ToInt32(octet.Substring(2, 30), 2)) * Math.Pow(2, -30);
+            double time = Convert.ToDouble(Convert.ToInt32(octet.Substring(2, 30), 2)) * Math.Pow(2, -30);
 
-            if (FSI_Position = "00") this.FSI_Position = "Same Time";
+            if (FSI_Position == "00") this.FSI_Position = "Same Time";
             if (FSI_Position == "01") 
             { 
                 time =  time + 1;
@@ -554,28 +554,28 @@ namespace CLassLibrary
             }
             if (FSI_Position == "01") this.FSI_Position = "Reserved";
             
-            this.TimeOfMessageReceptionOfPositionHighPrecision = Convert.ToString(time) + " s";
+            this.timeOfMessageReceptionOfPositionHighPrecision = Convert.ToString(time) + " s";
             
             position = position + 4;
             return position;
         }
 
         //DATA ITEM: I021/075
-        public string TimeOfMessageReceptionOfVelocity;
+        public string timeOfMessageReceptionOfVelocity;
 
         private int TimeOfMessageReceptionOfVelocity(string[] data, int position)
         {
             double seconds = Convert.ToDouble(Convert.ToInt32(string.Concat(data[position], data[position + 1], data[position + 2]), 2)) / 128;
             TimeSpan time = TimeSpan.FromSeconds(seconds);
             
-            this.TimeOfMessageReceptionOfVelocity = time.ToString(@"hh\:mm\:ss\:fff");
+            this.timeOfMessageReceptionOfVelocity = time.ToString(@"hh\:mm\:ss\:fff");
             
             position = position + 3;
             return position;
         }
 
         //DATA ITEM: I021/076
-        public string TimeOfMessageReceptionOfVelocityHighPrecision;
+        public string timeOfMessageReceptionOfVelocityHighPrecision;
         public string FSI_Velocity;
 
         private int TimeOfMessageReceptionOfVelocityHighPrecision(string[] data, int position)
@@ -583,9 +583,9 @@ namespace CLassLibrary
             string octet = string.Concat(data[position], data[position + 1], data[position + 2], data[position + 3]);
             
             FSI_Velocity = octet.Substring(0, 2);
-            int time = Convert.ToDouble(Convert.ToInt32(octet.Substring(2, 30), 2)) * Math.Pow(2, -30);
+            double time = Convert.ToDouble(Convert.ToInt32(octet.Substring(2, 30), 2)) * Math.Pow(2, -30);
 
-            if (FSI_Velocity = "00") this.FSI_Velocity = "Same Time";
+            if (FSI_Velocity == "00") this.FSI_Velocity = "Same Time";
             if (FSI_Velocity == "01") 
             { 
                 time =  time + 1;
@@ -598,23 +598,23 @@ namespace CLassLibrary
             }
             if (FSI_Velocity == "01") this.FSI_Velocity = "Reserved";
             
-            this.TimeOfMessageReceptionOfVelocityHighPrecision = Convert.ToString(time) + " s";
+            this.timeOfMessageReceptionOfVelocityHighPrecision = Convert.ToString(time) + " s";
             
             position = position + 4;
             return position;
         }
 
         //DATA ITEM: I021/077
-        public string TimeOfASTERIXReportTransmission;
-        public int TimeOfDaySeconds;
+        public string timeOfASTERIXReportTransmission;
+        public int timeOfDaySeconds;
 
         private int TimeOfASTERIXReportTransmission(string[] data, int position)
         {
             double seconds = Convert.ToDouble(Convert.ToInt32(string.Concat(data[position], data[position + 1], data[position + 2]), 2)) / 128;
             TimeSpan time = TimeSpan.FromSeconds(seconds);
             
-            this.TimeOfDaySeconds = Convert.ToInt32(Math.Truncate(seconds));
-            this.TimeOfASTERIXReportTransmission = time.ToString(@"hh\:mm\:ss\:fff");
+            this.timeOfDaySeconds = Convert.ToInt32(Math.Truncate(seconds));
+            this.timeOfASTERIXReportTransmission = time.ToString(@"hh\:mm\:ss\:fff");
             
             position = position + 3;
             return position;
@@ -632,7 +632,7 @@ namespace CLassLibrary
         }
 
         //DATA ITEM: I021/090
-        public string QualityIndicators;
+        //public string qualityIndicators;
         public string NUCr_NACv;
         public string NUCp_NIC;
         public string NICbaro;
@@ -739,10 +739,10 @@ namespace CLassLibrary
         private int TrajectoryIntent(string[] data, int position)
         {   
             if (data[position].Substring(0, 1) == "1") this.TIS = true;
-            else TIS = false;
+            else this.TIS = false;
             
             if (data[position].Substring(1, 1) == "1") this.TID = true;
-            else TID = false;
+            else this.TID = false;
 
             if (this.TIS == true)
             {
@@ -795,7 +795,7 @@ namespace CLassLibrary
 
                     position = position + 2;
                     
-                    Longitude[i] = Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1]))) * (180 / (Math.Pow(2, 23)))) + " º";
+                    this.Longitude[i] = Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1]))) * (180 / (Math.Pow(2, 23)))) + " º";
                     
                     position = position + 2;
 
@@ -895,14 +895,14 @@ namespace CLassLibrary
         }
 
         //DATA ITEM: I021/132
-        public string MessageAmplitude;
+        public string messageAmplitude;
 
         private int MessageAmplitude(string[] data, int position) 
         { 
-            this.MessageAmplitude = Convert.ToString(lib.ComputeA2Complement(data[postion])) + " dBm"; 
+            this.messageAmplitude = Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position])))) + " dBm"; 
             
             position = position + 1;
-            return postion; 
+            return position; 
         }
 
 
