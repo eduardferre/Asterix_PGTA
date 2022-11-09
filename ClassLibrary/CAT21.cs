@@ -132,7 +132,7 @@ namespace CLassLibrary
             bool end = true;
             while (end == true)
             {
-                string newOctet = Convert.ToString(Convert.ToInt32(message[position], 16), 2).PadLeft(8, '0');
+                string newOctet = Convert.ToString(Convert.ToInt32(data[positionition], 16), 2).PadLeft(8, '0');
                 FSPECNum = FSPECNum + newOctet.Substring(0, 7);
                 if (newOctet.Substring(7, 1) == "1")
                     position = position + 1;
@@ -1100,7 +1100,7 @@ namespace CLassLibrary
             else if (PS == 2) this.PS = "Lifeguard / medical emergency";
             else if (PS == 3) this.PS = "Minimum fuel";
             else if (PS == 4) this.PS = "No communications";
-            else if (PS == 5) this.PS = "Unlawful interference";
+            else if (PS == 5) this.PS = "UnLength_Widthful interference";
             else this.PS = "'Downed' Aircraft ";
             
             int SS = Convert.ToInt32(data[position].Substring(6, 2), 2);
@@ -1149,17 +1149,136 @@ namespace CLassLibrary
         public string Temperature;
         public string Turbulence;
 
-        private int MetInformation (string[] message, int pos)
+        private int MetInformation (string[] data, int position)
         {
             int positionInitial = position;
 
-            if (data[positionInitial].Substring(0, 1) == "1") { WindSpeed = Convert.ToString(Convert.ToInt32(string.Concat(data[position + 1], data[position + 2]), 2)) + " kts"; position = position + 2; }
-            if (data[positionInitial].Substring(1, 1) == "1") { WindDirection = Convert.ToString(Convert.ToInt32(string.Concat(data[position + 1], data[position + 2]), 2)) + " º"; position = position + 2; }
-            if (data[positionInitial].Substring(2, 1) == "1") { Temperature = Convert.ToString(Convert.ToInt32(string.Concat(data[position + 1], data[position + 2]), 2) * 0.25) + " ºC"; position = position + 2; }
-            if (data[positionInitial].Substring(3, 1) == "1") { Turbulence = Convert.ToString(Convert.ToInt32(string.Concat(data[position + 1], data[position + 2]), 2)) + " Turbulence"; position = position + 2; }
+            if (data[positionInitial].Substring(0, 1) == "1") { this.WindSpeed = Convert.ToString(Convert.ToInt32(string.Concat(data[position + 1], data[position + 2]), 2)) + " kts"; position = position + 2; }
+            if (data[positionInitial].Substring(1, 1) == "1") { this.WindDirection = Convert.ToString(Convert.ToInt32(string.Concat(data[position + 1], data[position + 2]), 2)) + " º"; position = position + 2; }
+            if (data[positionInitial].Substring(2, 1) == "1") { this.Temperature = Convert.ToString(Convert.ToInt32(string.Concat(data[position + 1], data[position + 2]), 2) * 0.25) + " ºC"; position = position + 2; }
+            if (data[positionInitial].Substring(3, 1) == "1") { this.Turbulence = Convert.ToString(Convert.ToInt32(string.Concat(data[position + 1], data[position + 2]), 2)) + " Turbulence"; position = position + 2; }
             
-            return posfin;
+            return position;
         }
+
+        //DATA ITEM: I021/230
+        public string rollAngle;
+        private int RollAngle(string[] data, int position)
+        {
+            this.rollAngle = Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1]))) * 0.01) + " º"; 
+            
+            position = position + 2;
+            return position; 
+        }
+
+        //DATA ITEM: I021/250
+        public string[] MBData;
+        public string[] BDS1;
+        public string[] BDS2;
+        public int REP;
+
+        private int ModeSMBData(string[] data, int position)
+        {
+            this.REP = Convert.ToInt32(data[position], 2);
+            
+            if (this.REP < 0) { this.MB_Data = new string[this.REP]; this.BDS1 = new string[this.REP]; this.BDS2 = new string[this.REP]; }
+
+            position = position + 1;
+
+            for (int i = 0 ; i < this.REP ; i++)
+            {
+                this.MB_Data[i] = String.Concat(data[position], data[position + 1], data[position + 2], data[position + 3], data[position + 4], data[position + 5], data[position + 6]);
+                this.BDS1[1] = data[position + 7].Substring(0, 4);
+                this.BDS2[1] = data[position + 7].Substring(4, 4);
+                
+                position = position + 8;
+            }
+
+            return position;
+        }
+
+        //DATA ITEM: I021/260
+        public string TYP;
+        public string STYP;
+        public string ARA;
+        public string RAC;
+        public string RAT;
+        public string MTE;
+        public string TTI;
+        public string TID;
+
+        private int ACASResolutionAdvisoryReport(string[] data, int position)
+        {
+            string data_message = string.Concat(data[position], data[position + 1], data[position + 2], data[position + 3], data[position + 4], data[position + 5], data[position + 6]);
+            
+            this.TYP = data_message.Substring(0,5);
+            this.STYP = data_message.Substring(5, 3);
+            this.ARA = data_message.Substring(8, 14);
+            this.RAC = data_message.Substring(22, 4);
+            this.RAT = data_message.Substring(26, 1);
+            this.MTE = data_message.Substring(27, 1);
+            this.TTI = data_message.Substring(28, 2);
+            this.TID = data_message.Substring(30, 26);
+            
+            position = position + 7;
+            return position;
+        }
+
+        //DATA ITEM: I021/271
+        public string POA;
+        public string CDTIS;
+        public string B2Low;
+        public string RAS;
+        public string IDENT;
+        public string Length_Width;
+
+        private int SurfaceCapabilitiesAndCharacteristics (string[] data, int position)
+        {
+            
+            if (data[position].Substring(2, 1) == "0") this.POA = "Position transmitted is not ADS-B position reference point";
+            else this.POA = "Position transmitted is the ADS-B position reference point";
+
+            if (data[position].Substring(3, 1) == "0") this.CDTIS = "Cockpit Display of Traffic Information not operational";
+            else this.CDTIS = "Cockpit Display of Traffic Information operational";
+
+            if (data[position].Substring(4, 1) == "0") this.B2Low= "Class B2 transmit power ≥ 70 Watts";
+            else this.B2Low= "Class B2 transmit power < 70 Watts";
+
+            if (data[position].Substring(5, 1) == "0") this.RAS = "Aircraft not receiving ATC-services";
+            else this.RAS = "Aircraft receiving ATC services";
+            if (data[position].Substring(6, 1) == "0") this.IDENT = "IDENT switch not active";
+            else this.IDENT = "IDENT switch active";
+
+            if (data[position].Substring(7, 1) == "1") 
+            {
+                position = position + 1;
+
+                int Length_Width = Convert.ToInt32(data[position].Substring(4, 4), 2) ;
+
+                if (Length_Width == 0) this.Length_Width  = "Lenght < 15  and Width < 11.5";
+                if (Length_Width == 1) this.Length_Width = "Lenght < 15  and Width < 23";
+                if (Length_Width == 2) this.Length_Width = "Lenght < 25  and Width < 28.5";
+                if (Length_Width == 3) this.Length_Width = "Lenght < 25  and Width < 34";
+                if (Length_Width == 4) this.Length_Width = "Lenght < 35  and Width < 33";
+                if (Length_Width == 5) this.Length_Width = "Lenght < 35  and Width < 38";
+                if (Length_Width == 6) this.Length_Width = "Lenght < 45  and Width < 39.5";
+                if (Length_Width == 7) this.Length_Width = "Lenght < 45  and Width < 45";
+                if (Length_Width == 8) this.Length_Width = "Lenght < 55  and Width < 45";
+                if (Length_Width == 9) this.Length_Width = "Lenght < 55  and Width < 52";
+                if (Length_Width == 10) this.Length_Width = "Lenght < 65  and Width < 59.5";
+                if (Length_Width == 11) this.Length_Width = "Lenght < 65  and Width < 67";
+                if (Length_Width == 12) this.Length_Width = "Lenght < 75  and Width < 72.5";
+                if (Length_Width == 13) this.Length_Width = "Lenght < 75  and Width < 80";
+                if (Length_Width == 14) this.Length_Width = "Lenght < 85  and Width < 80";
+                if (Length_Width == 15) this.Length_Width = "Lenght > 85  and Width > 80";
+            }
+
+            position = position + 1;
+            return position;
+        }
+
+        //DATA ITEM: I021/295
+        
 
 
         #endregion
