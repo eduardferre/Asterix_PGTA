@@ -1278,7 +1278,100 @@ namespace CLassLibrary
         }
 
         //DATA ITEM: I021/295
-        
+        public string AOS;
+        public string TRD;
+        public string M3A;
+        public string QI;
+        public string TI;
+        public string MAM;
+        public string GH;
+        public string FL;
+        public string ISA;
+        public string FSA;
+        public string AS;
+        public string TAS;
+        public string MH;
+        public string BVR;
+        public string GVR;
+        public string GV;
+        public string TAR;
+        public string TIDataAge;
+        public string TSDataAge;
+        public string MET;
+        public string ROA;
+        public string ARADataAge;
+        public string SCC;
+
+        private int Compute_Data_Age(string[] data, int position)
+        {
+            int positionInitial = position;
+
+            if (data[position].Substring(7, 1) == "1")
+            {
+                position = position + 1;
+
+                if (data[position].Substring(7, 1) == "1")
+                {
+                    position = position + 1;
+
+                    if (data[position].Substring(7, 1) == "1")
+                    {
+                        position = position + 1;
+                    }
+                }
+            }
+
+            position = position + 1;
+
+            if (data[positionInitial].Substring(0, 1) == "1") { this.AOS = Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
+            if (data[positionInitial].Substring(1, 1) == "1") { this.TRD = Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
+            if (data[positionInitial].Substring(2, 1) == "1") { this.M3A = Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
+            if (data[positionInitial].Substring(3, 1) == "1") { this.QI = Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
+            if (data[positionInitial].Substring(4, 1) == "1") { this.TI = Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
+            if (data[positionInitial].Substring(5, 1) == "1") { this.MAM = Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
+            if (data[positionInitial].Substring(6, 1) == "1") { this.GH = Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
+
+            if (data[positionInitial].Substring(7, 1) == "1")
+            {
+                if (data[positionInitial + 1].Substring(0, 1) == "1") { this.FL = Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
+                if (data[positionInitial + 1].Substring(1, 1) == "1") { this.ISA = Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
+                if (data[positionInitial + 1].Substring(2, 1) == "1") { this.FSA = Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
+                if (data[positionInitial + 1].Substring(3, 1) == "1") { this.AS = Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
+                if (data[positionInitial + 1].Substring(4, 1) == "1") { this.TAS = Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
+                if (data[positionInitial + 1].Substring(5, 1) == "1") { this.MH = Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
+                if (data[positionInitial + 1].Substring(6, 1) == "1") { this.BVR = Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
+                
+                if (data[positionInitial + 1].Substring(7, 1) == "1")
+                {
+                    if (data[positionInitial + 2].Substring(0, 1) == "1") { this.GVR = Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
+                    if (data[positionInitial + 2].Substring(1, 1) == "1") { this.GV = Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
+                    if (data[positionInitial + 2].Substring(2, 1) == "1") { this.TAR = Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
+                    if (data[positionInitial + 2].Substring(3, 1) == "1") { this.TIDataAge = Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
+                    if (data[positionInitial + 2].Substring(4, 1) == "1") { this.TSDataAge = Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
+                    if (data[positionInitial + 2].Substring(5, 1) == "1") { this.MET = Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
+                    if (data[positionInitial + 2].Substring(6, 1) == "1") { this.ROA = Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
+                    
+                    if (data[positionInitial+2].Substring(7, 1) == "1")
+                    {
+                        if (data[positionInitial + 3].Substring(0, 1) == "1") { this.ARADataAge = Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
+                        if (data[positionInitial + 3].Substring(1, 1) == "1") { this.SCC = Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
+                    }
+                }
+            }
+            
+            return position; 
+        }
+
+        //DATA ITEM: I021/400
+        public string receiverID;
+
+        private int ReceiverID(string[] data, int position) 
+        { 
+            this.receiverID = Convert.ToString(Convert.ToInt32(data[position],2));
+            
+            position = position + 1;
+            return position;
+        }
 
 
         #endregion
