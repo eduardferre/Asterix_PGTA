@@ -787,11 +787,11 @@ namespace CLassLibrary
                     
                     position = position + 1;
 
-                    this.Altitude[i] = Convert.ToString(lib.ComputeA2Complement(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1]))) * 10) + " ft";
+                    this.Altitude[i] = Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1]))) * 10) + " ft";
 
                     position = position + 2;
 
-                    this.Latitude[i] = Convert.ToString(lib.ComputeA2Complement(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1]))) * (180 / (Math.Pow(2, 23)))) + " º";
+                    this.Latitude[i] = Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1]))) * (180 / (Math.Pow(2, 23)))) + " º";
 
                     position = position + 2;
                     

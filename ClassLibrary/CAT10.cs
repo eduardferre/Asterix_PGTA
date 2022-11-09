@@ -28,7 +28,7 @@ namespace ClassLibrary
                // if (msghexa[i].Length == 1){
                //     msghexa[i] = string.Concat('0', msghexa[i]);
                // }
-                msgBin[i] = Convert.ToString(Convert.ToInt32(msgHexa,16),2); 
+                msgBin[i] = Convert.ToString(Convert.ToInt32(msgHexa,16), 2); 
                 while (msgBin[i].Length < 8)
                 {
                     msgBin[i] = string.Concat('0', msgBin[i]);
