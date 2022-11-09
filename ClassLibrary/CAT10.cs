@@ -231,6 +231,7 @@ namespace ClassLibrary
         //DATA ITEM: I010/010
         public string SAC;
         public string SIC;
+        
         private int DataSourceIdentifier(string[] data, int position)
         {
             this.SAC = Convert.ToString(Convert.ToInt32(data[position], 2));
