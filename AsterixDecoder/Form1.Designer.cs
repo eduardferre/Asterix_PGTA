@@ -28,6 +28,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableCAT10 = new System.Windows.Forms.DataGridView();
             this.Category = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SAC = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,7 +57,15 @@
             this.Presence = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AmplitudeofPrimaryPlot = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CalculatedAcceleration = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableCAT21 = new System.Windows.Forms.DataGridView();
+            this.CategoryCAT21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SACCAT21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SICCAT21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TargetIdentificationCAT21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TrackNumberCAT21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ServiceIdentificationCAT21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.tableCAT10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tableCAT21)).BeginInit();
             this.SuspendLayout();
             // 
             // tableCAT10
@@ -329,17 +338,99 @@
             this.CalculatedAcceleration.ReadOnly = true;
             this.CalculatedAcceleration.Width = 143;
             // 
+            // tableCAT21
+            // 
+            this.tableCAT21.AllowUserToAddRows = false;
+            this.tableCAT21.AllowUserToDeleteRows = false;
+            this.tableCAT21.AllowUserToOrderColumns = true;
+            this.tableCAT21.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.tableCAT21.BackgroundColor = System.Drawing.Color.LightSteelBlue;
+            this.tableCAT21.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.tableCAT21.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightSlateGray;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.LightSlateGray;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.tableCAT21.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.tableCAT21.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tableCAT21.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.CategoryCAT21,
+            this.SACCAT21,
+            this.SICCAT21,
+            this.TargetIdentificationCAT21,
+            this.TrackNumberCAT21,
+            this.ServiceIdentificationCAT21});
+            this.tableCAT21.GridColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.tableCAT21.Location = new System.Drawing.Point(20, 352);
+            this.tableCAT21.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tableCAT21.Name = "tableCAT21";
+            this.tableCAT21.ReadOnly = true;
+            this.tableCAT21.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.tableCAT21.RowTemplate.Height = 29;
+            this.tableCAT21.Size = new System.Drawing.Size(800, 300);
+            this.tableCAT21.TabIndex = 1;
+            // 
+            // CategoryCAT21
+            // 
+            this.CategoryCAT21.HeaderText = "Category";
+            this.CategoryCAT21.Name = "CategoryCAT21";
+            this.CategoryCAT21.ReadOnly = true;
+            this.CategoryCAT21.Width = 80;
+            // 
+            // SACCAT21
+            // 
+            this.SACCAT21.HeaderText = "SAC";
+            this.SACCAT21.MinimumWidth = 6;
+            this.SACCAT21.Name = "SACCAT21";
+            this.SACCAT21.ReadOnly = true;
+            this.SACCAT21.Width = 54;
+            // 
+            // SICCAT21
+            // 
+            this.SICCAT21.HeaderText = "SIC";
+            this.SICCAT21.MinimumWidth = 6;
+            this.SICCAT21.Name = "SICCAT21";
+            this.SICCAT21.ReadOnly = true;
+            this.SICCAT21.Width = 49;
+            // 
+            // TargetIdentificationCAT21
+            // 
+            this.TargetIdentificationCAT21.HeaderText = "Target Identification";
+            this.TargetIdentificationCAT21.MinimumWidth = 6;
+            this.TargetIdentificationCAT21.Name = "TargetIdentificationCAT21";
+            this.TargetIdentificationCAT21.ReadOnly = true;
+            this.TargetIdentificationCAT21.Width = 125;
+            // 
+            // TrackNumberCAT21
+            // 
+            this.TrackNumberCAT21.HeaderText = "Track Number";
+            this.TrackNumberCAT21.Name = "TrackNumberCAT21";
+            this.TrackNumberCAT21.ReadOnly = true;
+            this.TrackNumberCAT21.Width = 97;
+            // 
+            // ServiceIdentificationCAT21
+            // 
+            this.ServiceIdentificationCAT21.HeaderText = "Service Identification";
+            this.ServiceIdentificationCAT21.Name = "ServiceIdentificationCAT21";
+            this.ServiceIdentificationCAT21.ReadOnly = true;
+            this.ServiceIdentificationCAT21.Width = 130;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(848, 338);
+            this.ClientSize = new System.Drawing.Size(848, 749);
+            this.Controls.Add(this.tableCAT21);
             this.Controls.Add(this.tableCAT10);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tableCAT10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tableCAT21)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -374,6 +465,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Presence;
         private System.Windows.Forms.DataGridViewTextBoxColumn AmplitudeofPrimaryPlot;
         private System.Windows.Forms.DataGridViewTextBoxColumn CalculatedAcceleration;
+        private System.Windows.Forms.DataGridView tableCAT21;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CategoryCAT21;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SACCAT21;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SICCAT21;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TargetIdentificationCAT21;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TrackNumberCAT21;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ServiceIdentificationCAT21;
     }
 }
 

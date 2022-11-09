@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace CLassLibrary
+namespace ClassLibrary
 {
     public class CAT21
     {
@@ -154,7 +154,7 @@ namespace CLassLibrary
 
         #region CAT21 Decoding Procedure 
 
-        public void DecodECAT21(string[] dataMessage, int position)
+        public void DecodeCAT21(string[] dataMessage, int position)
         {
             string FSPECNum = FSPECnum(dataMessage);
             position = 3 + FSPECNum.Length / 7;
@@ -1073,7 +1073,7 @@ namespace CLassLibrary
 
         private int TargetIdentification (string[] data, int position)
         {
-            string characters = string.Concat(data[position + 1], data[position + 2], data[position + 3], data[position + 4], data[position + 5]);
+            string characters = string.Concat(data[position], data[position + 1], data[position + 2], data[position + 3], data[position + 4], data[position + 5]);
             for (int i = 0; i < 8; i++) this.TargetId = Convert.ToString(ComputeCharacter(characters.Substring(i * 6, 6)));
             
             position = position + 6;
