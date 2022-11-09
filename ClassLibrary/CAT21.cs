@@ -1008,7 +1008,7 @@ namespace CLassLibrary
 
         private int BarometricVerticalRate(string[] data, int position)
         {
-            if (message[pos].Substring(0, 1) == "0") this.barometricVerticalRate = Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(message[pos], message[pos + 1]).Substring(1, 15))) * 6.25) + " ft/min";
+            if (data[position].Substring(0, 1) == "0") this.barometricVerticalRate = Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1]).Substring(1, 15))) * 6.25) + " ft/min";
             else this.barometricVerticalRate = "Value exceeds defined rage";
             
             position = position + 2;
@@ -1016,7 +1016,35 @@ namespace CLassLibrary
         }
 
         //DATA ITEM: I021/157
-        
+        public string geometricVerticalRate;
+
+        private int GeometricVerticalRate(string[] data, int position)
+        {
+            if (data[position].Substring(0, 1) == "0") this.geometricVerticalRate = Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1]).Substring(1, 15))) * 6.25) + " feet/minute";
+            else this.geometricVerticalRate = "Value exceeds defined rage";
+            
+            position = position + 2;
+            return position;
+        }
+
+        //DATA ITEM: I021/160
+        public string GroundSpeed;
+        public string TrackAngle;
+        public string GroundVector;
+
+        private int AirborneGroundVector(string[] data, int position)
+        {
+            if (data[position].Substring(0, 1) == "0")
+            {
+                this.GroundSpeed = String.Format("{0:0.00}", (Convert.ToInt32(string.Concat(data[position], data[postion + 1]).Substring(1, 15),2) * Math.Pow(2, -14)*3600)) +  " kts";
+                this.TrackAngle = String.Format("{0:0.00}", Convert.ToInt32(string.Concat(data[position + 2], data[postion + 3]).Substring(0, 16),2) * (360 / (Math.Pow(2, 16)))) + " º";
+                this.GroundVector = "GS: " + this.GroundSpeed + ", TA: " + String.Format("{0:0.00}", this.TrackAngle);
+            }
+            else this.GroundVector = "Value exceeds defined rage";
+
+            position = position + 4;
+            return position;
+        }
 
 
         #endregion
