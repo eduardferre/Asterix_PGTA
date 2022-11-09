@@ -868,6 +868,43 @@ namespace CLassLibrary
             return newposition;
         }
 
+        //DATA ITEM: I021/131
+        public string LatitudeinWGS84HighResolution;
+        public string LongitudeinWGS84HighResolution;
+
+        private int PositionInWGS84CoordinatesHighResolution(string[] data, int position)
+        {
+            int newposition = position + 4;
+            double latitude = Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1], data[position + 2], data[position + 3]))) * (180 / (Math.Pow(2, 30)));
+            double longitude = Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[newposition], data[newposition + 1], data[newposition + 2], data[newposition + 3]))) * (180 / (Math.Pow(2, 30)));
+
+            int latitudeDeg = Convert.ToInt32(Math.Truncate(latitude));
+            int latitudeMin = Convert.ToInt32(Math.Truncate((latitude - latitudeDeg) * 60));
+            double latitudeSec = Math.Round(((latitude - (latitudeDeg +  (Convert.ToDouble(latitudeMin) / 60))) * 3600), 5);
+            int longitudeDeg = Convert.ToInt32(Math.Truncate(longitude));
+            int longitudeMin = Convert.ToInt32(Math.Truncate((longitude - longitudeDeg) * 60));
+            double longitudeSec = Math.Round(((longitude - (longitudeDeg +  (Convert.ToDouble(longitudeMin) / 60))) * 3600), 5);
+            
+            this.LatitudeinWGS84HighResolution = Convert.ToString(latitudeDeg) + "º " + Convert.ToString(latitudeMin) + "' " + Convert.ToString(latitudeSec) + "''";
+            this.LongitudeinWGS84HighResolution = Convert.ToString(longitudeDeg) + "º " + Convert.ToString(longitudeMin) + "' " + Convert.ToString(longitudeSec) + "''";
+
+            //Console.WriteLine("LatWGS84: " + this.LatitudeinWGS84);
+            //Console.WriteLine("LongWGS84: " + this.LongitudeinWGS84);
+
+            return newposition;
+        }
+
+        //DATA ITEM: I021/132
+        public string MessageAmplitude;
+
+        private int MessageAmplitude(string[] data, int position) 
+        { 
+            this.MessageAmplitude = Convert.ToString(lib.ComputeA2Complement(data[postion])) + " dBm"; 
+            
+            position = position + 1;
+            return postion; 
+        }
+
 
         #endregion
     }
