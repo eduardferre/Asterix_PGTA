@@ -1046,6 +1046,121 @@ namespace CLassLibrary
             return position;
         }
 
+        //DATA ITEM: I021/161
+        public string trackNumber;
+
+        private int TrackNumber(string[] data, int postion)
+        {
+            this.trackNumber = Convert.ToString(Convert.ToInt32(string.Concat(data[position], data[position + 1]).Substring(4,12), 2)); 
+            
+            position = position + 2;
+            return position;  
+        }
+
+        //DATA ITEM: I021/165
+        public string trackAngleRate;
+
+        private int TrackAngleRate(string[] data, int position) 
+        {
+            this.trackAngleRate = Convert.ToString(Convert.ToInt32(string.Concat(data[position], data position[position + 1]).Substring(6, 10), 2)*(1/32)) + " º/s";
+            
+            position = position + 2;
+            return position; 
+        }
+
+        //DATA ITEM: I021/170
+        public string TargetId;
+
+        private int TargetIdentification (string[] data, int position)
+        {
+            string characters = string.Concat(data[position + 1], data[position + 2], data[position + 3], data[position + 4], data[position + 5]);
+            for (int i = 0; i < 8; i++) this.TargetId = Convert.ToString(ComputeCharacter(characters.Substring(i * 6, 6)));
+            
+            position = position + 6;
+            return position;
+        }
+
+        //DATA ITEM: I021/200
+        public string ICF;
+        public string LNAV;
+        public string PS;
+        public string SS;
+
+        private int TargetStatus(string[] data, int position)
+        {
+            if (data[position].Substring(0, 1) == "0") this.ICF = "No intent change active";
+            else this.ICF= "Intent change flag raised";
+
+            if (data[position].Substring(1, 1) == "0") this.LNAV = "LNAV Mode engaged";
+            else this.LNAV = "LNAV Mode not engaged";
+
+            int PS = Convert.ToInt32(data[position].Substring(3,3), 2);
+            if (PS == 0) this.PS = "No emergency / not reported";
+            else if (PS == 1) this.PS = "General emergency";
+            else if (PS == 2) this.PS = "Lifeguard / medical emergency";
+            else if (PS == 3) this.PS = "Minimum fuel";
+            else if (PS == 4) this.PS = "No communications";
+            else if (PS == 5) this.PS = "Unlawful interference";
+            else this.PS = "'Downed' Aircraft ";
+            
+            int SS = Convert.ToInt32(data[position].Substring(6, 2), 2);
+            if (SS == 0) this.SS = "No condition reported";
+            else if (SS == 1) this.SS = "Permanent Alert (Emergency condition)";
+            else if (SS == 2) this.SS = "Temporary Alert (change in Mode 3/A Code other than emergency)";
+            else this.SS = "SPI set";
+            
+            position = position + 1;
+            return position;
+        }
+
+        //DATA ITEM: I021/210
+        public string VNS;
+        public string LTT;
+        public string MOPS;
+        public string VN;
+
+        private int MOPSVersion(string[] data, int position)
+        {
+            if (data[position].Substring(1, 1) == "0") this.VNS = "The MOPS Version is supported by the GS";
+            else this.VNS = "The MOPS Version is not supported by the GS";
+
+            int LTT = Convert.ToInt32( data[position].Substring(5,3),2);
+            if (LTT == 0) this.LTT = "Other";
+            else if (LTT == 1) this.LTT = "UAT";
+            else if (LTT == 2) 
+            {
+                int VN = Convert.ToInt32(data[position].Substring(2, 3), 2);
+                if (VN == 0) this.VN = "ED102/DO-260";
+                if (VN == 1) this.VN = "DO-260A";
+                if (VN == 2) this.VN = "ED102A/DO-260B";
+                this.LTT = "1090 ES | Version Number: " + this.VN; 
+            }
+            else if (LTT == 3) this.LTT = "VDL 4";
+            else this.LTT = "Not assigned";
+            this.MOPS = this.LTT;
+            
+            position = position + 1;
+            return position;
+        }
+
+        //DATA ITEM: I021/220
+        public string WindSpeed;
+        public string WindDirection;
+        public string Temperature;
+        public string Turbulence;
+
+        private int MetInformation (string[] message, int pos)
+        {
+            int positionInitial = position;
+
+            if (data[positionInitial].Substring(0, 1) == "1") { WindSpeed = Convert.ToString(Convert.ToInt32(string.Concat(data[position + 1], data[position + 2]), 2)) + " kts"; position = position + 2; }
+            if (data[positionInitial].Substring(1, 1) == "1") { WindDirection = Convert.ToString(Convert.ToInt32(string.Concat(data[position + 1], data[position + 2]), 2)) + " º"; position = position + 2; }
+            if (data[positionInitial].Substring(2, 1) == "1") { Temperature = Convert.ToString(Convert.ToInt32(string.Concat(data[position + 1], data[position + 2]), 2) * 0.25) + " ºC"; position = position + 2; }
+            if (data[positionInitial].Substring(3, 1) == "1") { Turbulence = Convert.ToString(Convert.ToInt32(string.Concat(data[position + 1], data[position + 2]), 2)) + " Turbulence"; position = position + 2; }
+            
+            return posfin;
+        }
+
 
         #endregion
     }
