@@ -132,7 +132,7 @@ namespace CLassLibrary
             bool end = true;
             while (end == true)
             {
-                string newOctet = Convert.ToString(Convert.ToInt32(data[positionition], 16), 2).PadLeft(8, '0');
+                string newOctet = Convert.ToString(Convert.ToInt32(message[position], 16), 2).PadLeft(8, '0');
                 FSPECNum = FSPECNum + newOctet.Substring(0, 7);
                 if (newOctet.Substring(7, 1) == "1")
                     position = position + 1;
@@ -168,7 +168,7 @@ namespace CLassLibrary
             }
 
             if (FSPEC[0] == '1') position = DataSourceIdentifier(data, position);
-            if (FSPEC[1] == '1') position = MessageType(data, position);
+            if (FSPEC[1] == '1') position = TargetReportDescriptor(data, position);
             if (FSPEC[2] == '1') position = TrackNumber(data, position);
             if (FSPEC[3] == '1') position = ServiceIdentification(data, position);
             if (FSPEC[4] == '1') position = TimeOfApplicabilityForPosition(data, position);
@@ -205,7 +205,7 @@ namespace CLassLibrary
                if (FSPEC[24] == '1') position = GeometricVerticalRate(data, position);
                if (FSPEC[25] == '1') position = AirborneGroundVector(data, position);
                if (FSPEC[26] == '1') position = TrackAngleRate(data, position);
-               if (FSPEC[27] == '1') position = TimeOfReportTransmission(data, position);
+               if (FSPEC[27] == '1') position = TimeOfASTERIXReportTransmission(data, position);
             }
 
             if (FSPEC.Length > 29)
@@ -232,8 +232,8 @@ namespace CLassLibrary
 
             if (FSPEC.Length > 43)
             {
-               if (FSPEC[47] == '1') position = ReservedExpansionField(data, position);
-               if (FSPEC[48] == '1') position = SpecialPurposeField(data, position);
+               //if (FSPEC[47] == '1') position = ReservedExpansionField(data, position);
+               //if (FSPEC[48] == '1') position = SpecialPurposeField(data, position);
             }
 
         }
@@ -719,10 +719,10 @@ namespace CLassLibrary
 
         //DATA ITEM: I021/110
         public bool TIS;
-        public bool TID;
+        public bool TID_TI;
         public string NAV;
         public string NVB;
-        public int REP;
+        public int REP_TI;
         public string[] TCA;
         public string[] NC;
         public int[] TCP;
@@ -741,8 +741,8 @@ namespace CLassLibrary
             if (data[position].Substring(0, 1) == "1") this.TIS = true;
             else this.TIS = false;
             
-            if (data[position].Substring(1, 1) == "1") this.TID = true;
-            else this.TID = false;
+            if (data[position].Substring(1, 1) == "1") this.TID_TI = true;
+            else this.TID_TI = false;
 
             if (this.TIS == true)
             {
@@ -755,27 +755,27 @@ namespace CLassLibrary
                 else this.NVB = "Trajectory Intent Data is not valid";
             }
 
-            if (this.TID == true)
+            if (this.TID_TI == true)
             {
                 position = position + 1;
 
-                this.REP = Convert.ToInt32(data[position], 2);
-                this.TCA = new string[this.REP];
-                this.NC = new string[this.REP];
-                this.TCP = new int[this.REP];
-                this.Altitude = new string[this.REP];
-                this.Latitude = new string[this.REP];
-                this.Longitude = new string[this.REP];
-                this.PointType = new string[this.REP];
-                this.TD = new string[this.REP];
-                this.TRA = new string[this.REP];
-                this.TOA = new string[this.REP];
-                this.TOV = new string[this.REP];
-                this.TTR = new string[this.REP];
+                this.REP_TI = Convert.ToInt32(data[position], 2);
+                this.TCA = new string[this.REP_TI];
+                this.NC = new string[this.REP_TI];
+                this.TCP = new int[this.REP_TI];
+                this.Altitude = new string[this.REP_TI];
+                this.Latitude = new string[this.REP_TI];
+                this.Longitude = new string[this.REP_TI];
+                this.PointType = new string[this.REP_TI];
+                this.TD = new string[this.REP_TI];
+                this.TRA = new string[this.REP_TI];
+                this.TOA = new string[this.REP_TI];
+                this.TOV = new string[this.REP_TI];
+                this.TTR = new string[this.REP_TI];
                 
                 position = position + 1;
 
-                for (int i = 0; i < this.REP; i++)
+                for (int i = 0; i < this.REP_TI; i++)
                 {
                     if (data[position].Substring(0, 1) == "0") this.TCA[i] = "TCP number available";
                     else this.TCA[i] = "TCP number not available";
@@ -1036,8 +1036,8 @@ namespace CLassLibrary
         {
             if (data[position].Substring(0, 1) == "0")
             {
-                this.GroundSpeed = String.Format("{0:0.00}", (Convert.ToInt32(string.Concat(data[position], data[postion + 1]).Substring(1, 15),2) * Math.Pow(2, -14)*3600)) +  " kts";
-                this.TrackAngle = String.Format("{0:0.00}", Convert.ToInt32(string.Concat(data[position + 2], data[postion + 3]).Substring(0, 16),2) * (360 / (Math.Pow(2, 16)))) + " º";
+                this.GroundSpeed = String.Format("{0:0.00}", (Convert.ToInt32(string.Concat(data[position], data[position + 1]).Substring(1, 15),2) * Math.Pow(2, -14)*3600)) +  " kts";
+                this.TrackAngle = String.Format("{0:0.00}", Convert.ToInt32(string.Concat(data[position + 2], data[position + 3]).Substring(0, 16),2) * (360 / (Math.Pow(2, 16)))) + " º";
                 this.GroundVector = "GS: " + this.GroundSpeed + ", TA: " + String.Format("{0:0.00}", this.TrackAngle);
             }
             else this.GroundVector = "Value exceeds defined rage";
@@ -1049,7 +1049,7 @@ namespace CLassLibrary
         //DATA ITEM: I021/161
         public string trackNumber;
 
-        private int TrackNumber(string[] data, int postion)
+        private int TrackNumber(string[] data, int position)
         {
             this.trackNumber = Convert.ToString(Convert.ToInt32(string.Concat(data[position], data[position + 1]).Substring(4,12), 2)); 
             
@@ -1062,7 +1062,7 @@ namespace CLassLibrary
 
         private int TrackAngleRate(string[] data, int position) 
         {
-            this.trackAngleRate = Convert.ToString(Convert.ToInt32(string.Concat(data[position], data position[position + 1]).Substring(6, 10), 2)*(1/32)) + " º/s";
+            this.trackAngleRate = Convert.ToString(Convert.ToInt32(string.Concat(data[position], data[position + 1]).Substring(6, 10), 2) * (1 / 32)) + " º/s";
             
             position = position + 2;
             return position; 
@@ -1175,19 +1175,19 @@ namespace CLassLibrary
         public string[] MBData;
         public string[] BDS1;
         public string[] BDS2;
-        public int REP;
+        public int REP_SMB;
 
         private int ModeSMBData(string[] data, int position)
         {
-            this.REP = Convert.ToInt32(data[position], 2);
+            this.REP_SMB = Convert.ToInt32(data[position], 2);
             
-            if (this.REP < 0) { this.MB_Data = new string[this.REP]; this.BDS1 = new string[this.REP]; this.BDS2 = new string[this.REP]; }
+            if (this.REP_SMB < 0) { this.MBData = new string[this.REP_SMB]; this.BDS1 = new string[this.REP_SMB]; this.BDS2 = new string[this.REP_SMB]; }
 
             position = position + 1;
 
-            for (int i = 0 ; i < this.REP ; i++)
+            for (int i = 0 ; i < this.REP_SMB ; i++)
             {
-                this.MB_Data[i] = String.Concat(data[position], data[position + 1], data[position + 2], data[position + 3], data[position + 4], data[position + 5], data[position + 6]);
+                this.MBData[i] = String.Concat(data[position], data[position + 1], data[position + 2], data[position + 3], data[position + 4], data[position + 5], data[position + 6]);
                 this.BDS1[1] = data[position + 7].Substring(0, 4);
                 this.BDS2[1] = data[position + 7].Substring(4, 4);
                 
@@ -1205,7 +1205,7 @@ namespace CLassLibrary
         public string RAT;
         public string MTE;
         public string TTI;
-        public string TID;
+        public string TID_ACAS;
 
         private int ACASResolutionAdvisoryReport(string[] data, int position)
         {
@@ -1218,7 +1218,7 @@ namespace CLassLibrary
             this.RAT = data_message.Substring(26, 1);
             this.MTE = data_message.Substring(27, 1);
             this.TTI = data_message.Substring(28, 2);
-            this.TID = data_message.Substring(30, 26);
+            this.TID_ACAS = data_message.Substring(30, 26);
             
             position = position + 7;
             return position;
@@ -1302,7 +1302,7 @@ namespace CLassLibrary
         public string ARADataAge;
         public string SCC;
 
-        private int Compute_Data_Age(string[] data, int position)
+        private int DataAges(string[] data, int position)
         {
             int positionInitial = position;
 
