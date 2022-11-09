@@ -846,7 +846,7 @@ namespace CLassLibrary
         public double LatitudeMapWGS84 = -200; //For the map
         public double LongitudeMapWGS84 = -200; //For the map
 
-        private int PositioninWGS84Coordinates(string[] data, int position) 
+        private int PositionInWGS84Coordinates(string[] data, int position) 
         {
             int newposition = position + 3;
             double latitude = Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1], data[position + 2]))) * (180 / (Math.Pow(2, 23)));
@@ -904,6 +904,119 @@ namespace CLassLibrary
             position = position + 1;
             return position; 
         }
+
+        //DATA ITEM: I021/140
+        public string geometricHeight;
+
+        private int GeometricHeight(string[] data, int position)
+        {
+            this.geometricHeight = Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1]))) * 6.25) + " ft";
+            
+            position = position + 2;
+            return position; 
+        }
+
+        //DATA ITEM: I021/145
+        public string fligthLevel;
+
+        private int FlightLevel(string[] data, int position)
+        {
+            this.fligthLevel = Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1]))) * (0.25)) + " FL";
+            
+            position = position + 2;
+            return position; 
+        }
+
+        //DATA ITEM: I021/146
+        public string SAS;
+        public string Source;
+        public string selectedAltitude;
+
+        private int SelectedAltitude(string[] data, int position)
+        {          
+            string Source = data[position].Substring(1, 2);
+            if (Source == "00") this.Source = "Unknown";
+            else if (Source == "01") this.Source = "Aircraft Altitude (Holding Altitude)";
+            else if (Source == "10") this.Source = "MCP/FCU Selected Altitude";
+            else this.Source = "FMS Selected Altitude";
+
+            
+            this.selectedAltitude = "SA: " + Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1]).Substring(3, 13))) * 25) + " ft";
+            
+            position = position + 2;
+            return position; 
+        }
+
+        //DATA ITEM: I021/148
+        public string MV;
+        public string AH;
+        public string AM;
+        public string finalStateSelectedAltitude;
+
+        private int FinalStateSelectedAltitude(string[] data, int position)
+        {
+            if (data[position].Substring(0, 1) == "0") this.MV = "Not active or unknown";
+            else this.MV = "Active";
+            if (data[position].Substring(1, 1) == "0") this.AH = "Not active or unknown";
+            else this.AH = "Active";
+            if (data[position].Substring(2, 1) == "0") this.AM = "Not active or unknown";
+            else this.AM = "Active";
+            
+            this.finalStateSelectedAltitude = Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1]).Substring(3, 13))) * 25) + " ft";
+            
+            position = position + 2;
+            return position;
+        }
+
+        //DATA ITEM: I021/150
+        public string airSpeed;
+
+        private int AirSpeed(string[] data, int position)
+        {
+            if (data[position].Substring(0, 1) == "0") this.airSpeed = Convert.ToString(Convert.ToInt32(string.Concat(data[position], data[position + 1]).Substring(1, 15),2) * Math.Pow(2, -14)) + " NM/s";
+            else this.airSpeed = Convert.ToString(Convert.ToInt32(string.Concat(data[position], data[position + 1]).Substring(1, 15),2) * 0.001) + " Mach";
+            
+            position = position + 2;
+            return position;
+        }
+
+        //DATA ITEM: I021/151
+        public string trueAirSpeed;
+
+        private int TrueAirSpeed(string[] data, int position)
+        {
+            if (data[position].Substring(0, 1) == "0") this.trueAirSpeed = Convert.ToString(Convert.ToInt32(string.Concat(data[position], data[position + 1]).Substring(1, 15),2)) + " kts";
+            else this.trueAirSpeed = "Value exceeds defined rage";
+            
+            position = position + 2;
+            return position;
+        }
+
+        //DATA ITEM: I021/152
+        public string magneticHeading;
+
+        private int MagneticHeading(string[] data, int position)
+        {
+            this.magneticHeading = Convert.ToString(Convert.ToInt32(string.Concat(data[position], data[position + 1]), 2) * (360 / (Math.Pow(2, 16)))) + "º"; 
+            
+            position = position + 2;
+            return position;
+        }
+
+        //DATA ITEM: I021/155
+        public string barometricVerticalRate;
+
+        private int BarometricVerticalRate(string[] data, int position)
+        {
+            if (message[pos].Substring(0, 1) == "0") this.barometricVerticalRate = Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(message[pos], message[pos + 1]).Substring(1, 15))) * 6.25) + " ft/min";
+            else this.barometricVerticalRate = "Value exceeds defined rage";
+            
+            position = position + 2;
+            return position;
+        }
+
+        //DATA ITEM: I021/157
+        
 
 
         #endregion
