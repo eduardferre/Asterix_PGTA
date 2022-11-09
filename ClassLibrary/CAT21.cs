@@ -1373,7 +1373,6 @@ namespace CLassLibrary
             return position;
         }
 
-
         #endregion
     }
 }
