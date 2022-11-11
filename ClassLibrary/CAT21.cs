@@ -678,7 +678,7 @@ namespace CLassLibrary
                     string spareBits = octetNum1_2.Substring(0, 2);
 
                     string SILsupp = octetNum1_2.Substring(2, 1);
-                    if (SILsupp == "0") this.SILsupp = "Measured per flight-Hour";
+                    if (SILsupp == "0") this.SILsupp = "Measured per hour";
                     else this.SILsupp = "Measured per sample";
 
                     this.SDA = Convert.ToString(Convert.ToInt32(data[position].Substring(3, 2), 2));
