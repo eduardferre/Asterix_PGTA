@@ -10,12 +10,22 @@ namespace ClassLibrary
 {
     public class DecodeFiles
     {
-        public int numberMsgs = 0;
-        public int numberCAT10Msgs = 0;
+        public int numFiles = 0;
+
+        public int numMsgs = 0;
+        public int numCAT10Msgs = 0;
+        public int numCAT21Msgs = 0;
+       
         public string process;
 
         List<CAT10> listCAT10 = new List<CAT10>();
         List<CAT21> listCAT21 = new List<CAT21>();
+
+        public List<string> nameFiles = new List<string>();
+
+
+        public List<CAT10> GetListCAT10() { return listCAT10; }
+        public List<CAT21> GetListCAT21() { return listCAT21; }
 
         public List<CAT10> ReadCAT10()
         {
@@ -71,11 +81,11 @@ namespace ClassLibrary
                 {
                     CAT10 cat10 = new CAT10();
 
-                    cat10.msgNum = numberMsgs;
-                    cat10.msgCAT10Num = numberCAT10Msgs;
+                    cat10.msgNum = numMsgs;
+                    cat10.msgCAT10Num = numCAT10Msgs;
 
-                    numberMsgs++;
-                    numberCAT10Msgs++;
+                    numMsgs++;
+                    numCAT10Msgs++;
 
                     //Console.WriteLine("CAT" + CAT + ", lenght: " + lenght);
 
@@ -145,11 +155,11 @@ namespace ClassLibrary
                 {
                     CAT21 cat21 = new CAT21();
 
-                    cat21.msgNum = numberMsgs;
-                    cat21.msgCAT21Num = numberCAT10Msgs;
+                    cat21.msgNum = numMsgs;
+                    cat21.msgCAT21Num = numCAT21Msgs;
 
-                    numberMsgs++;
-                    numberCAT10Msgs++;
+                    numMsgs++;
+                    numCAT21Msgs++;
 
                     //Console.WriteLine("CAT" + CAT + ", lenght: " + lenght);
 
@@ -164,6 +174,111 @@ namespace ClassLibrary
 
             return listCAT21;
         }
+
+        public void ClearStoredData()
+        {
+            numFiles = 0;
+            numMsgs = 0;
+            numCAT10Msgs = 0;
+            numCAT21Msgs = 0;
+            nameFiles.Clear();
+            listCAT10.Clear();
+            listCAT21.Clear();
+        }
+
+        public int Read(string path)
+        {
+            try
+            {
+                process = "File is being decoded...";
+                print(process);
+
+                byte[] fileBytes = File.ReadAllBytes(path);
+                List<byte[]> listBytes = new List<byte[]>();
+
+                int cont = fileBytes[1] * 256 + fileBytes[2];
+                int i = 0;
+
+                while (i < fileBytes.Length)
+                {
+                    byte[] array = new byte[cont];
+
+                    for (int j = 0; j < array.Length; j++)
+                    {
+                        array[j] = fileBytes[i];
+                        i++;
+                    }
+
+                    listBytes.Add(array);
+
+                    if (i + 2 < fileBytes.Length) cont = fileBytes[i + 1] * 256 + fileBytes[i + 2];
+                }
+
+                List<string[]> listHex = new List<string[]>();
+
+                for (i = 0; i < listBytes.Count; i++)
+                {
+                    byte[] byteSelect = listBytes[i];
+                    string[] arrayHex = new string[byteSelect.Length];
+
+                    for (int j = 0; j < byteSelect.Length; j++)
+                    {
+                        arrayHex[j] = byteSelect[j].ToString("X");
+
+                        if (arrayHex[j].Length <= 1) arrayHex[j] = string.Concat('0', arrayHex[j]);
+                    }
+
+                    listHex.Add(arrayHex);
+                }
+
+                for (i = 0; i < listHex.Count; i++)
+                {
+                    process = "Loading message " + Convert.ToString(i) + " of " + Convert.ToString(listHex.Count) + " messages...";
+                    print(process);
+
+                    string[] arrayMsg = listHex[i];
+                    int CAT = int.Parse(arrayMsg[0], System.Globalization.NumberStyles.HexNumber);
+                    int lenght = int.Parse(arrayMsg[1], System.Globalization.NumberStyles.HexNumber) * 256 + int.Parse(arrayMsg[2], System.Globalization.NumberStyles.HexNumber);
+
+                    if (CAT == 10)
+                    {
+                        CAT10 cat10 = new CAT10();
+
+                        cat10.msgNum = numMsgs;
+                        cat10.msgCAT10Num = numCAT10Msgs;
+
+                        numMsgs++;
+                        numCAT10Msgs++;
+
+                        cat10.DecodeCAT10(arrayMsg, 0);
+
+                        listCAT10.Add(cat10);
+                    }
+                    else if (CAT == 21)
+                    {
+                        CAT21 cat21 = new CAT21();
+
+                        cat21.msgNum = numMsgs;
+                        cat21.msgCAT21Num = numCAT10Msgs;
+
+                        numMsgs++;
+                        numCAT21Msgs++;
+
+                        cat21.DecodeCAT21(arrayMsg, 0);
+
+                        listCAT21.Add(cat21);
+                    }
+                }
+
+
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
 
         public void print(string texto)
         {
