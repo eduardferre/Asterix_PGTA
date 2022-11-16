@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "PrXB7yhbO1eE1RxiS8Bs7EACsfC+0HOggTilh/NPrYsH/Bi66qJjQIWpD+YBVy26BqtJXKxTCMtUdjDx38T0kg==",
+  "dgSpecHash": "ArocRC96EzmexgJXTwT3Q0F0Og0eaLbrEKS/iohDReYp9uC3314tp6E39l2zwo6X0zuVh9YVnb/RhDDXPQX0uQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Eduard\\Desktop\\Asterix_PGTA\\FlightDataItems\\FlightDataItems.csproj",
+  "projectFilePath": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\FlightDataItems\\FlightDataItems.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Eduard\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Users\\Eduard\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+    "C:\\Users\\gerar\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\gerar\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
   ],
   "logs": []
 }

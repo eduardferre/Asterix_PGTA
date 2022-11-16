@@ -566,12 +566,14 @@ namespace ClassLibrary
 
         //DATA ITEM: I010/140
         public string TimeOfDay;
+        public int TimeOfDaySec;
 
         private int TimeofDay(string[] data, int position)
         {
             int number = Convert.ToInt32(string.Concat(data[position], data[position + 1], data[position + 2]), 2);
             double seconds = Convert.ToDouble(number) / 128;
-            
+
+            this.TimeOfDaySec = Convert.ToInt32(Math.Truncate(seconds));
             this.TimeOfDay = TimeSpan.FromSeconds(seconds).ToString(@"hh\:mm\:ss\:fff");
 
             //Console.WriteLine("TimeOfDay: " + this.TimeOfDay);
