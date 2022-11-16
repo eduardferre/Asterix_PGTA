@@ -22,24 +22,50 @@ namespace AsterixDecoder
         private void Form1_Load(object sender, EventArgs e)
         {
             DecodeFiles decode = new DecodeFiles();
+            
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = "c:\\";
+            openFileDialog.Filter = "txt files (*.txt) | *.txt* | ast files (*.ast) | *.ast*";
+            openFileDialog.FilterIndex = 2;
+            openFileDialog.Multiselect = true;
+            openFileDialog.RestoreDirectory = true;
+            openFileDialog.ShowDialog();
 
-            List<CAT10> listCAT10 = decode.ReadCAT10();
-            List<CAT21> listCAT21 = decode.ReadCAT21();
+            if (openFileDialog.SafeFileName != null)
+            {
+                foreach (string path in openFileDialog.FileNames)
+                {
+                    int result = decode.Read(path);
 
-            //foreach (CAT10 msg in listCAT10)
+                    if (result == 1)
+                    {
+                        decode.numFiles++;
+                        decode.nameFiles.Add(path);
+                    }
+                }
+            }
+
+            List<CAT10> listCAT10 = decode.GetListCAT10();
+            List<CAT21> listCAT21 = decode.GetListCAT21();
+
+            if (listCAT10.Count > 0) { foreach (CAT10 cat10 in listCAT10) { CreateTable_CAT10(cat10); } }
+            if (listCAT21.Count > 0) { foreach (CAT21 cat21 in listCAT21) { CreateTable_CAT21(cat21); } }
+
+            //for (int i = 0; i < 5; i++)
             //{
-            //    AddRowT(msg);
+            //    CreateTable_CAT10(listCAT10[i]);
             //}
 
-            for (int i = 0; i < 5; i++)
-            {
-                CreateTable_CAT10(listCAT10[i]);
-            }
+            //for (int i = 0; i < 5; i++)
+            //{
+            //    CreateTable_CAT21(listCAT21[i]);
+            //}
+            //string path = "";
 
-            for (int i = 0; i < 5; i++)
-            {
-                CreateTable_CAT21(listCAT21[i]);
-            }
+            //int read = decode.Read(path);
+
+            //List<CAT10> listCAT10 = decode.GetListCAT10();
+            //List<CAT21> listCat21 = decode.GetListCAT21();
 
         }
 
