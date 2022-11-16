@@ -638,7 +638,7 @@ namespace ClassLibrary
         public string NICbaro;
         public string SIL;
         public string NACp;
-        public string SILS;
+        public string SILsupp;
         public string SDA;
         public string GVA;
         public int PIC;
@@ -657,7 +657,7 @@ namespace ClassLibrary
 
             string FX1 = octetNum1.Substring(7, 1);
 
-            if (FX1 == "1")
+            if (FX1 == "1") // First Extension
             {
                 newposition = newposition + 1;
 
@@ -669,22 +669,24 @@ namespace ClassLibrary
                 
                 string FX2 = octetNum1_1.Substring(7, 1);
 
-                if (FX2 == "1")
+                if (FX2 == "1") // Second Extension
                 {
                     newposition = newposition + 1;
 
                     string octetNum1_2 = data[newposition];
 
-                    string SILS = octetNum1_2.Substring(2, 1);
-                    if (SILS == "0") this.SILS = "Measured per flight-Hour";
-                    else this.SILS = "Measured per sample";
+                    string spareBits = octetNum1_2.Substring(0, 2);
+
+                    string SILsupp = octetNum1_2.Substring(2, 1);
+                    if (SILsupp == "0") this.SILsupp = "Measured per hour";
+                    else this.SILsupp = "Measured per sample";
 
                     this.SDA = Convert.ToString(Convert.ToInt32(data[position].Substring(3, 2), 2));
                     this.GVA = Convert.ToString(Convert.ToInt32(data[position].Substring(5, 2), 2));
 
                     string FX3 = octetNum1_2.Substring(7, 1);
 
-                    if (FX3 == "1")
+                    if (FX3 == "1") // Third Extension
                     {
                         newposition = newposition + 1;
 
@@ -706,8 +708,9 @@ namespace ClassLibrary
                         if (this.PIC == 12) this.ICB = "< 0.04 NM"; this.NUCp = ""; this.NIC = "9";
                         if (this.PIC == 13) this.ICB = "< 0.013 NM"; this.NUCp = "8"; this.NIC = "10";
                         if (this.PIC == 14) this.ICB = "< 0.004 NM"; this.NUCp = "9"; this.NIC = "11";
+                        if (this.PIC == 15) this.ICB = "Not defined"; this.NUCp = "Not defined"; this.NIC = "Not defined";
                         
-                        string spareBits = octetNum1_3.Substring(4, 3);
+                        string spareBits1 = octetNum1_3.Substring(4, 3);
 
                         string FX4 = Convert.ToString(octetNum1_3[7]);
                     }
