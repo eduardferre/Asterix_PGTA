@@ -21,6 +21,9 @@ namespace ClassLibrary
         List<CAT10> listCAT10 = new List<CAT10>();
         List<CAT21> listCAT21 = new List<CAT21>();
 
+        DataTable tableCAT10 = new DataTable();
+        DataTable tableCAT21 = new DataTable();
+
         public List<string> nameFiles = new List<string>();
 
 
@@ -79,7 +82,7 @@ namespace ClassLibrary
 
                 if (CAT == 10)
                 {
-                    CAT10 cat10 = new CAT10();
+                    CAT10 cat10 = new CAT10(arrayMsg, 0);
 
                     cat10.msgNum = numMsgs;
                     cat10.msgCAT10Num = numCAT10Msgs;
@@ -88,8 +91,6 @@ namespace ClassLibrary
                     numCAT10Msgs++;
 
                     //Console.WriteLine("CAT" + CAT + ", lenght: " + lenght);
-
-                    cat10.DecodeCAT10(arrayMsg, 0);
 
                     listCAT10.Add(cat10);
                 }
@@ -153,7 +154,7 @@ namespace ClassLibrary
 
                 if (CAT == 21)
                 {
-                    CAT21 cat21 = new CAT21();
+                    CAT21 cat21 = new CAT21(arrayMsg, 0);
 
                     cat21.msgNum = numMsgs;
                     cat21.msgCAT21Num = numCAT21Msgs;
@@ -162,8 +163,6 @@ namespace ClassLibrary
                     numCAT21Msgs++;
 
                     //Console.WriteLine("CAT" + CAT + ", lenght: " + lenght);
-
-                    cat21.DecodeCAT21(arrayMsg, 0);
 
                     listCAT21.Add(cat21);
                 }
@@ -242,7 +241,7 @@ namespace ClassLibrary
 
                     if (CAT == 10)
                     {
-                        CAT10 cat10 = new CAT10();
+                        CAT10 cat10 = new CAT10(arrayMsg, 0);
 
                         cat10.msgNum = numMsgs;
                         cat10.msgCAT10Num = numCAT10Msgs;
@@ -250,21 +249,17 @@ namespace ClassLibrary
                         numMsgs++;
                         numCAT10Msgs++;
 
-                        cat10.DecodeCAT10(arrayMsg, 0);
-
                         listCAT10.Add(cat10);
                     }
                     else if (CAT == 21)
                     {
-                        CAT21 cat21 = new CAT21();
+                        CAT21 cat21 = new CAT21(arrayMsg, 0);
 
                         cat21.msgNum = numMsgs;
                         cat21.msgCAT21Num = numCAT10Msgs;
 
                         numMsgs++;
                         numCAT21Msgs++;
-
-                        cat21.DecodeCAT21(arrayMsg, 0);
 
                         listCAT21.Add(cat21);
                     }
@@ -278,7 +273,6 @@ namespace ClassLibrary
                 return 0;
             }
         }
-
 
         public void print(string texto)
         {

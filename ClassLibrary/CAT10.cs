@@ -154,8 +154,11 @@ namespace ClassLibrary
         #endregion
 
         #region CAT10 Decoding Procedure 
+        public CAT10()
+        {
 
-        public void DecodeCAT10(string[] dataMessage, int position)
+        }
+        public CAT10(string[] dataMessage, int position)
         {
             string FSPECNum = FSPECnum(dataMessage);
             position = 3 + FSPECNum.Length / 7;

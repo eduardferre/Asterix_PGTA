@@ -48,18 +48,18 @@ namespace AsterixDecoder
             List<CAT10> listCAT10 = decode.GetListCAT10();
             List<CAT21> listCAT21 = decode.GetListCAT21();
 
-            if (listCAT10.Count > 0) { foreach (CAT10 cat10 in listCAT10) { CreateTable_CAT10(cat10); } }
-            if (listCAT21.Count > 0) { foreach (CAT21 cat21 in listCAT21) { CreateTable_CAT21(cat21); } }
+            //if (listCAT10.Count > 0) { foreach (CAT10 cat10 in listCAT10) { CreateTable_CAT10(cat10); } }
+            //if (listCAT21.Count > 0) { foreach (CAT21 cat21 in listCAT21) { CreateTable_CAT21(cat21); } }
 
-            //for (int i = 0; i < 5; i++)
-            //{
-            //    CreateTable_CAT10(listCAT10[i]);
-            //}
+            for (int i = 0; i < 5; i++)
+            {
+                CreateTable_CAT10(listCAT10[i]);
+            }
 
-            //for (int i = 0; i < 5; i++)
-            //{
-            //    CreateTable_CAT21(listCAT21[i]);
-            //}
+            for (int i = 0; i < 5; i++)
+            {
+                CreateTable_CAT21(listCAT21[i]);
+            }
             //string path = "";
 
             //int read = decode.Read(path);

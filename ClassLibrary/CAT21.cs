@@ -154,7 +154,11 @@ namespace ClassLibrary
 
         #region CAT21 Decoding Procedure 
 
-        public void DecodeCAT21(string[] dataMessage, int position)
+        public CAT21()
+        {
+
+        }
+        public CAT21(string[] dataMessage, int position)
         {
             string FSPECNum = FSPECnum(dataMessage);
             position = 3 + FSPECNum.Length / 7;
