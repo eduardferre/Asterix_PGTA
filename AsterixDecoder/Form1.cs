@@ -13,6 +13,14 @@ namespace AsterixDecoder
 {
     public partial class Form1 : Form
     {
+        DecodeFiles decodeFiles = new DecodeFiles();
+
+        List<CAT10> listCAT10 = new List<CAT10>();
+        List<CAT21> listCAT21 = new List<CAT21>();
+        
+        DataTable tableCAT10 = new DataTable();
+        DataTable tableCAT21 = new DataTable();
+        
         public Form1()
         {
             InitializeComponent();
@@ -21,8 +29,6 @@ namespace AsterixDecoder
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            DecodeFiles decode = new DecodeFiles();
-            
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = "c:\\";
             openFileDialog.Filter = "txt files (*.txt) | *.txt* | ast files (*.ast) | *.ast*";
@@ -45,8 +51,11 @@ namespace AsterixDecoder
                 }
             }
 
-            List<CAT10> listCAT10 = decode.GetListCAT10();
-            List<CAT21> listCAT21 = decode.GetListCAT21();
+            this.listCAT10 = decode.GetListCAT10();
+            this.listCAT21 = decode.GetListCAT21();
+
+            this.tableCAT10 = decode.GetTableCAT10();
+            this.tableCAT21 = decode.GetTableCAT21();
 
             //if (listCAT10.Count > 0) { foreach (CAT10 cat10 in listCAT10) { CreateTable_CAT10(cat10); } }
             //if (listCAT21.Count > 0) { foreach (CAT21 cat21 in listCAT21) { CreateTable_CAT21(cat21); } }
