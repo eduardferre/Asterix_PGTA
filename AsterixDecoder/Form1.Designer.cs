@@ -116,12 +116,12 @@
             this.AmplitudeofPrimaryPlot,
             this.CalculatedAcceleration});
             this.tableCAT10.GridColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.tableCAT10.Location = new System.Drawing.Point(469, 42);
+            this.tableCAT10.Location = new System.Drawing.Point(860, 159);
             this.tableCAT10.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableCAT10.Name = "tableCAT10";
             this.tableCAT10.ReadOnly = true;
             this.tableCAT10.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.tableCAT10.Size = new System.Drawing.Size(374, 127);
+            this.tableCAT10.Size = new System.Drawing.Size(153, 115);
             this.tableCAT10.TabIndex = 0;
             // 
             // Category
@@ -364,12 +364,12 @@
             this.TrackNumberCAT21,
             this.ServiceIdentificationCAT21});
             this.tableCAT21.GridColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.tableCAT21.Location = new System.Drawing.Point(469, 183);
+            this.tableCAT21.Location = new System.Drawing.Point(860, 292);
             this.tableCAT21.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableCAT21.Name = "tableCAT21";
             this.tableCAT21.ReadOnly = true;
             this.tableCAT21.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.tableCAT21.Size = new System.Drawing.Size(448, 159);
+            this.tableCAT21.Size = new System.Drawing.Size(153, 119);
             this.tableCAT21.TabIndex = 1;
             // 
             // CategoryCAT21
@@ -419,7 +419,7 @@
             // 
             // loadFiles_Button
             // 
-            this.loadFiles_Button.Location = new System.Drawing.Point(860, 31);
+            this.loadFiles_Button.Location = new System.Drawing.Point(860, 77);
             this.loadFiles_Button.Name = "loadFiles_Button";
             this.loadFiles_Button.Size = new System.Drawing.Size(153, 43);
             this.loadFiles_Button.TabIndex = 2;
@@ -431,7 +431,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1025, 749);
+            this.ClientSize = new System.Drawing.Size(1025, 641);
             this.Controls.Add(this.loadFiles_Button);
             this.Controls.Add(this.tableCAT21);
             this.Controls.Add(this.tableCAT10);

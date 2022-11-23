@@ -265,9 +265,23 @@ namespace AsterixDecoder
 
             DataGridView gridCAT10 = new DataGridView();
 
+            gridCAT10.Location = new Point(10, 10);
+
+            gridCAT10.Size = new Size(800, 300);
+
             this.Controls.Add(gridCAT10);
 
-            gridCAT10.DataSource = tableCAT10;
+            gridCAT10.DataSource = dataTableCAT10;
+
+            DataGridView gridCAT21 = new DataGridView();
+
+            gridCAT21.Location = new Point(10, 320);
+
+            gridCAT21.Size = new Size(800, 300);
+
+            this.Controls.Add(gridCAT21);
+
+            gridCAT21.DataSource = dataTableCAT21;
         }
     }
 }
