@@ -26,3 +26,4 @@ C:\Users\Eduard\Desktop\Asterix_PGTA\ClassLibrary\obj\Debug\netstandard2.0\Class
 C:\Users\Eduard\Desktop\Asterix_PGTA\ClassLibrary\obj\Debug\netstandard2.0\ClassLibrary.csproj.CoreCompileInputs.cache
 C:\Users\Eduard\Desktop\Asterix_PGTA\ClassLibrary\obj\Debug\netstandard2.0\ClassLibrary.dll
 C:\Users\Eduard\Desktop\Asterix_PGTA\ClassLibrary\obj\Debug\netstandard2.0\ClassLibrary.pdb
+C:\Users\gerar\OneDrive\Universitat\5A\PGTA\Asterix_PGTA\ClassLibrary\obj\Debug\netstandard2.0\ClassLibrary.csproj.CoreCompileInputs.cache

@@ -436,7 +436,8 @@
         }
 
         #endregion
-
+        private System.Windows.Forms.DataGridView tableCAT10; 
+        private System.Windows.Forms.DataGridView tableCAT21;
         private System.Windows.Forms.DataGridViewTextBoxColumn Category;
         private System.Windows.Forms.DataGridViewTextBoxColumn SAC;
         private System.Windows.Forms.DataGridViewTextBoxColumn SIC;

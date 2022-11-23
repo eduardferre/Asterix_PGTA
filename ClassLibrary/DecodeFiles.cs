@@ -775,5 +775,130 @@ namespace ClassLibrary
                 }
             }
         }
+
+        private void FindDirection(List<Trajectories> listTraj, CATALL message)
+        {
+            if (message.targetIdentification != null && message.targetIdentification.Count() > 1) // && listtraj.Exists(x => x.Target_Identification == message.Target_Identification))
+            {
+                Trajectories t = listTraj.Find(x => x.targetIdentification == message.targetIdentification);
+                int index = t.listTimePoints.FindIndex(x => x.time == message.timeOfDay);
+
+                ComputeDirectionFromindex(t, index, message);
+            }
+
+            else if (message.targetAddress != null)// && listtraj.Exists(x => x.Target_Address == message.Target_Address))
+            {
+                Trajectories t = listTraj.Find(x => x.targetAdd == message.targetAddress);
+                int index = t.listTimePoints.FindIndex(x => x.time == message.timeOfDay);
+                ComputeDirectionFromindex(t, index, message);
+            }
+
+            else if (message.trackNumber != null)// && listtraj.Exists(x => x.Track_number == message.Track_number))
+            {
+                Trajectories t = listTraj.Find(x => x.trackNum == message.trackNumber);
+                int index = t.listTimePoints.FindIndex(x => x.time == message.timeOfDay);
+                ComputeDirectionFromindex(t, index, message);
+            }
+        }
+
+        private void ComputeDirecction(List<CATALL> listCATALL)
+        {
+            process = "Computing trajectories...";
+
+            process = "Applying trajectories...";
+
+            int i = 0;
+
+            /*Once trajectories are created, we will walk trhought the CATALL list and search the direction of each message*/
+            foreach (CATALL message in listCATALL)
+            {
+                i++;
+                process = "Applying trajectory for message " + i + " of " + Convert.ToString(listCATALL.Count) + " messages...";
+
+                if (message.latitudeInWGS84 != -200 && message.longitudeInWGS84 != -200)
+                {
+                    if (message.detectionMode == "SMR")
+                    {
+                        FindDirection(SMRTraj, message);
+                    }
+                    if (message.detectionMode == "MLAT")
+                    {
+                        FindDirection(MLATTraj, message);
+                    }
+                    if (message.detectionMode == "ADSB")
+                    {
+                        FindDirection(ADSBTraj, message);
+                    }
+                }
+            }
+        }
+
+        private void ComputeDetectionRatio(List<CATALL> listCATALL)
+        {
+            process = "Computing radars detection ratio...";
+            double ADSBratio = 0;
+            int ADSBRatio;
+            int ADSBCount = 0;
+            if (ADSBTraj.Count() > 0)
+            {
+                foreach (Trajectories t in ADSBTraj)
+                {
+                    if (t.CountTimepoint() > 3)
+                    {
+                        double r = (t.listTimePoints[t.listTimePoints.Count() - 1].time - t.listTimePoints[0].time) / (t.listTimePoints.Count() - 1);
+                        if (r < 5)
+                        {
+                            ADSBCount++;
+                            ADSBratio += r;
+                        }
+                    }
+                }
+                ADSBRatio = Convert.ToInt32(ADSBratio / ADSBCount);
+                if (ADSBRatio < 1) { ADSBRatio = 1; }
+            }
+            else
+            {
+                ADSBRatio = 1;
+            }
+            process = "Applying radars detection ratio...";
+            foreach (CATALL message in listCATALL)
+            {
+                if (message.CAT == "21 v. 2.1")
+                {
+                    message.refreshratio = ADSBRatio;
+                }
+                else
+                {
+                    message.refreshratio = 1;
+                }
+            }
+        }
+
+        private List<CATALL> ComputeTimeOfDay(List<CATALL> listCATALL)
+        {
+            List<CATALL> List = new List<CATALL>();
+            List = listCATALL.OrderBy(CATAll => CATAll.listTimeOfDay).ToList();
+            int firsttime = List[0].listTimeOfDay;
+            int lasttime = List[List.Count - 1].listTimeOfDay;
+            double da = (lasttime - firsttime) / 86400;
+            int days = Convert.ToInt32(Math.Truncate(da)) + 1;
+            if (List[0].listTimeOfDay < 0)
+            {
+                double fir = (firsttime / 86400);
+                int firstday = Convert.ToInt32(Math.Truncate(fir)) - 1;
+                foreach (CATALL mess in List)
+                {
+                    mess.timeOfDay = mess.listTimeOfDay + (-firstday * 86400);
+                }
+            }
+            else
+            {
+                foreach (CATALL mess in List)
+                {
+                    mess.timeOfDay = mess.listTimeOfDay;
+                }
+            }
+            return List;
+        }
     }
 }
