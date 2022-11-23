@@ -725,6 +725,7 @@ namespace ClassLibrary
         }
 
         //DATA ITEM: I021/110
+        public int TRAJInfo;
         public bool TIS;
         public bool TID_TI;
         public string NAV;
@@ -744,7 +745,9 @@ namespace ClassLibrary
         public string[] TTR;
 
         private int TrajectoryIntent(string[] data, int position)
-        {   
+        {
+            TRAJInfo = 1;
+
             if (data[position].Substring(0, 1) == "1") this.TIS = true;
             else this.TIS = false;
             
@@ -1151,6 +1154,7 @@ namespace ClassLibrary
         }
 
         //DATA ITEM: I021/220
+        public int METInfo;
         public string WindSpeed;
         public string WindDirection;
         public string Temperature;
@@ -1158,6 +1162,8 @@ namespace ClassLibrary
 
         private int MetInformation (string[] data, int position)
         {
+            METInfo = 1;
+            
             int positionInitial = position;
 
             if (data[positionInitial].Substring(0, 1) == "1") { this.WindSpeed = Convert.ToString(Convert.ToInt32(string.Concat(data[position + 1], data[position + 2]), 2)) + " kts"; position = position + 2; }
@@ -1285,6 +1291,7 @@ namespace ClassLibrary
         }
 
         //DATA ITEM: I021/295
+        public int DAInfo;
         public string AOS;
         public string TRD;
         public string M3A;
@@ -1311,6 +1318,8 @@ namespace ClassLibrary
 
         private int DataAges(string[] data, int position)
         {
+            DAInfo = 1;
+            
             int positionInitial = position;
 
             if (data[position].Substring(7, 1) == "1")

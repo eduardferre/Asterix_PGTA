@@ -37,7 +37,7 @@ namespace ClassLibrary
         public DataTable GetTableCAT10() { return tableCAT10; }
         public DataTable GetTableCAT21() { return tableCAT21; }
 
-        public void DecodeFiles() 
+        public DecodeFiles() 
         {
             this.CreateTableCAT10();
             this.CreateTableCAT21();
@@ -318,7 +318,7 @@ namespace ClassLibrary
             tableCAT10.Columns.Add("Measured Height");
             tableCAT10.Columns.Add("Mode-3A Code");
             tableCAT10.Columns.Add("Mode S MB Data");
-            tableCAT10.Columns.Add("Standard\ Deviation of Position");
+            tableCAT10.Columns.Add("Standard Deviation of Position");
             tableCAT10.Columns.Add("Presence");
             tableCAT10.Columns.Add("Amplitude of Primary Plot");
             tableCAT10.Columns.Add("Calculated Acceleration");
@@ -374,164 +374,168 @@ namespace ClassLibrary
 
         public void FillTableCAT10(CAT10 message)
         { 
-            var row = tablaCAT10.NewRow();
-            row["Number"] = message.num;
-            row["CAT number"] = message.cat10num;
+            var row = tableCAT10.NewRow();
+
+            row["Number"] = message.msgNum;
+            row["CAT number"] = message.msgCAT10Num;
             if (message.CAT != null) { row["Category"] = message.CAT; }
             else { row["Category"] = "N/A"; }
             if (message.SAC != null) { row["SAC"] = message.SAC; }
             else { row["SAC"] = "N/A"; }
             if (message.SIC != null) { row["SIC"] = message.SIC; }
             else { row["SIC"] = "N/A"; }
-            if (message.TAR != null)
+            if (message.TargetId != null)
             {
-                if (message.TAR.Replace(" ","")!="" ) { row["Target Identification"] = message.TAR; }
+                if (message.TargetId.Replace(" ","") != "" ) { row["Target Identification"] = message.TargetId; }
                 else { row["Target Identification"] = "N/A"; }
             }
             else { row["Target Identification"] = "N/A"; }
             if (message.TYP != null) { row["Target Report Descriptor"] = "Click for more data"; }
             else { row["Target Report Descriptor"] = "N/A"; }
-            if (message.MESSAGE_TYPE != null) { row["Message Type"] = message.MESSAGE_TYPE; }
+            if (message.messageType != null) { row["Message Type"] = message.messageType; }
             else { row["Message Type"] = "N/A"; }
-            if (message.Flight_Level != null) { row["Flight Level"] = message.Flight_Level; }
+            if (message.FlightLevelInfo != null) { row["Flight Level"] = message.FlightLevelInfo; }
             else { row["Flight Level"] = "N/A"; }
-            if (message.Track_Number != null) { row["Track Number"] = message.Track_Number; }
+            if (message.TrackNum != null) { row["Track Number"] = message.TrackNum; }
             else { row["Track Number"] = "N/A"; }
-            if (message.Time_Of_Day != null) { row["Time of Day"] = message.Time_Of_Day; }
+            if (message.TimeOfDay != null) { row["Time of Day"] = message.TimeOfDay; }
             else { row["Time of Day"] = "N/A"; }
             if (message.CNF != null) { row["Track Status"] = "Click for more data"; }
             else { row["Track Status"] = "N/A"; }
-            if (message.Latitude_in_WGS_84 != null && message.Longitude_in_WGS_84 != null) { row["Position in WGS-84 Co-ordinates"] =  message.Latitude_in_WGS_84 + ", " + message.Longitude_in_WGS_84; }
+            if (message.LatitudeinWGS84 != null && message.LongitudeinWGS84 != null) { row["Position in WGS-84 Co-ordinates"] =  message.LatitudeinWGS84 + ", " + message.LongitudeinWGS84; }
             else { row["Position in WGS-84 Co-ordinates"] = "N/A"; }
-            if (message.Position_Cartesian_Coordinates != null) { row["Position in Cartesian Co-ordinates"] = message.Position_Cartesian_Coordinates; }
+            if (message.positioninCartesianCoordinates != null) { row["Position in Cartesian Co-ordinates"] = message.positioninCartesianCoordinates; }
             else { row["Position in Cartesian Co-ordinates"] = "N/A"; }
-            if (message.Position_In_Polar != null) { row["Position in Polar Co-ordinates"] = message.Position_In_Polar; }
+            if (message.positioninPolarCoordinates != null) { row["Position in Polar Co-ordinates"] = message.positioninPolarCoordinates; }
             else { row["Position in Polar Co-ordinates"] = "N/A"; }
-            if (message.Track_Velocity_Polar_Coordinates != null) { row["Track Velocity in Polar Coordinates"] = message.Track_Velocity_Polar_Coordinates; }
+            if (message.TrackVelocityPolarCoordinates != null) { row["Track Velocity in Polar Coordinates"] = message.TrackVelocityPolarCoordinates; }
             else { row["Track Velocity in Polar Coordinates"] = "N/A"; }
-            if (message.Track_Velocity_in_Cartesian_Coordinates != null) { row["Track Velocity in Cartesian Coordinates"] = message.Track_Velocity_in_Cartesian_Coordinates; }
+            if (message.TrackVelocityCartesianCoordinates != null) { row["Track Velocity in Cartesian Coordinates"] = message.TrackVelocityCartesianCoordinates; }
             else { row["Track Velocity in Cartesian Coordinates"] = "N/A"; }
-            if (message.Target_size_and_orientation != null) { row["Target Size and Orientation"] = message.Target_size_and_orientation; }
+            if (message.targetSizeOrientation != null) { row["Target Size and Orientation"] = message.targetSizeOrientation; }
             else { row["Target Size and Orientation"] = "N/A"; }
-            if (message.Target_Address != null) { row["Target Address"] = message.Target_Address; }
+            if (message.TargetAdd != null) { row["Target Address"] = message.TargetAdd; }
             else { row["Target Address"] = "N/A"; }
             if (message.NOGO != null) { row["System Status"] = "Click for more data"; }
             else { row["System Status"] = "N/A"; }
             if (message.VFI != null) { row["Vehicle Fleet Identification"] = message.VFI; }
             else { row["Vehicle Fleet Identification"] = "N/A"; }
-            if (message.Pre_programmed_message != null) { row["Pre-programmed Message"] = message.Pre_programmed_message; }
+            if (message.preProgrammedMessage != null) { row["Pre-programmed Message"] = message.preProgrammedMessage; }
             else { row["Pre-programmed Message"] = "N/A"; }
-            if (message.Measured_Height != null) { row["Measured Height"] = message.Measured_Height; }
+            if (message.measuredHeight != null) { row["Measured Height"] = message.measuredHeight; }
             else { row["Measured Height"] = "N/A"; }
-            if (message.Mode_3A != null) { row["Mode-3A Code"] = message.Mode_3A; }
+            if (message.Mode3A != null) { row["Mode-3A Code"] = message.Mode3A; }
             else { row["Mode-3A Code"] = "N/A"; }
-            if (message.MB_Data != null) { row["Mode S MB Data"] = "Click for more data"; }
+            if (message.MBData != null) { row["Mode S MB Data"] = "Click for more data"; }
             else { row["Mode S MB Data"] = "N/A"; }
-            if (message.Deviation_X != null) { row["Standard Deviation of Position"] = "Click for more data"; }
+            if (message.DeviationX != null) { row["Standard Deviation of Position"] = "Click for more data"; }
             else { row["Standard Deviation of Position"] = "N/A"; }
-            if (message.REP_Presence != 0) { row["Presence"] = "Click for more data"; }
+            if (message.REPPresence != 0) { row["Presence"] = "Click for more data"; }
             else { row["Presence"] = "N/A"; }
             if (message.PAM != null) { row["Amplitude of Primary Plot"] = message.PAM; }
             else { row["Amplitude of Primary Plot"] = "N/A"; }
-            if (message.Calculated_Acceleration != null) { row["Calculated Acceleration"] = message.Calculated_Acceleration; }
+            if (message.calculatedAcceleration != null) { row["Calculated Acceleration"] = message.calculatedAcceleration; }
             else { row["Calculated Acceleration"] = "N/A"; }
-            tablaCAT10.Rows.Add(row);
+
+            tableCAT10.Rows.Add(row);
         }
 
-        private void FillTableCAT21(CAT21vs21 message)
+        private void FillTableCAT21(CAT21 message)
         {
-            var row = tablaCAT21v21.NewRow();
-            row["Number"] = Message.num;
-            row["CAT number"] = Message.cat21v21num;
-            if (Message.CAT != null) { row["Category"] = Message.CAT; }
-            else { row["Category"] = "No Data"; }
-            if (Message.SAC != null) { row["SAC"] = Message.SAC; }
-            else { row["SAC"] = "No Data"; }
-            if (Message.SIC != null) { row["SIC"] = Message.SIC; }
-            else { row["SIC"] = "No Data"; }
-            if (Message.Target_Identification != null) { row["Target\nIdentification"] = Message.Target_Identification; }
-            else { row["Target\nIdentification"] = "No Data"; }
-            if (Message.ATP != null) { row["Target\nReport\nDescriptor"] = "Click to expand"; }
-            else { row["Target\nReport\nDescriptor"] = "No Data"; }
-            if (Message.Track_Number != null) { row["Track\nNumber"] = Message.Track_Number; }
-            else { row["Track\nNumber"] = "No Data"; }
-            if (Message.Service_Identification != null) { row["Service\nIdentification"] = Message.Service_Identification; }
-            else { row["Service\nIdentification"] = "No Data"; }
-            if (Message.Time_of_Applicability_Position != null) { row["Time of\nApplicability\nfor Position"] = Message.Time_of_Applicability_Position; }
-            else { row["Time of\nApplicability\nfor Position"] = "No Data"; }
-            if (Message.LatitudeWGS_84 != null && Message.LongitudeWGS_84 != null) { row["Position in WGS-84 co-ordinates"] =  Message.LatitudeWGS_84 + ", " + Message.LongitudeWGS_84; }
-            else { row["Position in WGS-84 co-ordinates"] = "No Data"; }
-            if (Message.High_Resolution_LatitudeWGS_84 != null && Message.High_Resolution_LongitudeWGS_84 != null) { row["Position in WGS-84 co-ordinates high res"] =  Message.High_Resolution_LatitudeWGS_84 + ", " + Message.High_Resolution_LongitudeWGS_84; }
-            else { row["Position in WGS-84 co-ordinates high res"] = "No Data"; }
-            if (Message.Time_of_Applicability_Velocity != null) { row["Time of\nApplicability\nfor Velocity"] = Message.Time_of_Applicability_Velocity; }
-            else { row["Time of\nApplicability\nfor Velocity"] = "No Data"; }
-            if (Message.Air_Speed != null) { row["Air\nSpeed"] = Message.Air_Speed; }
-            else { row["Air\nSpeed"] = "No Data"; }
-            if (Message.True_Air_Speed != null) { row["True Air\nSpeed"] = Message.True_Air_Speed; }
-            else { row["True Air\nSpeed"] = "No Data"; }
-            if (Message.Target_address != null) { row["Target Address"] = Message.Target_address; }
-            else { row["Target Address"] = "No Data"; }
-            if (Message.Time_of_Message_Reception_Position != null) { row["Time of\nMessage\nReception\nof Position"] = Message.Time_of_Message_Reception_Position; }
-            else { row["Time of\nMessage\nReception\nof Position"] = "No Data"; }
-            if (Message.Time_of_Message_Reception_Velocity != null) { row["Time of\nMessage\nReception\nof Velocity"] = Message.Time_of_Message_Reception_Velocity; }
-            else { row["Time of\nMessage\nReception\nof Velocity"] = "No Data"; }
-            if (Message.Geometric_Height != null) { row["Geometric\nHeight"] = Message.Geometric_Height; }
-            else { row["Geometric\nHeight"] = "No Data"; }
-            if (Message.NUCr_NACv != null) { row["Quality\nIndicators"] = "Click to expand"; }
-            else { row["Quality\nIndicators"] = "No Data"; }
-            if (Message.MOPS != null) { row["MOPS Version"] = Message.MOPS; }
-            else { row["MOPS Version"] = "No Data"; }
-            if (Message.ModeA3 != null) { row["Mode-3A\nCode"] = Message.ModeA3; }
-            else { row["Mode-3A\nCode"] = "No Data"; }
-            if (Message.Roll_Angle != null) { row["Roll\nAngle"] = Message.Roll_Angle; }
-            else { row["Roll\nAngle"] = "No Data"; }
-            if (Message.Flight_Level != null) { row["Flight\nLevel"] = Message.Flight_Level; }
-            else { row["Flight\nLevel"] = "No Data"; }
-            if (Message.Magnetic_Heading != null) { row["Magnetic\nHeading"] = Message.Magnetic_Heading; }
-            else { row["Magnetic\nHeading"] = "No Data"; }
-            if (Message.ICF != null) { row["Target\nStatus"] = "Click to expand"; }
-            else { row["Target\nStatus"] = "No Data"; }
-            if (Message.Barometric_Vertical_Rate != null) { row["Barometric\nVertical Rate"] = Message.Barometric_Vertical_Rate; }
-            else { row["Barometric\nVertical Rate"] = "No Data"; }
-            if (Message.Geometric_Vertical_Rate != null) { row["Geometric\nVertical Rate"] = Message.Geometric_Vertical_Rate; }
-            else { row["Geometric\nVertical Rate"] = "No Data"; }
-            if (Message.Ground_vector != null) { row["Airborne Ground Vector"] = Message.Ground_vector; }
-            else { row["Airborne Ground Vector"] = "No Data"; }
-            if (Message.Track_Angle_Rate != null) { row["Track\nAngle\nRate"] = Message.Track_Angle_Rate; }
-            else { row["Track\nAngle\nRate"] = "No Data"; }
-            if (Message.Time_of_Asterix_Report_Transmission != null) { row["Time of\nReport\nTransmission"] = Message.Time_of_Asterix_Report_Transmission; }
-            else { row["Time of\nReport\nTransmission"] = "No Data"; }
-            if (Message.ECAT != null) { row["Emitter Category"] = Message.ECAT; }
-            else { row["Emitter Category"] = "No Data"; }
-            if (Message.MET_present != 0) { row["Met\nInformation"] = "Click to expand"; }
-            else { row["Met\nInformation"] = "No Data"; }
-            if (Message.Selected_Altitude != null) { row["Selected Altitude"] = Message.Selected_Altitude; }
-            else { row["Selected Altitude"] = "No Data"; }
-            if (Message.MV != null) { row["Final\nState\nSelected\nAltitude"] = "Click to expand"; }
-            else { row["Final\nState\nSelected\nAltitude"] = "No Data"; }
-            if (Message.Trajectory_present != 0) { row["Trajectory\nIntent"] = "Click to expand"; }
-            else { row["Trajectory\nIntent"] = "No Data"; }
-            if (Message.RP != null) { row["Service\nManagement"] = Message.RP; }
-            else { row["Service\nManagement"] = "No Data"; }
-            if (Message.RA != null) { row["Aircraft\nOperational\nStatus"] = "Click to expand"; }
-            else { row["Aircraft\nOperational\nStatus"] = "No Data"; }
-            if (Message.POA != null)
+            var row = tableCAT21.NewRow();
+
+            row["Number"] = message.msgNum;
+            row["CAT number"] = message.msgCAT21Num;
+            if (message.CAT != null) { row["Category"] = message.CAT; }
+            else { row["Category"] = "N/A"; }
+            if (message.SAC != null) { row["SAC"] = message.SAC; }
+            else { row["SAC"] = "N/A"; }
+            if (message.SIC != null) { row["SIC"] = message.SIC; }
+            else { row["SIC"] = "N/A"; }
+            if (message.TargetId != null) { row["Target Identification"] = message.TargetId; }
+            else { row["Target Identification"] = "N/A"; }
+            if (message.ATP != null) { row["Target Report Descriptor"] = "Click for more data"; }
+            else { row["Target Report Descriptor"] = "N/A"; }
+            if (message.trackNumber != null) { row["Track Number"] = message.trackNumber; }
+            else { row["Track Number"] = "N/A"; }
+            if (message.ServiceId != null) { row["Service Identification"] = message.ServiceId; }
+            else { row["Service Identification"] = "N/A"; }
+            if (message.timeOfApplicabilityForPosition != null) { row["Time of Applicability for Position"] = message.timeOfApplicabilityForPosition; }
+            else { row["Time of Applicability for Position"] = "N/A"; }
+            if (message.LatitudeinWGS84 != null && message.LongitudeinWGS84 != null) { row["Position in WGS-84 co-ordinates"] =  message.LatitudeinWGS84 + ", " + message.LongitudeinWGS84; }
+            else { row["Position in WGS-84 co-ordinates"] = "N/A"; }
+            if (message.LatitudeinWGS84HighResolution != null && message.LongitudeinWGS84HighResolution != null) { row["Position in WGS-84 co-ordinates high res"] =  message.LatitudeinWGS84HighResolution + ", " + message.LatitudeinWGS84HighResolution; }
+            else { row["Position in WGS-84 co-ordinates high res"] = "N/A"; }
+            if (message.timeOfApplicabilityForVelocity != null) { row["Time of Applicability for Velocity"] = message.timeOfApplicabilityForVelocity; }
+            else { row["Time of Applicability for Velocity"] = "N/A"; }
+            if (message.airSpeed != null) { row["Air Speed"] = message.airSpeed; }
+            else { row["Air Speed"] = "N/A"; }
+            if (message.trueAirSpeed != null) { row["True Air Speed"] = message.trueAirSpeed; }
+            else { row["True Air Speed"] = "N/A"; }
+            if (message.TargetAdd != null) { row["Target Address"] = message.TargetAdd; }
+            else { row["Target Address"] = "N/A"; }
+            if (message.timeOfMessageReceptionOfPosition != null) { row["Time of Message Reception of Position"] = message.timeOfMessageReceptionOfPosition; }
+            else { row["Time of Message Reception of Position"] = "N/A"; }
+            if (message.timeOfMessageReceptionOfVelocity != null) { row["Time of Message Reception of Velocity"] = message.timeOfMessageReceptionOfVelocity; }
+            else { row["Time of Message Reception of Velocity"] = "N/A"; }
+            if (message.geometricHeight != null) { row["Geometric Height"] = message.geometricHeight; }
+            else { row["Geometric Height"] = "N/A"; }
+            if (message.NUCr_NACv != null) { row["Quality Indicators"] = "Click for more data"; }
+            else { row["Quality Indicators"] = "N/A"; }
+            if (message.MOPS != null) { row["MOPS Version"] = message.MOPS; }
+            else { row["MOPS Version"] = "N/A"; }
+            if (message.Mode3A != null) { row["Mode-3A Code"] = message.Mode3A; }
+            else { row["Mode-3A Code"] = "N/A"; }
+            if (message.rollAngle != null) { row["Roll Angle"] = message.rollAngle; }
+            else { row["Roll Angle"] = "N/A"; }
+            if (message.fligthLevel != null) { row["Flight Level"] = message.fligthLevel; }
+            else { row["Flight Level"] = "N/A"; }
+            if (message.magneticHeading != null) { row["Magnetic Heading"] = message.magneticHeading; }
+            else { row["Magnetic Heading"] = "N/A"; }
+            if (message.ICF != null) { row["Target Status"] = "Click for more data"; }
+            else { row["Target Status"] = "N/A"; }
+            if (message.barometricVerticalRate != null) { row["Barometric Vertical Rate"] = message.barometricVerticalRate; }
+            else { row["Barometric Vertical Rate"] = "N/A"; }
+            if (message.geometricVerticalRate != null) { row["Geometric Vertical Rate"] = message.geometricVerticalRate; }
+            else { row["Geometric Vertical Rate"] = "N/A"; }
+            if (message.GroundVector != null) { row["Airborne Ground Vector"] = message.GroundVector; }
+            else { row["Airborne Ground Vector"] = "N/A"; }
+            if (message.trackAngleRate != null) { row["Track Angle Rate"] = message.trackAngleRate; }
+            else { row["Track Angle Rate"] = "N/A"; }
+            if (message.timeOfASTERIXReportTransmission != null) { row["Time of Report Transmission"] = message.timeOfASTERIXReportTransmission; }
+            else { row["Time of Report Transmission"] = "N/A"; }
+            if (message.ECAT != null) { row["Emitter Category"] = message.ECAT; }
+            else { row["Emitter Category"] = "N/A"; }
+            if (message.METInfo != 0) { row["Met Information"] = "Click for more data"; }
+            else { row["Met Information"] = "N/A"; }
+            if (message.selectedAltitude != null) { row["Selected Altitude"] = message.selectedAltitude; }
+            else { row["Selected Altitude"] = "N/A"; }
+            if (message.MV != null) { row["Final State Selected Altitude"] = "Click for more data"; }
+            else { row["Final State Selected Altitude"] = "N/A"; }
+            if (message.TRAJInfo != 0) { row["Trajectory Intent"] = "Click for more data"; }
+            else { row["Trajectory Intent"] = "N/A"; }
+            if (message.RP != null) { row["Service Management"] = message.RP; }
+            else { row["Service Management"] = "N/A"; }
+            if (message.RA != null) { row["Aircraft Operational Status"] = "Click for more data"; }
+            else { row["Aircraft Operational Status"] = "N/A"; }
+            if (message.POA != null)
             {
-                if (Message.POA.Length > 25) { row["Surface\nCapabilities\nand\nCharacteristics"] = "Click to expand"; }
-                else { row["Surface\nCapabilities\nand\nCharacteristics"] = "No Data"; }
+                if (message.POA.Length > 25) { row["Surface Capabilities and Characteristics"] = "Click for more data"; }
+                else { row["Surface Capabilities and Characteristics"] = "N/A"; }
             }
-            else { row["Surface\nCapabilities\nand\nCharacteristics"] = "No Data"; }
-            if (Message.Message_Amplitude != null) { row["Message\nAmplitude"] = Message.Message_Amplitude; }
-            else { row["Message\nAmplitude"] = "No Data"; }
-            if (Message.MB_Data != null) { row["Mode S MB Data"] = "Click to expand"; }
-            else { row["Mode S MB Data"] = "No Data"; }
-            if (Message.TYP != null) { row["ACAS\nResolution\nAdvisory\nReport"] = "Click to expand"; }
-            else { row["ACAS\nResolution\nAdvisory\nReport"] = "No Data"; }
-            if (Message.Receiver_ID != null) { row["Receiver\nID"] = Message.Receiver_ID; }
-            else { row["Receiver\nID"] = "No Data"; }
-            if (Message.Data_Ages_present != 0) { row["Data Ages"] = "Click to expand"; }
-            else { row["Data Ages"] = "No Data"; }
-            tablaCAT21v21.Rows.Add(row);
+            else { row["Surface Capabilities and Characteristics"] = "N/A"; }
+            if (message.messageAmplitude != null) { row["Message Amplitude"] = message.messageAmplitude; }
+            else { row["Message Amplitude"] = "N/A"; }
+            if (message.MBData != null) { row["Mode S MB Data"] = "Click for more data"; }
+            else { row["Mode S MB Data"] = "N/A"; }
+            if (message.TYP != null) { row["ACAS Resolution Advisory Report"] = "Click for more data"; }
+            else { row["ACAS Resolution Advisory Report"] = "N/A"; }
+            if (message.receiverID != null) { row["Receiver ID"] = message.receiverID; }
+            else { row["Receiver ID"] = "N/A"; }
+            if (message.DAInfo != 0) { row["Data Ages"] = "Click for more data"; }
+            else { row["Data Ages"] = "N/A"; }
+            
+            tableCAT21.Rows.Add(row);
         }
 
         private void ComputeTraj(List<CATALL> list)

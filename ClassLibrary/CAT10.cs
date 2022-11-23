@@ -736,7 +736,7 @@ namespace ClassLibrary
         //DATA ITEM: I010/210
         public string Ax;
         public string Ay;
-        public string Calculated_Acceleration;
+        public string calculatedAcceleration;
 
         private int CalculatedAcceleration(string[] data, int position)
         {
@@ -749,7 +749,7 @@ namespace ClassLibrary
             if (ay >= 31 || ax <= -31) { this.Ay = "Ay exceed the max value"; }
             else { this.Ay = "Ay: " + Convert.ToString(ay) + "m/s²"; }
             
-            this.Calculated_Acceleration = this.Ax + " " + this.Ay;
+            this.calculatedAcceleration = this.Ax + " " + this.Ay;
 
             //Console.WriteLine("Ax: " + this.Ax);
             //Console.WriteLine("Ay: " + this.Ay);
