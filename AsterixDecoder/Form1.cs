@@ -18,8 +18,8 @@ namespace AsterixDecoder
         List<CAT10> listCAT10 = new List<CAT10>();
         List<CAT21> listCAT21 = new List<CAT21>();
         
-        DataTable tableCAT10 = new DataTable();
-        DataTable tableCAT21 = new DataTable();
+        DataTable dataTableCAT10 = new DataTable();
+        DataTable dataTableCAT21 = new DataTable();
         
         public Form1()
         {
@@ -41,21 +41,21 @@ namespace AsterixDecoder
             {
                 foreach (string path in openFileDialog.FileNames)
                 {
-                    int result = decode.Read(path);
+                    int result = decodeFiles.Read(path);
 
                     if (result == 1)
                     {
-                        decode.numFiles++;
-                        decode.nameFiles.Add(path);
+                        decodeFiles.numFiles++;
+                        decodeFiles.nameFiles.Add(path);
                     }
                 }
             }
 
-            this.listCAT10 = decode.GetListCAT10();
-            this.listCAT21 = decode.GetListCAT21();
+            this.listCAT10 = decodeFiles.GetListCAT10();
+            this.listCAT21 = decodeFiles.GetListCAT21();
 
-            this.tableCAT10 = decode.GetTableCAT10();
-            this.tableCAT21 = decode.GetTableCAT21();
+            this.dataTableCAT10 = decodeFiles.GetTableCAT10();
+            this.dataTableCAT21 = decodeFiles.GetTableCAT21();
 
             //if (listCAT10.Count > 0) { foreach (CAT10 cat10 in listCAT10) { CreateTable_CAT10(cat10); } }
             //if (listCAT21.Count > 0) { foreach (CAT21 cat21 in listCAT21) { CreateTable_CAT21(cat21); } }
@@ -164,7 +164,7 @@ namespace AsterixDecoder
             if (Message.PAM != null) row.Cells["AmplitudeofPrimaryPlot"].Value = Message.PAM;
             else row.Cells["AmplitudeofPrimaryPlot"].Value = "N/A";
 
-            if (Message.Calculated_Acceleration != null) row.Cells["CalculatedAcceleration"].Value = Message.Calculated_Acceleration;
+            if (Message.calculatedAcceleration != null) row.Cells["CalculatedAcceleration"].Value = Message.calculatedAcceleration;
             else row.Cells["CalculatedAcceleration"].Value = "N/A";
         }
 
