@@ -6,7 +6,7 @@ namespace ClassLibrary
 {
     class CATALL
     {
-        public int num;
+        public int msgNum;
         public string CAT;
         public string SAC;
         public string SIC;
@@ -25,7 +25,7 @@ namespace ClassLibrary
 
         public CATALL(CAT10 msg, int firstTimeOfDay, int firstTime)
         {
-            this.num = msg.msgNum;
+            this.msgNum = msg.msgNum;
             this.CAT = msg.CAT;
             this.SAC = msg.SAC;
             this.SIC = msg.SIC;
@@ -46,7 +46,7 @@ namespace ClassLibrary
 
         public CATALL(CAT21 msg, int firstTimeOfDay, int firstTime)
         {
-            this.num = msg.msgNum;
+            this.msgNum = msg.msgNum;
             this.CAT = msg.CAT;
             this.SAC = msg.SAC;
             this.SIC = msg.SIC;

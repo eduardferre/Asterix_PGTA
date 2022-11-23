@@ -24,6 +24,11 @@ namespace ClassLibrary
         DataTable tableCAT10 = new DataTable();
         DataTable tableCAT21 = new DataTable();
 
+        List<Trajectories> SMRTraj = new List<Trajectories>(); //List with SMR trajectories
+        List<Trajectories> MLATTraj = new List<Trajectories>(); //List with MLAT trajectories
+        List<Trajectories> ADSBTraj = new List<Trajectories>(); //List with ADSB trajectories
+
+
         public List<string> nameFiles = new List<string>();
 
 
@@ -529,9 +534,242 @@ namespace ClassLibrary
             tablaCAT21v21.Rows.Add(row);
         }
 
+        private void ComputeTraj(List<CATALL> list)
+        {
+            SMRTraj = new List<Trajectories>();
+            MLATTraj = new List<Trajectories>();
+            ADSBTraj = new List<Trajectories>();
+
+            int i = 0;
+            foreach (CATALL msg in list)
+            {
+                process = "Computing trajectory for message " + i + " of " + Convert.ToString(List.Count) + " messages...";
+                i++;
+
+                if (msg.latitudeInWGS84 != -200 && msg.longitudeInWGS84 != -200)
+                {
+                    if (msg.detectionMode == "SMR")
+                    {
+                        if (msg.targetIdentification != null)
+                        {
+                            if (SMRTraj.Exists(x => x.targetIdentification == msg.targetIdentification)) { SMRTraj.Find(x => x.targetIdentification == msg.targetIdentification).AddTimePoint(msg.latitudeInWGS84, msg.longitudeInWGS84, msg.timeOfDay); }
+                            else
+                            {
+                                Trajectories traj = new Trajectories(msg.targetIdentification, msg.timeOfDay, msg.latitudeInWGS84, msg.longitudeInWGS84, msg.type, msg.targetAddress, msg.detectionMode, msg.CAT, msg.SAC, msg.SIC, msg.trackNumber);
+                                SMRTraj.Add(traj);
+
+                            }
+                        }
+                        else if (msg.targetAddress != null)
+                        {
+                            if (SMRTraj.Exists(x => x.targetAdd == msg.targetAddress)) { SMRTraj.Find(x => x.targetAdd == msg.targetAddress).AddTimePoint(msg.latitudeInWGS84, msg.longitudeInWGS84, msg.timeOfDay); }
+                            else
+                            {
+                                Trajectories traj = new Trajectories(msg.targetIdentification, msg.timeOfDay, msg.latitudeInWGS84, msg.longitudeInWGS84, msg.type, msg.targetAddress, msg.detectionMode, msg.CAT, msg.SAC, msg.SIC, msg.trackNumber);
+                                SMRTraj.Add(traj);
+
+                            }
+                        }
+                        else if (msg.trackNumber != null)
+                        {
+                            if (SMRTraj.Exists(x => x.trackNum == msg.trackNumber)) { SMRTraj.Find(x => x.trackNum == msg.trackNumber).AddTimePoint(msg.latitudeInWGS84, msg.longitudeInWGS84, msg.timeOfDay); }
+                            else
+                            {
+                                Trajectories traj = new Trajectories(msg.targetIdentification, msg.timeOfDay, msg.latitudeInWGS84, msg.longitudeInWGS84, msg.type, msg.targetAddress, msg.detectionMode, msg.CAT, msg.SAC, msg.SIC, msg.trackNumber);
+                                SMRTraj.Add(traj);
+                            }
+                        }
+                    }
+                    else if (msg.detectionMode == "MLAT")
+                    {
+                        if (msg.targetIdentification != null)
+                        {
+                            if (MLATTraj.Exists(x => x.targetIdentification == msg.targetIdentification)) { MLATTraj.Find(x => x.targetIdentification == msg.targetIdentification).AddTimePoint(msg.latitudeInWGS84, msg.longitudeInWGS84, msg.timeOfDay); }
+                            else
+                            {
+                                Trajectories traj = new Trajectories(msg.targetIdentification, msg.timeOfDay, msg.latitudeInWGS84, msg.longitudeInWGS84, msg.type, msg.targetAddress, msg.detectionMode, msg.CAT, msg.SAC, msg.SIC, msg.trackNumber);
+                                MLATTraj.Add(traj);
+
+                            }
+                        }
+                        else if (msg.targetAddress != null)
+                        {
+                            if (MLATTraj.Exists(x => x.targetAdd == msg.targetAddress)) { MLATTraj.Find(x => x.targetAdd == msg.targetAddress).AddTimePoint(msg.latitudeInWGS84, msg.longitudeInWGS84, msg.timeOfDay); }
+                            else
+                            {
+                                Trajectories traj = new Trajectories(msg.targetIdentification, msg.timeOfDay, msg.latitudeInWGS84, msg.longitudeInWGS84, msg.type, msg.targetAddress, msg.detectionMode, msg.CAT, msg.SAC, msg.SIC, msg.trackNumber);
+                                MLATTraj.Add(traj);
+
+                            }
+                        }
+                        else if (msg.trackNumber != null)
+                        {
+                            if (MLATTraj.Exists(x => x.trackNum == msg.trackNumber)) { MLATTraj.Find(x => x.trackNum == msg.trackNumber).AddTimePoint(msg.latitudeInWGS84, msg.longitudeInWGS84, msg.timeOfDay); }
+                            else
+                            {
+                                Trajectories traj = new Trajectories(msg.targetIdentification, msg.timeOfDay, msg.latitudeInWGS84, msg.longitudeInWGS84, msg.type, msg.targetAddress, msg.detectionMode, msg.CAT, msg.SAC, msg.SIC, msg.trackNumber);
+                                MLATTraj.Add(traj);
+                            }
+                        }
+                    }
+                    else if (msg.detectionMode == "ADSB")
+                    {
+                        if (msg.targetIdentification != null)
+                        {
+                            if (ADSBTraj.Exists(x => x.targetIdentification == msg.targetIdentification)) { ADSBTraj.Find(x => x.targetIdentification == msg.targetIdentification).AddTimePoint(msg.latitudeInWGS84, msg.longitudeInWGS84, msg.timeOfDay); }
+                            else
+                            {
+                                Trajectories traj = new Trajectories(msg.targetIdentification, msg.timeOfDay, msg.latitudeInWGS84, msg.longitudeInWGS84, msg.type, msg.targetAddress, msg.detectionMode, msg.CAT, msg.SAC, msg.SIC, msg.trackNumber);
+                                ADSBTraj.Add(traj);
+                            }
+                        }
+                        else if (msg.targetAddress != null)
+                        {
+                            if (ADSBTraj.Exists(x => x.targetAdd == msg.targetAddress)) { ADSBTraj.Find(x => x.targetAdd == msg.targetAddress).AddTimePoint(msg.latitudeInWGS84, msg.longitudeInWGS84, msg.timeOfDay); }
+                            else
+                            {
+                                Trajectories traj = new Trajectories(msg.targetIdentification, msg.timeOfDay, msg.latitudeInWGS84, msg.longitudeInWGS84, msg.type, msg.targetAddress, msg.detectionMode, msg.CAT, msg.SAC, msg.SIC, msg.trackNumber);
+                                ADSBTraj.Add(traj);
+                            }
+                        }
+                        else if (msg.trackNumber != null)
+                        {
+                            if (ADSBTraj.Exists(x => x.trackNum == msg.trackNumber)) { ADSBTraj.Find(x => x.trackNum == msg.trackNumber).AddTimePoint(msg.latitudeInWGS84, msg.longitudeInWGS84, msg.timeOfDay); }
+                            else
+                            {
+                                Trajectories traj = new Trajectories(msg.targetIdentification, msg.timeOfDay, msg.latitudeInWGS84, msg.longitudeInWGS84, msg.type, msg.targetAddress, msg.de, msg.CAT, msg.SAC, msg.SIC, msg.trackNumber);
+                                ADSBTraj.Add(traj);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        private void ClearTraj()
+        {
+            SMRTraj = new List<Trajectories>();
+            MLATTraj = new List<Trajectories>();
+            ADSBTraj = new List<Trajectories>();
+        }
+
         public void print(string texto)
         {
             Console.WriteLine(texto);
+        }
+
+        private void ComputeDirectionFromindex(Trajectories t, int index, CATALL message)
+        {
+            if (t.CountTimepoint() > 2)
+            {
+                if ((index + 2) < t.CountTimepoint())
+                {
+
+                    PointWithTime p = t.listTimePoints[index + 1];
+                    if (t.listTimePoints[index + 1].time == message.timeOfDay)
+                    {
+                        bool dif = false;
+                        int i = 2;
+                        while (dif == false)
+                        {
+                            p = t.listTimePoints[index + i];
+                            if (p.time != message.timeOfDay) { dif = true; }
+                            if ((index + i + 1) >= t.CountTimepoint()) { dif = true; }
+                            i++;
+                        }
+                    }
+                    double X = p.point.Longitude - message.longitudeInWGS84;
+                    double Y = p.point.Latitude - message.latitudeInWGS84;
+                    int direction = 100;
+                    double dir = 0;
+                    dir = (Math.Atan2(Y, X) * (180 / Math.PI));
+                    try
+                    {
+                        direction = Convert.ToInt32(dir);
+                    }
+                    catch { direction = 0; }
+                    if (message.type == "car")
+                    {
+                        direction = -(direction - 180);
+                    }
+                    else if (message.type == "plane")
+                    {
+                        direction = -(direction - 45);
+                    }
+                    message.direction = direction;
+                }
+                else if ((index + 1) < t.CountTimepoint())
+                {
+                    double X;
+                    double Y;
+                    int direction;
+                    double dir;
+                    PointWithTime p = t.listTimePoints[index + 1];
+                    if (t.listTimePoints[index + 1].time != message.timeOfDay || index == 0)
+                    {
+                        p = t.listTimePoints[index + 1];
+                        X = p.point.Longitude - message.longitudeInWGS84;
+                        Y = p.point.Latitude - message.latitudeInWGS84;
+
+                        dir = (Math.Atan2(Y, X) * (180 / Math.PI));
+                        try
+                        {
+                            direction = Convert.ToInt32(dir);
+                        }
+                        catch { direction = 0; }
+                    }
+
+                    else
+                    {
+                        p = t.listTimePoints[index - 1];
+                        X = message.longitudeInWGS84 - p.point.Longitude;
+                        Y = message.latitudeInWGS84 - p.point.Latitude;
+                        dir = (Math.Atan2(Y, X) * (180 / Math.PI));
+                        try
+                        {
+                            direction = Convert.ToInt32(dir);
+                        }
+                        catch { direction = 0; }
+
+                    }
+
+                    if (message.type == "car")
+                    {
+                        direction = -(direction - 180);
+                    }
+                    else if (message.type == "plane")
+                    {
+                        direction = -(direction - 45);
+                    }
+                    message.direction = direction;
+
+                }
+                else
+                {
+                    try
+                    {
+                        PointWithTime p = t.listTimePoints[index - 1];
+                        double X = message.longitudeInWGS84 - p.point.Longitude;
+                        double Y = message.latitudeInWGS84 - p.point.Latitude;
+                        int direction = 100;
+                        double dir = (Math.Atan2(Y, X) * (180 / Math.PI));
+                        try
+                        {
+                            direction = Convert.ToInt32(dir);
+                        }
+                        catch { direction = 0; }
+                        if (message.type == "car")
+                        {
+                            direction = -(direction - 180);
+                        }
+                        else if (message.type == "plane")
+                        {
+                            direction = -(direction - 45);
+                        }
+                        message.direction = direction;
+                    }
+                    catch { }
+                }
+            }
         }
     }
 }

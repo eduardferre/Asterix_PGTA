@@ -13,7 +13,7 @@ namespace AsterixDecoder
 {
     public partial class Form1 : Form
     {
-        DecodeFiles decodeFiles = new DecodeFiles();
+        DecodeFiles decode = new DecodeFiles();
 
         List<CAT10> listCAT10 = new List<CAT10>();
         List<CAT21> listCAT21 = new List<CAT21>();

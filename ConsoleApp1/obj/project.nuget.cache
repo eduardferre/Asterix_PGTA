@@ -1,8 +1,32 @@
 {
   "version": 2,
-  "dgSpecHash": "WWck6cZlAb0CahTFD4zgAIK08zWMUwCLe3aRaqpxpet/XtnGn7C235vMHmMO/3q2jbEm3PleeSVWuc20UsU72g==",
+  "dgSpecHash": "+BqHByXHvPTwM4HjLLwgRinfjgL0aWHFrslo5R8SFlwR7qz1knbxJEFf3qYMBV2hnf0OyNFqzu8GaQfm79fJCg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Eduard\\Desktop\\Asterix_PGTA\\ConsoleApp1\\ConsoleApp1.csproj",
-  "expectedPackageFiles": [],
-  "logs": []
+  "projectFilePath": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\ConsoleApp1\\ConsoleApp1.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\gerar\\.nuget\\packages\\ajaxmin\\5.14.5506.26202\\ajaxmin.5.14.5506.26202.nupkg.sha512",
+    "C:\\Users\\gerar\\.nuget\\packages\\gmap.net\\1.0.1\\gmap.net.1.0.1.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "El paquete \"AjaxMin 5.14.5506.26202\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\" en lugar de la plataforma de destino del proyecto \".NETCoreApp,Version=v3.1\". Puede que el paquete no sea totalmente compatible con el proyecto.",
+      "libraryId": "AjaxMin",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "El paquete \"GMap.Net 1.0.1\" se restauró con \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\" en lugar de la plataforma de destino del proyecto \".NETCoreApp,Version=v3.1\". Puede que el paquete no sea totalmente compatible con el proyecto.",
+      "libraryId": "GMap.Net",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
 }

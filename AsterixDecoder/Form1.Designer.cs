@@ -437,7 +437,6 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView tableCAT10;
         private System.Windows.Forms.DataGridViewTextBoxColumn Category;
         private System.Windows.Forms.DataGridViewTextBoxColumn SAC;
         private System.Windows.Forms.DataGridViewTextBoxColumn SIC;
@@ -465,7 +464,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Presence;
         private System.Windows.Forms.DataGridViewTextBoxColumn AmplitudeofPrimaryPlot;
         private System.Windows.Forms.DataGridViewTextBoxColumn CalculatedAcceleration;
-        private System.Windows.Forms.DataGridView tableCAT21;
         private System.Windows.Forms.DataGridViewTextBoxColumn CategoryCAT21;
         private System.Windows.Forms.DataGridViewTextBoxColumn SACCAT21;
         private System.Windows.Forms.DataGridViewTextBoxColumn SICCAT21;
