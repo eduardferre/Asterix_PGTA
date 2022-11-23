@@ -27,8 +27,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableCAT10 = new System.Windows.Forms.DataGridView();
             this.Category = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SAC = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -64,6 +64,7 @@
             this.TargetIdentificationCAT21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TrackNumberCAT21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ServiceIdentificationCAT21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.loadFiles_Button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tableCAT10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tableCAT21)).BeginInit();
             this.SuspendLayout();
@@ -77,14 +78,14 @@
             this.tableCAT10.BackgroundColor = System.Drawing.Color.LightSteelBlue;
             this.tableCAT10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.tableCAT10.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightSlateGray;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.LightSlateGray;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.tableCAT10.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.LightSlateGray;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.LightSlateGray;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.tableCAT10.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.tableCAT10.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tableCAT10.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Category,
@@ -347,14 +348,14 @@
             this.tableCAT21.BackgroundColor = System.Drawing.Color.LightSteelBlue;
             this.tableCAT21.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.tableCAT21.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightSlateGray;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.LightSlateGray;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.tableCAT21.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.LightSlateGray;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.LightSlateGray;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.tableCAT21.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.tableCAT21.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tableCAT21.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CategoryCAT21,
@@ -418,11 +419,22 @@
             this.ServiceIdentificationCAT21.ReadOnly = true;
             this.ServiceIdentificationCAT21.Width = 130;
             // 
+            // loadFiles_Button
+            // 
+            this.loadFiles_Button.Location = new System.Drawing.Point(860, 31);
+            this.loadFiles_Button.Name = "loadFiles_Button";
+            this.loadFiles_Button.Size = new System.Drawing.Size(153, 43);
+            this.loadFiles_Button.TabIndex = 2;
+            this.loadFiles_Button.Text = "Load Files";
+            this.loadFiles_Button.UseVisualStyleBackColor = true;
+            this.loadFiles_Button.Click += new System.EventHandler(this.loadFiles_Button_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1025, 749);
+            this.Controls.Add(this.loadFiles_Button);
             this.Controls.Add(this.tableCAT21);
             this.Controls.Add(this.tableCAT10);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -437,6 +449,8 @@
 
         #endregion
 
+        private System.Windows.Forms.DataGridView tableCAT10;
+        private System.Windows.Forms.DataGridView tableCAT21;
         private System.Windows.Forms.DataGridViewTextBoxColumn Category;
         private System.Windows.Forms.DataGridViewTextBoxColumn SAC;
         private System.Windows.Forms.DataGridViewTextBoxColumn SIC;
@@ -470,6 +484,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn TargetIdentificationCAT21;
         private System.Windows.Forms.DataGridViewTextBoxColumn TrackNumberCAT21;
         private System.Windows.Forms.DataGridViewTextBoxColumn ServiceIdentificationCAT21;
+        private System.Windows.Forms.Button loadFiles_Button;
     }
 }
 

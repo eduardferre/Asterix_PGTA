@@ -76,7 +76,7 @@ namespace ConsoleApp1
                     numberMsgs++;
                     numberCAT10Msgs++;
 
-                    cat10.DecodeCAT10(arrayMsg, 0);
+                    //cat10.DecodeCAT10(arrayMsg, 0);
 
                     listCAT10.Add(cat10);
                 }

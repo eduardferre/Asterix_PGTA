@@ -13,7 +13,7 @@ namespace AsterixDecoder
 {
     public partial class Form1 : Form
     {
-        DecodeFiles decode = new DecodeFiles();
+        DecodeFiles decodeFiles = new DecodeFiles();
 
         List<CAT10> listCAT10 = new List<CAT10>();
         List<CAT21> listCAT21 = new List<CAT21>();
@@ -29,33 +29,7 @@ namespace AsterixDecoder
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.InitialDirectory = "c:\\";
-            openFileDialog.Filter = "txt files (*.txt) | *.txt* | ast files (*.ast) | *.ast*";
-            openFileDialog.FilterIndex = 2;
-            openFileDialog.Multiselect = true;
-            openFileDialog.RestoreDirectory = true;
-            openFileDialog.ShowDialog();
-
-            if (openFileDialog.SafeFileName != null)
-            {
-                foreach (string path in openFileDialog.FileNames)
-                {
-                    int result = decodeFiles.Read(path);
-
-                    if (result == 1)
-                    {
-                        decodeFiles.numFiles++;
-                        decodeFiles.nameFiles.Add(path);
-                    }
-                }
-            }
-
-            this.listCAT10 = decodeFiles.GetListCAT10();
-            this.listCAT21 = decodeFiles.GetListCAT21();
-
-            this.dataTableCAT10 = decodeFiles.GetTableCAT10();
-            this.dataTableCAT21 = decodeFiles.GetTableCAT21();
+           
 
             //if (listCAT10.Count > 0) { foreach (CAT10 cat10 in listCAT10) { CreateTable_CAT10(cat10); } }
             //if (listCAT21.Count > 0) { foreach (CAT21 cat21 in listCAT21) { CreateTable_CAT21(cat21); } }
@@ -257,6 +231,43 @@ namespace AsterixDecoder
 
             //if (Message.Calculated_Acceleration != null) row.Cells["CalculatedAcceleration"].Value = Message.Calculated_Acceleration;
             //else row.Cells["CalculatedAcceleration"].Value = "N/A";
+        }
+
+        private void loadFiles_Button_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = "c:\\";
+            openFileDialog.Filter = "txt files (*.txt) | *.txt* | ast files (*.ast) | *.ast*";
+            openFileDialog.FilterIndex = 2;
+            openFileDialog.Multiselect = true;
+            openFileDialog.RestoreDirectory = true;
+            openFileDialog.ShowDialog();
+
+            if (openFileDialog.SafeFileName != null)
+            {
+                foreach (string path in openFileDialog.FileNames)
+                {
+                    int result = decodeFiles.Read(path);
+
+                    if (result == 1)
+                    {
+                        decodeFiles.numFiles++;
+                        decodeFiles.nameFiles.Add(path);
+                    }
+                }
+            }
+
+            this.listCAT10 = decodeFiles.GetListCAT10();
+            this.listCAT21 = decodeFiles.GetListCAT21();
+
+            this.dataTableCAT10 = decodeFiles.GetTableCAT10();
+            this.dataTableCAT21 = decodeFiles.GetTableCAT21();
+
+            DataGridView gridCAT10 = new DataGridView();
+
+            this.Controls.Add(gridCAT10);
+
+            gridCAT10.DataSource = tableCAT10;
         }
     }
 }
