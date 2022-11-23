@@ -27,8 +27,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableCAT10 = new System.Windows.Forms.DataGridView();
             this.Category = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SAC = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -78,14 +78,14 @@
             this.tableCAT10.BackgroundColor = System.Drawing.Color.LightSteelBlue;
             this.tableCAT10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.tableCAT10.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.LightSlateGray;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.LightSlateGray;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.tableCAT10.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightSlateGray;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.LightSlateGray;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.tableCAT10.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.tableCAT10.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tableCAT10.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Category,
@@ -116,13 +116,13 @@
             this.AmplitudeofPrimaryPlot,
             this.CalculatedAcceleration});
             this.tableCAT10.GridColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.tableCAT10.Location = new System.Drawing.Point(20, 9);
+            this.tableCAT10.Location = new System.Drawing.Point(469, 31);
             this.tableCAT10.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableCAT10.Name = "tableCAT10";
             this.tableCAT10.ReadOnly = true;
             this.tableCAT10.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.tableCAT10.RowTemplate.Height = 29;
-            this.tableCAT10.Size = new System.Drawing.Size(800, 300);
+            this.tableCAT10.Size = new System.Drawing.Size(374, 127);
             this.tableCAT10.TabIndex = 0;
             // 
             // Category
@@ -348,14 +348,14 @@
             this.tableCAT21.BackgroundColor = System.Drawing.Color.LightSteelBlue;
             this.tableCAT21.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.tableCAT21.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.Raised;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.LightSlateGray;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.LightSlateGray;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.tableCAT21.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightSlateGray;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.LightSlateGray;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.tableCAT21.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.tableCAT21.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tableCAT21.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CategoryCAT21,
@@ -365,13 +365,13 @@
             this.TrackNumberCAT21,
             this.ServiceIdentificationCAT21});
             this.tableCAT21.GridColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.tableCAT21.Location = new System.Drawing.Point(20, 352);
+            this.tableCAT21.Location = new System.Drawing.Point(469, 183);
             this.tableCAT21.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableCAT21.Name = "tableCAT21";
             this.tableCAT21.ReadOnly = true;
             this.tableCAT21.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.tableCAT21.RowTemplate.Height = 29;
-            this.tableCAT21.Size = new System.Drawing.Size(800, 300);
+            this.tableCAT21.Size = new System.Drawing.Size(448, 159);
             this.tableCAT21.TabIndex = 1;
             // 
             // CategoryCAT21
@@ -448,12 +448,8 @@
         }
 
         #endregion
-<<<<<<< HEAD
-        private System.Windows.Forms.DataGridView tableCAT10; 
-=======
 
         private System.Windows.Forms.DataGridView tableCAT10;
->>>>>>> 71469e6478c7d5d6ceedba483b0fcc7d36438f1b
         private System.Windows.Forms.DataGridView tableCAT21;
         private System.Windows.Forms.DataGridViewTextBoxColumn Category;
         private System.Windows.Forms.DataGridViewTextBoxColumn SAC;
