@@ -116,12 +116,11 @@
             this.AmplitudeofPrimaryPlot,
             this.CalculatedAcceleration});
             this.tableCAT10.GridColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.tableCAT10.Location = new System.Drawing.Point(469, 31);
+            this.tableCAT10.Location = new System.Drawing.Point(469, 42);
             this.tableCAT10.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableCAT10.Name = "tableCAT10";
             this.tableCAT10.ReadOnly = true;
             this.tableCAT10.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.tableCAT10.RowTemplate.Height = 29;
             this.tableCAT10.Size = new System.Drawing.Size(374, 127);
             this.tableCAT10.TabIndex = 0;
             // 
@@ -370,7 +369,6 @@
             this.tableCAT21.Name = "tableCAT21";
             this.tableCAT21.ReadOnly = true;
             this.tableCAT21.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.tableCAT21.RowTemplate.Height = 29;
             this.tableCAT21.Size = new System.Drawing.Size(448, 159);
             this.tableCAT21.TabIndex = 1;
             // 
@@ -448,12 +446,8 @@
         }
 
         #endregion
-<<<<<<< HEAD
-        private System.Windows.Forms.DataGridView tableCAT10; 
-=======
 
-        private System.Windows.Forms.DataGridView tableCAT10;
->>>>>>> 16742d35c85d79b9e43a1f6aa2319fe5e3aaf4c0
+        private System.Windows.Forms.DataGridView tableCAT10; 
         private System.Windows.Forms.DataGridView tableCAT21;
         private System.Windows.Forms.DataGridViewTextBoxColumn Category;
         private System.Windows.Forms.DataGridViewTextBoxColumn SAC;
