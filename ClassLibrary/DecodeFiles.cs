@@ -547,7 +547,7 @@ namespace ClassLibrary
             int i = 0;
             foreach (CATALL msg in list)
             {
-                process = "Computing trajectory for message " + i + " of " + Convert.ToString(List.Count) + " messages...";
+                process = "Computing trajectory for message " + i + " of " + Convert.ToString(list.Count) + " messages...";
                 i++;
 
                 if (msg.latitudeInWGS84 != -200 && msg.longitudeInWGS84 != -200)
@@ -641,7 +641,7 @@ namespace ClassLibrary
                             if (ADSBTraj.Exists(x => x.trackNum == msg.trackNumber)) { ADSBTraj.Find(x => x.trackNum == msg.trackNumber).AddTimePoint(msg.latitudeInWGS84, msg.longitudeInWGS84, msg.timeOfDay); }
                             else
                             {
-                                Trajectories traj = new Trajectories(msg.targetIdentification, msg.timeOfDay, msg.latitudeInWGS84, msg.longitudeInWGS84, msg.type, msg.targetAddress, msg.de, msg.CAT, msg.SAC, msg.SIC, msg.trackNumber);
+                                Trajectories traj = new Trajectories(msg.targetIdentification, msg.timeOfDay, msg.latitudeInWGS84, msg.longitudeInWGS84, msg.type, msg.targetAddress, msg.detectionMode, msg.CAT, msg.SAC, msg.SIC, msg.trackNumber);
                                 ADSBTraj.Add(traj);
                             }
                         }
