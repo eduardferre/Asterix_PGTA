@@ -448,12 +448,7 @@
         }
 
         #endregion
-<<<<<<< HEAD
         private System.Windows.Forms.DataGridView tableCAT10; 
-=======
-
-        private System.Windows.Forms.DataGridView tableCAT10;
->>>>>>> 71469e6478c7d5d6ceedba483b0fcc7d36438f1b
         private System.Windows.Forms.DataGridView tableCAT21;
         private System.Windows.Forms.DataGridViewTextBoxColumn Category;
         private System.Windows.Forms.DataGridViewTextBoxColumn SAC;
