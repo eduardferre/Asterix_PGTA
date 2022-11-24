@@ -1081,11 +1081,17 @@ namespace ClassLibrary
         //DATA ITEM: I021/170
         public string TargetId;
 
-        private int TargetIdentification (string[] data, int position)
+        private int TargetIdentification(string[] data, int position)
         {
+            StringBuilder tarId = new StringBuilder();
+
             string characters = string.Concat(data[position], data[position + 1], data[position + 2], data[position + 3], data[position + 4], data[position + 5]);
-            for (int i = 0; i < 8; i++) this.TargetId = Convert.ToString(ComputeCharacter(characters.Substring(i * 6, 6)));
-            
+            for (int i = 0; i < 8; i++) tarId.Append(ComputeCharacter(characters.Substring(i * 6, 6)));
+
+            string id = tarId.ToString();
+
+            if (id.Length > 1) { this.TargetId = id; }
+
             position = position + 6;
             return position;
         }
