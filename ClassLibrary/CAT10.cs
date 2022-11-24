@@ -781,10 +781,14 @@ namespace ClassLibrary
             string sti = data[position];
             if (sti == "00000000") this.STI = "Callsign or registration downlinked from transponder";
             else if (sti == "01000000") this.STI = "Callsign not downlinked from transponder"; 
-            else if (sti == "10000000") this.STI = "Registration not downlinked from transponder"; 
+            else if (sti == "10000000") this.STI = "Registration not downlinked from transponder";
+
+            StringBuilder tarId = new StringBuilder();
 
             string characters = string.Concat(data[position + 1], data[position + 2], data[position + 3], data[position + 4], data[position + 5], data[position + 6]);
-            for (int i = 0; i < 8; i++) this.TargetId = Convert.ToString(ComputeCharacter(characters.Substring(i * 6, 6)));
+            for (int i = 0; i < 8; i++) tarId.Append(ComputeCharacter(characters.Substring(i * 6, 6)));
+
+            this.TargetId = tarId.ToString().Trim();
 
             //Console.WriteLine("STI: " + this.STI);
             //Console.WriteLine("TargetId: " + this.TargetId);
