@@ -96,7 +96,6 @@ namespace ClassLibrary
                 listHex.Add(arrayHex);
             }
 
-            //only for the first message, let's see if it works
             for (i = 0; i < listHex.Count; i++)
             {
                 //process = "Loading message " + Convert.ToString(i) + " of " + Convert.ToString(listHex.Count) + " messages...";

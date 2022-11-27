@@ -127,7 +127,7 @@ namespace AsterixDecoder
                 }
                 else if (columnName == "Presence")
                 {
-                    doubleClickInfo_label.Text = cat10.REPPresence.ToString();
+                    //?doubleClickInfo_label.Text = cat10.REPPresence.ToString();
                 }
             }
 
@@ -169,17 +169,29 @@ namespace AsterixDecoder
                 {
                     doubleClickInfo_label.Text = cat21.MV + "\n" + cat21.AH + "\n" + cat21.AM + "\n" + cat21.finalStateSelectedAltitude;
                 }
+                else if (columnName == "Trajectory Intent")
+                {
+                    doubleClickInfo_label.Text = cat21.NAV + "\n" + cat21.NVB;
+                }
+                else if (columnName == "Aircraft Operational Status")
+                {
+                    doubleClickInfo_label.Text = cat21.RA + "\n" + cat21.TC + "\n" + cat21.TS + "\n" + cat21.CDTIA + "\n" + cat21.NotTCAS + "\n" + cat21.SA;
+                }
+                else if (columnName == "Surface Capabilities and Characteristics") 
+                {
+                    doubleClickInfo_label.Text = cat21.POA + "\n" + cat21.CDTIS + "\n" + cat21.B2Low + "\n" + cat21.RAS + "\n" + cat21.IDENT + "\n" + cat21.Length_Width;
+                }
                 else if (columnName == "Mode S MB Data")
                 {
-                    //?doubleClickInfo_label.Text = cat10.modeSrep.ToString();
+                    //?doubleClickInfo_label.Text = cat21.REP_SMB.ToString();
                 }
-                else if (columnName == "Standard Deviation of Position")
+                else if (columnName == "ACAS Resolution Advisory Report")
                 {
-                    doubleClickInfo_label.Text = cat10.StandardDevPos;
+                    doubleClickInfo_label.Text = cat21.TYP + "\n" + cat21.STYP + "\n" + cat21.ARA + "\n" + cat21.RAC + "\n" + cat21.RAT + "\n" + cat21.MTE + "\n" + cat21.TTI + "\n" + cat21.TID;
                 }
-                else if (columnName == "Presence")
+                else if (columnName == "Data Ages")
                 {
-                    doubleClickInfo_label.Text = cat10.REPPresence.ToString();
+                    doubleClickInfo_label.Text = cat21.AOS + "\n" + cat21.TRD + "\n" + cat21.M3A + "\n" + cat21.QI + "\n" + cat21.TI + "\n" + cat21.MAM + "\n" + cat21.GH + "\n" + cat21.FL + "\n" + cat21.ISA + "\n" + cat21.FSA + "\n" + cat21.AS + "\n" + cat21.TAS + "\n" + cat21.MH + "\n" + cat21.BVR + "\n" + cat21.GVR + "\n" + cat21.GV + "\n" + cat21.TAR + "\n" + cat21.TIDataAge + "\n" + cat21.TSDataAge + "\n" + cat21.MET + "\n" + cat21.ROA + "\n" + cat21.ARADataAge + "\n" + cat21.SCC;
                 }
             }
         }
