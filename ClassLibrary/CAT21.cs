@@ -1374,8 +1374,8 @@ namespace ClassLibrary
                     
                     if (data[positionInitial+2].Substring(7, 1) == "1")
                     {
-                        if (data[positionInitial + 3].Substring(0, 1) == "1") { this.ARADataAge = Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
-                        if (data[positionInitial + 3].Substring(1, 1) == "1") { this.SCC = Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
+                        if (data[positionInitial + 3].Substring(0, 1) == "1") { this.ARADataAge = "ARA: " + Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
+                        if (data[positionInitial + 3].Substring(1, 1) == "1") { this.SCC = "SCC: " + Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
                     }
                 }
             }
