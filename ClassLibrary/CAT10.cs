@@ -267,34 +267,34 @@ namespace ClassLibrary
             string octetNum1 = data[newposition];
             string TYP = octetNum1.Substring(0, 3); //The left first 3 bits (8, 7 & 6) represent TYP
 
-            if (TYP == "000") this.TYP = "SSR MLAT";
-            if (TYP == "001") this.TYP = "Mode S MLAT";
-            if (TYP == "010") this.TYP = "ADS-B";
-            if (TYP == "011") this.TYP = "PSR";
-            if (TYP == "100") this.TYP = "Magnetic Loop System";
-            if (TYP == "101") this.TYP = "HF MLAT";
-            if (TYP == "110") this.TYP = "Not defined";
-            if (TYP == "111") this.TYP = "Other types";
+            if (TYP == "000") this.TYP = "TYP: SSR MLAT";
+            if (TYP == "001") this.TYP = "TYP: Mode S MLAT";
+            if (TYP == "010") this.TYP = "TYP: ADS-B";
+            if (TYP == "011") this.TYP = "TYP: PSR";
+            if (TYP == "100") this.TYP = "TYP: Magnetic Loop System";
+            if (TYP == "101") this.TYP = "TYP: HF MLAT";
+            if (TYP == "110") this.TYP = "TYP: Not defined";
+            if (TYP == "111") this.TYP = "TYP: Other types";
 
             string DCR = octetNum1.Substring(3, 1); //Next bit (5) represents DCR
 
-            if (DCR == "0") this.DCR = "No differential correction";
-            if (DCR == "1") this.DCR = "Differential correction";
+            if (DCR == "0") this.DCR = "DCR: No differential correction";
+            if (DCR == "1") this.DCR = "DCR: Differential correction";
 
             string CHN = octetNum1.Substring(4, 1); //Next bit (4) represents CHN
 
-            if (CHN == "0") this.CHN = "Chain 1";
-            if (CHN == "1") this.CHN = "Chain 2";
+            if (CHN == "0") this.CHN = "CHN: Chain 1";
+            if (CHN == "1") this.CHN = "CHN: Chain 2";
 
             string GBS = octetNum1.Substring(5, 1); //Next bit (3) represents GBS
 
-            if (GBS == "0") this.GBS = "Transponder Ground bit not set";
-            if (GBS == "1") this.GBS = "Transponder Ground bit set";
+            if (GBS == "0") this.GBS = "GBS: Transponder Ground bit not set";
+            if (GBS == "1") this.GBS = "GBS: Transponder Ground bit set";
 
             string CRT = octetNum1.Substring(6, 1); //Next bit (2) represents CRT
 
-            if (CRT == "0") this.CRT = "No Corrupted reply in MLAT";
-            if (CRT == "1") this.CRT = "Corrupted replies in MLAT";
+            if (CRT == "0") this.CRT = "CRT: No Corrupted reply in MLAT";
+            if (CRT == "1") this.CRT = "CRT: Corrupted replies in MLAT";
 
             string FX1 = Convert.ToString(octetNum1[7]); //Next bit (1) represents FX
 
@@ -306,31 +306,31 @@ namespace ClassLibrary
 
                 string SIM = octetNum1_1.Substring(0, 1);
 
-                if (SIM == "0") this.SIM = "Actual target report";
-                if (SIM == "1") this.SIM = "Simulated target report";
+                if (SIM == "0") this.SIM = "SIM: Actual target report";
+                if (SIM == "1") this.SIM = "SIM: Simulated target report";
 
                 string TST = octetNum1_1.Substring(1, 1);
 
-                if (TST == "0") this.TST = "Default";
-                if (TST == "1") this.TST = "Test Target";
+                if (TST == "0") this.TST = "TST: Default";
+                if (TST == "1") this.TST = "TST: Test Target";
 
                 string RAB = octetNum1_1.Substring(2, 1);
 
-                if (RAB == "0") this.RAB = "Report from target transponder";
-                if (RAB == "1") this.RAB = "Report from field monitor (fixed transponder)";
+                if (RAB == "0") this.RAB = "RAB: Report from target transponder";
+                if (RAB == "1") this.RAB = "RAB: Report from field monitor (fixed transponder)";
 
                 string LOP = octetNum1_1.Substring(3, 2);
 
-                if (LOP == "00") this.LOP = "Undetermined";
-                if (LOP == "01") this.LOP = "Loop start";
-                if (LOP == "10") this.LOP = "Loop finish";
+                if (LOP == "00") this.LOP = "LOP: Undetermined";
+                if (LOP == "01") this.LOP = "LOP: Loop start";
+                if (LOP == "10") this.LOP = "LOP: Loop finish";
 
                 string TOT = octetNum1_1.Substring(5, 2);
 
-                if (TOT == "00") this.TOT = "Undetermined";
-                if (TOT == "01") this.TOT = "Aircraft";
-                if (TOT == "10") this.TOT = "Ground vehicle";
-                if (TOT == "11") this.TOT = "Helicopter";
+                if (TOT == "00") this.TOT = "TOT: Undetermined";
+                if (TOT == "01") this.TOT = "TOT: Aircraft";
+                if (TOT == "10") this.TOT = "TOT: Ground vehicle";
+                if (TOT == "11") this.TOT = "TOT: Helicopter";
 
                 string FX2 = Convert.ToString(octetNum1_1[7]);
 
@@ -342,26 +342,14 @@ namespace ClassLibrary
 
                     string SPI = octetNum1_2.Substring(0, 1);
 
-                    if (SPI == "0") this.SPI = "Absence of SPI";
-                    if (SPI == "1") this.SPI = "Special Position Identification";
+                    if (SPI == "0") this.SPI = "SPI: Absence of SPI";
+                    if (SPI == "1") this.SPI = "SPI: Special Position Identification";
 
                     string spareBits = octetNum1_2.Substring(1, 6);
 
                     string FX3 = Convert.ToString(octetNum1_2[7]);
                 }
             }
-
-            //Console.WriteLine("TYP: " + this.TYP);
-            //Console.WriteLine("DCR: " + this.DCR);
-            //Console.WriteLine("CHN: " + this.CHN);
-            //Console.WriteLine("GBS: " + this.GBS);
-            //Console.WriteLine("CRT: " + this.CRT);
-            //Console.WriteLine("SIM: " + this.SIM);
-            //Console.WriteLine("TST: " + this.TST);
-            //Console.WriteLine("RAB: " + this.RAB);
-            //Console.WriteLine("LOP: " + this.LOP);
-            //Console.WriteLine("TOT: " + this.TOT);
-            //Console.WriteLine("SPI: " + this.SPI);
 
             return newposition + 1;
         }
@@ -376,16 +364,12 @@ namespace ClassLibrary
         {
             double range = Convert.ToInt32(string.Concat(data[position], data[position + 1]), 2); // RHO 2 octets
             
-            if (range >= 65536) this.RHO = "RHO is equal or exceeds maximum range (65536m ≈ 35.4NM)";
-            else this.RHO = "RHO = " + Convert.ToString(range) + "m";
+            if (range >= 65536) this.RHO = "ρ is equal or exceeds maximum range (65536m ≈ 35.4NM)";
+            else this.RHO = "ρ: " + Convert.ToString(range) + "m";
             
-            this.THETA = "THETA = " + String.Format("{0:0.00}", Convert.ToDouble(Convert.ToInt32(string.Concat(data[position + 2], data[position + 3]), 2)) * (360 / (Math.Pow(2, 16)))) + "º"; // THETA 2 octets
+            this.THETA = "θ: " + String.Format("{0:0.00}", Convert.ToDouble(Convert.ToInt32(string.Concat(data[position + 2], data[position + 3]), 2)) * (360 / (Math.Pow(2, 16)))) + "º"; // THETA 2 octets
             
             this.positioninPolarCoordinates = this.RHO + ", " + this.THETA;
-
-            //Console.WriteLine("RHO: " + this.RHO);
-            //Console.WriteLine("THETA: " + this.THETA);
-            //Console.WriteLine("Pos. in PolarCoords: " + this.positioninPolarCoordinates);
 
             return position + 4;
         }
@@ -409,11 +393,8 @@ namespace ClassLibrary
             int longitudeMin = Convert.ToInt32(Math.Truncate((longitude - longitudeDeg) * 60));
             double longitudeSec = Math.Round(((longitude - (longitudeDeg +  (Convert.ToDouble(longitudeMin) / 60))) * 3600), 5);
             
-            this.LatitudeinWGS84 = Convert.ToString(latitudeDeg) + "º " + Convert.ToString(latitudeMin) + "' " + Convert.ToString(latitudeSec) + "''";
-            this.LongitudeinWGS84 = Convert.ToString(longitudeDeg) + "º " + Convert.ToString(longitudeMin) + "' " + Convert.ToString(longitudeSec) + "''";
-
-            //Console.WriteLine("LatWGS84: " + this.LatitudeinWGS84);
-            //Console.WriteLine("LongWGS84: " + this.LongitudeinWGS84);
+            this.LatitudeinWGS84 = "Lat.: " + Convert.ToString(latitudeDeg) + "º " + Convert.ToString(latitudeMin) + "' " + Convert.ToString(latitudeSec) + "''";
+            this.LongitudeinWGS84 = "Long: " + Convert.ToString(longitudeDeg) + "º " + Convert.ToString(longitudeMin) + "' " + Convert.ToString(longitudeSec) + "''";
 
             return newposition;
         }
@@ -432,14 +413,12 @@ namespace ClassLibrary
             string X = Convert.ToString(this.XMap);
             string Y = Convert.ToString(this.YMap);
 
-            positioninCartesianCoordinates = "X Component = " + XMap + ", Y Component = " + YMap;
+            positioninCartesianCoordinates = "X: " + XMap + ", Y: " + YMap;
 
             //Point MapPoint = new Point(this.XMap, this.YMap);
 
             //PointLatLng position = lib.ComputeWGS_84_from_Cartesian(MapPoint, this.SIC); //Compute WGS84 position from cartesian position
             //Set_WGS84_Coordinates(position); //Apply computed WGS84 position to this message
-
-            //Console.WriteLine("Pos. in CartesianCoords: " + this.positioninCartesianCoordinates);
 
             return newposition;
         }
@@ -496,11 +475,6 @@ namespace ClassLibrary
 
             this.Mode3A = Convert.ToString(DecimalToOctal(Convert.ToInt32(string.Concat(data[position], data[position + 1]).Substring(4, 12), 2))).PadLeft(4,'0');
 
-            //Console.WriteLine("VMode3A: " + this.VMode3A);
-            //Console.WriteLine("GMode3A: " + this.GMode3A);
-            //Console.WriteLine("LMode3A: " + this.LMode3A);
-            //Console.WriteLine("Mode3A: " + this.Mode3A);
-
             position = position + 2;
             return position;
         }
@@ -516,23 +490,17 @@ namespace ClassLibrary
         {
             char[] octet = data[position].ToCharArray(0, 8);
 
-            if (octet[0] == '0') this.VFlightLevel = "Code validated";
-            else this.VFlightLevel = "Code not validated";
+            if (octet[0] == '0') this.VFlightLevel = "VFlight: Code validated";
+            else this.VFlightLevel = "VFlight: Code not validated";
 
-            if(octet[1] == 0) this.GFlightLevel = "Default";
-            else this.GFlightLevel = "Garbled code";
+            if(octet[1] == 0) this.GFlightLevel = "GFlight: Default";
+            else this.GFlightLevel = "GFlight: Garbled code";
 
             this.FlightLevel = Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position],  data[position + 1]).Substring(2, 14))) * 0.25);
 
             this.FlightLevelFT =  Convert.ToString(Convert.ToDouble(FlightLevel) * 100) + " ft";
 
-            this.FlightLevelInfo = this.VFlightLevel + ", " + this.GFlightLevel + ", FL" + this.FlightLevel;
-
-            //Console.WriteLine("VFlight: " + this.VFlightLevel);
-            //Console.WriteLine("GFlight: " + this.GFlightLevel);
-            //Console.WriteLine("FlightLevel: " + this.FlightLevel);
-            //Console.WriteLine("FlightLevelInfo: " + this.FlightLevelInfo);
-            //Console.WriteLine("FlightLevelFT: " + this.FlightLevelFT);
+            this.FlightLevelInfo = this.VFlightLevel + "\n" + this.GFlightLevel + "\n" +  "FL" + this.FlightLevel;
 
             position += 2;
             return position;
@@ -544,8 +512,6 @@ namespace ClassLibrary
         private int MeasuredHeight(string[] data, int position)
         {
             this.measuredHeight = Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1]))) * 6.25) + " ft";
-
-            //Console.WriteLine("MeasuredHeight: " + this.measuredHeight);
 
             position += 2;
             return position;
@@ -613,26 +579,26 @@ namespace ClassLibrary
         private int TrackStatus(string[] data, int position)
         {
             char[] octet = data[position].ToCharArray(0, 8);
-            if (octet[0] == '0') this.CNF = "Confirmed track";
-            else this.CNF = "Track in initialisation phase";
+            if (octet[0] == '0') this.CNF = "CNF: Confirmed track";
+            else this.CNF = "CNF: Track in initialisation phase";
             
-            if (octet[1] == '0') this.TRE = "Default";
-            else this.TRE = "Last report for a track";
+            if (octet[1] == '0') this.TRE = "TRE: Default";
+            else this.TRE = "TRE: Last report for a track";
 
             string crt = string.Concat(octet[2], octet[3]);
-            if (crt == "00") this.CST = "No extrapolation";
-            else if (crt == "01") this.CST = "Predictable extrapolation due to sensor refresh period"; 
-            else if (crt == "10") this.CST = "Predictable extrapolation in masked area"; 
-            else if (crt == "11") this.CST = "Extrapolation due to unpredictable absence of detection"; 
+            if (crt == "00") this.CST = "CST: No extrapolation";
+            else if (crt == "01") this.CST = "CST: Predictable extrapolation due to sensor refresh period"; 
+            else if (crt == "10") this.CST = "CST: Predictable extrapolation in masked area"; 
+            else if (crt == "11") this.CST = "CST: Extrapolation due to unpredictable absence of detection"; 
             
-            if (octet[4] == '0') this.MAH = "Default";
-            else this.MAH = "Horizontal manoeuvre";
+            if (octet[4] == '0') this.MAH = "MAH: Default";
+            else this.MAH = "MAH: Horizontal manoeuvre";
 
-            if (octet[5] == '0') this.TCC = "Tracking performed in 'Sensor Plane', i.e. neither slant range correction nor projection was applied."; 
-            else this.TCC = "Slant range correction and a suitable projection technique are used to track in a 2D.reference plane, tangential to the earth model at the Sensor Site co-ordinates."; 
+            if (octet[5] == '0') this.TCC = "TCC: Tracking performed in 'Sensor Plane', i.e. neither slant range correction nor projection was applied."; 
+            else this.TCC = "TCC: Slant range correction and a suitable projection technique are used to track in a 2D.reference plane, tangential to the earth model at the Sensor Site co-ordinates."; 
             
-            if (octet[6] == '0') this.STH = "Measured position"; 
-            else this.STH = "Smoothed position"; 
+            if (octet[6] == '0') this.STH = "STH: Measured position"; 
+            else this.STH = "STH: Smoothed position"; 
             
             position = position + 1;
 
@@ -640,25 +606,25 @@ namespace ClassLibrary
             {
                 octet = data[position].ToCharArray(0, 8);
                 string tom = string.Concat(octet[0], octet[1]);
-                if (tom == "00") this.TOM = "Unknown type of movement";
-                else if (tom == "01") this.TOM = "Taking-off"; 
-                else if (tom == "10") this.TOM = "Landing"; 
-                else if (tom == "11") this.TOM = "Other types of movement"; 
+                if (tom == "00") this.TOM = "TOM: Unknown type of movement";
+                else if (tom == "01") this.TOM = "TOM: Taking-off"; 
+                else if (tom == "10") this.TOM = "TOM: Landing"; 
+                else if (tom == "11") this.TOM = "TOM: Other types of movement"; 
 
                 string dou = string.Concat(octet[2], octet[3], octet[4]);
-                if (dou == "000") this.DOU = "No doubt"; 
-                else if (dou == "001") this.DOU = "Doubtful correlation (undetermined reason)"; 
-                else if (dou == "010") this.DOU = "Doubtful correlation in clutter"; 
-                else if (dou == "011") this.DOU = "Loss of accuracy"; 
-                else if (dou == "100") this.DOU = "Loss of accuracy in clutter"; 
-                else if (dou == "101") this.DOU = "Unstable track"; 
-                else if (dou == "110") this.DOU = "Previously coasted";
+                if (dou == "000") this.DOU = "DOU: No doubt"; 
+                else if (dou == "001") this.DOU = "DOU: Doubtful correlation (undetermined reason)"; 
+                else if (dou == "010") this.DOU = "DOU: Doubtful correlation in clutter"; 
+                else if (dou == "011") this.DOU = "DOU: Loss of accuracy"; 
+                else if (dou == "100") this.DOU = "DOU: Loss of accuracy in clutter"; 
+                else if (dou == "101") this.DOU = "DOU: Unstable track"; 
+                else if (dou == "110") this.DOU = "DOU: Previously coasted";
 
                 string mrs = string.Concat(octet[5], octet[6]);
-                if (mrs == "00") this.MRS = "Merge or split indication undetermined"; 
-                else if (mrs == "01") this.MRS = "Track merged by association to plot"; 
-                else if (mrs == "10") this.MRS = "Track merged by non-association to plot"; 
-                else if (mrs == "11") this.MRS = "Split track"; 
+                if (mrs == "00") this.MRS = "MRS: Merge or split indication undetermined"; 
+                else if (mrs == "01") this.MRS = "MRS: Track merged by association to plot"; 
+                else if (mrs == "10") this.MRS = "MRS: Track merged by non-association to plot"; 
+                else if (mrs == "11") this.MRS = "MRS: Split track"; 
 
                 position = position + 1;
 
@@ -666,22 +632,11 @@ namespace ClassLibrary
                 {
                     octet = data[position].ToCharArray(0, 8);
                     if (octet[0] == '0') this.GHO = "GHO: Default";
-                    else this.GHO = "Ghost track";
+                    else this.GHO = "GHO: Ghost track";
 
                     position = position + 1;
                 }
             }
-
-            //Console.WriteLine("CNF: " + this.CNF);
-            //Console.WriteLine("TRE: " + this.TRE);
-            //Console.WriteLine("CST: " + this.CST);
-            //Console.WriteLine("MAH: " + this.MAH);
-            //Console.WriteLine("TCC: " + this.TCC);
-            //Console.WriteLine("STH: " + this.STH);
-            //Console.WriteLine("TOM: " + this.TOM);
-            //Console.WriteLine("DOU: " + this.DOU);
-            //Console.WriteLine("MRS: " + this.MRS);
-            //Console.WriteLine("GHO: " + this.GHO);
 
             return position;
         }
@@ -696,15 +651,11 @@ namespace ClassLibrary
             double groundSpeed = Convert.ToDouble(Convert.ToInt32(string.Concat(data[position], data[position + 1]), 2)) * Math.Pow(2, -14);
             double groundSpeed_meters = groundSpeed * 1852;
 
-            if (groundSpeed >= 2) this.GroundSpeed = "Ground Speed is equal or higher than the maximum available value (2NM/s), ";
-            else this.GroundSpeed = "GroundSpeed: " + String.Format("{0:0.00}", groundSpeed_meters) + "m/s, ";
+            if (groundSpeed >= 2) this.GroundSpeed = "GS is equal or higher than the maximum available value (2NM/s), ";
+            else this.GroundSpeed = "GS: " + String.Format("{0:0.00}", groundSpeed_meters) + "m/s, ";
 
-            this.TrackAngle = "TrackAngle: " + String.Format("{0:0.00}", (Convert.ToInt32(string.Concat(data[position + 2], data[position + 3]),2)) * (360 / (Math.Pow(2, 16)))) + "°";
+            this.TrackAngle = "TA: " + String.Format("{0:0.00}", (Convert.ToInt32(string.Concat(data[position + 2], data[position + 3]),2)) * (360 / (Math.Pow(2, 16)))) + "°";
             this.TrackVelocityPolarCoordinates = this.GroundSpeed + this.TrackAngle;
-
-            //Console.WriteLine("GroundSpeed: " + this.GroundSpeed);
-            //Console.WriteLine("TrackAngle: " + this.TrackAngle);
-            //Console.WriteLine("TrackVelPolar: " + this.TrackVelocityPolarCoordinates);
 
             position = position + 4;
             return position;
@@ -724,10 +675,6 @@ namespace ClassLibrary
             this.Vy = "Vy: " + Convert.ToString(vy) + "m/s";
             
             this.TrackVelocityCartesianCoordinates = this.Vx + this.Vy;
-
-            //Console.WriteLine("Vx: " + this.Vx);
-            //Console.WriteLine("Vy: " + this.Vy);
-            //Console.WriteLine("TrackVelCartesian: " + this.TrackVelocityCartesianCoordinates);
 
             position = position + 4;
             return position;
@@ -751,10 +698,6 @@ namespace ClassLibrary
             
             this.calculatedAcceleration = this.Ax + " " + this.Ay;
 
-            //Console.WriteLine("Ax: " + this.Ax);
-            //Console.WriteLine("Ay: " + this.Ay);
-            //Console.WriteLine("CalcAcc: " + this.Calculated_Acceleration);
-
             position = position + 2;
             return position;
         }
@@ -765,8 +708,6 @@ namespace ClassLibrary
         private int TargetAddress(string[] data, int position)
         {
             this.TargetAdd = string.Concat(BinarytoHexadecimal(data[position]), BinarytoHexadecimal(data[position + 1]), BinarytoHexadecimal(data[position + 2]));
-
-            //Console.WriteLine("TargetAdd: " + this.TargetAdd);
 
             position = position + 3;
             return position;
@@ -779,9 +720,9 @@ namespace ClassLibrary
         private int TargetIdentification(string[] data, int position)
         {
             string sti = data[position];
-            if (sti == "00000000") this.STI = "Callsign or registration downlinked from transponder";
-            else if (sti == "01000000") this.STI = "Callsign not downlinked from transponder"; 
-            else if (sti == "10000000") this.STI = "Registration not downlinked from transponder";
+            if (sti == "00000000") this.STI = "STI: Callsign or registration downlinked from transponder";
+            else if (sti == "01000000") this.STI = "STI: Callsign not downlinked from transponder"; 
+            else if (sti == "10000000") this.STI = "STI: Registration not downlinked from transponder";
 
             StringBuilder tarId = new StringBuilder();
 
@@ -789,9 +730,6 @@ namespace ClassLibrary
             for (int i = 0; i < 8; i++) tarId.Append(ComputeCharacter(characters.Substring(i * 6, 6)));
 
             this.TargetId = tarId.ToString().Trim();
-
-            //Console.WriteLine("STI: " + this.STI);
-            //Console.WriteLine("TargetId: " + this.TargetId);
 
             position = position + 7;
             return position;
@@ -810,7 +748,7 @@ namespace ClassLibrary
             
             position =  position + 1;
 
-            for (int i = 0; i < modeSrep; i++)
+            for (int i = 0; i < this.modeSrep; i++)
             {
                 this.MBData[i] = String.Concat(data[position], data[position + 1], data[position + 2], data[position + 3], data[position + 4], data[position + 5], data[position + 6]);
                 this.BDS1[1] = data[position + 7].Substring(0, 4);
@@ -818,11 +756,6 @@ namespace ClassLibrary
 
                 position = position + 8;
             }
-
-            //Console.WriteLine("MBData: " + this.MBData);
-            //Console.WriteLine("BSD1: " + this.BDS1);
-            //Console.WriteLine("BSD2: " + this.BDS2);
-            //Console.WriteLine("modeSrep: " + this.modeSrep);
 
             return position;
         }
@@ -835,23 +768,17 @@ namespace ClassLibrary
 
         public int TargetSizeOrientation(string[] data, int position)
         {
-            //this.targetLength = Convert.ToInt32(data[position][0]) * 64 + Convert.ToInt32(data[position][1]) * 32 + Convert.ToInt32(data[position][2]) * 16 + Convert.ToInt32(data[position][3]) * 8 + Convert.ToInt32(data[position][4]) * 4 + Convert.ToInt32(data[position][5]) * 2 + Convert.ToInt32(data[position][6]);
-            this.targetLength = "Target Length: " + Convert.ToString(Convert.ToInt32(data[position].Substring(0, 7), 2)) + "m";
+            this.targetLength = "Length: " + Convert.ToString(Convert.ToInt32(data[position].Substring(0, 7), 2)) + "m";
             if (data[position][7] == '1') position = position + 1;
             else return position;
             
-            this.targetOrientation = "Target Orientation: " + Convert.ToString(Convert.ToDouble(Convert.ToInt32(data[position].Substring(0, 7) ,2)) * 360 / 128) + "º";
+            this.targetOrientation = "Orientation: " + Convert.ToString(Convert.ToDouble(Convert.ToInt32(data[position].Substring(0, 7) ,2)) * 360 / 128) + "º";
             if (data[position][7] == '1') position = position + 1;
             else return position;
 
-            this.targetWidth = "Target Width: " + Convert.ToString(Convert.ToInt32(data[position].Substring(0, 7), 2)) + "m";
+            this.targetWidth = "Width: " + Convert.ToString(Convert.ToInt32(data[position].Substring(0, 7), 2)) + "m";
 
             this.targetSizeOrientation = this.targetLength + ", " + this.targetOrientation + ", " + this.targetWidth;
-
-            //Console.WriteLine("targetLength: " + this.targetLength);
-            //Console.WriteLine("targetOrientation: " + this.targetOrientation);
-            //Console.WriteLine("targetWidth: " + this.targetWidth);
-            //Console.WriteLine("targetSieOrientation: " + this.targetSizeOrientation);
 
             position = position + 1;
             return position;
@@ -874,10 +801,6 @@ namespace ClassLibrary
                 
                 position = position + 2;
             }
-
-            //Console.WriteLine("REPPresence: " + this.REPPresence);
-            //Console.WriteLine("DRHO: " + this.DRHO);
-            //Console.WriteLine("THETA: " + this.DTHETA);
 
             return position;
         }
@@ -907,8 +830,6 @@ namespace ClassLibrary
             else if (vfi == 15) this.VFI = "Aircraft maintenance";
             else if (vfi == 16) this.VFI = "Flyco (follow me)";
 
-            //Console.WriteLine("VFI: " + this.VFI);
-
             position = position + 1;
             return position;
         }
@@ -922,22 +843,18 @@ namespace ClassLibrary
         {
             char[] OctetoChar = data[position].ToCharArray(0, 8);
             
-            if (OctetoChar[0] == '0') this.TRB = "Trouble: Default"; 
-            else if (OctetoChar[0] == '1') this.TRB = "Trouble: In Trouble"; 
+            if (OctetoChar[0] == '0') this.TRB = "TRB: Default"; 
+            else if (OctetoChar[0] == '1') this.TRB = "TRB: In Trouble"; 
             
             int msg = Convert.ToInt32(data[position].Substring(1, 7), 2);
             
-            if (msg == 1) this.MSG = "Message: Towing aircraft"; 
-            else if (msg == 2) this.MSG = "Message: “Follow me” operation"; 
-            else if (msg == 3) this.MSG = "Message: Runway check"; 
-            else if (msg == 4) this.MSG = "Message: Emergency operation (fire, medical…)"; 
-            else if (msg == 5) this.MSG = "Message: Work in progress (maintenance, birds scarer, sweepers…)";
+            if (msg == 1) this.MSG = "MSG: Towing aircraft"; 
+            else if (msg == 2) this.MSG = "MSG: “Follow me” operation"; 
+            else if (msg == 3) this.MSG = "MSG: Runway check"; 
+            else if (msg == 4) this.MSG = "MSG: Emergency operation (fire, medical…)"; 
+            else if (msg == 5) this.MSG = "MSG: Work in progress (maintenance, birds scarer, sweepers…)";
 
             this.preProgrammedMessage = TRB + " " + MSG;
-
-            //Console.WriteLine("TRB: " + this.TRB);
-            //Console.WriteLine("MSG: " + this.MSG);
-            //Console.WriteLine("preProgramMsg: " + this.preProgrammedMessage);
 
             position = position + 1;
             return position;
@@ -947,16 +864,15 @@ namespace ClassLibrary
         public string DeviationX;
         public string DeviationY;
         public string CovarianceXY;
+        public string StandardDevPos;
 
         private int StandardDeviationOfPosition(string[] data, int position)
         {
-            DeviationX = "Standard Deviation of X component (σx):" + Convert.ToString(Convert.ToDouble(Convert.ToInt32(data[position], 2)) * 0.25) + "m";
-            DeviationY = "Standard Deviation of Y component (σy): " + Convert.ToString(Convert.ToDouble(Convert.ToInt32(data[position + 1], 2)) * 0.25) + "m";
-            CovarianceXY = "Covariance (σxy): " + Convert.ToString(Convert.ToInt32(BinTwosComplementToSignedDecimal(string.Concat(data[position + 2], data[position + 3]))) * 0.25) + "m^2";
+            this.DeviationX = "σx: " + Convert.ToString(Convert.ToDouble(Convert.ToInt32(data[position], 2)) * 0.25) + "m";
+            this.DeviationY = "σy: " + Convert.ToString(Convert.ToDouble(Convert.ToInt32(data[position + 1], 2)) * 0.25) + "m";
+            this.CovarianceXY = "σxy: " + Convert.ToString(Convert.ToInt32(BinTwosComplementToSignedDecimal(string.Concat(data[position + 2], data[position + 3]))) * 0.25) + "m^2";
 
-            //Console.WriteLine("DevX: " + this.DeviationX);
-            //Console.WriteLine("DevY: " + this.DeviationY);
-            //Console.WriteLine("CovXY: " + this.CovarianceXY);
+            this.StandardDevPos = this.DeviationX + "\n" + this.DeviationY + "\n" + this.CovarianceXY;
 
             position = position + 4;
             return position;
@@ -974,27 +890,21 @@ namespace ClassLibrary
             char[] OctetoChar = data[position].ToCharArray(0, 8);
             int nogo = Convert.ToInt32(string.Concat(OctetoChar[0], OctetoChar[1]), 2);
             
-            if (nogo == 0) this.NOGO = "Operational Release Status of the System (NOGO): Operational"; 
-            else if (nogo == 1) this.NOGO = "Operational Release Status of the System (NOGO): Degraded"; 
-            else if (nogo == 2) this.NOGO = "Operational Release Status of the System (NOGO): NOGO"; 
+            if (nogo == 0) this.NOGO = "NOGO: Operational"; 
+            else if (nogo == 1) this.NOGO = "NOGO: Degraded"; 
+            else if (nogo == 2) this.NOGO = "NOGO: NOGO"; 
             
-            if (OctetoChar[2] == '0') this.OVL = "Overload indicator: No overload"; 
-            else if (OctetoChar[2] == '1') this.OVL = "Overload indicator: Overload"; 
+            if (OctetoChar[2] == '0') this.OVL = "OVL: No overload"; 
+            else if (OctetoChar[2] == '1') this.OVL = "OVL: Overload"; 
             
-            if (OctetoChar[3] == '0') this.TSV = "Time Source Validity: Valid"; 
-            else if (OctetoChar[3] == '1') this.TSV = "Time Source Validity: Invalid"; 
+            if (OctetoChar[3] == '0') this.TSV = "TSV: Valid"; 
+            else if (OctetoChar[3] == '1') this.TSV = "TSV: Invalid"; 
             
             if (OctetoChar[4] == '0') this.DIV = "DIV: Normal Operation"; 
             else if (OctetoChar[4] == '1') this.DIV = "DIV: Diversity degraded"; 
             
             if (OctetoChar[5] == '0') this.TIF = "TIF: Test Target Operative";
             else if (OctetoChar[5] == '1') this.TIF = "TIF: Test Target Failure";
-
-            //Console.WriteLine("NOGO: " + this.NOGO);
-            //Console.WriteLine("OVL: " + this.OVL);
-            //Console.WriteLine("TSV: " + this.TSV);
-            //Console.WriteLine("DIV: " + this.DIV);
-            //Console.WriteLine("TIF: " + this.TIF);
 
             position = position + 1;
             return position;

@@ -92,7 +92,7 @@ namespace ClassLibrary
         public string BinarytoHexadecimal(string binaryNumber)
         {
             string hexadecimalNumber = string.Format("{0:x}", Convert.ToInt32(binaryNumber, 2));
-            return hexadecimalNumber;
+            return hexadecimalNumber.ToUpper();
         }
 
         public string ComputeCharacter(string BinaryNumber)
@@ -390,25 +390,25 @@ namespace ClassLibrary
             string octetNum1 = data[newposition];
             
             int ATP = Convert.ToInt32(octetNum1.Substring(0, 3), 2);
-            if (ATP == 0) this.ATP = "24-Bit ICAO address";
-            else if (ATP == 1) this.ATP = "Duplicate address";
-            else if (ATP == 2) this.ATP = "Surface vehiCLe address";
-            else if (ATP == 3) this.ATP = "Anonymous address";
-            else this.ATP = "Reserved for future use";
+            if (ATP == 0) this.ATP = "ATP: 24-Bit ICAO address";
+            else if (ATP == 1) this.ATP = "ATP: Duplicate address";
+            else if (ATP == 2) this.ATP = "ATP: Surface vehiCLe address";
+            else if (ATP == 3) this.ATP = "ATP: Anonymous address";
+            else this.ATP = "ATP: Reserved for future use";
 
             int ARC = Convert.ToInt32(octetNum1.Substring(4, 2), 2);
-            if (ARC == 0) this.ARC = "25 ft ";
-            else if (ARC == 1) this.ARC = "100 ft";
-            else if (ARC == 2) this.ARC = "Unknown";
-            else this.ARC = "Invalid";
+            if (ARC == 0) this.ARC = "ARC: 25 ft ";
+            else if (ARC == 1) this.ARC = "ARC: 100 ft";
+            else if (ARC == 2) this.ARC = "ARC: Unknown";
+            else this.ARC = "ARC: Invalid";
 
             int RC = Convert.ToInt32(octetNum1.Substring(5, 1), 2);
-            if (RC == 0) this.RC = "Default";
-            else this.RC = "Range Check passed, CPR Validation pending";
+            if (RC == 0) this.RC = "RC: Default";
+            else this.RC = "RC: Range Check passed, CPR Validation pending";
 
             int RAB = Convert.ToInt32(octetNum1.Substring(6, 1), 2);
-            if (RAB == 0) this.RAB = "Report from target transponder";
-            else this.RAB = "Report from field monitor (fixed transponder)";
+            if (RAB == 0) this.RAB = "RAB: Report from target transponder";
+            else this.RAB = "RAB: Report from field monitor (fixed transponder)";
 
             int FX1 = Convert.ToInt32(octetNum1.Substring(7, 1), 2);
 
@@ -419,30 +419,30 @@ namespace ClassLibrary
                 string octetNum1_1 = data[newposition];
                 
                 int DCR = Convert.ToInt32(octetNum1_1.Substring(0, 1), 2);
-                if (DCR == 0) this.DCR = "No differential correction (ADS-B)";
-                else this.DCR = "Differential correction (ADS-B)";
+                if (DCR == 0) this.DCR = "DCR: No differential correction (ADS-B)";
+                else this.DCR = "DCR: Differential correction (ADS-B)";
 
                 int GBS = Convert.ToInt32(octetNum1_1.Substring(1, 1), 2);
-                if (GBS == 0) this.GBS = "Ground Bit not set";
-                else this.GBS = "Ground Bit set";
+                if (GBS == 0) this.GBS = "GBS: Ground Bit not set";
+                else this.GBS = "GBS: Ground Bit set";
 
                 int SIM = Convert.ToInt32(octetNum1_1.Substring(2, 1), 2);
-                if (SIM == 0) this.SIM = "Actual target report";
-                else this.SIM = "Simulated target report";
+                if (SIM == 0) this.SIM = "SIM: Actual target report";
+                else this.SIM = "SIM: Simulated target report";
 
                 int TST = Convert.ToInt32(octetNum1_1.Substring(3, 1), 2);
-                if (TST == '0') this.TST = "Default";
-                else this.TST = "Test Target";
+                if (TST == '0') this.TST = "TST: Default";
+                else this.TST = "TST: Test Target";
 
                 int SAA = Convert.ToInt32(octetNum1_1.Substring(4, 1), 2);
-                if (SAA == '0') this.SAA = "Equipment capable to provide Selected Altitude";
-                else this.SAA = "Equipment not capable to provide Selected Altitude";
+                if (SAA == '0') this.SAA = "SAA: Equipment capable to provide Selected Altitude";
+                else this.SAA = "SAA: Equipment not capable to provide Selected Altitude";
 
                 int CL = Convert.ToInt32(octetNum1_1.Substring(5, 2), 2);
-                if (CL == 0) this.CL = "Report valid";
-                else if (CL == 1) this.CL = "Report suspect";
-                else if (CL == 2) this.CL = "No information";
-                else this.CL = "Reserved for future use";
+                if (CL == 0) this.CL = "CL: Report valid";
+                else if (CL == 1) this.CL = "CL: Report suspect";
+                else if (CL == 2) this.CL = "CL: No information";
+                else this.CL = "CL: Reserved for future use";
                 
                 int FX2 = Convert.ToInt32(octetNum1_1.Substring(7, 1), 2);
 
@@ -455,24 +455,24 @@ namespace ClassLibrary
                     string spareBits = octetNum1_2.Substring(0, 2);
 
                     int IPC = Convert.ToInt32(octetNum1_2.Substring(2, 1), 2);
-                    if (IPC == 0) this.IPC = "Default";
-                    else this.IPC = "Independent Position Check failed";
+                    if (IPC == 0) this.IPC = "IPC: Default";
+                    else this.IPC = "IPC: Independent Position Check failed";
 
                     int NOGO = Convert.ToInt32(octetNum1_2.Substring(3, 1), 2);
-                    if (NOGO == 0) this.NOGO = "NOGO-bit not set";
-                    else this.NOGO = "NOGO-bit set";
+                    if (NOGO == 0) this.NOGO = "NOGO: NOGO-bit not set";
+                    else this.NOGO = "NOGO: NOGO-bit set";
 
                     int CPR = Convert.ToInt32(octetNum1_2.Substring(4, 1), 2);
-                    if (CPR == 0) this.CPR = "CPR Validation correct ";
-                    else this.CPR = "CPR Validation failed";
+                    if (CPR == 0) this.CPR = "CPR: CPR Validation correct ";
+                    else this.CPR = "CPR: CPR Validation failed";
                     
                     int LDPJ = Convert.ToInt32(octetNum1_2.Substring(5, 1), 2);
-                    if (LDPJ == 0) this.LDPJ = "LDPJ not detected";
-                    else this.LDPJ = "LDPJ detected";
+                    if (LDPJ == 0) this.LDPJ = "LDPJ: LDPJ not detected";
+                    else this.LDPJ = "LDPJ: LDPJ detected";
 
                     int RCF = Convert.ToInt32(octetNum1_2.Substring(6, 1), 2);
-                    if (RCF == 0) this.RCF = "Default";
-                    else this.RCF = "Range Check failed ";
+                    if (RCF == 0) this.RCF = "RCF: Default";
+                    else this.RCF = "RCF: Range Check failed ";
 
                     int FX3 = Convert.ToInt32(octetNum1_2.Substring(7, 1), 2);
                 }
@@ -646,6 +646,7 @@ namespace ClassLibrary
         public string SDA;
         public string GVA;
         public int PIC;
+        public string PICsupp;
         public string ICB;
         public string NUCp;
         public string NIC;
@@ -656,8 +657,8 @@ namespace ClassLibrary
 
             string octetNum1 = data[newposition];
 
-            this.NUCr_NACv = Convert.ToString(Convert.ToInt32(octetNum1.Substring(0, 3), 2));
-            this.NUCp_NIC = Convert.ToString(Convert.ToInt32(octetNum1.Substring(3, 4), 2));
+            this.NUCr_NACv = "NUCr or NACv: " + Convert.ToString(Convert.ToInt32(octetNum1.Substring(0, 3), 2));
+            this.NUCp_NIC = "NUCp or NIC: " + Convert.ToString(Convert.ToInt32(octetNum1.Substring(3, 4), 2));
 
             string FX1 = octetNum1.Substring(7, 1);
 
@@ -667,9 +668,9 @@ namespace ClassLibrary
 
                 string octetNum1_1 = data[newposition];
 
-                this.NICbaro = Convert.ToString(Convert.ToInt32(octetNum1_1.Substring(0, 1), 2));
-                this.SIL = Convert.ToString(Convert.ToInt32(octetNum1_1.Substring(1, 2), 2));
-                this.NACp = Convert.ToString(Convert.ToInt32(octetNum1_1.Substring(3, 4), 2));
+                this.NICbaro = "NICbaro: " + Convert.ToString(Convert.ToInt32(octetNum1_1.Substring(0, 1), 2));
+                this.SIL = "SIL: " + Convert.ToString(Convert.ToInt32(octetNum1_1.Substring(1, 2), 2));
+                this.NACp = "NACp: " + Convert.ToString(Convert.ToInt32(octetNum1_1.Substring(3, 4), 2));
                 
                 string FX2 = octetNum1_1.Substring(7, 1);
 
@@ -682,11 +683,11 @@ namespace ClassLibrary
                     string spareBits = octetNum1_2.Substring(0, 2);
 
                     string SILsupp = octetNum1_2.Substring(2, 1);
-                    if (SILsupp == "0") this.SILsupp = "Measured per hour";
-                    else this.SILsupp = "Measured per sample";
+                    if (SILsupp == "0") this.SILsupp = "SIL: Measured per hour";
+                    else this.SILsupp = "SIL: Measured per sample";
 
-                    this.SDA = Convert.ToString(Convert.ToInt32(data[position].Substring(3, 2), 2));
-                    this.GVA = Convert.ToString(Convert.ToInt32(data[position].Substring(5, 2), 2));
+                    this.SDA = "SDA: " + Convert.ToString(Convert.ToInt32(data[position].Substring(3, 2), 2));
+                    this.GVA = "GVA: " + Convert.ToString(Convert.ToInt32(data[position].Substring(5, 2), 2));
 
                     string FX3 = octetNum1_2.Substring(7, 1);
 
@@ -697,22 +698,24 @@ namespace ClassLibrary
                         string octetNum1_3 = data[newposition];
 
                         this.PIC = Convert.ToInt32(octetNum1_3.Substring(0, 4), 2);
-                        if (this.PIC == 0) this.ICB = "No integrity(or > 20.0 NM)"; this.NUCp = "0"; this.NIC = "0";
-                        if (this.PIC == 1) this.ICB = "< 20.0 NM"; this.NUCp = "1"; this.NIC = "1";
-                        if (this.PIC == 2) this.ICB = "< 10.0 NM"; this.NUCp = "2"; this.NIC = "-";
-                        if (this.PIC == 3) this.ICB = "< 8.0 NM"; this.NUCp = "-"; this.NIC = "2";
-                        if (this.PIC == 4) this.ICB = "< 4.0 NM"; this.NUCp = "-"; this.NIC = "3";
-                        if (this.PIC == 5) this.ICB = "< 2.0 NM"; this.NUCp = "3"; this.NIC = "4";
-                        if (this.PIC == 6) this.ICB = "< 1.0 NM"; this.NUCp = "4"; this.NIC = "5";
-                        if (this.PIC == 7) this.ICB = "< 0.6 NM"; this.NUCp = "-"; this.NIC = "6 (+ 1/1)";
-                        if (this.PIC == 8) this.ICB = "< 0.5 NM"; this.NUCp = "5"; this.NIC = "6 (+ 0/0)";
-                        if (this.PIC == 9) this.ICB = "< 0.3 NM"; this.NUCp = "-"; this.NIC = "6 (+ 0/1)";
-                        if (this.PIC == 10) this.ICB = "< 0.2 NM"; this.NUCp = "6"; this.NIC = "7";
-                        if (this.PIC == 11) this.ICB = "< 0.1 NM"; this.NUCp = "7"; this.NIC = "8";
-                        if (this.PIC == 12) this.ICB = "< 0.04 NM"; this.NUCp = ""; this.NIC = "9";
-                        if (this.PIC == 13) this.ICB = "< 0.013 NM"; this.NUCp = "8"; this.NIC = "10";
-                        if (this.PIC == 14) this.ICB = "< 0.004 NM"; this.NUCp = "9"; this.NIC = "11";
-                        if (this.PIC == 15) this.ICB = "Not defined"; this.NUCp = "Not defined"; this.NIC = "Not defined";
+                        this.PICsupp = "PIC: " + this.PIC.ToString();
+
+                        if (this.PIC == 0) this.ICB = "ICB: No integrity(or > 20.0 NM)"; this.NUCp = "NUCp: 0"; this.NIC = "NIC: 0";
+                        if (this.PIC == 1) this.ICB = "ICB: < 20.0 NM"; this.NUCp = "NUCp: 1"; this.NIC = "NIC: 1";
+                        if (this.PIC == 2) this.ICB = "ICB: < 10.0 NM"; this.NUCp = "NUCp: 2"; this.NIC = "NIC: -";
+                        if (this.PIC == 3) this.ICB = "ICB: < 8.0 NM"; this.NUCp = "NUCp: -"; this.NIC = "NIC: 2";
+                        if (this.PIC == 4) this.ICB = "ICB: < 4.0 NM"; this.NUCp = "NUCp: -"; this.NIC = "NIC: 3";
+                        if (this.PIC == 5) this.ICB = "ICB: < 2.0 NM"; this.NUCp = "NUCp: 3"; this.NIC = "NIC: 4";
+                        if (this.PIC == 6) this.ICB = "ICB: < 1.0 NM"; this.NUCp = "NUCp: 4"; this.NIC = "NIC: 5";
+                        if (this.PIC == 7) this.ICB = "ICB: < 0.6 NM"; this.NUCp = "NUCp: -"; this.NIC = "NIC: 6 (+ 1/1)";
+                        if (this.PIC == 8) this.ICB = "ICB: < 0.5 NM"; this.NUCp = "NUCp: 5"; this.NIC = "NIC: 6 (+ 0/0)";
+                        if (this.PIC == 9) this.ICB = "ICB: < 0.3 NM"; this.NUCp = "NUCp: -"; this.NIC = "NIC: 6 (+ 0/1)";
+                        if (this.PIC == 10) this.ICB = "ICB: < 0.2 NM"; this.NUCp = "NUCp: 6"; this.NIC = "NIC: 7";
+                        if (this.PIC == 11) this.ICB = "ICB: < 0.1 NM"; this.NUCp = "NUCp: 7"; this.NIC = "NIC: 8";
+                        if (this.PIC == 12) this.ICB = "ICB: < 0.04 NM"; this.NUCp = "NUCp: -"; this.NIC = "NIC: 9";
+                        if (this.PIC == 13) this.ICB = "ICB: < 0.013 NM"; this.NUCp = "NUCp: 8"; this.NIC = "NIC: 10";
+                        if (this.PIC == 14) this.ICB = "ICB: < 0.004 NM"; this.NUCp = "NUCp: 9"; this.NIC = "NIC: 11";
+                        if (this.PIC == 15) this.ICB = "ICB: Not defined"; this.NUCp = "NUCp: Not defined"; this.NIC = "NIC: Not defined";
                         
                         string spareBits1 = octetNum1_3.Substring(4, 3);
 
@@ -858,9 +861,10 @@ namespace ClassLibrary
 
         private int PositionInWGS84Coordinates(string[] data, int position) 
         {
-            int newposition = position + 3;
             double latitude = Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1], data[position + 2]))) * (180 / (Math.Pow(2, 23)));
-            double longitude = Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[newposition], data[newposition + 1], data[newposition + 2]))) * (180 / (Math.Pow(2, 23)));
+            position = position + 3;
+            double longitude = Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1], data[position + 2]))) * (180 / (Math.Pow(2, 23)));
+            position = position + 3;
 
             int latitudeDeg = Convert.ToInt32(Math.Truncate(latitude));
             int latitudeMin = Convert.ToInt32(Math.Truncate((latitude - latitudeDeg) * 60));
@@ -875,7 +879,7 @@ namespace ClassLibrary
             //Console.WriteLine("LatWGS84: " + this.LatitudeinWGS84);
             //Console.WriteLine("LongWGS84: " + this.LongitudeinWGS84);
 
-            return newposition;
+            return position;
         }
 
         //DATA ITEM: I021/131
@@ -884,9 +888,10 @@ namespace ClassLibrary
 
         private int PositionInWGS84CoordinatesHighResolution(string[] data, int position)
         {
-            int newposition = position + 4;
-            double latitude = Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1], data[position + 2], data[position + 3]))) * (180 / (Math.Pow(2, 30)));
-            double longitude = Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[newposition], data[newposition + 1], data[newposition + 2], data[newposition + 3]))) * (180 / (Math.Pow(2, 30)));
+            double latitude = Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1], data[position + 2], data[position + 3]))) * (180 / (Math.Pow(2, 30))); 
+            position = position + 4;
+            double longitude = Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1], data[position + 2], data[position + 3]))) * (180 / (Math.Pow(2, 30))); 
+            position = position + 4;
 
             int latitudeDeg = Convert.ToInt32(Math.Truncate(latitude));
             int latitudeMin = Convert.ToInt32(Math.Truncate((latitude - latitudeDeg) * 60));
@@ -901,7 +906,7 @@ namespace ClassLibrary
             //Console.WriteLine("LatWGS84: " + this.LatitudeinWGS84);
             //Console.WriteLine("LongWGS84: " + this.LongitudeinWGS84);
 
-            return newposition;
+            return position;
         }
 
         //DATA ITEM: I021/132
@@ -965,14 +970,14 @@ namespace ClassLibrary
 
         private int FinalStateSelectedAltitude(string[] data, int position)
         {
-            if (data[position].Substring(0, 1) == "0") this.MV = "Not active or unknown";
-            else this.MV = "Active";
-            if (data[position].Substring(1, 1) == "0") this.AH = "Not active or unknown";
-            else this.AH = "Active";
-            if (data[position].Substring(2, 1) == "0") this.AM = "Not active or unknown";
-            else this.AM = "Active";
+            if (data[position].Substring(0, 1) == "0") this.MV = "MV: Not active or unknown";
+            else this.MV = "MV: Active";
+            if (data[position].Substring(1, 1) == "0") this.AH = "AH: Not active or unknown";
+            else this.AH = "AH: Active";
+            if (data[position].Substring(2, 1) == "0") this.AM = "AM: Not active or unknown";
+            else this.AM = "AM: Active";
             
-            this.finalStateSelectedAltitude = Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1]).Substring(3, 13))) * 25) + " ft";
+            this.finalStateSelectedAltitude = "Altitude: " + Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1]).Substring(3, 13))) * 25) + " ft";
             
             position = position + 2;
             return position;
@@ -1046,7 +1051,7 @@ namespace ClassLibrary
         {
             if (data[position].Substring(0, 1) == "0")
             {
-                this.GroundSpeed = String.Format("{0:0.00}", (Convert.ToInt32(string.Concat(data[position], data[position + 1]).Substring(1, 15),2) * Math.Pow(2, -14)*3600)) +  " kts";
+                this.GroundSpeed = String.Format("{0:0.00}", (Convert.ToInt32(string.Concat(data[position], data[position + 1]).Substring(1, 15), 2) * Math.Pow(2, -14) * 3600)) +  " kts";
                 this.TrackAngle = String.Format("{0:0.00}", Convert.ToInt32(string.Concat(data[position + 2], data[position + 3]).Substring(0, 16),2) * (360 / (Math.Pow(2, 16)))) + " º";
                 this.GroundVector = "GS: " + this.GroundSpeed + ", TA: " + String.Format("{0:0.00}", this.TrackAngle);
             }
@@ -1075,7 +1080,7 @@ namespace ClassLibrary
             this.trackAngleRate = Convert.ToString(Convert.ToInt32(string.Concat(data[position], data[position + 1]).Substring(6, 10), 2) * (1 / 32)) + " º/s";
             
             position = position + 2;
-            return position; 
+            return position;
         }
 
         //DATA ITEM: I021/170
@@ -1104,26 +1109,26 @@ namespace ClassLibrary
 
         private int TargetStatus(string[] data, int position)
         {
-            if (data[position].Substring(0, 1) == "0") this.ICF = "No intent change active";
-            else this.ICF= "Intent change flag raised";
+            if (data[position].Substring(0, 1) == "0") this.ICF = "ICF: No intent change active";
+            else this.ICF= "ICF: Intent change flag raised";
 
-            if (data[position].Substring(1, 1) == "0") this.LNAV = "LNAV Mode engaged";
-            else this.LNAV = "LNAV Mode not engaged";
+            if (data[position].Substring(1, 1) == "0") this.LNAV = "LNAV: LNAV Mode engaged";
+            else this.LNAV = "LNAV: LNAV Mode not engaged";
 
             int PS = Convert.ToInt32(data[position].Substring(3,3), 2);
-            if (PS == 0) this.PS = "No emergency / not reported";
-            else if (PS == 1) this.PS = "General emergency";
-            else if (PS == 2) this.PS = "Lifeguard / medical emergency";
-            else if (PS == 3) this.PS = "Minimum fuel";
-            else if (PS == 4) this.PS = "No communications";
-            else if (PS == 5) this.PS = "UnLength_Widthful interference";
-            else this.PS = "'Downed' Aircraft ";
+            if (PS == 0) this.PS = "PS: No emergency / not reported";
+            else if (PS == 1) this.PS = "PS: General emergency";
+            else if (PS == 2) this.PS = "PS: Lifeguard / medical emergency";
+            else if (PS == 3) this.PS = "PS: Minimum fuel";
+            else if (PS == 4) this.PS = "PS: No communications";
+            else if (PS == 5) this.PS = "PS: UnLength_Widthful interference";
+            else this.PS = "PS: 'Downed' Aircraft ";
             
             int SS = Convert.ToInt32(data[position].Substring(6, 2), 2);
-            if (SS == 0) this.SS = "No condition reported";
-            else if (SS == 1) this.SS = "Permanent Alert (Emergency condition)";
-            else if (SS == 2) this.SS = "Temporary Alert (change in Mode 3/A Code other than emergency)";
-            else this.SS = "SPI set";
+            if (SS == 0) this.SS = "SS: No condition reported";
+            else if (SS == 1) this.SS = "SS: Permanent Alert (Emergency condition)";
+            else if (SS == 2) this.SS = "SS: Temporary Alert (change in Mode 3/A Code other than emergency)";
+            else this.SS = "SS: SPI set";
             
             position = position + 1;
             return position;
@@ -1172,10 +1177,10 @@ namespace ClassLibrary
             
             int positionInitial = position;
 
-            if (data[positionInitial].Substring(0, 1) == "1") { this.WindSpeed = Convert.ToString(Convert.ToInt32(string.Concat(data[position + 1], data[position + 2]), 2)) + " kts"; position = position + 2; }
-            if (data[positionInitial].Substring(1, 1) == "1") { this.WindDirection = Convert.ToString(Convert.ToInt32(string.Concat(data[position + 1], data[position + 2]), 2)) + " º"; position = position + 2; }
-            if (data[positionInitial].Substring(2, 1) == "1") { this.Temperature = Convert.ToString(Convert.ToInt32(string.Concat(data[position + 1], data[position + 2]), 2) * 0.25) + " ºC"; position = position + 2; }
-            if (data[positionInitial].Substring(3, 1) == "1") { this.Turbulence = Convert.ToString(Convert.ToInt32(string.Concat(data[position + 1], data[position + 2]), 2)) + " Turbulence"; position = position + 2; }
+            if (data[positionInitial].Substring(0, 1) == "1") { this.WindSpeed = "Wind Seed:" + Convert.ToString(Convert.ToInt32(string.Concat(data[position + 1], data[position + 2]), 2)) + " kts"; position = position + 2; }
+            if (data[positionInitial].Substring(1, 1) == "1") { this.WindDirection = "Wind Direction: " + Convert.ToString(Convert.ToInt32(string.Concat(data[position + 1], data[position + 2]), 2)) + " º"; position = position + 2; }
+            if (data[positionInitial].Substring(2, 1) == "1") { this.Temperature = "Temperature: " + Convert.ToString(Convert.ToInt32(string.Concat(data[position + 1], data[position + 2]), 2) * 0.25) + " ºC"; position = position + 2; }
+            if (data[positionInitial].Substring(3, 1) == "1") { this.Turbulence = "Turbulence: " + Convert.ToString(Convert.ToInt32(string.Concat(data[position + 1], data[position + 2]), 2)); position = position + 2; }
             
             return position;
         }

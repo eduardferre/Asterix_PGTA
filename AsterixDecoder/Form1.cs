@@ -20,7 +20,7 @@ namespace AsterixDecoder
         
         DataTable dataTableCAT10 = new DataTable();
         DataTable dataTableCAT21 = new DataTable();
-        
+
         public Form1()
         {
             InitializeComponent();
@@ -29,208 +29,8 @@ namespace AsterixDecoder
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           
-
-            //if (listCAT10.Count > 0) { foreach (CAT10 cat10 in listCAT10) { CreateTable_CAT10(cat10); } }
-            //if (listCAT21.Count > 0) { foreach (CAT21 cat21 in listCAT21) { CreateTable_CAT21(cat21); } }
-
-            // for (int i = 0; i < 5; i++)
-            // {
-            //     CreateTable_CAT10(listCAT10[i]);
-            // }
-
-            // for (int i = 0; i < 5; i++)
-            // {
-            //     CreateTable_CAT21(listCAT21[i]);
-            // }
-            
-            //string path = "";
-
-            //int read = decode.Read(path);
-
-            //List<CAT10> listCAT10 = decode.GetListCAT10();
-            //List<CAT21> listCat21 = decode.GetListCAT21();
-
-        }
-
-        public void CreateTable_CAT10(CAT10 Message)
-        {
-            int rowId = tableCAT10.Rows.Add();
-
-            DataGridViewRow row = tableCAT10.Rows[rowId];
-            if (Message.CAT != null) row.Cells["Category"].Value = Message.CAT;
-
-            if (Message.SAC != null) row.Cells["SAC"].Value = Message.SAC;
-            else row.Cells["SAC"].Value = "N/A";
-
-            if (Message.SIC != null) row.Cells["SIC"].Value = Message.SIC;
-            else row.Cells["SIC"].Value = "N/A";
-
-            if (Message.TargetId != null)
-            {
-                if (Message.TargetId.Replace(" ", "") != "") { row.Cells["TargetIdentification"].Value = Message.TargetId; }
-                else { row.Cells["TargetIdentification"].Value = "N/A"; }
-            }
-            else row.Cells["TargetIdentification"].Value = "N/A";
-
-            if (Message.TYP != null) row.Cells["TargetReport"].Value = Message.TYP;
-            else row.Cells["TargetReport"].Value = "N/A";
-
-            if (Message.messageType != null) row.Cells["MessageType"].Value = Message.messageType;
-            else row.Cells["MessageType"].Value = "N/A";
-
-            if (Message.FlightLevelInfo != null) row.Cells["FlightLevel"].Value = Message.FlightLevelInfo;
-            else row.Cells["FlightLevel"].Value = "N/A";
-
-            if (Message.TrackNum != null) row.Cells["TrackNumber"].Value = Message.TrackNum;
-            else row.Cells["TrackNumber"].Value = "N/A";
-
-            if (Message.TimeOfDay != null) row.Cells["TimeofDay"].Value = Message.TimeOfDay;
-            else row.Cells["TimeofDay"].Value = "N/A";
-
-            if (Message.CNF != null) row.Cells["TrackStatus"].Value = Message.CNF;
-            else row.Cells["TrackStatus"].Value = "N/A";
-
-            if (Message.LatitudeinWGS84 != null && Message.LongitudeinWGS84 != null) row.Cells["PositioninWGS84Coordinates"].Value = Message.LatitudeinWGS84 + ", " + Message.LongitudeinWGS84;
-            else row.Cells["PositioninWGS84Coordinates"].Value = "N/A";
-
-            if (Message.positioninCartesianCoordinates != null) row.Cells["PositioninCartesianCoordinates"].Value = Message.positioninCartesianCoordinates;
-            else row.Cells["PositioninCartesianCoordinates"].Value = "N/A";
-
-            if (Message.positioninPolarCoordinates != null) row.Cells["PositioninPolarCoordinates"].Value = Message.positioninPolarCoordinates;
-            else row.Cells["PositioninPolarCoordinates"].Value = "N/A";
-
-            if (Message.TrackVelocityPolarCoordinates != null) row.Cells["TrackVelocityinPolarCoordinates"].Value = Message.TrackVelocityPolarCoordinates;
-            else row.Cells["TrackVelocityinPolarCoordinates"].Value = "N/A";
-
-            if (Message.TrackVelocityCartesianCoordinates != null) { row.Cells["TrackVelocityinCartesianCoordinates"].Value = Message.TrackVelocityCartesianCoordinates; }
-            else { row.Cells["TrackVelocityinCartesianCoordinates"].Value = "N/A"; }
-
-            if (Message.targetSizeOrientation != null) row.Cells["TargetSizeandOrientation"].Value = Message.targetSizeOrientation;
-            else row.Cells["TargetSizeandOrientation"].Value = "N/A";
-
-            if (Message.TargetAdd != null) row.Cells["TargetAddress"].Value = Message.TargetAdd;
-            else row.Cells["TargetAddress"].Value = "N/A";
-
-            if (Message.NOGO != null) row.Cells["SystemStatus"].Value = Message.NOGO;
-            else row.Cells["SystemStatus"].Value = "N/A";
-
-            if (Message.VFI != null) row.Cells["VehicleFleetIdentification"].Value = Message.VFI;
-            else row.Cells["VehicleFleetIdentification"].Value = "N/A";
-
-            if (Message.preProgrammedMessage != null) row.Cells["PreprogrammedMessage"].Value = Message.preProgrammedMessage;
-            else row.Cells["PreprogrammedMessage"].Value = "N/A";
-
-            if (Message.measuredHeight != null) row.Cells["MeasuredHeight"].Value = Message.measuredHeight;
-            else row.Cells["MeasuredHeight"].Value = "N/A";
-
-            if (Message.Mode3A != null) row.Cells["Mode3ACode"].Value = Message.Mode3A;
-            else row.Cells["Mode3ACode"].Value = "N/A";
-
-            if (Message.MBData != null) row.Cells["ModeSMBData"].Value = Message.MBData;
-            else row.Cells["ModeSMBData"].Value = "N/A";
-
-            if (Message.DeviationX != null) row.Cells["StandardDeviationofPosition"].Value = Message.DeviationX;
-            else row.Cells["StandardDeviationofPosition"].Value = "N/A";
-
-            if (Message.REPPresence != 0) row.Cells["Presence"].Value = Message.REPPresence;
-            else row.Cells["Presence"].Value = "N/A";
-
-            if (Message.PAM != null) row.Cells["AmplitudeofPrimaryPlot"].Value = Message.PAM;
-            else row.Cells["AmplitudeofPrimaryPlot"].Value = "N/A";
-
-            if (Message.calculatedAcceleration != null) row.Cells["CalculatedAcceleration"].Value = Message.calculatedAcceleration;
-            else row.Cells["CalculatedAcceleration"].Value = "N/A";
-        }
-
-        public void CreateTable_CAT21(CAT21 Message)
-        {
-            int rowId = tableCAT21.Rows.Add();
-
-            DataGridViewRow row = tableCAT21.Rows[rowId];
-            if (Message.CAT != null) row.Cells["CategoryCAT21"].Value = Message.CAT;
-
-            if (Message.SAC != null) row.Cells["SACCAT21"].Value = Message.SAC;
-            else row.Cells["SACCAT21"].Value = "N/A";
-
-            if (Message.SIC != null) row.Cells["SICCAT21"].Value = Message.SIC;
-            else row.Cells["SICCAT21"].Value = "N/A";
-
-            if (Message.TargetId != null)
-            {
-                if (Message.TargetId.Replace(" ", "") != "") { row.Cells["TargetIdentificationCAT21"].Value = Message.TargetId; }
-                else { row.Cells["TargetIdentificationCAT21"].Value = "N/A"; }
-            }
-            else row.Cells["TargetIdentificationCAT21"].Value = "N/A";
-
-            if (Message.trackNumber != null) row.Cells["TrackNumberCAT21"].Value = Message.trackNumber;
-            else row.Cells["TrackNumberCAT21"].Value = "N/A";
-
-            if (Message.ServiceId != null) row.Cells["ServiceIdentificationCAT21"].Value = Message.ServiceId;
-            else row.Cells["ServiceIdentificationCAT21"].Value = "N/A";
-
-            //if (Message.FlightLevelInfo != null) row.Cells["FlightLevel"].Value = Message.FlightLevelInfo;
-            //else row.Cells["FlightLevel"].Value = "N/A";
-
-            //if (Message.TrackNum != null) row.Cells["TrackNumber"].Value = Message.TrackNum;
-            //else row.Cells["TrackNumber"].Value = "N/A";
-
-            //if (Message.TimeOfDay != null) row.Cells["TimeofDay"].Value = Message.TimeOfDay;
-            //else row.Cells["TimeofDay"].Value = "N/A";
-
-            //if (Message.CNF != null) row.Cells["TrackStatus"].Value = Message.CNF;
-            //else row.Cells["TrackStatus"].Value = "N/A";
-
-            //if (Message.LatitudeinWGS84 != null && Message.LongitudeinWGS84 != null) row.Cells["PositioninWGS84Coordinates"].Value = Message.LatitudeinWGS84 + ", " + Message.LongitudeinWGS84;
-            //else row.Cells["PositioninWGS84Coordinates"].Value = "N/A";
-
-            //if (Message.positioninCartesianCoordinates != null) row.Cells["PositioninCartesianCoordinates"].Value = Message.positioninCartesianCoordinates;
-            //else row.Cells["PositioninCartesianCoordinates"].Value = "N/A";
-
-            //if (Message.positioninPolarCoordinates != null) row.Cells["PositioninPolarCoordinates"].Value = Message.positioninPolarCoordinates;
-            //else row.Cells["PositioninPolarCoordinates"].Value = "N/A";
-
-            //if (Message.TrackVelocityPolarCoordinates != null) row.Cells["TrackVelocityinPolarCoordinates"].Value = Message.TrackVelocityPolarCoordinates;
-            //else row.Cells["TrackVelocityinPolarCoordinates"].Value = "N/A";
-
-            //if (Message.TrackVelocityCartesianCoordinates != null) { row.Cells["TrackVelocityinCartesianCoordinates"].Value = Message.TrackVelocityCartesianCoordinates; }
-            //else { row.Cells["TrackVelocityinCartesianCoordinates"].Value = "N/A"; }
-
-            //if (Message.targetSizeOrientation != null) row.Cells["TargetSizeandOrientation"].Value = Message.targetSizeOrientation;
-            //else row.Cells["TargetSizeandOrientation"].Value = "N/A";
-
-            //if (Message.TargetAdd != null) row.Cells["TargetAddress"].Value = Message.TargetAdd;
-            //else row.Cells["TargetAddress"].Value = "N/A";
-
-            //if (Message.NOGO != null) row.Cells["SystemStatus"].Value = Message.NOGO;
-            //else row.Cells["SystemStatus"].Value = "N/A";
-
-            //if (Message.VFI != null) row.Cells["VehicleFleetIdentification"].Value = Message.VFI;
-            //else row.Cells["VehicleFleetIdentification"].Value = "N/A";
-
-            //if (Message.preProgrammedMessage != null) row.Cells["PreprogrammedMessage"].Value = Message.preProgrammedMessage;
-            //else row.Cells["PreprogrammedMessage"].Value = "N/A";
-
-            //if (Message.measuredHeight != null) row.Cells["MeasuredHeight"].Value = Message.measuredHeight;
-            //else row.Cells["MeasuredHeight"].Value = "N/A";
-
-            //if (Message.Mode3A != null) row.Cells["Mode3ACode"].Value = Message.Mode3A;
-            //else row.Cells["Mode3ACode"].Value = "N/A";
-
-            //if (Message.MBData != null) row.Cells["ModeSMBData"].Value = Message.MBData;
-            //else row.Cells["ModeSMBData"].Value = "N/A";
-
-            //if (Message.DeviationX != null) row.Cells["StandardDeviationofPosition"].Value = Message.DeviationX;
-            //else row.Cells["StandardDeviationofPosition"].Value = "N/A";
-
-            //if (Message.REPPresence != 0) row.Cells["Presence"].Value = Message.REPPresence;
-            //else row.Cells["Presence"].Value = "N/A";
-
-            //if (Message.PAM != null) row.Cells["AmplitudeofPrimaryPlot"].Value = Message.PAM;
-            //else row.Cells["AmplitudeofPrimaryPlot"].Value = "N/A";
-
-            //if (Message.Calculated_Acceleration != null) row.Cells["CalculatedAcceleration"].Value = Message.Calculated_Acceleration;
-            //else row.Cells["CalculatedAcceleration"].Value = "N/A";
+            gridCAT10.Visible = false;
+            gridCAT21.Visible = false;
         }
 
         private void loadFiles_Button_Click(object sender, EventArgs e)
@@ -263,25 +63,130 @@ namespace AsterixDecoder
             this.dataTableCAT10 = decodeFiles.GetTableCAT10();
             this.dataTableCAT21 = decodeFiles.GetTableCAT21();
 
-            DataGridView gridCAT10 = new DataGridView();
-
             gridCAT10.Location = new Point(10, 10);
-
-            gridCAT10.Size = new Size(800, 300);
-
-            this.Controls.Add(gridCAT10);
-
-            gridCAT10.DataSource = dataTableCAT10;
-
-            DataGridView gridCAT21 = new DataGridView();
-
             gridCAT21.Location = new Point(10, 320);
-
+            
+            gridCAT10.Size = new Size(800, 300);
             gridCAT21.Size = new Size(800, 300);
 
+            this.Controls.Add(gridCAT10);
             this.Controls.Add(gridCAT21);
 
+            gridCAT10.DataSource = dataTableCAT10;
             gridCAT21.DataSource = dataTableCAT21;
+
+            gridCAT10.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            gridCAT21.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+
+            gridCAT10.Visible = true;
+            gridCAT21.Visible = true;
+        }
+
+        private void gridCAT10_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var row = e.RowIndex;
+            var column = e.ColumnIndex;
+            
+            if (row >= 0 && column >= 0)
+            {
+                CAT10 cat10 = this.listCAT10[row];
+                string columnName = gridCAT10.Columns[column].Name;
+                
+                if (columnName == "Target Report")
+                {
+                    doubleClickInfo_label.Text = cat10.TYP + "\n" + cat10.DCR + "\n" + cat10.CHN +
+                    "\n" + cat10.GBS + "\n" + cat10.CRT + "\n" + cat10.SIM + "\n" + cat10.TST + "\n"
+                    + cat10.RAB + "\n" + cat10.LOP + "\n" + cat10.TOT + "\n" + cat10.SPI;
+                }
+                else if (columnName == "Track Status")
+                {
+                    doubleClickInfo_label.Text = cat10.CNF + "\n" + cat10.TRE + "\n" + cat10.CST + "\n"
+                    + cat10.MAH + "\n" + cat10.TCC + "\n" + cat10.STH + "\n" + cat10.TOM + "\n" + cat10.DOU
+                    + "\n" + cat10.MRS + "\n" + cat10.GHO;
+                }
+                else if (columnName == "Target Size and Orientation")
+                {
+                    doubleClickInfo_label.Text = cat10.targetSizeOrientation;
+                }
+                else if (columnName == "Flight Level")
+                {
+                    doubleClickInfo_label.Text = cat10.FlightLevelInfo;
+                }
+                else if (columnName == "System Status")
+                {
+                    doubleClickInfo_label.Text = cat10.NOGO + "\n" + cat10.OVL + "\n" + cat10.TSV + "\n"
+                    + cat10.DIV + "\n" + cat10.TIF;
+                }
+                else if (columnName == "Mode S MB Data")
+                {
+                    //?doubleClickInfo_label.Text = cat10.modeSrep.ToString();
+                }
+                else if (columnName == "Standard Deviation of Position")
+                {
+                    doubleClickInfo_label.Text = cat10.StandardDevPos;
+                }
+                else if (columnName == "Presence")
+                {
+                    doubleClickInfo_label.Text = cat10.REPPresence.ToString();
+                }
+            }
+
+        }
+
+        private void gridCAT21_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var row = e.RowIndex;
+            var column = e.ColumnIndex;
+
+            if (row >= 0 && column >= 0)
+            {
+                CAT21 cat21 = this.listCAT21[row];
+                string columnName = gridCAT21.Columns[column].Name;
+
+                if (columnName == "Target Report")
+                {
+                    doubleClickInfo_label.Text = cat21.ATP + "\n" + cat21.ARC + "\n" + cat21.RC + "\n" +
+                    cat21.RAB + "\n" + cat21.DCR + "\n" + cat21.GBS + "\n" + cat21.SIM + "\n" + cat21.TST
+                    + "\n" + cat21.SAA + "\n" + cat21.CL + "\n" + cat21.IPC + "\n" + cat21.NOGO + "\n" +
+                    cat21.LDPJ + "\n" + cat21.RCF;
+                }
+                else if (columnName == "Quality Indicators")
+                {
+                    doubleClickInfo_label.Text = cat21.NUCr_NACv + "\n" + cat21.NUCp_NIC + "\n" + cat21.NICbaro
+                    + "\n" + cat21.SILsupp + "\n" + cat21.NACp + "\n" + cat21.SDA + "\n" + cat21.GVA + "\n" +
+                    cat21.PICsupp + "\n" + cat21.ICB + "\n" + cat21.NUCp + "\n" + cat21.NIC;
+                }
+                else if (columnName == "Target Status")
+                {
+                    doubleClickInfo_label.Text = cat21.ICF + "\n" + cat21.LNAV + "\n" + cat21.PS + "\n" + cat21.SS;
+                }
+                else if (columnName == "Met Information")
+                {
+                    doubleClickInfo_label.Text = cat21.WindSpeed + "\n" + cat21.WindDirection + "\n" + 
+                    cat21.Temperature + "\n" + cat21.Turbulence;
+                }
+                else if (columnName == "Final State Selected Altitude")
+                {
+                    doubleClickInfo_label.Text = cat21.MV + "\n" + cat21.AH + "\n" + cat21.AM + "\n" + cat21.finalStateSelectedAltitude;
+                }
+                else if (columnName == "Mode S MB Data")
+                {
+                    //?doubleClickInfo_label.Text = cat10.modeSrep.ToString();
+                }
+                else if (columnName == "Standard Deviation of Position")
+                {
+                    doubleClickInfo_label.Text = cat10.StandardDevPos;
+                }
+                else if (columnName == "Presence")
+                {
+                    doubleClickInfo_label.Text = cat10.REPPresence.ToString();
+                }
+            }
+        }
+
+        private void doubleClickInfo_label_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

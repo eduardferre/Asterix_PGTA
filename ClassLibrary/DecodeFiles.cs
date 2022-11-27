@@ -281,8 +281,6 @@ namespace ClassLibrary
                         FillTableCAT21(cat21);
                     }
                 }
-
-
                 return 1;
             }
             catch
@@ -293,23 +291,23 @@ namespace ClassLibrary
 
         public void CreateTableCAT10()
         {
-            tableCAT10.Columns.Add("Number",typeof(int)); 
-            tableCAT10.Columns.Add("CAT number"); 
+            tableCAT10.Columns.Add("Nº", typeof(int)); 
+            tableCAT10.Columns.Add("CAT Nº"); 
             tableCAT10.Columns.Add("Category"); 
             tableCAT10.Columns.Add("SAC"); 
-            tableCAT10.Columns.Add("SIC"); 
+            tableCAT10.Columns.Add("SIC");
             tableCAT10.Columns.Add("Target Identification"); 
             tableCAT10.Columns.Add("Track Number"); 
-            tableCAT10.Columns.Add("Target Report Descriptor"); 
+            tableCAT10.Columns.Add("Target Report"); 
             tableCAT10.Columns.Add("Message Type"); 
             tableCAT10.Columns.Add("Flight Level"); 
             tableCAT10.Columns.Add("Time of Day"); 
             tableCAT10.Columns.Add("Track Status"); 
-            tableCAT10.Columns.Add("Position in WGS-84 Co-ordinates"); 
-            tableCAT10.Columns.Add("Position in Cartesian Co-ordinates"); 
-            tableCAT10.Columns.Add("Position in Polar Co-ordinates"); 
-            tableCAT10.Columns.Add("Track Velocity in Polar Coordinates"); 
-            tableCAT10.Columns.Add("Track Velocity in Cartesian Coordinates"); 
+            tableCAT10.Columns.Add("Position in WGS-84"); 
+            tableCAT10.Columns.Add("Position in Cartesian"); 
+            tableCAT10.Columns.Add("Position in Polar"); 
+            tableCAT10.Columns.Add("Track Velocity in Polar"); 
+            tableCAT10.Columns.Add("Track Velocity in Cartesian"); 
             tableCAT10.Columns.Add("Target Size and Orientation"); 
             tableCAT10.Columns.Add("Target Address"); 
             tableCAT10.Columns.Add("System Status");
@@ -326,18 +324,18 @@ namespace ClassLibrary
 
         private void CreateTableCAT21()
         { 
-            tableCAT21.Columns.Add("Number", typeof(int));  
-            tableCAT21.Columns.Add("CAT number");  
+            tableCAT21.Columns.Add("Nº", typeof(int));  
+            tableCAT21.Columns.Add("CAT Nº");  
             tableCAT21.Columns.Add("Category");  
             tableCAT21.Columns.Add("SAC"); 
             tableCAT21.Columns.Add("SIC"); 
             tableCAT21.Columns.Add("Target Identification"); 
             tableCAT21.Columns.Add("Track Number"); 
-            tableCAT21.Columns.Add("Target Report Descriptor"); 
+            tableCAT21.Columns.Add("Target Report"); 
             tableCAT21.Columns.Add("Service Identification"); 
             tableCAT21.Columns.Add("Time of Report Transmission"); 
-            tableCAT21.Columns.Add("Position in WGS-84 co-ordinates"); 
-            tableCAT21.Columns.Add("Position in WGS-84 co-ordinates high res"); 
+            tableCAT21.Columns.Add("Position in WGS-84"); 
+            tableCAT21.Columns.Add("Position in WGS-84 HR"); 
             tableCAT21.Columns.Add("Air Speed"); 
             tableCAT21.Columns.Add("True Air Speed"); 
             tableCAT21.Columns.Add("Target Address"); 
@@ -376,8 +374,8 @@ namespace ClassLibrary
         { 
             var row = tableCAT10.NewRow();
 
-            row["Number"] = message.msgNum;
-            row["CAT number"] = message.msgCAT10Num;
+            row["Nº"] = message.msgNum;
+            row["CAT Nº"] = message.msgCAT10Num;
             if (message.CAT != null) { row["Category"] = message.CAT; }
             else { row["Category"] = "N/A"; }
             if (message.SAC != null) { row["SAC"] = message.SAC; }
@@ -390,11 +388,11 @@ namespace ClassLibrary
                 else { row["Target Identification"] = "N/A"; }
             }
             else { row["Target Identification"] = "N/A"; }
-            if (message.TYP != null) { row["Target Report Descriptor"] = "Click for more data"; }
-            else { row["Target Report Descriptor"] = "N/A"; }
+            if (message.TYP != null) { row["Target Report"] = "Click for more data"; }
+            else { row["Target Report"] = "N/A"; }
             if (message.messageType != null) { row["Message Type"] = message.messageType; }
             else { row["Message Type"] = "N/A"; }
-            if (message.FlightLevelInfo != null) { row["Flight Level"] = message.FlightLevelInfo; }
+            if (message.FlightLevelInfo != null) { row["Flight Level"] = "Click for more data"; }
             else { row["Flight Level"] = "N/A"; }
             if (message.TrackNum != null) { row["Track Number"] = message.TrackNum; }
             else { row["Track Number"] = "N/A"; }
@@ -402,16 +400,16 @@ namespace ClassLibrary
             else { row["Time of Day"] = "N/A"; }
             if (message.CNF != null) { row["Track Status"] = "Click for more data"; }
             else { row["Track Status"] = "N/A"; }
-            if (message.LatitudeinWGS84 != null && message.LongitudeinWGS84 != null) { row["Position in WGS-84 Co-ordinates"] =  message.LatitudeinWGS84 + ", " + message.LongitudeinWGS84; }
-            else { row["Position in WGS-84 Co-ordinates"] = "N/A"; }
-            if (message.positioninCartesianCoordinates != null) { row["Position in Cartesian Co-ordinates"] = message.positioninCartesianCoordinates; }
-            else { row["Position in Cartesian Co-ordinates"] = "N/A"; }
-            if (message.positioninPolarCoordinates != null) { row["Position in Polar Co-ordinates"] = message.positioninPolarCoordinates; }
-            else { row["Position in Polar Co-ordinates"] = "N/A"; }
-            if (message.TrackVelocityPolarCoordinates != null) { row["Track Velocity in Polar Coordinates"] = message.TrackVelocityPolarCoordinates; }
-            else { row["Track Velocity in Polar Coordinates"] = "N/A"; }
-            if (message.TrackVelocityCartesianCoordinates != null) { row["Track Velocity in Cartesian Coordinates"] = message.TrackVelocityCartesianCoordinates; }
-            else { row["Track Velocity in Cartesian Coordinates"] = "N/A"; }
+            if (message.LatitudeinWGS84 != null && message.LongitudeinWGS84 != null) { row["Position in WGS-84"] =  message.LatitudeinWGS84 + ", " + message.LongitudeinWGS84; }
+            else { row["Position in WGS-84"] = "N/A"; }
+            if (message.positioninCartesianCoordinates != null) { row["Position in Cartesian"] = message.positioninCartesianCoordinates; }
+            else { row["Position in Cartesian"] = "N/A"; }
+            if (message.positioninPolarCoordinates != null) { row["Position in Polar"] = message.positioninPolarCoordinates; }
+            else { row["Position in Polar"] = "N/A"; }
+            if (message.TrackVelocityPolarCoordinates != null) { row["Track Velocity in Polar"] = message.TrackVelocityPolarCoordinates; }
+            else { row["Track Velocity in Polar"] = "N/A"; }
+            if (message.TrackVelocityCartesianCoordinates != null) { row["Track Velocity in Cartesian"] = message.TrackVelocityCartesianCoordinates; }
+            else { row["Track Velocity in Cartesian"] = "N/A"; }
             if (message.targetSizeOrientation != null) { row["Target Size and Orientation"] = message.targetSizeOrientation; }
             else { row["Target Size and Orientation"] = "N/A"; }
             if (message.TargetAdd != null) { row["Target Address"] = message.TargetAdd; }
@@ -444,8 +442,8 @@ namespace ClassLibrary
         {
             var row = tableCAT21.NewRow();
 
-            row["Number"] = message.msgNum;
-            row["CAT number"] = message.msgCAT21Num;
+            row["Nº"] = message.msgNum;
+            row["CAT Nº"] = message.msgCAT21Num;
             if (message.CAT != null) { row["Category"] = message.CAT; }
             else { row["Category"] = "N/A"; }
             if (message.SAC != null) { row["SAC"] = message.SAC; }
@@ -454,18 +452,18 @@ namespace ClassLibrary
             else { row["SIC"] = "N/A"; }
             if (message.TargetId != null) { row["Target Identification"] = message.TargetId; }
             else { row["Target Identification"] = "N/A"; }
-            if (message.ATP != null) { row["Target Report Descriptor"] = "Click for more data"; }
-            else { row["Target Report Descriptor"] = "N/A"; }
+            if (message.ATP != null) { row["Target Report"] = "Click for more data"; }
+            else { row["Target Report"] = "N/A"; }
             if (message.trackNumber != null) { row["Track Number"] = message.trackNumber; }
             else { row["Track Number"] = "N/A"; }
             if (message.ServiceId != null) { row["Service Identification"] = message.ServiceId; }
             else { row["Service Identification"] = "N/A"; }
             if (message.timeOfApplicabilityForPosition != null) { row["Time of Applicability for Position"] = message.timeOfApplicabilityForPosition; }
             else { row["Time of Applicability for Position"] = "N/A"; }
-            if (message.LatitudeinWGS84 != null && message.LongitudeinWGS84 != null) { row["Position in WGS-84 co-ordinates"] =  message.LatitudeinWGS84 + ", " + message.LongitudeinWGS84; }
-            else { row["Position in WGS-84 co-ordinates"] = "N/A"; }
-            if (message.LatitudeinWGS84HighResolution != null && message.LongitudeinWGS84HighResolution != null) { row["Position in WGS-84 co-ordinates high res"] =  message.LatitudeinWGS84HighResolution + ", " + message.LatitudeinWGS84HighResolution; }
-            else { row["Position in WGS-84 co-ordinates high res"] = "N/A"; }
+            if (message.LatitudeinWGS84 != null && message.LongitudeinWGS84 != null) { row["Position in WGS-84"] =  message.LatitudeinWGS84 + ", " + message.LongitudeinWGS84; }
+            else { row["Position in WGS-84"] = "N/A"; }
+            if (message.LatitudeinWGS84HighResolution != null && message.LongitudeinWGS84HighResolution != null) { row["Position in WGS-84 HR"] =  message.LatitudeinWGS84HighResolution + ", " + message.LatitudeinWGS84HighResolution; }
+            else { row["Position in WGS-84 HR"] = "N/A"; }
             if (message.timeOfApplicabilityForVelocity != null) { row["Time of Applicability for Velocity"] = message.timeOfApplicabilityForVelocity; }
             else { row["Time of Applicability for Velocity"] = "N/A"; }
             if (message.airSpeed != null) { row["Air Speed"] = message.airSpeed; }
