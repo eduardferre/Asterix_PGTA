@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v3.1": {
       "AsterixDecoder/1.0.0": {
         "dependencies": {
+          "AjaxMin": "5.14.5506.26202",
           "ClassLibrary": "1.0.0",
           "GMap.Net": "1.0.1"
         },

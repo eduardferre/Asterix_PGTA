@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AjaxMin" Version="5.14.5506.26202" />
     <PackageReference Include="GMap.Net" Version="1.0.1" />
   </ItemGroup>
 
