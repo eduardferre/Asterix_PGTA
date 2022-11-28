@@ -19,3 +19,4 @@ C:\Users\Eduard\Desktop\Asterix_PGTA\AsterixDecoder\obj\Debug\netcoreapp3.1\Aste
 C:\Users\Eduard\Desktop\Asterix_PGTA\AsterixDecoder\obj\Debug\netcoreapp3.1\AsterixDecoder.pdb
 C:\Users\Eduard\Desktop\Asterix_PGTA\AsterixDecoder\obj\Debug\netcoreapp3.1\AsterixDecoder.genruntimeconfig.cache
 C:\Users\Eduard\Desktop\Asterix_PGTA\AsterixDecoder\obj\Debug\netcoreapp3.1\AsterixDecoder.AsterixDecoder.resources
+C:\Users\Eduard\Desktop\Asterix_PGTA\AsterixDecoder\obj\Debug\netcoreapp3.1\AsterixDecoder.Properties.Resources.resources

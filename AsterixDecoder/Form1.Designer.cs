@@ -43,6 +43,8 @@
             this.trajectoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.info_label = new System.Windows.Forms.Label();
+            this.process_label = new System.Windows.Forms.Label();
+            this.msg_label = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT21)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -157,14 +159,14 @@
             // loadFileToolStripMenuItem
             // 
             this.loadFileToolStripMenuItem.Name = "loadFileToolStripMenuItem";
-            this.loadFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadFileToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.loadFileToolStripMenuItem.Text = "Load File";
             this.loadFileToolStripMenuItem.Click += new System.EventHandler(this.loadFileToolStripMenuItem_Click);
             // 
             // saveCSVToolStripMenuItem
             // 
             this.saveCSVToolStripMenuItem.Name = "saveCSVToolStripMenuItem";
-            this.saveCSVToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveCSVToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.saveCSVToolStripMenuItem.Text = "Save CSV";
             // 
             // CAT10ToolStripMenuItem
@@ -210,11 +212,29 @@
             this.info_label.Text = "DATA ITEM INFO";
             this.info_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // process_label
+            // 
+            this.process_label.AutoSize = true;
+            this.process_label.Location = new System.Drawing.Point(494, 82);
+            this.process_label.Name = "process_label";
+            this.process_label.Size = new System.Drawing.Size(0, 15);
+            this.process_label.TabIndex = 7;
+            // 
+            // msg_label
+            // 
+            this.msg_label.AutoSize = true;
+            this.msg_label.Location = new System.Drawing.Point(494, 131);
+            this.msg_label.Name = "msg_label";
+            this.msg_label.Size = new System.Drawing.Size(0, 15);
+            this.msg_label.TabIndex = 8;
+            // 
             // AsterixDecoder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1300, 650);
+            this.Controls.Add(this.msg_label);
+            this.Controls.Add(this.process_label);
             this.Controls.Add(this.info_label);
             this.Controls.Add(this.gridCAT21);
             this.Controls.Add(this.gridCAT10);
@@ -251,6 +271,8 @@
         private System.Windows.Forms.ToolStripMenuItem trajectoriesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.Label info_label;
+        private System.Windows.Forms.Label process_label;
+        private System.Windows.Forms.Label msg_label;
     }
 }
 

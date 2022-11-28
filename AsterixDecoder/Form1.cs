@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,7 @@ namespace AsterixDecoder
             gridCAT21.Visible = false;
             clickInfo_label.Visible = false;
             info_label.Visible = false;
+            process_label.Text = "Select a file to decode";
         }
 
         private void gridCAT10_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -86,10 +88,11 @@ namespace AsterixDecoder
                 }
 
                 string[] infoSplit = info.Split("\n");
+                info = "";
 
                 foreach (string i in infoSplit)
                 {
-                    if (i != "") info = i + "\n";
+                    if (i != "") info = info + i + "\n";
                 }
 
                 clickInfo_label.Text = info;
@@ -194,7 +197,20 @@ namespace AsterixDecoder
 
             if (openFileDialog.SafeFileName != null)
             {
-                foreach (string path in openFileDialog.FileNames)
+                decodeFiles.ClearStoredData();
+
+                string[] fileNames = openFileDialog.FileNames;
+
+                if (fileNames.Length == 1) process_label.Text = "Selected file: \n                        " + fileNames[0];
+                else
+                {
+                    string process = "Selected files: \n                        ";
+                    foreach (string p in fileNames) { process = process + p + "\n                        "; }
+
+                    process_label.Text = process;
+                }
+
+                foreach (string path in fileNames)
                 {
                     int result = decodeFiles.Read(path);
 
@@ -203,7 +219,14 @@ namespace AsterixDecoder
                         decodeFiles.numFiles++;
                         decodeFiles.nameFiles.Add(path);
                     }
+                    else MessageBox.Show(path + " file is nor readable or an error ocurred while decoding");
                 }
+
+                msg_label.Text = "There are a total of " + decodeFiles.numMsgs.ToString() + " messages\n" +
+                                 "CAT10: " + decodeFiles.numCAT10Msgs.ToString() + " messages\n" +
+                                 "      SMR: " + decodeFiles.numCAT10SMRMsgs + " messages\n" +
+                                 "      MLAT: " + decodeFiles.numCAT10MLATMsgs + " messages\n" +
+                                 "CAT21: " + decodeFiles.numCAT21Msgs.ToString() + " messages";   
             }
 
             this.listCAT10 = decodeFiles.GetListCAT10();
@@ -215,7 +238,7 @@ namespace AsterixDecoder
 
         private void CAT10ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (listCAT10.Count == 0)
+            if (listCAT10.Count != 0)
             {
                 gridCAT21.Visible = false;
 
@@ -241,7 +264,7 @@ namespace AsterixDecoder
 
         private void CAT21ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (listCAT21.Count == 0)
+            if (listCAT21.Count != 0)
             {
                 gridCAT10.Visible = false;
 

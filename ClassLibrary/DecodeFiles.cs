@@ -14,9 +14,11 @@ namespace ClassLibrary
 
         public int numMsgs = 0;
         public int numCAT10Msgs = 0;
+        public int numCAT10SMRMsgs = 0;
+        public int numCAT10MLATMsgs = 0;
         public int numCAT21Msgs = 0;
        
-        public string process;
+        public string process = "Select a file to decode";
 
         List<CAT10> listCAT10 = new List<CAT10>();
         List<CAT21> listCAT21 = new List<CAT21>();
@@ -48,6 +50,8 @@ namespace ClassLibrary
             numFiles = 0;
             numMsgs = 0;
             numCAT10Msgs = 0;
+            numCAT10SMRMsgs = 0;
+            numCAT10MLATMsgs = 0;
             numCAT21Msgs = 0;
             nameFiles.Clear();
             listCAT10.Clear();
@@ -98,8 +102,7 @@ namespace ClassLibrary
 
             for (i = 0; i < listHex.Count; i++)
             {
-                //process = "Loading message " + Convert.ToString(i) + " of " + Convert.ToString(listHex.Count) + " messages...";
-                //print(process);
+                process = "Loading message " + Convert.ToString(i) + " of " + Convert.ToString(listHex.Count) + " messages...";
 
                 string[] arrayMsg = listHex[i];
                 int CAT = int.Parse(arrayMsg[0], System.Globalization.NumberStyles.HexNumber);
@@ -204,7 +207,6 @@ namespace ClassLibrary
             try
             {
                 process = "File is being decoded...";
-                print(process);
 
                 byte[] fileBytes = File.ReadAllBytes(path);
                 List<byte[]> listBytes = new List<byte[]>();
@@ -247,7 +249,6 @@ namespace ClassLibrary
                 for (i = 0; i < listHex.Count; i++)
                 {
                     process = "Loading message " + Convert.ToString(i) + " of " + Convert.ToString(listHex.Count) + " messages...";
-                    print(process);
 
                     string[] arrayMsg = listHex[i];
                     int CAT = int.Parse(arrayMsg[0], System.Globalization.NumberStyles.HexNumber);
@@ -262,6 +263,9 @@ namespace ClassLibrary
 
                         numMsgs++;
                         numCAT10Msgs++;
+
+                        if (cat10.SIC == "7") numCAT10SMRMsgs++;
+                        else if (cat10.SIC == "107") numCAT10MLATMsgs++;
 
                         listCAT10.Add(cat10);
                         FillTableCAT10(cat10);
