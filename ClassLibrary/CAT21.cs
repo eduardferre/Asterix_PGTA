@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace ClassLibrary
@@ -728,6 +729,7 @@ namespace ClassLibrary
         }
 
         //DATA ITEM: I021/110
+        public int TRAJInfo;
         public bool TIS;
         public bool TID_TI;
         public string NAV;
@@ -748,6 +750,8 @@ namespace ClassLibrary
 
         private int TrajectoryIntent(string[] data, int position)
         {
+            this.TRAJInfo = 1;
+            
             if (data[position].Substring(0, 1) == "1") this.TIS = true;
             else this.TIS = false;
             
@@ -945,13 +949,16 @@ namespace ClassLibrary
         public string selectedAltitude;
 
         private int SelectedAltitude(string[] data, int position)
-        {          
-            string Source = data[position].Substring(1, 2);
-            if (Source == "00") this.Source = "Unknown";
-            else if (Source == "01") this.Source = "Aircraft Altitude (Holding Altitude)";
-            else if (Source == "10") this.Source = "MCP/FCU Selected Altitude";
-            else this.Source = "FMS Selected Altitude";
+        {
+            string sas = data[position].Substring(0, 1);
+            if (sas == "0") this.SAS = "SAS: No source information provided";
+            else this.SAS = "SAS: Source information provided";
 
+            string Source = data[position].Substring(1, 2);
+            if (Source == "00") this.Source = "Source: Unknown";
+            else if (Source == "01") this.Source = "Source: Aircraft Altitude (Holding Altitude)";
+            else if (Source == "10") this.Source = "Source: MCP/FCU Selected Altitude";
+            else this.Source = "Source: FMS Selected Altitude";
             
             this.selectedAltitude = "SA: " + Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position], data[position + 1]).Substring(3, 13))) * 25) + " ft";
             
@@ -1234,7 +1241,7 @@ namespace ClassLibrary
             
             this.TYP = "TYP: " +  data_message.Substring(0,5);
             this.STYP = "STYP: " + data_message.Substring(5, 3);
-            this.ARA = "ARA: " + ata_message.Substring(8, 14);
+            this.ARA = "ARA: " + data_message.Substring(8, 14);
             this.RAC = "RAC: " + data_message.Substring(22, 4);
             this.RAT = "RAT: " + data_message.Substring(26, 1);
             this.MTE = "MTE: " + data_message.Substring(27, 1);
@@ -1299,6 +1306,7 @@ namespace ClassLibrary
         }
 
         //DATA ITEM: I021/295
+        public int DAInfo;
         public string AOS;
         public string TRD;
         public string M3A;
@@ -1325,6 +1333,8 @@ namespace ClassLibrary
 
         private int DataAges(string[] data, int position)
         {
+            this.DAInfo = 1;
+
             int positionInitial = position;
 
             if (data[position].Substring(7, 1) == "1")
@@ -1344,38 +1354,38 @@ namespace ClassLibrary
 
             position = position + 1;
 
-            if (data[positionInitial].Substring(0, 1) == "1") { this.AOS = "AOS: " + Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
-            if (data[positionInitial].Substring(1, 1) == "1") { this.TRD = "TRD: " + Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
-            if (data[positionInitial].Substring(2, 1) == "1") { this.M3A = "M3A: " + Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
-            if (data[positionInitial].Substring(3, 1) == "1") { this.QI = "QI: " + Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
-            if (data[positionInitial].Substring(4, 1) == "1") { this.TI = "TI: " + Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
-            if (data[positionInitial].Substring(5, 1) == "1") { this.MAM = "MAM: " + Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
-            if (data[positionInitial].Substring(6, 1) == "1") { this.GH = "GH: " + Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
+            if (data[positionInitial].Substring(0, 1) == "1") { this.AOS = "AOS: " + (Convert.ToInt32(data[position], 2) * 0.1).ToString("0.00") + " s"; position = position + 1; }
+            if (data[positionInitial].Substring(1, 1) == "1") { this.TRD = "TRD: " + (Convert.ToInt32(data[position], 2) * 0.1).ToString("0.00") + " s"; position = position + 1; }
+            if (data[positionInitial].Substring(2, 1) == "1") { this.M3A = "M3A: " + (Convert.ToInt32(data[position], 2) * 0.1).ToString("0.00") + " s"; position = position + 1; }
+            if (data[positionInitial].Substring(3, 1) == "1") { this.QI = "QI: " + (Convert.ToInt32(data[position], 2) * 0.1).ToString("0.00") + " s"; position = position + 1; }
+            if (data[positionInitial].Substring(4, 1) == "1") { this.TI = "TI: " + (Convert.ToInt32(data[position], 2) * 0.1).ToString("0.00") + " s"; position = position + 1; }
+            if (data[positionInitial].Substring(5, 1) == "1") { this.MAM = "MAM: " + (Convert.ToInt32(data[position], 2) * 0.1).ToString("0.00") + " s"; position = position + 1; }
+            if (data[positionInitial].Substring(6, 1) == "1") { this.GH = "GH: " + (Convert.ToInt32(data[position], 2) * 0.1).ToString("0.00") + " s"; position = position + 1; }
 
             if (data[positionInitial].Substring(7, 1) == "1")
             {
-                if (data[positionInitial + 1].Substring(0, 1) == "1") { this.FL = "FL: " + Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
-                if (data[positionInitial + 1].Substring(1, 1) == "1") { this.ISA = "ISA: " + Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
-                if (data[positionInitial + 1].Substring(2, 1) == "1") { this.FSA = "FSA: " + Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
-                if (data[positionInitial + 1].Substring(3, 1) == "1") { this.AS = "AS: " + Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
-                if (data[positionInitial + 1].Substring(4, 1) == "1") { this.TAS = "TAS: " + Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
-                if (data[positionInitial + 1].Substring(5, 1) == "1") { this.MH = "MH: " + Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
-                if (data[positionInitial + 1].Substring(6, 1) == "1") { this.BVR = "BVR: " + Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
+                if (data[positionInitial + 1].Substring(0, 1) == "1") { this.FL = "FL: " + (Convert.ToInt32(data[position], 2) * 0.1).ToString("0.00") + " s"; position = position + 1; }
+                if (data[positionInitial + 1].Substring(1, 1) == "1") { this.ISA = "ISA: " + (Convert.ToInt32(data[position], 2) * 0.1).ToString("0.00") + " s"; position = position + 1; }
+                if (data[positionInitial + 1].Substring(2, 1) == "1") { this.FSA = "FSA: " + (Convert.ToInt32(data[position], 2) * 0.1).ToString("0.00") + " s"; position = position + 1; }
+                if (data[positionInitial + 1].Substring(3, 1) == "1") { this.AS = "AS: " + (Convert.ToInt32(data[position], 2) * 0.1).ToString("0.00") + " s"; position = position + 1; }
+                if (data[positionInitial + 1].Substring(4, 1) == "1") { this.TAS = "TAS: " + (Convert.ToInt32(data[position], 2) * 0.1).ToString("0.00") + " s"; position = position + 1; }
+                if (data[positionInitial + 1].Substring(5, 1) == "1") { this.MH = "MH: " + (Convert.ToInt32(data[position], 2) * 0.1).ToString("0.00") + " s"; position = position + 1; }
+                if (data[positionInitial + 1].Substring(6, 1) == "1") { this.BVR = "BVR: " + (Convert.ToInt32(data[position], 2) * 0.1).ToString("0.00") + " s"; position = position + 1; }
                 
                 if (data[positionInitial + 1].Substring(7, 1) == "1")
                 {
-                    if (data[positionInitial + 2].Substring(0, 1) == "1") { this.GVR = "GVR: " + Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
-                    if (data[positionInitial + 2].Substring(1, 1) == "1") { this.GV = "GV: " + Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
-                    if (data[positionInitial + 2].Substring(2, 1) == "1") { this.TAR = "TAR: " + Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
-                    if (data[positionInitial + 2].Substring(3, 1) == "1") { this.TIDataAge = "TI: " + Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
-                    if (data[positionInitial + 2].Substring(4, 1) == "1") { this.TSDataAge = "TS: " + Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
-                    if (data[positionInitial + 2].Substring(5, 1) == "1") { this.MET = "MET: " + Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
-                    if (data[positionInitial + 2].Substring(6, 1) == "1") { this.ROA = "ROA: " + Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
+                    if (data[positionInitial + 2].Substring(0, 1) == "1") { this.GVR = "GVR: " + (Convert.ToInt32(data[position], 2) * 0.1).ToString("0.00") + " s"; position = position + 1; }
+                    if (data[positionInitial + 2].Substring(1, 1) == "1") { this.GV = "GV: " + (Convert.ToInt32(data[position], 2) * 0.1).ToString("0.00") + " s"; position = position + 1; }
+                    if (data[positionInitial + 2].Substring(2, 1) == "1") { this.TAR = "TAR: " + (Convert.ToInt32(data[position], 2) * 0.1).ToString("0.00") + " s"; position = position + 1; }
+                    if (data[positionInitial + 2].Substring(3, 1) == "1") { this.TIDataAge = "TI: " + (Convert.ToInt32(data[position], 2) * 0.1).ToString("0.00") + " s"; position = position + 1; }
+                    if (data[positionInitial + 2].Substring(4, 1) == "1") { this.TSDataAge = "TS: " + (Convert.ToInt32(data[position], 2) * 0.1).ToString("0.00") + " s"; position = position + 1; }
+                    if (data[positionInitial + 2].Substring(5, 1) == "1") { this.MET = "MET: " + (Convert.ToInt32(data[position], 2) * 0.1).ToString("0.00") + " s"; position = position + 1; }
+                    if (data[positionInitial + 2].Substring(6, 1) == "1") { this.ROA = "ROA: " + (Convert.ToInt32(data[position], 2) * 0.1).ToString("0.00") + " s"; position = position + 1; }
                     
                     if (data[positionInitial+2].Substring(7, 1) == "1")
                     {
-                        if (data[positionInitial + 3].Substring(0, 1) == "1") { this.ARADataAge = "ARA: " + Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
-                        if (data[positionInitial + 3].Substring(1, 1) == "1") { this.SCC = "SCC: " + Convert.ToString(Convert.ToInt32(data[position], 2) * 0.1) + " s"; position = position + 1; }
+                        if (data[positionInitial + 3].Substring(0, 1) == "1") { this.ARADataAge = "ARA: " + (Convert.ToInt32(data[position], 2) * 0.1).ToString("0.00") + " s"; position = position + 1; }
+                        if (data[positionInitial + 3].Substring(1, 1) == "1") { this.SCC = "SCC: " + (Convert.ToInt32(data[position], 2) * 0.1).ToString("0.00") + " s"; position = position + 1; }
                     }
                 }
             }

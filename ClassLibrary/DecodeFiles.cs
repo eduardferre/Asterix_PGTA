@@ -505,7 +505,7 @@ namespace ClassLibrary
             else { row["Emitter Category"] = "N/A"; }
             if (message.METInfo != 0) { row["Met Information"] = "Click for more data"; }
             else { row["Met Information"] = "N/A"; }
-            if (message.selectedAltitude != null) { row["Selected Altitude"] = message.selectedAltitude; }
+            if (message.selectedAltitude != null) { row["Selected Altitude"] = "Click for more data"; }
             else { row["Selected Altitude"] = "N/A"; }
             if (message.MV != null) { row["Final State Selected Altitude"] = "Click for more data"; }
             else { row["Final State Selected Altitude"] = "N/A"; }

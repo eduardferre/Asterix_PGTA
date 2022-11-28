@@ -1,6 +1,6 @@
 ﻿namespace AsterixDecoder
 {
-    partial class Form1
+    partial class AsterixDecoder
     {
         /// <summary>
         ///  Required designer variable.
@@ -30,33 +30,32 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.loadFiles_Button = new System.Windows.Forms.Button();
-            this.doubleClickInfo_label = new System.Windows.Forms.Label();
+            this.clickInfo_label = new System.Windows.Forms.Label();
             this.gridCAT10 = new System.Windows.Forms.DataGridView();
             this.gridCAT21 = new System.Windows.Forms.DataGridView();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileStripMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CAT10ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CAT21ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mAPSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.trajectoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.info_label = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT21)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // loadFiles_Button
+            // clickInfo_label
             // 
-            this.loadFiles_Button.Location = new System.Drawing.Point(847, 12);
-            this.loadFiles_Button.Name = "loadFiles_Button";
-            this.loadFiles_Button.Size = new System.Drawing.Size(166, 43);
-            this.loadFiles_Button.TabIndex = 2;
-            this.loadFiles_Button.Text = "Load Files";
-            this.loadFiles_Button.UseVisualStyleBackColor = true;
-            this.loadFiles_Button.Click += new System.EventHandler(this.loadFiles_Button_Click);
-            // 
-            // doubleClickInfo_label
-            // 
-            this.doubleClickInfo_label.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.doubleClickInfo_label.Font = new System.Drawing.Font("Segoe UI", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.doubleClickInfo_label.Location = new System.Drawing.Point(847, 73);
-            this.doubleClickInfo_label.Name = "doubleClickInfo_label";
-            this.doubleClickInfo_label.Size = new System.Drawing.Size(166, 203);
-            this.doubleClickInfo_label.TabIndex = 3;
-            this.doubleClickInfo_label.Click += new System.EventHandler(this.doubleClickInfo_label_Click);
+            this.clickInfo_label.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.clickInfo_label.Font = new System.Drawing.Font("Segoe UI", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.clickInfo_label.Location = new System.Drawing.Point(1166, 62);
+            this.clickInfo_label.Name = "clickInfo_label";
+            this.clickInfo_label.Size = new System.Drawing.Size(122, 172);
+            this.clickInfo_label.TabIndex = 3;
             // 
             // gridCAT10
             // 
@@ -83,7 +82,7 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.gridCAT10.DefaultCellStyle = dataGridViewCellStyle2;
-            this.gridCAT10.Location = new System.Drawing.Point(12, 12);
+            this.gridCAT10.Location = new System.Drawing.Point(12, 317);
             this.gridCAT10.Margin = new System.Windows.Forms.Padding(0);
             this.gridCAT10.MultiSelect = false;
             this.gridCAT10.Name = "gridCAT10";
@@ -101,7 +100,7 @@
             this.gridCAT10.RowTemplate.Height = 25;
             this.gridCAT10.RowTemplate.ReadOnly = true;
             this.gridCAT10.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridCAT10.Size = new System.Drawing.Size(240, 150);
+            this.gridCAT10.Size = new System.Drawing.Size(10, 11);
             this.gridCAT10.TabIndex = 4;
             this.gridCAT10.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridCAT10_CellClick);
             // 
@@ -116,7 +115,7 @@
             this.gridCAT21.ColumnHeadersHeight = 22;
             this.gridCAT21.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.gridCAT21.DefaultCellStyle = dataGridViewCellStyle2;
-            this.gridCAT21.Location = new System.Drawing.Point(12, 172);
+            this.gridCAT21.Location = new System.Drawing.Point(12, 358);
             this.gridCAT21.Margin = new System.Windows.Forms.Padding(0);
             this.gridCAT21.MultiSelect = false;
             this.gridCAT21.Name = "gridCAT21";
@@ -127,34 +126,131 @@
             this.gridCAT21.RowTemplate.Height = 25;
             this.gridCAT21.RowTemplate.ReadOnly = true;
             this.gridCAT21.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridCAT21.Size = new System.Drawing.Size(240, 150);
+            this.gridCAT21.Size = new System.Drawing.Size(10, 10);
             this.gridCAT21.TabIndex = 4;
             this.gridCAT21.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridCAT21_CellClick);
             // 
-            // Form1
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileStripMenu,
+            this.CAT10ToolStripMenuItem,
+            this.CAT21ToolStripMenuItem,
+            this.mAPSToolStripMenuItem,
+            this.trajectoriesToolStripMenuItem,
+            this.helpToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1300, 24);
+            this.menuStrip1.TabIndex = 5;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileStripMenu
+            // 
+            this.fileStripMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadFileToolStripMenuItem,
+            this.saveCSVToolStripMenuItem});
+            this.fileStripMenu.Name = "fileStripMenu";
+            this.fileStripMenu.Size = new System.Drawing.Size(37, 20);
+            this.fileStripMenu.Text = "File";
+            // 
+            // loadFileToolStripMenuItem
+            // 
+            this.loadFileToolStripMenuItem.Name = "loadFileToolStripMenuItem";
+            this.loadFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadFileToolStripMenuItem.Text = "Load File";
+            this.loadFileToolStripMenuItem.Click += new System.EventHandler(this.loadFileToolStripMenuItem_Click);
+            // 
+            // saveCSVToolStripMenuItem
+            // 
+            this.saveCSVToolStripMenuItem.Name = "saveCSVToolStripMenuItem";
+            this.saveCSVToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveCSVToolStripMenuItem.Text = "Save CSV";
+            // 
+            // CAT10ToolStripMenuItem
+            // 
+            this.CAT10ToolStripMenuItem.Name = "CAT10ToolStripMenuItem";
+            this.CAT10ToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.CAT10ToolStripMenuItem.Text = "CAT10";
+            this.CAT10ToolStripMenuItem.Click += new System.EventHandler(this.CAT10ToolStripMenuItem_Click);
+            // 
+            // CAT21ToolStripMenuItem
+            // 
+            this.CAT21ToolStripMenuItem.Name = "CAT21ToolStripMenuItem";
+            this.CAT21ToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.CAT21ToolStripMenuItem.Text = "CAT21";
+            this.CAT21ToolStripMenuItem.Click += new System.EventHandler(this.CAT21ToolStripMenuItem_Click);
+            // 
+            // mAPSToolStripMenuItem
+            // 
+            this.mAPSToolStripMenuItem.Name = "mAPSToolStripMenuItem";
+            this.mAPSToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.mAPSToolStripMenuItem.Text = "Maps";
+            // 
+            // trajectoriesToolStripMenuItem
+            // 
+            this.trajectoriesToolStripMenuItem.Name = "trajectoriesToolStripMenuItem";
+            this.trajectoriesToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
+            this.trajectoriesToolStripMenuItem.Text = "Trajectories";
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // info_label
+            // 
+            this.info_label.AutoSize = true;
+            this.info_label.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.info_label.Location = new System.Drawing.Point(1127, 37);
+            this.info_label.Name = "info_label";
+            this.info_label.Size = new System.Drawing.Size(161, 25);
+            this.info_label.TabIndex = 6;
+            this.info_label.Text = "DATA ITEM INFO";
+            this.info_label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // AsterixDecoder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1025, 641);
+            this.ClientSize = new System.Drawing.Size(1300, 650);
+            this.Controls.Add(this.info_label);
             this.Controls.Add(this.gridCAT21);
             this.Controls.Add(this.gridCAT10);
-            this.Controls.Add(this.doubleClickInfo_label);
-            this.Controls.Add(this.loadFiles_Button);
+            this.Controls.Add(this.clickInfo_label);
+            this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.MaximizeBox = false;
+            this.Name = "AsterixDecoder";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "ASTERIX Decoder";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT21)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Button loadFiles_Button;
-        private System.Windows.Forms.Label doubleClickInfo_label;
+        private System.Windows.Forms.Label clickInfo_label;
         private System.Windows.Forms.DataGridView gridCAT10;
         private System.Windows.Forms.DataGridView gridCAT21;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileStripMenu;
+        private System.Windows.Forms.ToolStripMenuItem loadFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveCSVToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CAT10ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem CAT21ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mAPSToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem trajectoriesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.Label info_label;
     }
 }
 
