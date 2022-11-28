@@ -1,2 +1,13 @@
 /bin
 /obj
+/AsterixDecoder/bin
+/AsterixDecoder/obj
+/AsterixDecoder/.vs
+/ClassLibrary/bin
+/ClassLibrary/obj
+/ClassLibrary/.vs
+/ConsoleApp1/bin
+/ConsoleApp1/obj
+/ConsoleApp1/.vs
+/FlightDataItem/bin
+/FlightDataItem/obj
