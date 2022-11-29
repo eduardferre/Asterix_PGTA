@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Gmap.net;
+using GMap.NET;
 namespace ClassLibrary
 {
     public class PointWithTime
     {
-        public Location point = new Location();
+        public PointLatLng point = new PointLatLng();
         public int time;
-        public PointWithTime(Location p, int t)
+        public PointWithTime(PointLatLng p, int t)
         {
             this.point = p;
             this.time = t;
@@ -29,12 +29,12 @@ namespace ClassLibrary
         public string trackNum;
         public string type;
         public string detectionMode;
-        public List<Location> listPoints = new List<Location>();
+        public List<PointLatLng> listPoints = new List<PointLatLng>();
         public List<PointWithTime> listTimePoints = new List<PointWithTime>();
 
       public Trajectories(string Callsign, int Time, double lat, double lon, string emitter, string TargetAddress, string DetectionMode, string CAT, string SAC, string SIC, string Track_number)
         {
-            Location p = new Location(lat, lon);
+            PointLatLng p = new PointLatLng(lat, lon);
             this.listPoints.Add(p);
             PointWithTime pt = new PointWithTime(p, Time);
             this.listTimePoints.Add(pt);
@@ -54,14 +54,14 @@ namespace ClassLibrary
 
           public void AddPoint(double lat, double lon, int time)
         {
-            Location p = new Location(lat, lon);
+            PointLatLng p = new PointLatLng(lat, lon);
             this.listPoints.Add(p);
             this.lastTOD = time;
         }
 
       public void AddTimePoint(double lat, double lon, int time)
         {
-            Location p = new Location(lat, lon);
+            PointLatLng p = new PointLatLng(lat, lon);
             PointWithTime TimePoint = new PointWithTime(p, time);
             listTimePoints.Add(TimePoint);
 
@@ -141,10 +141,10 @@ namespace ClassLibrary
         {
             StringBuilder KMLcoor = new StringBuilder();
             KMLcoor.AppendLine("<coordinates>");
-            foreach (Location p in listPoints)
+            foreach (PointLatLng p in listPoints)
             {
-                string Lat = Convert.ToString(p.Latitude).Replace(",", ".");
-                string Lon = Convert.ToString(p.Longitude).Replace(",", ".");
+                string Lat = Convert.ToString(p.Lat).Replace(",", ".");
+                string Lon = Convert.ToString(p.Lng).Replace(",", ".");
                 KMLcoor.AppendLine(Lon + "," + Lat);
             }
             KMLcoor.AppendLine("</coordinates>");

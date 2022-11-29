@@ -9,6 +9,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Input;
+using System.Net;
+
+
+using GMap.NET;
+using System.Reflection;
+using GMap.NET.MapProviders;
+using Cursors = System.Windows.Input.Cursors;
+using Image = System.Drawing.Image;
+using GMap.NET.WindowsPresentation;
+using MessageBox = System.Windows.MessageBox;
 
 namespace AsterixDecoder
 {
@@ -286,6 +297,30 @@ namespace AsterixDecoder
                 gridCAT21.Visible = true;
             }
             else { MessageBox.Show("No data for CAT21, please upload a file with CAT21 messages"); }
+        }
+
+        int zoom = 12;
+        private void gMapControl1_Load(object sender, EventArgs e)
+        {
+            GMaps.Instance.Mode = AccessMode.ServerAndCache;
+
+            gMapControl1.RoutesEnabled = true;
+            gMapControl1.PolygonsEnabled = true;
+            gMapControl1.MarkersEnabled = true;
+            gMapControl1.NegativeMode = false;
+            gMapControl1.RetryLoadTile = 0;
+            gMapControl1.ShowTileGridLines = false;
+            gMapControl1.AllowDrop = true;
+            gMapControl1.IgnoreMarkerOnMouseWheel = true;
+            gMapControl1.DragButton = MouseButtons.Left;
+            gMapControl1.DisableFocusOnMouseEnter = true;
+            gMapControl1.MinZoom = 0;
+            gMapControl1.MaxZoom = 24;
+            gMapControl1.Zoom = zoom;
+            gMapControl1.Position = new PointLatLng(41.295855, 2.08442);
+            gMapControl1.MapProvider = GMapProviders.GoogleMap;
+
+
         }
     }
 }

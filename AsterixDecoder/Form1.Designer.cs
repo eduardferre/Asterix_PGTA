@@ -45,6 +45,7 @@
             this.info_label = new System.Windows.Forms.Label();
             this.process_label = new System.Windows.Forms.Label();
             this.msg_label = new System.Windows.Forms.Label();
+            this.gMapControl1 = new GMap.NET.WindowsForms.GMapControl();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT21)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -99,9 +100,6 @@
             this.gridCAT10.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.gridCAT10.RowHeadersWidth = 6;
             this.gridCAT10.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.gridCAT10.RowTemplate.Height = 25;
-            this.gridCAT10.RowTemplate.ReadOnly = true;
-            this.gridCAT10.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.gridCAT10.Size = new System.Drawing.Size(10, 11);
             this.gridCAT10.TabIndex = 4;
             this.gridCAT10.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridCAT10_CellClick);
@@ -125,9 +123,6 @@
             this.gridCAT21.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.gridCAT21.RowHeadersWidth = 6;
             this.gridCAT21.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.gridCAT21.RowTemplate.Height = 25;
-            this.gridCAT21.RowTemplate.ReadOnly = true;
-            this.gridCAT21.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.gridCAT21.Size = new System.Drawing.Size(10, 10);
             this.gridCAT21.TabIndex = 4;
             this.gridCAT21.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridCAT21_CellClick);
@@ -228,11 +223,39 @@
             this.msg_label.Size = new System.Drawing.Size(0, 15);
             this.msg_label.TabIndex = 8;
             // 
+            // gMapControl1
+            // 
+            this.gMapControl1.Bearing = 0F;
+            this.gMapControl1.CanDragMap = true;
+            this.gMapControl1.EmptyTileColor = System.Drawing.Color.Navy;
+            this.gMapControl1.GrayScaleMode = false;
+            this.gMapControl1.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
+            this.gMapControl1.LevelsKeepInMemory = 5;
+            this.gMapControl1.Location = new System.Drawing.Point(12, 37);
+            this.gMapControl1.MarkersEnabled = true;
+            this.gMapControl1.MaxZoom = 2;
+            this.gMapControl1.MinZoom = 2;
+            this.gMapControl1.MouseWheelZoomEnabled = true;
+            this.gMapControl1.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
+            this.gMapControl1.Name = "gMapControl1";
+            this.gMapControl1.NegativeMode = false;
+            this.gMapControl1.PolygonsEnabled = true;
+            this.gMapControl1.RetryLoadTile = 0;
+            this.gMapControl1.RoutesEnabled = true;
+            this.gMapControl1.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
+            this.gMapControl1.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
+            this.gMapControl1.ShowTileGridLines = false;
+            this.gMapControl1.Size = new System.Drawing.Size(601, 277);
+            this.gMapControl1.TabIndex = 9;
+            this.gMapControl1.Zoom = 0D;
+            this.gMapControl1.Load += new System.EventHandler(this.gMapControl1_Load);
+            // 
             // AsterixDecoder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1300, 650);
+            this.Controls.Add(this.gMapControl1);
             this.Controls.Add(this.msg_label);
             this.Controls.Add(this.process_label);
             this.Controls.Add(this.info_label);
@@ -273,6 +296,7 @@
         private System.Windows.Forms.Label info_label;
         private System.Windows.Forms.Label process_label;
         private System.Windows.Forms.Label msg_label;
+        private GMap.NET.WindowsForms.GMapControl gMapControl1;
     }
 }
 

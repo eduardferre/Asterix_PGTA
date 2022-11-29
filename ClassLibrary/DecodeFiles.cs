@@ -22,13 +22,14 @@ namespace ClassLibrary
 
         List<CAT10> listCAT10 = new List<CAT10>();
         List<CAT21> listCAT21 = new List<CAT21>();
+        List<CATALL> listCATALL = new List<CATALL>();
 
         DataTable tableCAT10 = new DataTable();
         DataTable tableCAT21 = new DataTable();
 
-        List<Trajectories> SMRTraj = new List<Trajectories>(); //List with SMR trajectories
-        List<Trajectories> MLATTraj = new List<Trajectories>(); //List with MLAT trajectories
-        List<Trajectories> ADSBTraj = new List<Trajectories>(); //List with ADSB trajectories
+        List<Trajectories> SMRTraj = new List<Trajectories>(); 
+        List<Trajectories> MLATTraj = new List<Trajectories>(); 
+        List<Trajectories> ADSBTraj = new List<Trajectories>(); 
 
 
         public List<string> nameFiles = new List<string>();
@@ -36,6 +37,7 @@ namespace ClassLibrary
 
         public List<CAT10> GetListCAT10() { return listCAT10; }
         public List<CAT21> GetListCAT21() { return listCAT21; }
+       // public List<CATALL> GetListCATALL() { return listCATALL; }
         public DataTable GetTableCAT10() { return tableCAT10; }
         public DataTable GetTableCAT21() { return tableCAT21; }
 
@@ -56,6 +58,7 @@ namespace ClassLibrary
             nameFiles.Clear();
             listCAT10.Clear();
             listCAT21.Clear();
+            listCATALL.Clear();
             tableCAT10.Clear();
             tableCAT21.Clear();
         }
@@ -207,6 +210,8 @@ namespace ClassLibrary
             try
             {
                 process = "File is being decoded...";
+                bool first = true;
+                int first_time_file = 0;
 
                 byte[] fileBytes = File.ReadAllBytes(path);
                 List<byte[]> listBytes = new List<byte[]>();
@@ -266,8 +271,16 @@ namespace ClassLibrary
 
                         if (cat10.SIC == "7") numCAT10SMRMsgs++;
                         else if (cat10.SIC == "107") numCAT10MLATMsgs++;
-
+                        if (first == true)
+                        {
+                            first_time_file = cat10.TimeOfDaySec;
+                            first = false;
+                        }
                         listCAT10.Add(cat10);
+
+                        CATALL catall = new CATALL(cat10, 0, first_time_file); 
+
+                        listCATALL.Add(catall);
                         FillTableCAT10(cat10);
                     }
                     else if (CAT == 21)
@@ -279,11 +292,21 @@ namespace ClassLibrary
 
                         numMsgs++;
                         numCAT21Msgs++;
-
+                        if (first == true)
+                        {
+                            first_time_file = cat21.timeOfDaySeconds;
+                            first = false;
+                        }
                         listCAT21.Add(cat21);
+                        CATALL catall = new CATALL(cat21, 0, first_time_file);
+                        listCATALL.Add(catall);
                         FillTableCAT21(cat21);
                     }
                 }
+                listCATALL = ComputeTimeOfDay(listCATALL);
+                ComputeTraj(listCATALL);
+                ComputeDirecction(listCATALL);
+                ComputeDetectionRatio(listCATALL);
                 return 1;
             }
             catch
@@ -682,8 +705,8 @@ namespace ClassLibrary
                             i++;
                         }
                     }
-                    double X = p.point.Longitude - message.longitudeInWGS84;
-                    double Y = p.point.Latitude - message.latitudeInWGS84;
+                    double X = p.point.Lng - message.longitudeInWGS84;
+                    double Y = p.point.Lat - message.latitudeInWGS84;
                     int direction = 100;
                     double dir = 0;
                     dir = (Math.Atan2(Y, X) * (180 / Math.PI));
@@ -712,8 +735,8 @@ namespace ClassLibrary
                     if (t.listTimePoints[index + 1].time != message.timeOfDay || index == 0)
                     {
                         p = t.listTimePoints[index + 1];
-                        X = p.point.Longitude - message.longitudeInWGS84;
-                        Y = p.point.Latitude - message.latitudeInWGS84;
+                        X = p.point.Lng - message.longitudeInWGS84;
+                        Y = p.point.Lat - message.latitudeInWGS84;
 
                         dir = (Math.Atan2(Y, X) * (180 / Math.PI));
                         try
@@ -726,8 +749,8 @@ namespace ClassLibrary
                     else
                     {
                         p = t.listTimePoints[index - 1];
-                        X = message.longitudeInWGS84 - p.point.Longitude;
-                        Y = message.latitudeInWGS84 - p.point.Latitude;
+                        X = message.longitudeInWGS84 - p.point.Lng;
+                        Y = message.latitudeInWGS84 - p.point.Lat;
                         dir = (Math.Atan2(Y, X) * (180 / Math.PI));
                         try
                         {
@@ -753,8 +776,8 @@ namespace ClassLibrary
                     try
                     {
                         PointWithTime p = t.listTimePoints[index - 1];
-                        double X = message.longitudeInWGS84 - p.point.Longitude;
-                        double Y = message.latitudeInWGS84 - p.point.Latitude;
+                        double X = message.longitudeInWGS84 - p.point.Lng;
+                        double Y = message.latitudeInWGS84 - p.point.Lat;
                         int direction = 100;
                         double dir = (Math.Atan2(Y, X) * (180 / Math.PI));
                         try
