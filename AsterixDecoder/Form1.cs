@@ -41,11 +41,14 @@ namespace AsterixDecoder
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            process_label.Text = "Select a file to decode";
+            clickInfo_label.Visible = false;
             gridCAT10.Visible = false;
             gridCAT21.Visible = false;
-            clickInfo_label.Visible = false;
             info_label.Visible = false;
-            process_label.Text = "Select a file to decode";
+            process_label.Visible = true;
+            msg_label.Visible = false;
+            gMapControl1.Visible = false;
         }
 
         private void gridCAT10_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -249,9 +252,15 @@ namespace AsterixDecoder
 
         private void CAT10ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            clickInfo_label.Visible = true;
+            gridCAT10.Visible = true;
+            gridCAT21.Visible = false;
+            info_label.Visible = true;
+            process_label.Visible = false;
+            msg_label.Visible = false;
+            gMapControl1.Visible = false;
             if (listCAT10.Count != 0)
             {
-                gridCAT21.Visible = false;
 
                 gridCAT10.Location = new Point(10, 40);
                 clickInfo_label.Location = new Point(1075, 80);
@@ -275,9 +284,15 @@ namespace AsterixDecoder
 
         private void CAT21ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            clickInfo_label.Visible = true;
+            gridCAT10.Visible = false;
+            gridCAT21.Visible = true;
+            info_label.Visible = true;
+            process_label.Visible = false;
+            msg_label.Visible = false;
+            gMapControl1.Visible = false;
             if (listCAT21.Count != 0)
             {
-                gridCAT10.Visible = false;
 
                 gridCAT21.Location = new Point(10, 40);
                 clickInfo_label.Location = new Point(1075, 80);
@@ -320,6 +335,18 @@ namespace AsterixDecoder
             gMapControl1.Position = new PointLatLng(41.295855, 2.08442);
             gMapControl1.MapProvider = GMapProviders.GoogleMap;
 
+
+        }
+
+        private void MapsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            clickInfo_label.Visible = false;
+            gridCAT10.Visible = false;
+            gridCAT21.Visible = false;
+            info_label.Visible = false;
+            process_label.Visible = false;
+            msg_label.Visible = false;
+            gMapControl1.Visible = true;
 
         }
     }
