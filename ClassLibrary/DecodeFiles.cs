@@ -11,7 +11,6 @@ namespace ClassLibrary
     public class DecodeFiles
     {
         public int numFiles = 0;
-
         public int numMsgs = 0;
         public int numCAT10Msgs = 0;
         public int numCAT10SMRMsgs = 0;
