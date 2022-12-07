@@ -262,11 +262,12 @@ namespace ClassLibrary
                     {
                         CAT10 cat10 = new CAT10(arrayMsg, 0);
 
+                        numMsgs++;
+                        numCAT10Msgs++;
+
                         cat10.msgNum = numMsgs;
                         cat10.msgCAT10Num = numCAT10Msgs;
 
-                        numMsgs++;
-                        numCAT10Msgs++;
 
                         if (cat10.SIC == "7") numCAT10SMRMsgs++;
                         else if (cat10.SIC == "107") numCAT10MLATMsgs++;
@@ -286,11 +287,12 @@ namespace ClassLibrary
                     {
                         CAT21 cat21 = new CAT21(arrayMsg, 0);
 
-                        cat21.msgNum = numMsgs;
-                        cat21.msgCAT21Num = numCAT10Msgs;
-
                         numMsgs++;
                         numCAT21Msgs++;
+
+                        cat21.msgNum = numMsgs;
+                        cat21.msgCAT21Num = numCAT21Msgs;
+
                         if (first == true)
                         {
                             first_time_file = cat21.timeOfDaySeconds;
