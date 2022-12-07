@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\AsterixDecoder\\AsterixDecoder.csproj": {}
+    "C:\\Users\\Eduard\\Desktop\\Asterix_PGTA\\AsterixDecoder\\AsterixDecoder.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\AsterixDecoder\\AsterixDecoder.csproj": {
+    "C:\\Users\\Eduard\\Desktop\\Asterix_PGTA\\AsterixDecoder\\AsterixDecoder.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\AsterixDecoder\\AsterixDecoder.csproj",
+        "projectUniqueName": "C:\\Users\\Eduard\\Desktop\\Asterix_PGTA\\AsterixDecoder\\AsterixDecoder.csproj",
         "projectName": "AsterixDecoder",
-        "projectPath": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\AsterixDecoder\\AsterixDecoder.csproj",
-        "packagesPath": "C:\\Users\\gerar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\AsterixDecoder\\obj\\",
+        "projectPath": "C:\\Users\\Eduard\\Desktop\\Asterix_PGTA\\AsterixDecoder\\AsterixDecoder.csproj",
+        "packagesPath": "C:\\Users\\Eduard\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Eduard\\Desktop\\Asterix_PGTA\\AsterixDecoder\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\gerar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Eduard\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,9 +30,10 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\ClassLibrary\\ClassLibrary.csproj": {
-                "projectPath": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\ClassLibrary\\ClassLibrary.csproj"
+              "C:\\Users\\Eduard\\Desktop\\Asterix_PGTA\\ClassLibrary\\ClassLibrary.csproj": {
+                "projectPath": "C:\\Users\\Eduard\\Desktop\\Asterix_PGTA\\ClassLibrary\\ClassLibrary.csproj"
               }
             }
           }
@@ -41,6 +46,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "AjaxMin": {
               "target": "Package",
@@ -57,7 +63,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -70,26 +77,27 @@
             },
             "Microsoft.WindowsDesktop.App.WindowsForms": {
               "privateAssets": "none"
-            },
-            "Microsoft.WindowsDesktop.App.WPF": {
-              "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\ClassLibrary\\ClassLibrary.csproj": {
+    "C:\\Users\\Eduard\\Desktop\\Asterix_PGTA\\ClassLibrary\\ClassLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\ClassLibrary\\ClassLibrary.csproj",
+        "projectUniqueName": "C:\\Users\\Eduard\\Desktop\\Asterix_PGTA\\ClassLibrary\\ClassLibrary.csproj",
         "projectName": "ClassLibrary",
-        "projectPath": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\ClassLibrary\\ClassLibrary.csproj",
-        "packagesPath": "C:\\Users\\gerar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\ClassLibrary\\obj\\",
+        "projectPath": "C:\\Users\\Eduard\\Desktop\\Asterix_PGTA\\ClassLibrary\\ClassLibrary.csproj",
+        "packagesPath": "C:\\Users\\Eduard\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Eduard\\Desktop\\Asterix_PGTA\\ClassLibrary\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\gerar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Eduard\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -101,6 +109,7 @@
         },
         "frameworks": {
           "netstandard2.0": {
+            "targetAlias": "netstandard2.0",
             "projectReferences": {}
           }
         },
@@ -112,6 +121,7 @@
       },
       "frameworks": {
         "netstandard2.0": {
+          "targetAlias": "netstandard2.0",
           "dependencies": {
             "GMap.NET.Core": {
               "target": "Package",
@@ -146,11 +156,12 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }
