@@ -65,6 +65,15 @@ namespace AsterixDecoder
             adsbCheck.Visible = false;
             timeButton.Visible = false;
             labelFilter.Visible = false;
+            trajButton.Visible = false;
+            smrButton.Visible = false;
+            mlatButton.Visible = false;
+            trackNumberButton.Visible = false;
+            targetAddressButton.Visible = false;
+            mode3AButton.Visible = false;
+            targetIDButton.Visible = false;
+            filterButton.Visible = false;
+            filterTextBox.Visible = false;
         }
 
         private void gridCAT10_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -299,6 +308,7 @@ namespace AsterixDecoder
             mlatCheck.Visible = false;
             adsbCheck.Visible = false;
             timeButton.Visible = false;
+            trajButton.Visible = false;
 
             if (listCAT10.Count != 0)
             {
@@ -306,6 +316,15 @@ namespace AsterixDecoder
                 gridCAT10.Location = new Point(10, 40);
                 clickInfo_label.Location = new Point(1075, 80);
                 info_label.Location = new Point(1100, 40);
+                labelFilter.Location = new Point(1110, 335);
+                smrButton.Location = new Point(1110, 375);
+                mlatButton.Location = new Point(1110, 400);
+                trackNumberButton.Location = new Point(1110, 425);
+                mode3AButton.Location = new Point(1110, 450);
+                targetAddressButton.Location = new Point(1110, 475);
+                targetIDButton.Location = new Point(1110, 500);
+                filterTextBox.Location = new Point(1115, 525);
+                filterButton.Location = new Point(1100, 560);
 
                 gridCAT10.Size = new Size(1050, 600);
                 clickInfo_label.Size = new Size(210, 250);
@@ -320,6 +339,14 @@ namespace AsterixDecoder
                 labelFilter.Visible = true;
                 clickInfo_label.Visible = true;
                 gridCAT10.Visible = true;
+                smrButton.Visible = true;
+                mlatButton.Visible = true;
+                trackNumberButton.Visible = true;
+                targetAddressButton.Visible = true;
+                targetIDButton.Visible = true;
+                mode3AButton.Visible = true;
+                filterButton.Visible = true;
+                filterTextBox.Visible = true;
             }
             else { MessageBox.Show("No data for CAT10, please upload a file with CAT10 messages"); }
         }
@@ -338,6 +365,7 @@ namespace AsterixDecoder
             mlatCheck.Visible = false;
             adsbCheck.Visible = false;
             timeButton.Visible = false;
+            trajButton.Visible = false;
 
             if (listCAT21.Count != 0)
             {
@@ -345,7 +373,6 @@ namespace AsterixDecoder
                 gridCAT21.Location = new Point(10, 40);
                 clickInfo_label.Location = new Point(1075, 80);
                 info_label.Location = new Point(1100, 40);
-                labelFilter.Location = new Point(1150, 250);
 
                 gridCAT21.Size = new Size(1050, 600);
                 clickInfo_label.Size = new Size(210, 250);
@@ -360,6 +387,14 @@ namespace AsterixDecoder
                 labelFilter.Visible = true;
                 clickInfo_label.Visible = true;
                 gridCAT21.Visible = true;
+                smrButton.Visible = true;
+                mlatButton.Visible = true;
+                trackNumberButton.Visible = true;
+                targetAddressButton.Visible = true;
+                mode3AButton.Visible = true;
+                targetIDButton.Visible = true;
+                filterButton.Visible = true;
+                filterTextBox.Visible = true;
             }
             else { MessageBox.Show("No data for CAT21, please upload a file with CAT21 messages"); }
         }
@@ -372,6 +407,14 @@ namespace AsterixDecoder
             info_label.Visible = false;
             process_label.Visible = false;
             msg_label.Visible = false;
+            smrButton.Visible = false;
+            mlatButton.Visible = false;
+            trackNumberButton.Visible = false;
+            targetAddressButton.Visible = false;
+            targetIDButton.Visible = false;
+            mode3AButton.Visible = false;
+            filterButton.Visible = false;
+            filterTextBox.Visible = false;
             gMapControl1.Visible = true;
             timeLabel.Visible = true;
             startButton.Visible = true;
@@ -381,6 +424,7 @@ namespace AsterixDecoder
             mlatCheck.Visible = true;
             adsbCheck.Visible = true;
             timeButton.Visible = true;
+            trajButton.Visible = true;
 
             timer1.Stop();
             timer1.Interval = 1000;

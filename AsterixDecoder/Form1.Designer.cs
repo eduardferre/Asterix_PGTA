@@ -61,8 +61,16 @@ namespace AsterixDecoder
             this.adsbCheck = new System.Windows.Forms.CheckBox();
             this.timeButton = new System.Windows.Forms.Button();
             this.labelFilter = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.trajButton = new System.Windows.Forms.Button();
+            this.smrButton = new System.Windows.Forms.RadioButton();
+            this.mlatButton = new System.Windows.Forms.RadioButton();
+            this.trackNumberButton = new System.Windows.Forms.RadioButton();
+            this.targetIDButton = new System.Windows.Forms.RadioButton();
+            this.mode3AButton = new System.Windows.Forms.RadioButton();
+            this.targetAddressButton = new System.Windows.Forms.RadioButton();
+            this.filterButton = new System.Windows.Forms.Button();
+            this.filterTextBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT21)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -376,20 +384,11 @@ namespace AsterixDecoder
             // 
             this.labelFilter.AutoSize = true;
             this.labelFilter.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelFilter.Location = new System.Drawing.Point(1152, 255);
+            this.labelFilter.Location = new System.Drawing.Point(1139, 254);
             this.labelFilter.Name = "labelFilter";
             this.labelFilter.Size = new System.Drawing.Size(124, 25);
             this.labelFilter.TabIndex = 6;
             this.labelFilter.Text = "FILTER DATA";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1238, 501);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 15);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "label1";
             // 
             // trajButton
             // 
@@ -401,14 +400,113 @@ namespace AsterixDecoder
             this.trajButton.UseVisualStyleBackColor = true;
             this.trajButton.Click += new System.EventHandler(this.trajButton_Click);
             // 
+            // smrButton
+            // 
+            this.smrButton.AutoSize = true;
+            this.smrButton.Location = new System.Drawing.Point(1139, 317);
+            this.smrButton.Name = "smrButton";
+            this.smrButton.Size = new System.Drawing.Size(49, 19);
+            this.smrButton.TabIndex = 20;
+            this.smrButton.TabStop = true;
+            this.smrButton.Text = "SMR";
+            this.smrButton.UseVisualStyleBackColor = true;
+            // 
+            // mlatButton
+            // 
+            this.mlatButton.AutoSize = true;
+            this.mlatButton.Location = new System.Drawing.Point(1139, 292);
+            this.mlatButton.Name = "mlatButton";
+            this.mlatButton.Size = new System.Drawing.Size(55, 19);
+            this.mlatButton.TabIndex = 21;
+            this.mlatButton.TabStop = true;
+            this.mlatButton.Text = "MLAT";
+            this.mlatButton.UseVisualStyleBackColor = true;
+            // 
+            // trackNumberButton
+            // 
+            this.trackNumberButton.AutoSize = true;
+            this.trackNumberButton.Location = new System.Drawing.Point(1139, 341);
+            this.trackNumberButton.Name = "trackNumberButton";
+            this.trackNumberButton.Size = new System.Drawing.Size(99, 19);
+            this.trackNumberButton.TabIndex = 22;
+            this.trackNumberButton.TabStop = true;
+            this.trackNumberButton.Text = "Track Number";
+            this.trackNumberButton.UseVisualStyleBackColor = true;
+            // 
+            // targetIDButton
+            // 
+            this.targetIDButton.AutoSize = true;
+            this.targetIDButton.Location = new System.Drawing.Point(1139, 366);
+            this.targetIDButton.Name = "targetIDButton";
+            this.targetIDButton.Size = new System.Drawing.Size(68, 19);
+            this.targetIDButton.TabIndex = 23;
+            this.targetIDButton.TabStop = true;
+            this.targetIDButton.Text = "TargetID";
+            this.targetIDButton.UseVisualStyleBackColor = true;
+            // 
+            // mode3AButton
+            // 
+            this.mode3AButton.AutoSize = true;
+            this.mode3AButton.Location = new System.Drawing.Point(1139, 391);
+            this.mode3AButton.Name = "mode3AButton";
+            this.mode3AButton.Size = new System.Drawing.Size(78, 19);
+            this.mode3AButton.TabIndex = 24;
+            this.mode3AButton.TabStop = true;
+            this.mode3AButton.Text = "Mode 3/A";
+            this.mode3AButton.UseVisualStyleBackColor = true;
+            // 
+            // targetAddressButton
+            // 
+            this.targetAddressButton.AutoSize = true;
+            this.targetAddressButton.Location = new System.Drawing.Point(1139, 416);
+            this.targetAddressButton.Name = "targetAddressButton";
+            this.targetAddressButton.Size = new System.Drawing.Size(102, 19);
+            this.targetAddressButton.TabIndex = 25;
+            this.targetAddressButton.TabStop = true;
+            this.targetAddressButton.Text = "Target Address";
+            this.targetAddressButton.UseVisualStyleBackColor = true;
+            // 
+            // filterButton
+            // 
+            this.filterButton.Location = new System.Drawing.Point(1126, 470);
+            this.filterButton.Name = "filterButton";
+            this.filterButton.Size = new System.Drawing.Size(147, 30);
+            this.filterButton.TabIndex = 26;
+            this.filterButton.Text = "Filter";
+            this.filterButton.UseVisualStyleBackColor = true;
+            // 
+            // filterTextBox
+            // 
+            this.filterTextBox.Location = new System.Drawing.Point(1142, 444);
+            this.filterTextBox.Name = "filterTextBox";
+            this.filterTextBox.Size = new System.Drawing.Size(116, 23);
+            this.filterTextBox.TabIndex = 27;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(1250, 623);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 15);
+            this.label1.TabIndex = 28;
+            this.label1.Text = "label1";
+            // 
             // AsterixDecoder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1300, 650);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.filterTextBox);
+            this.Controls.Add(this.filterButton);
+            this.Controls.Add(this.targetAddressButton);
+            this.Controls.Add(this.mode3AButton);
+            this.Controls.Add(this.targetIDButton);
+            this.Controls.Add(this.trackNumberButton);
+            this.Controls.Add(this.mlatButton);
+            this.Controls.Add(this.smrButton);
             this.Controls.Add(this.labelFilter);
             this.Controls.Add(this.trajButton);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.timeButton);
             this.Controls.Add(this.adsbCheck);
             this.Controls.Add(this.mlatCheck);
@@ -471,8 +569,16 @@ namespace AsterixDecoder
         private System.Windows.Forms.CheckBox adsbCheck;
         private System.Windows.Forms.Button timeButton;
         private System.Windows.Forms.Label labelFilter;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button trajButton;
+        private System.Windows.Forms.RadioButton smrButton;
+        private System.Windows.Forms.RadioButton mlatButton;
+        private System.Windows.Forms.RadioButton trackNumberButton;
+        private System.Windows.Forms.RadioButton targetIDButton;
+        private System.Windows.Forms.RadioButton mode3AButton;
+        private System.Windows.Forms.RadioButton targetAddressButton;
+        private System.Windows.Forms.Button filterButton;
+        private System.Windows.Forms.TextBox filterTextBox;
+        private System.Windows.Forms.Label label1;
     }
 }
 
