@@ -1,12 +1,25 @@
-﻿using System;
+﻿using ClassLibrary;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using System.Net;
 
 
 using GMap.NET;
 using System.Reflection;
 using GMap.NET.MapProviders;
 using GMap.NET.WindowsPresentation;
+using GMap.NET.WindowsForms;
+using GMap.NET.WindowsForms.Markers;
+
+
 namespace ClassLibrary
 {
     class Maps

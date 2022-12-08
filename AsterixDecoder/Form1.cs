@@ -20,19 +20,14 @@ using Cursors = System.Windows.Input.Cursors;
 using Image = System.Drawing.Image;
 using GMap.NET.WindowsPresentation;
 using MessageBox = System.Windows.MessageBox;
-<<<<<<< HEAD
 using Microsoft.Ajax.Utilities;
-=======
 using GMap.NET.WindowsForms;
 using GMap.NET.WindowsForms.Markers;
->>>>>>> master
-
 namespace AsterixDecoder
 {
     public partial class AsterixDecoder : Form
     {
         DecodeFiles decodeFiles = new DecodeFiles();
-
         List<CAT10> listCAT10 = new List<CAT10>();
         List<CAT21> listCAT21 = new List<CAT21>();
         List<CATALL> listCATALL = new List<CATALL>();
@@ -49,6 +44,7 @@ namespace AsterixDecoder
         }
 
         
+
         private void AsterixDecoder_Load(object sender, EventArgs e)
         {
             process_label.Text = "Select a file to decode";
@@ -711,25 +707,26 @@ namespace AsterixDecoder
             markers.Add(marker);
            // SetMarkerShape(marker);
         }
-        //private void SetMarkerShape(markerWithInfo marker)
-        //{
-        //    Bitmap bitmaptxt = MarkersDrawings.InsertText(marker);
-        //    int heig = 50; //35
-        //    int wid = 50; //35
-        //    marker.Shape = new System.Windows.Controls.Image
-        //    {
-
-        //        Width = heig,
-        //        Height = wid,
-        //        Source = MarkersDrawings.ToBitmapImage(bitmaptxt)
-        //    };
-        //    marker.Offset = new System.Windows.Point((-wid / 2), (-heig / 2) - 5);
-        //    bitmaptxt.Dispose();
-        //    bitmaptxt = null;
-        //    marker.Shape.MouseLeftButtonUp += markerclick;
-        //}
+        
 
         public GMapOverlay OverlayMarkers = new GMapOverlay("Markers");
+
+        public class MarkerIMG : GMarkerGoogle
+        {
+            public markerWithInfo marker;
+            Bitmap bitmap;
+            PointLatLng p;
+            public MarkerIMG(PointLatLng p, Bitmap bitmap, markerWithInfo mk)
+            :base(p,bitmap)
+            {
+                this.marker = mk;
+            }
+            public MarkerIMG(PointLatLng p, GMarkerGoogleType type, markerWithInfo mk)
+            : base(p,type)
+            {
+                this.marker = mk;
+            }
+        }
 
         private void ShowMarkers()
         {
@@ -740,7 +737,8 @@ namespace AsterixDecoder
                 {
                     if (marker.DetectionMode == "SMR")
                     {
-                        GMap.NET.WindowsForms.GMapMarker mk = new GMarkerGoogle(marker.p, GMarkerGoogleType.blue_dot);
+                        MarkerIMG mk = new MarkerIMG(marker.p, GMarkerGoogleType.blue_dot, marker);
+
                         OverlayMarkers.Markers.Add(mk);
                     }
                 }
@@ -748,7 +746,7 @@ namespace AsterixDecoder
                 {
                     if (marker.DetectionMode == "MLAT")
                     {
-                        GMap.NET.WindowsForms.GMapMarker mk = new GMarkerGoogle(marker.p, GMarkerGoogleType.pink_dot);
+                        MarkerIMG mk = new MarkerIMG(marker.p, GMarkerGoogleType.pink, marker);
                         OverlayMarkers.Markers.Add(mk);
                     }
                 }
@@ -756,13 +754,14 @@ namespace AsterixDecoder
                 {
                     if (marker.DetectionMode == "ADSB")
                     {
-                        GMap.NET.WindowsForms.GMapMarker mk = new GMarkerGoogle(marker.p, GMarkerGoogleType.green_dot);
+                        MarkerIMG mk = new MarkerIMG(marker.p, GMarkerGoogleType.green, marker);
                         OverlayMarkers.Markers.Add(mk);
                     }
                 }
             }
             gMapControl1.Overlays.Add(OverlayMarkers);
         }
+
         private void timer1_Tick(object sender, EventArgs e)
         { 
             time++;
@@ -840,6 +839,11 @@ namespace AsterixDecoder
             Form2 cv = new Form2();
             cv.ShowDialog();
             time = cv.getTime();
+        }
+
+
+        void gMapControl1_OnMarkerClick(GMap.NET.WindowsForms.GMapMarker item, System.Windows.Forms.MouseEventArgs e)
+        {
         }
     }
 }

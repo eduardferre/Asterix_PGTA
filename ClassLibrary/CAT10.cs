@@ -514,9 +514,11 @@ namespace ClassLibrary
             if(octet[1] == 0) this.GFlightLevel = "GFlight: Default";
             else this.GFlightLevel = "GFlight: Garbled code";
 
-            this.FlightLevel = "FL" + Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position],  data[position + 1]).Substring(2, 14))) * 0.25);
+            this.FlightLevel = Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position],  data[position + 1]).Substring(2, 14))) * 0.25);
 
             this.FlightLevelFT =  Convert.ToString(Convert.ToDouble(FlightLevel) * 100) + " ft";
+
+            this.FlightLevel = "FL" + this.FlightLevel;
 
             this.FlightLevelInfo = this.VFlightLevel + "\n" + this.GFlightLevel + "\n" + this.FlightLevel;
 

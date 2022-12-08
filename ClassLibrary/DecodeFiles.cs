@@ -63,148 +63,6 @@ namespace ClassLibrary
             tableCAT21.Clear();
         }
 
-        public List<CAT10> ReadCAT10()
-        {
-            byte[] fileBytes = File.ReadAllBytes("C:\\Users\\Eduard\\Desktop\\Asterix_PGTA\\AsterixDecoder\\201002-lebl-080001_smr.ast");
-            List<byte[]> listBytes = new List<byte[]>();
-
-            int cont = fileBytes[1] * 256 + fileBytes[2];
-            int i = 0;
-
-            while (i < fileBytes.Length)
-            {
-                byte[] array = new byte[cont];
-
-                for (int j = 0; j < array.Length; j++)
-                {
-                    array[j] = fileBytes[i];
-                    i++;
-                }
-
-                listBytes.Add(array);
-
-                if (i + 2 < fileBytes.Length) cont = fileBytes[i + 1] * 256 + fileBytes[i + 2];
-            }
-
-            List<string[]> listHex = new List<string[]>();
-
-            for (i = 0; i < listBytes.Count; i++)
-            {
-                byte[] byteSelect = listBytes[i];
-                string[] arrayHex = new string[byteSelect.Length];
-
-                for (int j = 0; j < byteSelect.Length; j++)
-                {
-                    arrayHex[j] = byteSelect[j].ToString("X");
-
-                    if (arrayHex[j].Length <= 1) arrayHex[j] = string.Concat('0', arrayHex[j]);
-                }
-
-                listHex.Add(arrayHex);
-            }
-
-            for (i = 0; i < listHex.Count; i++)
-            {
-                process = "Loading message " + Convert.ToString(i) + " of " + Convert.ToString(listHex.Count) + " messages...";
-
-                string[] arrayMsg = listHex[i];
-                int CAT = int.Parse(arrayMsg[0], System.Globalization.NumberStyles.HexNumber);
-                int lenght = int.Parse(arrayMsg[1], System.Globalization.NumberStyles.HexNumber) * 256 + int.Parse(arrayMsg[2], System.Globalization.NumberStyles.HexNumber);
-
-                if (CAT == 10)
-                {
-                    CAT10 cat10 = new CAT10(arrayMsg, 0);
-
-                    cat10.msgNum = numMsgs;
-                    cat10.msgCAT10Num = numCAT10Msgs;
-
-                    numMsgs++;
-                    numCAT10Msgs++;
-
-                    //Console.WriteLine("CAT" + CAT + ", lenght: " + lenght);
-
-                    listCAT10.Add(cat10);
-                }
-            }
-
-            //process = "DONE";
-            //print(process);
-
-            return listCAT10;
-        }
-
-        public List<CAT21> ReadCAT21()
-        {
-            byte[] fileBytes = File.ReadAllBytes("C:\\Users\\Eduard\\Desktop\\Asterix_PGTA\\AsterixDecoder\\201002-lebl-080001_adsb.ast");
-            List<byte[]> listBytes = new List<byte[]>();
-
-            int cont = fileBytes[1] * 256 + fileBytes[2];
-            int i = 0;
-
-            while (i < fileBytes.Length)
-            {
-                byte[] array = new byte[cont];
-
-                for (int j = 0; j < array.Length; j++)
-                {
-                    array[j] = fileBytes[i];
-                    i++;
-                }
-
-                listBytes.Add(array);
-
-                if (i + 2 < fileBytes.Length) cont = fileBytes[i + 1] * 256 + fileBytes[i + 2];
-            }
-
-            List<string[]> listHex = new List<string[]>();
-
-            for (i = 0; i < listBytes.Count; i++)
-            {
-                byte[] byteSelect = listBytes[i];
-                string[] arrayHex = new string[byteSelect.Length];
-
-                for (int j = 0; j < byteSelect.Length; j++)
-                {
-                    arrayHex[j] = byteSelect[j].ToString("X");
-
-                    if (arrayHex[j].Length <= 1) arrayHex[j] = string.Concat('0', arrayHex[j]);
-                }
-
-                listHex.Add(arrayHex);
-            }
-
-            //only for the first message, let's see if it works
-            for (i = 0; i < listHex.Count; i++)
-            {
-                //process = "Loading message " + Convert.ToString(i) + " of " + Convert.ToString(listHex.Count) + " messages...";
-                //print(process);
-
-                string[] arrayMsg = listHex[i];
-                int CAT = int.Parse(arrayMsg[0], System.Globalization.NumberStyles.HexNumber);
-                int lenght = int.Parse(arrayMsg[1], System.Globalization.NumberStyles.HexNumber) * 256 + int.Parse(arrayMsg[2], System.Globalization.NumberStyles.HexNumber);
-
-                if (CAT == 21)
-                {
-                    CAT21 cat21 = new CAT21(arrayMsg, 0);
-
-                    cat21.msgNum = numMsgs;
-                    cat21.msgCAT21Num = numCAT21Msgs;
-
-                    numMsgs++;
-                    numCAT21Msgs++;
-
-                    //Console.WriteLine("CAT" + CAT + ", lenght: " + lenght);
-
-                    listCAT21.Add(cat21);
-                }
-            }
-
-            //process = "DONE";
-            //print(process);
-
-            return listCAT21;
-        }
-
         public int Read(string path)
         {
             try
@@ -233,7 +91,7 @@ namespace ClassLibrary
 
                     if (i + 2 < fileBytes.Length) cont = fileBytes[i + 1] * 256 + fileBytes[i + 2];
                 }
-
+                fileBytes = null;
                 List<string[]> listHex = new List<string[]>();
 
                 for (i = 0; i < listBytes.Count; i++)
@@ -250,7 +108,7 @@ namespace ClassLibrary
 
                     listHex.Add(arrayHex);
                 }
-
+                listBytes.Clear();
                 for (i = 0; i < listHex.Count; i++)
                 {
                     process = "Loading message " + Convert.ToString(i) + " of " + Convert.ToString(listHex.Count) + " messages...";
@@ -305,6 +163,7 @@ namespace ClassLibrary
                         FillTableCAT21(cat21);
                     }
                 }
+                listHex.Clear();
                 listCATALL = ComputeTimeOfDay(listCATALL);
                 ComputeTraj(listCATALL);
                 ComputeDirecction(listCATALL);

@@ -18,7 +18,7 @@ namespace AsterixDecoder
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            time = Convert.ToInt32(hhBox.Text) * 60 * 60 + Convert.ToInt32(ssBox.Text) * 60 + Convert.ToInt32(mmBox.Text);
+            time = Convert.ToInt32(hhBox.Text) * 60 * 60 + Convert.ToInt32(mmBox.Text) * 60 + Convert.ToInt32(ssBox.Text);
             this.Close();
         }
         public int getTime()

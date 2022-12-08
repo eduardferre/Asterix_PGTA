@@ -40,8 +40,8 @@ namespace ClassLibrary
             if (msg.TOT == "Ground vehicle") { type = "car"; }
             else if (msg.TOT == "Aircraft") { type = "plane"; }
             else { type = "undetermined"; }
-            if (msg.TYP == "PSR") { detectionMode = "SMR"; }
-            if (msg.TYP == "Mode S MLAT") { detectionMode = "MLAT"; }
+            if (msg.SIC == "7") { detectionMode = "SMR"; }
+            if (msg.SIC == "107") { detectionMode = "MLAT"; }
         }
 
         public CATALL(CAT21 msg, int firstTimeOfDay, int firstTime)
