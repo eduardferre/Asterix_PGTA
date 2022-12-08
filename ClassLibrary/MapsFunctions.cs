@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace ClassLibrary
 {
@@ -19,7 +20,7 @@ namespace ClassLibrary
         /// <summary>
         /// 1 meter -> 1/1852 nautic miles
         /// </summary>
-        public const double METERS2NM = 1 / GeoUtils.NM2METERS;
+        public const double METERS2NM = 1 / MapsFunctions.NM2METERS;
         /// <summary>
         /// 1 nautic mile -> 1852 metres
         /// </summary>
@@ -90,14 +91,14 @@ namespace ClassLibrary
         /// <summary>
         /// Default constructor
         /// </summary>
-        public GeoUtils() { }
+        public MapsFunctions() { }
 
         /// <summary>
         /// Constructor with initializers
         /// </summary>
         /// <param name="E">eccentricity of the ellipsoid</param>
         /// <param name="A">semi-major axis of the Europe-50 ellipsoid (in metres)</param>
-        public GeoUtils(double E, double A)
+        public MapsFunctions(double E, double A)
         {
             this.E2 = E * E;
             this.A = A;
@@ -109,7 +110,7 @@ namespace ClassLibrary
         /// <param name="E">eccentricity of the ellipsoid</param>
         /// <param name="A">semi-major axis of the Europe-50 ellipsoid (in metres)</param>
         /// <param name="centerProjection">center coordinates in lat,lon (radians), height (meters) for projections</param>
-        public GeoUtils(double E, double A, CoordinatesWGS84 centerProjection)
+        public MapsFunctions(double E, double A, CoordinatesWGS84 centerProjection)
         {
             this.E2 = E * E;
             this.A = A;
@@ -181,13 +182,13 @@ namespace ClassLibrary
             {
                 n = 1; if (lat1 < 0) lat1 *= -1; //quitamos el menos porque ya lo vamos a hacer con el parametro n
             }
-            res.Lat = GeoUtils.LatLon2Radians(lat1, lat2, lat3, n);
+            res.Lat = MapsFunctions.LatLon2Radians(lat1, lat2, lat3, n);
             n = 0;
             if ((lonMinus.Length > 0 && lonMinus.Substring(0, 1).Equals("-")) || lonEW.Equals("W"))
             {
                 n = 1; if (lon1 < 0) lon1 *= -1; //quitamos el menos porque ya lo vamos a hacer con el parametro n
             }
-            res.Lon = GeoUtils.LatLon2Radians(lon1, lon2, lon3, n);
+            res.Lon = MapsFunctions.LatLon2Radians(lon1, lon2, lon3, n);
             res.Height = height;
             return res;
         }
@@ -221,7 +222,7 @@ namespace ClassLibrary
             double d = d1 + (d2 / 60.0) + (d3 / 3600.0);
             if (ns == 1)
                 d *= -1.0;
-            return d * GeoUtils.DEGS2RADS;
+            return d * MapsFunctions.DEGS2RADS;
         }
 
         /// <summary>
@@ -240,7 +241,7 @@ namespace ClassLibrary
                 double d1 = double.Parse(s1);
                 double d2 = double.Parse(s2);
                 double d3 = double.Parse(s3);
-                d = GeoUtils.LatLon2Degrees(d1, d2, d3, ns);
+                d = MapsFunctions.LatLon2Degrees(d1, d2, d3, ns);
             }
             catch (FormatException) { }
             return d;
@@ -274,7 +275,7 @@ namespace ClassLibrary
         /// <returns></returns>
         static public void Radians2LatLon(double d, out double d1, out double d2, out double d3, out int ns)
         {
-            d *= GeoUtils.RADS2DEGS;
+            d *= MapsFunctions.RADS2DEGS;
             if (d < 0) { d *= -1.0; ns = 1; } else { ns = 0; }
             d1 = Math.Floor(d);
             d2 = Math.Floor((d - d1) * 60.0);
@@ -338,9 +339,9 @@ namespace ClassLibrary
             //double b = this.A * Math.Sqrt(1 - this.E2);
             double b = 6356752.3142;
 
-            if ((Math.Abs(c.X) < GeoUtils.ALMOST_ZERO) && (Math.Abs(c.Y) < GeoUtils.ALMOST_ZERO))
+            if ((Math.Abs(c.X) < MapsFunctions.ALMOST_ZERO) && (Math.Abs(c.Y) < MapsFunctions.ALMOST_ZERO))
             {
-                if (Math.Abs(c.Z) < GeoUtils.ALMOST_ZERO)
+                if (Math.Abs(c.Z) < MapsFunctions.ALMOST_ZERO)
                 {
                     // the point is at the center of earth :)
                     res.Lat = Math.PI / 2.0;
@@ -368,7 +369,7 @@ namespace ClassLibrary
             if (res.Lat >= 0) { Lat_over = -0.1; } else { Lat_over = 0.1; }
 
             int loop_count = 0;
-            while ((Math.Abs(res.Lat - Lat_over) > GeoUtils.REQUIERED_PRECISION)
+            while ((Math.Abs(res.Lat - Lat_over) > MapsFunctions.REQUIERED_PRECISION)
                 && (loop_count < 50))
             {
                 loop_count++;
@@ -412,8 +413,8 @@ namespace ClassLibrary
             //    Math.Pow((this.B * Math.Sin(c2.Lat)), 2)
             //    ));
 
-            this.T1 = GeoUtils.CalculateTranslationMatrix(c2, this.A, this.E2);
-            this.R1 = GeoUtils.CalculateRotationMatrix(c2.Lat, c2.Lon);
+            this.T1 = MapsFunctions.CalculateTranslationMatrix(c2, this.A, this.E2);
+            this.R1 = MapsFunctions.CalculateRotationMatrix(c2.Lat, c2.Lon);
 
             return this.centerProjection;
         }
@@ -568,7 +569,7 @@ namespace ClassLibrary
         /// <returns>elevation angle in radians</returns>
         static public double CalculateElevation(CoordinatesWGS84 centerCoordinates, double R, double rho, double h)
         {
-            if ((rho < GeoUtils.ALMOST_ZERO) || (R == -1.0) || (centerCoordinates == null))
+            if ((rho < MapsFunctions.ALMOST_ZERO) || (R == -1.0) || (centerCoordinates == null))
             {
                 // when rho < 0 and rho = 0 a division by zero could happen
                 return 0;
@@ -598,7 +599,7 @@ namespace ClassLibrary
         static public double CalculateAzimuth(double x, double y)
         {
             double theta;
-            if (Math.Abs(y) < GeoUtils.ALMOST_ZERO)
+            if (Math.Abs(y) < MapsFunctions.ALMOST_ZERO)
             {
                 theta = (x / Math.Abs(x)) * Math.PI / 2.0;
             }
@@ -755,7 +756,7 @@ namespace ClassLibrary
             res.Rho = Math.Sqrt(cartesianCoordinates.X * cartesianCoordinates.X +
                 cartesianCoordinates.Y * cartesianCoordinates.Y +
                 cartesianCoordinates.Z * cartesianCoordinates.Z);
-            res.Theta = GeoUtils.CalculateAzimuth(cartesianCoordinates.X, cartesianCoordinates.Y);
+            res.Theta = MapsFunctions.CalculateAzimuth(cartesianCoordinates.X, cartesianCoordinates.Y);
             res.Elevation = Math.Asin(cartesianCoordinates.Z / res.Rho);
             return res;
         }
@@ -881,7 +882,7 @@ namespace ClassLibrary
             }
             else
             {
-                rotationMatrix = GeoUtils.CalculateRotationMatrix(radarCoordinates.Lat, radarCoordinates.Lon);
+                rotationMatrix = MapsFunctions.CalculateRotationMatrix(radarCoordinates.Lat, radarCoordinates.Lon);
                 this.rotationMatrixHT.Add(radarCoordinates, rotationMatrix);
             }
             return rotationMatrix;
@@ -901,7 +902,7 @@ namespace ClassLibrary
             }
             else
             {
-                translationMatrix = GeoUtils.CalculateTranslationMatrix(radarCoordinates, this.A, this.E2);
+                translationMatrix = MapsFunctions.CalculateTranslationMatrix(radarCoordinates, this.A, this.E2);
                 this.translationMatrixHT.Add(radarCoordinates, translationMatrix);
             }
             return translationMatrix;
@@ -923,7 +924,7 @@ namespace ClassLibrary
                 }
                 else
                 {
-                    p = GeoUtils.CalculatePositionRadarMatrix(this.T1,
+                    p = MapsFunctions.CalculatePositionRadarMatrix(this.T1,
                         ObtainTranslationMatrix(radarCoordinates),
                         ObtainRotationMatrix(radarCoordinates));
                     this.positionRadarMatrixHT.Add(radarCoordinates, p);
@@ -948,7 +949,7 @@ namespace ClassLibrary
                 }
                 else
                 {
-                    p = GeoUtils.CalculateRotationRadarMatrix(this.R1,
+                    p = MapsFunctions.CalculateRotationRadarMatrix(this.R1,
                         ObtainRotationMatrix(radarCoordinates));
                     this.rotationRadarMatrixHT.Add(radarCoordinates, p);
                 }
@@ -1011,7 +1012,7 @@ namespace ClassLibrary
         public static string ToStringStandard(CoordinatesPolar c)
         {
             System.Text.StringBuilder s = new System.Text.StringBuilder();
-            s.AppendFormat(" R: {0:f4}NM T: {1:f4}º E: {2:f4}º", c.Rho * GeoUtils.METERS2NM, c.Theta * GeoUtils.RADS2DEGS, c.Elevation * GeoUtils.RADS2DEGS);
+            s.AppendFormat(" R: {0:f4}NM T: {1:f4}º E: {2:f4}º", c.Rho * MapsFunctions.METERS2NM, c.Theta * MapsFunctions.RADS2DEGS, c.Elevation * MapsFunctions.RADS2DEGS);
             return s.ToString();
         }
     }
@@ -1145,8 +1146,8 @@ namespace ClassLibrary
         /// <param name="h">height in meters</param>
         public CoordinatesWGS84(string lat, string lon, double h)
         {
-            this.lat = Convert.ToDouble(lat) * GeoUtils.DEGS2RADS;
-            this.lon = Convert.ToDouble(lon) * GeoUtils.DEGS2RADS;
+            this.lat = Convert.ToDouble(lat) * MapsFunctions.DEGS2RADS;
+            this.lon = Convert.ToDouble(lon) * MapsFunctions.DEGS2RADS;
             this.height = h;
         }
 
@@ -1166,15 +1167,15 @@ namespace ClassLibrary
         {
             System.Text.StringBuilder s = new System.Text.StringBuilder();
             double d1, d2, d3; int n;
-            GeoUtils.Radians2LatLon(lat, out d1, out d2, out d3, out n);
+            MapsFunctions.Radians2LatLon(lat, out d1, out d2, out d3, out n);
             //s.AppendFormat("{0:d2}º{1:d2}'{2:f4}" + (n == 0 ? 'N' : 'S') + " ", (int)d1, (int)d2, d3);
             s.AppendFormat("{0:d2}:{1:d2}:{2:f4}" + (n == 0 ? 'N' : 'S') + " ", (int)d1, (int)d2, d3);
-            GeoUtils.Radians2LatLon(lon, out d1, out d2, out d3, out n);
+            MapsFunctions.Radians2LatLon(lon, out d1, out d2, out d3, out n);
             //s.AppendFormat("{0:d2}º{1:d2}'{2:f4}" + (n == 0 ? 'E' : 'W') + " ", (int)d1, (int)d2, d3);
             s.AppendFormat("{0:d3}:{1:d2}:{2:f4}" + (n == 0 ? 'E' : 'W') + " ", (int)d1, (int)d2, d3);
             s.AppendFormat("{0:f4}m", height);
             s.Append(Environment.NewLine);
-            s.AppendFormat("lat:{0:f9} lon:{1:f9}", this.Lat*GeoUtils.RADS2DEGS, this.Lon*GeoUtils.RADS2DEGS);
+            s.AppendFormat("lat:{0:f9} lon:{1:f9}", this.Lat* MapsFunctions.RADS2DEGS, this.Lon* MapsFunctions.RADS2DEGS);
             return s.ToString(); 
         }
     }

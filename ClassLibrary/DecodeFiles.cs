@@ -250,7 +250,7 @@ namespace ClassLibrary
                     listHex.Add(arrayHex);
                 }
 
-                for (i = 0; i < 5; i++)
+                for (i = 0; i < listHex.Count; i++)
                 {
                     process = "Loading message " + Convert.ToString(i) + " of " + Convert.ToString(listHex.Count) + " messages...";
 

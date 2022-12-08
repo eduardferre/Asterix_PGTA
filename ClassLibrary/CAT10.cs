@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GMap.NET;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -416,98 +417,53 @@ namespace ClassLibrary
 
             positioninCartesianCoordinates = "X: " + XMap + ", Y: " + YMap;
 
-            //Point MapPoint = new Point(Convert.ToInt32(this.XMap), Convert.ToInt32(this.YMap));
+            Point MapPoint = new Point(Convert.ToInt32(this.XMap), Convert.ToInt32(this.YMap));
 
-            //double[] coords = ComputeWGS84fromCartesian(MapPoint, this.SIC); //Compute WGS84 position from cartesian position
-            //Set_WGS84_Coordinates(coords); //Apply computed WGS84 position to this message
+            PointLatLng coordsLatLng = ComputeWGS84fromCartesian(MapPoint, this.SIC); //Compute WGS84 position from cartesian position
+            Set_WGS84_Coordinates(coordsLatLng); //Apply computed WGS84 position to this message
 
             return newposition;
         }
 
 
         //WSG84 FROM CARTESIAN
-        //public double[] ComputeWGS84fromCartesian(Point point, string SIC)
-        //{
-        //    double[] position = new double[3];
-        //    double[] airportWGS84 = new double[3];
-        //    double[] markerGeo = new double[2];
+        public PointLatLng ComputeWGS84fromCartesian(Point point, string SIC)
+        {
+            PointLatLng position = new PointLatLng();
+            double[] airportWGS84 = new double[3];
 
-        //    double A = 678137.0;
-        //    double B = 0;
-        //    double E2 = 0.00669437999013;
+            airportWGS84[0] = 41.29561833 * (Math.PI / 180); //lat
+            airportWGS84[1] = 2.095114167 * (Math.PI / 180); //long
+            airportWGS84[2] = 0;
 
-        //    double X_pos = point.X;
-        //    double Y_pos = point.Y;
-        //    double Z_pos = 0;
+            CoordinatesXYZ planeCartesian = new CoordinatesXYZ(point.X, point.Y, 0);
+            CoordinatesWGS84 airportGeodesic = new CoordinatesWGS84(airportWGS84[0], airportWGS84[1]);
+            MapsFunctions maps = new MapsFunctions();
+            CoordinatesWGS84 markerGeo = maps.change_system_cartesian2geodesic(planeCartesian, airportGeodesic);
+            maps = null;
 
-        //    airportWGS84[0] = 41.29561833 * (Math.PI / 180); //lat
-        //    airportWGS84[1] = 2.095114167 * (Math.PI / 180); //long
-        //    airportWGS84[2] = 0;
+            position.Lat = markerGeo.Lat * (180 / Math.PI);
+            position.Lng = markerGeo.Lon * (180 / Math.PI);
 
-        //    double nu = A / Math.Sqrt(1 - E2 * Math.Pow(Math.Sin(airportWGS84[0]), 2.0));
-        //    double RS = A * (1.0 - E2) / Math.Pow(1 - E2 * Math.Pow(Math.Sin(airportWGS84[0]), 2.0), 1.5);
-            
-        //    double[][] T1 = { new double[3], new double[3], new double[3] };
-        //    T1[0][0] = (nu + airportWGS84[3]) * Math.Cos(airportWGS84[0]) * Math.Cos(airportWGS84[1]);
-        //    T1[0][1] = 0;
-        //    T1[0][2] = 0;
-        //    T1[1][0] = (nu + airportWGS84[3]) * Math.Cos(airportWGS84[0]) * Math.Sin(airportWGS84[1]);
-        //    T1[1][1] = 0;
-        //    T1[1][2] = 0;
-        //    T1[2][0] = (nu * (1 - E2) + airportWGS84[3]) * Math.Cos(airportWGS84[0]);
-        //    T1[2][1] = 0;
-        //    T1[2][2] = 0;
+            return position;
+        }
 
-        //    double[][] R1 = { new double[3], new double[3], new double[3] };
-        //    R1[0][0] = -(Math.Sin(airportWGS84[1]));
-        //    R1[0][1] = Math.Cos(airportWGS84[1]);
-        //    R1[0][2] = 0;
-        //    R1[1][0] = -(Math.Sin(airportWGS84[0]) * Math.Cos(airportWGS84[1]));
-        //    R1[1][1] = -(Math.Sin(airportWGS84[0]) * Math.Sin(airportWGS84[1]));
-        //    R1[1][2] = Math.Cos(airportWGS84[0]);
-        //    R1[2][0] = Math.Cos(airportWGS84[0]) * Math.Cos(airportWGS84[0]);
-        //    R1[2][1] = Math.Cos(airportWGS84[0]) * Math.Sin(airportWGS84[0]);
-        //    R1[2][2] = Math.Sin(airportWGS84[0]);
+        public void Set_WGS84_Coordinates(PointLatLng pos)
+        {
+            this.LatitudeMapWGS84 = pos.Lat;
+            this.LongitudeMapWGS84 = pos.Lng;
 
-        //    double[][] input = { new double[1], new double[1], new double[1] };
-        //    input[0][0] = X_pos;
-        //    input[1][0] = Y_pos;
-        //    input[2][0] = Z_pos;
+            int Latdegres = Convert.ToInt32(Math.Truncate(LatitudeMapWGS84));
+            int Latmin = Convert.ToInt32(Math.Truncate((LatitudeMapWGS84 - Latdegres) * 60));
+            double Latsec = Math.Round(((LatitudeMapWGS84 - (Latdegres + (Convert.ToDouble(Latmin) / 60))) * 3600), 5);
 
-        //    double[][] R2 = { new double[3], new double[3], new double[3] };
+            int Londegres = Convert.ToInt32(Math.Truncate(LongitudeMapWGS84));
+            int Lonmin = Convert.ToInt32(Math.Truncate((LongitudeMapWGS84 - Londegres) * 60));
+            double Lonsec = Math.Round(((LongitudeMapWGS84 - (Londegres + (Convert.ToDouble(Lonmin) / 60))) * 3600), 5);
 
-        //    for (int i = 0; i < 3; i++)
-        //    {
-        //        for (int j = 0; j < 1; j++)
-        //        {
-        //            R2[j][i] = R1[i][j];
-        //        }
-        //    }
-
-        //    double[][] C = 
-
-
-
-        //    position[0] = markerGeo[0] * (180 / Math.PI);
-        //    position[1] = markerGeo[1] * (180 / Math.PI);
-
-        //    return position;
-        //}
-
-        //public void Set_WGS84_Coordinates(double[] pos)
-        //{
-        //    this.LatitudeMapWGS84 = pos[0];
-        //    this.LongitudeinWGS84 = pos[1];
-
-        //    int Latdegres = Convert.ToInt32(Math.Truncate(LatitudeWGS_84_map));
-        //    int Latmin = Convert.ToInt32(Math.Truncate((LatitudeWGS_84_map - Latdegres) * 60));
-        //    double Latsec = Math.Round(((LatitudeWGS_84_map - (Latdegres + (Convert.ToDouble(Latmin) / 60))) * 3600), 5);
-        //    int Londegres = Convert.ToInt32(Math.Truncate(LongitudeWGS_84_map));
-        //    int Lonmin = Convert.ToInt32(Math.Truncate((LongitudeWGS_84_map - Londegres) * 60));
-        //    double Lonsec = Math.Round(((LongitudeWGS_84_map - (Londegres + (Convert.ToDouble(Lonmin) / 60))) * 3600), 5);
-        //    Latitude_in_WGS_84 = Convert.ToString(Latdegres) + "º " + Convert.ToString(Latmin) + "' " + Convert.ToString(Latsec) + "''";
-        //    Longitude_in_WGS_84 = Convert.ToString(Londegres) + "º" + Convert.ToString(Lonmin) + "' " + Convert.ToString(Lonsec) + "''";
-        //}
+            LatitudeinWGS84 = Convert.ToString(Latdegres) + "º " + Convert.ToString(Latmin) + "' " + Convert.ToString(Latsec) + "''";
+            LongitudeinWGS84 = Convert.ToString(Londegres) + "º" + Convert.ToString(Lonmin) + "' " + Convert.ToString(Lonsec) + "''";
+        }
 
 
         //DATA ITEM I010/060
