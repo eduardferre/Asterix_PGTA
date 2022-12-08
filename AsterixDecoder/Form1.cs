@@ -20,6 +20,7 @@ using Cursors = System.Windows.Input.Cursors;
 using Image = System.Drawing.Image;
 using GMap.NET.WindowsPresentation;
 using MessageBox = System.Windows.MessageBox;
+using Microsoft.Ajax.Utilities;
 
 namespace AsterixDecoder
 {
@@ -87,9 +88,17 @@ namespace AsterixDecoder
                     info = cat10.NOGO + "\n" + cat10.OVL + "\n" + cat10.TSV + "\n"
                     + cat10.DIV + "\n" + cat10.TIF;
                 }
+                else if (columnName == "Mode-3A Code")
+                {
+                    info = cat10.VMode3A + "\n" + cat10.GMode3A + "\n" + cat10.LMode3A + "\n" + cat10.Mode3A;
+                }
                 else if (columnName == "Mode S MB Data")
                 {
-                    //?info = cat10.modeSrep.ToString();
+                    info = "Repetitions: " + cat10.modeSrep.ToString();
+                    for (int s = 0; s < cat10.modeSrep; s++)
+                    {
+                        info = info + "\n" + "Repetition: " + Convert.ToString(s) + "\n" + "Mode S Comm B message data: " + cat10.MBData[s] + "\n" + "Comm B Data Buffer Store 1 Address: " + cat10.BDS1[s] + "\n" + "Comm B Data Buffer Store 2 Address: " + cat10.BDS2[s];
+                    }
                 }
                 else if (columnName == "Standard Deviation of Position")
                 {
@@ -97,7 +106,11 @@ namespace AsterixDecoder
                 }
                 else if (columnName == "Presence")
                 {
-                    //?info = cat10.REPPresence.ToString();
+                    info = "Repetitions: " + Convert.ToString(cat10.REPPresence);
+                    for (int s = 0; s < cat10.REPPresence; s++)
+                    {
+                        info = info + "\n" + "Difference between the radial distance of the plot centre and that of the presence: " + cat10.DRHO[s] + "\n" + "Difference between the azimuth of the plot centre and that of the presence: " + cat10.DTHETA[s];
+                    }
                 }
 
                 string[] infoSplit = info.Split("\n");
@@ -237,10 +250,12 @@ namespace AsterixDecoder
 
                 msg_label.Text = "There are a total of " + decodeFiles.numMsgs.ToString() + " messages\n" +
                                  "CAT10: " + decodeFiles.numCAT10Msgs.ToString() + " messages\n" +
-                                 "      SMR: " + decodeFiles.numCAT10SMRMsgs + " messages\n" +
-                                 "      MLAT: " + decodeFiles.numCAT10MLATMsgs + " messages\n" +
+                                 "        SMR: " + decodeFiles.numCAT10SMRMsgs + " messages\n" +
+                                 "        MLAT: " + decodeFiles.numCAT10MLATMsgs + " messages\n" +
                                  "CAT21: " + decodeFiles.numCAT21Msgs.ToString() + " messages";
             }
+
+            msg_label.Visible = true;
 
             this.listCAT10 = decodeFiles.GetListCAT10();
             this.listCAT21 = decodeFiles.GetListCAT21();
@@ -249,7 +264,7 @@ namespace AsterixDecoder
             this.dataTableCAT21 = decodeFiles.GetTableCAT21();
         }
 
-        private void CAT10ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void tableCAT10ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             clickInfo_label.Visible = true;
             gridCAT10.Visible = true;
@@ -258,6 +273,7 @@ namespace AsterixDecoder
             process_label.Visible = false;
             msg_label.Visible = false;
             gMapControl1.Visible = false;
+
             if (listCAT10.Count != 0)
             {
 
@@ -281,7 +297,7 @@ namespace AsterixDecoder
             else { MessageBox.Show("No data for CAT10, please upload a file with CAT10 messages"); }
         }
 
-        private void CAT21ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void tableCAT21ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             clickInfo_label.Visible = true;
             gridCAT10.Visible = false;
@@ -335,88 +351,94 @@ namespace AsterixDecoder
             if (saveFileDialog.FileName != null)
             {
                 Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
-                string path0 = saveFileDialog.FileName;
-                string path = path0 + ".csv";
+                string path = saveFileDialog.FileName + ".csv";
                 StringBuilder sb = new StringBuilder();
                 if (File.Exists(path)) { File.Delete(path); }
 
                 StringBuilder ColumnsNames = new StringBuilder();
+
                 foreach (DataColumn col in dataTableCAT10.Columns)
                 {
-                    if (col.ColumnName != "CAT number")
-                    {
-                        string Name = col.ColumnName.Replace('\n', ' ');
-                        ColumnsNames.Append(Name + ",");
-                    }
+                    ColumnsNames.Append(col.ColumnName + ',');
                 }
 
                 string ColNames = ColumnsNames.ToString();
                 ColNames = ColNames.TrimEnd(',');
                 sb.AppendLine(ColNames);
+
                 foreach (DataRow row in dataTableCAT10.Rows) //cat10
                 {
-                    string nl = "; ";
+                    string space = "; ";
                     StringBuilder RowData = new StringBuilder();
                     int number = Convert.ToInt32(row[1].ToString());
-                    CAT10 message = listCAT10[number];
+                    CAT10 message = listCAT10[number - 1];
+
                     foreach (DataColumn column in dataTableCAT10.Columns)
                     {
-                        string Value = "";
-                        if (column.ColumnName != "CAT number")
+                        string cellString = "";
+
+                        string data = row[column].ToString();
+
+                        if (data == "Click for more data")
                         {
-                            string data = row[column].ToString();
-                            if (data == "Click to expand")
+                            if (column.ColumnName == "Target Report")
                             {
-                                if (column.ColumnName == "Target\nReport\nDescriptor")
-                                {
-                                    Value = "TYP: " + message.TYP + nl + message.DCR + nl + message.CHN + nl + message.GBS + nl + message.CRT;
-                                    if (message.SIM != null) { Value = Value + nl + message.SIM + nl + message.TST + nl + message.RAB + nl + message.LOP + nl + message.TOT; }
-                                    if (message.SPI != null) { Value = Value + nl + message.SPI; }
-                                }
-                                if (column.ColumnName == "Track Status")
-                                {
-                                    Value = Value + message.CNF + nl + message.TRE + nl + message.CST + nl + message.MAH + nl + message.TCC + nl + message.STH;
-                                    if (message.TOM != null) { Value = Value + nl + message.TOM + nl + message.DOU + nl + message.MRS; }
-                                    if (message.GHO != null) { Value = Value + nl + message.GHO; }
-                                }
-                                if (column.ColumnName == "System\nStatus")
-                                {
-                                    Value = message.NOGO + nl + message.OVL + nl + message.TSV + nl + message.DIV + nl + message.TIF;
-                                }
-
-                                if (column.ColumnName == "Mode-3A\nCode")
-                                {
-                                    Value = message.VMode3A + nl + message.GMode3A + nl + message.LMode3A + nl + message.Mode3A;
-                                }
-                                if (column.ColumnName == "Mode S MB\nData")
-                                {
-                                    Value = Value + "Repetitions: " + message.modeSrep;
-                                    for (int s = 0; s < message.modeSrep; s++)
-                                    {
-                                        Value = Value + nl + "Repetition: " + Convert.ToString(s) + nl + "Mode S Comm B message data: " + message.MBData[s] + nl + "Comm B Data Buffer Store 1 Address: " + message.BDS1[s] + nl + "Comm B Data Buffer Store 2 Address: " + message.BDS2[s];
-                                    }
-                                }
-
-                                if (column.ColumnName == "Standard\nDeviation\nof Position")
-                                {
-                                    Value = message.DeviationX + nl + message.DeviationY + nl + message.CovarianceXY;
-                                }
-                                if (column.ColumnName == "Presence")
-                                {
-                                    Value = Value + "Repetitions: " + Convert.ToString(message.REPPresence);
-                                    for (int s = 0; s < message.REPPresence; s++)
-                                    {
-                                        Value = Value + nl + "Difference between the radial distance of the plot centre and that of the presence: " + message.DRHO[s] + nl + "Difference between the azimuth of the plot centre and that of the presence: " + message.DTHETA[s];
-                                    }
-                                }
-                                data = Value;
-
+                                cellString = message.TYP + space + message.DCR + space + message.CHN + space + message.GBS + space + message.CRT;
+                                if (message.SIM != null) { cellString = cellString + space + message.SIM + space + message.TST + space + message.RAB + space + message.LOP + space + message.TOT; }
+                                if (message.SPI != null) { cellString = cellString + space + message.SPI; }
                             }
-                            data = data.Replace(",", ".");
-                            RowData.Append(data);
-                            RowData.Append(",");
+                            if (column.ColumnName == "Flight Level")
+                            {
+                                cellString = message.VFlightLevel + space + message.GFlightLevel + space + message.FlightLevel;
+                            }
+                            if (column.ColumnName == "Track Status")
+                            {
+                                cellString = cellString + message.CNF + space + message.TRE + space + message.CST + space + message.MAH + space + message.TCC + space + message.STH;
+                                if (message.TOM != null) { cellString = cellString + space + message.TOM + space + message.DOU + space + message.MRS; }
+                                if (message.GHO != null) { cellString = cellString + space + message.GHO; }
+                            }
+                            if (column.ColumnName == "System Status")
+                            {
+                                cellString = message.NOGO + space + message.OVL + space + message.TSV + space + message.DIV + space + message.TIF;
+                            }
+                            if (column.ColumnName == "Target Size and Orientation")
+                            {
+                                cellString = message.targetLength + space + message.targetWidth + space + message.targetOrientation;
+                            }
+                            if (column.ColumnName == "Mode-3A Code")
+                            {
+                                cellString = message.VMode3A + space + message.GMode3A + space + message.LMode3A + space + message.Mode3A;
+                            }
+                            if (column.ColumnName == "Mode S MB Data")
+                            {
+                                cellString = "Repetitions: " + Convert.ToString(message.modeSrep);
+                                for (int s = 0; s < message.modeSrep; s++)
+                                {
+                                    cellString = cellString + space + "Repetition: " + Convert.ToString(s) + space + "Mode S Comm B message data: " + message.MBData[s] + space + "Comm B Data Buffer Store 1 Address: " + message.BDS1[s] + space + "Comm B Data Buffer Store 2 Address: " + message.BDS2[s];
+                                }
+                            }
+
+                            if (column.ColumnName == "Standard Deviation of Position")
+                            {
+                                cellString = message.DeviationX + space + message.DeviationY + space + message.CovarianceXY;
+                            }
+                            if (column.ColumnName == "Presence")
+                            {
+                                cellString = "Repetitions: " + Convert.ToString(message.REPPresence);
+                                for (int s = 0; s < message.REPPresence; s++)
+                                {
+                                    cellString = cellString + space + "Difference between the radial distance of the plot centre and that of the presence: " + message.DRHO[s] + space + "Difference between the azimuth of the plot centre and that of the presence: " + message.DTHETA[s];
+                                }
+                            }
+
+                            data = cellString;
                         }
+
+                        data = data.Replace(",", ".");
+                        RowData.Append(data);
+                        RowData.Append(",");
                     }
+
                     string RowDat = RowData.ToString();
                     RowDat = RowDat.TrimEnd(',');
                     sb.AppendLine(RowDat);
@@ -461,7 +483,7 @@ namespace AsterixDecoder
                     string Value = "";
                     StringBuilder RowData = new StringBuilder();
                     int number = Convert.ToInt32(row[1].ToString());
-                    CAT21 message = listCAT21[number];
+                    CAT21 message = listCAT21[number - 1];
                     foreach (DataColumn column in dataTableCAT21.Columns)
                     {
                         if (column.ColumnName != "CAT number")
@@ -616,5 +638,6 @@ namespace AsterixDecoder
             gMapControl1.Position = new PointLatLng(41.295855, 2.08442);
             gMapControl1.MapProvider = GMapProviders.GoogleMap;
         }
+
     }
 }

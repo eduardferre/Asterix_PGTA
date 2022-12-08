@@ -27,9 +27,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.clickInfo_label = new System.Windows.Forms.Label();
             this.gridCAT10 = new System.Windows.Forms.DataGridView();
             this.gridCAT21 = new System.Windows.Forms.DataGridView();
@@ -37,17 +37,19 @@
             this.fileStripMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.loadFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CAT10ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tableCAT10ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportCSV_CAT10_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CAT21ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tableCAT21ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportCSV_CAT21_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mAPSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportKMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trajectoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.info_label = new System.Windows.Forms.Label();
             this.process_label = new System.Windows.Forms.Label();
             this.msg_label = new System.Windows.Forms.Label();
             this.gMapControl1 = new GMap.NET.WindowsForms.GMapControl();
-            this.exportKMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT21)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -69,37 +71,37 @@
             this.gridCAT10.AllowUserToResizeColumns = false;
             this.gridCAT10.AllowUserToResizeRows = false;
             this.gridCAT10.CausesValidation = false;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridCAT10.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridCAT10.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gridCAT10.ColumnHeadersHeight = 22;
             this.gridCAT10.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridCAT10.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridCAT10.DefaultCellStyle = dataGridViewCellStyle2;
             this.gridCAT10.Location = new System.Drawing.Point(12, 317);
             this.gridCAT10.Margin = new System.Windows.Forms.Padding(0);
             this.gridCAT10.MultiSelect = false;
             this.gridCAT10.Name = "gridCAT10";
             this.gridCAT10.ReadOnly = true;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridCAT10.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridCAT10.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.gridCAT10.RowHeadersWidth = 6;
             this.gridCAT10.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gridCAT10.Size = new System.Drawing.Size(10, 11);
@@ -113,16 +115,16 @@
             this.gridCAT21.AllowUserToResizeColumns = false;
             this.gridCAT21.AllowUserToResizeRows = false;
             this.gridCAT21.CausesValidation = false;
-            this.gridCAT21.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.gridCAT21.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gridCAT21.ColumnHeadersHeight = 22;
             this.gridCAT21.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.gridCAT21.DefaultCellStyle = dataGridViewCellStyle5;
+            this.gridCAT21.DefaultCellStyle = dataGridViewCellStyle2;
             this.gridCAT21.Location = new System.Drawing.Point(12, 358);
             this.gridCAT21.Margin = new System.Windows.Forms.Padding(0);
             this.gridCAT21.MultiSelect = false;
             this.gridCAT21.Name = "gridCAT21";
             this.gridCAT21.ReadOnly = true;
-            this.gridCAT21.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.gridCAT21.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.gridCAT21.RowHeadersWidth = 6;
             this.gridCAT21.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gridCAT21.Size = new System.Drawing.Size(10, 10);
@@ -162,11 +164,18 @@
             // CAT10ToolStripMenuItem
             // 
             this.CAT10ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tableCAT10ToolStripMenuItem,
             this.exportCSV_CAT10_ToolStripMenuItem});
             this.CAT10ToolStripMenuItem.Name = "CAT10ToolStripMenuItem";
             this.CAT10ToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.CAT10ToolStripMenuItem.Text = "CAT10";
-            this.CAT10ToolStripMenuItem.Click += new System.EventHandler(this.CAT10ToolStripMenuItem_Click);
+            // 
+            // tableCAT10ToolStripMenuItem
+            // 
+            this.tableCAT10ToolStripMenuItem.Name = "tableCAT10ToolStripMenuItem";
+            this.tableCAT10ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tableCAT10ToolStripMenuItem.Text = "Data Table";
+            this.tableCAT10ToolStripMenuItem.Click += new System.EventHandler(this.tableCAT10ToolStripMenuItem_Click);
             // 
             // exportCSV_CAT10_ToolStripMenuItem
             // 
@@ -178,11 +187,18 @@
             // CAT21ToolStripMenuItem
             // 
             this.CAT21ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tableCAT21ToolStripMenuItem,
             this.exportCSV_CAT21_ToolStripMenuItem});
             this.CAT21ToolStripMenuItem.Name = "CAT21ToolStripMenuItem";
             this.CAT21ToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.CAT21ToolStripMenuItem.Text = "CAT21";
-            this.CAT21ToolStripMenuItem.Click += new System.EventHandler(this.CAT21ToolStripMenuItem_Click);
+            // 
+            // tableCAT21ToolStripMenuItem
+            // 
+            this.tableCAT21ToolStripMenuItem.Name = "tableCAT21ToolStripMenuItem";
+            this.tableCAT21ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tableCAT21ToolStripMenuItem.Text = "Data Table";
+            this.tableCAT21ToolStripMenuItem.Click += new System.EventHandler(this.tableCAT21ToolStripMenuItem_Click);
             // 
             // exportCSV_CAT21_ToolStripMenuItem
             // 
@@ -199,6 +215,13 @@
             this.mAPSToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.mAPSToolStripMenuItem.Text = "Maps";
             this.mAPSToolStripMenuItem.Click += new System.EventHandler(this.mapsToolStripMenuItem_Click);
+            // 
+            // exportKMLToolStripMenuItem
+            // 
+            this.exportKMLToolStripMenuItem.Name = "exportKMLToolStripMenuItem";
+            this.exportKMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportKMLToolStripMenuItem.Text = "Export KML";
+            this.exportKMLToolStripMenuItem.Click += new System.EventHandler(this.exportKMLToolStripMenuItem_Click);
             // 
             // trajectoriesToolStripMenuItem
             // 
@@ -266,13 +289,6 @@
             this.gMapControl1.Zoom = 0D;
             this.gMapControl1.Load += new System.EventHandler(this.gMapControl1_Load);
             // 
-            // exportKMLToolStripMenuItem
-            // 
-            this.exportKMLToolStripMenuItem.Name = "exportKMLToolStripMenuItem";
-            this.exportKMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.exportKMLToolStripMenuItem.Text = "Export KML";
-            this.exportKMLToolStripMenuItem.Click += new System.EventHandler(this.exportKMLToolStripMenuItem_Click);
-            // 
             // AsterixDecoder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -322,6 +338,8 @@
         private System.Windows.Forms.ToolStripMenuItem exportCSV_CAT10_ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportCSV_CAT21_ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportKMLToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tableCAT10ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tableCAT21ToolStripMenuItem;
     }
 }
 

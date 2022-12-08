@@ -496,11 +496,11 @@ namespace ClassLibrary
             if(octet[1] == 0) this.GFlightLevel = "GFlight: Default";
             else this.GFlightLevel = "GFlight: Garbled code";
 
-            this.FlightLevel = Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position],  data[position + 1]).Substring(2, 14))) * 0.25);
+            this.FlightLevel = "FL" + Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position],  data[position + 1]).Substring(2, 14))) * 0.25);
 
             this.FlightLevelFT =  Convert.ToString(Convert.ToDouble(FlightLevel) * 100) + " ft";
 
-            this.FlightLevelInfo = this.VFlightLevel + "\n" + this.GFlightLevel + "\n" +  "FL" + this.FlightLevel;
+            this.FlightLevelInfo = this.VFlightLevel + "\n" + this.GFlightLevel + "\n" + this.FlightLevel;
 
             position += 2;
             return position;
@@ -778,7 +778,7 @@ namespace ClassLibrary
 
             this.targetWidth = "Width: " + Convert.ToString(Convert.ToInt32(data[position].Substring(0, 7), 2)) + "m";
 
-            this.targetSizeOrientation = this.targetLength + ", " + this.targetOrientation + ", " + this.targetWidth;
+            this.targetSizeOrientation = this.targetLength + "\n" + this.targetOrientation + "\n" + this.targetWidth;
 
             position = position + 1;
             return position;
