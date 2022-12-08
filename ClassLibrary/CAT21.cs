@@ -876,7 +876,8 @@ namespace ClassLibrary
             
             this.LatitudeinWGS84 = Convert.ToString(latitudeDeg) + "º " + Convert.ToString(latitudeMin) + "' " + Convert.ToString(latitudeSec) + "''";
             this.LongitudeinWGS84 = Convert.ToString(longitudeDeg) + "º " + Convert.ToString(longitudeMin) + "' " + Convert.ToString(longitudeSec) + "''";
-
+            LatitudeMapWGS84 = Convert.ToDouble(latitude);
+            LongitudeMapWGS84 = Convert.ToDouble(longitude);
             //Console.WriteLine("LatWGS84: " + this.LatitudeinWGS84);
             //Console.WriteLine("LongWGS84: " + this.LongitudeinWGS84);
 

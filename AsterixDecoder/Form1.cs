@@ -20,7 +20,12 @@ using Cursors = System.Windows.Input.Cursors;
 using Image = System.Drawing.Image;
 using GMap.NET.WindowsPresentation;
 using MessageBox = System.Windows.MessageBox;
+<<<<<<< HEAD
 using Microsoft.Ajax.Utilities;
+=======
+using GMap.NET.WindowsForms;
+using GMap.NET.WindowsForms.Markers;
+>>>>>>> master
 
 namespace AsterixDecoder
 {
@@ -30,15 +35,20 @@ namespace AsterixDecoder
 
         List<CAT10> listCAT10 = new List<CAT10>();
         List<CAT21> listCAT21 = new List<CAT21>();
+        List<CATALL> listCATALL = new List<CATALL>();
 
         DataTable dataTableCAT10 = new DataTable();
         DataTable dataTableCAT21 = new DataTable();
+
+        List<markerWithInfo> markers = new List<markerWithInfo>();
+        int time = 0;
 
         public AsterixDecoder()
         {
             InitializeComponent();
         }
 
+        
         private void AsterixDecoder_Load(object sender, EventArgs e)
         {
             process_label.Text = "Select a file to decode";
@@ -49,6 +59,10 @@ namespace AsterixDecoder
             process_label.Visible = true;
             msg_label.Visible = false;
             gMapControl1.Visible = false;
+            timeLabel.Visible = false;
+            startButton.Visible = false;
+            resetButton.Visible = false;
+            speedButton.Visible = false;
         }
 
         private void gridCAT10_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -263,6 +277,7 @@ namespace AsterixDecoder
 
             this.listCAT10 = decodeFiles.GetListCAT10();
             this.listCAT21 = decodeFiles.GetListCAT21();
+            this.listCATALL = decodeFiles.GetListCATALL();
 
             this.dataTableCAT10 = decodeFiles.GetTableCAT10();
             this.dataTableCAT21 = decodeFiles.GetTableCAT21();
@@ -277,6 +292,10 @@ namespace AsterixDecoder
             process_label.Visible = false;
             msg_label.Visible = false;
             gMapControl1.Visible = false;
+            timeLabel.Visible = false;
+            startButton.Visible = false;
+            resetButton.Visible = false;
+            speedButton.Visible = false;
 
             if (listCAT10.Count != 0)
             {
@@ -310,6 +329,10 @@ namespace AsterixDecoder
             process_label.Visible = false;
             msg_label.Visible = false;
             gMapControl1.Visible = false;
+            timeLabel.Visible = false;
+            startButton.Visible = false;
+            resetButton.Visible = false;
+            speedButton.Visible = false;
             if (listCAT21.Count != 0)
             {
 
@@ -342,6 +365,23 @@ namespace AsterixDecoder
             process_label.Visible = false;
             msg_label.Visible = false;
             gMapControl1.Visible = true;
+            timeLabel.Visible = true;
+            startButton.Visible = true;
+            resetButton.Visible = true;
+            speedButton.Visible = true;
+
+            timer1.Stop();
+            timer1.Interval = 1000;
+            time = 86400;
+            foreach (CATALL message in listCATALL) 
+            { 
+                if (message.timeOfDay < time) 
+                {
+                    time = message.timeOfDay;
+                }
+            }
+            timeLabel.Text = Convert.ToString((time / (60 * 60)) % 24) + " : " + Convert.ToString((time / 60) % 60) + " : " + Convert.ToString((time % 60));
+
         }
 
         private void exportCSV_CAT10_ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -647,7 +687,159 @@ namespace AsterixDecoder
             gMapControl1.Zoom = zoom;
             gMapControl1.Position = new PointLatLng(41.295855, 2.08442);
             gMapControl1.MapProvider = GMapProviders.GoogleMap;
+            gMapControl1.ShowCenter = false;
         }
 
+        private void startButton_Click(object sender, EventArgs e)
+        {
+            if (startButton.Text == "Start")
+            {
+                timer1.Start();
+                startButton.Text = "Pause";
+            }
+            else
+            {
+                timer1.Stop();
+                startButton.Text = "Start";
+            }
+        }
+
+        private void AddActualMarker(double X, double Y, string Callsign, int time, int num, string emmiter, string TargetAdd, string detectionmode, string CAT, string SIC, string SAC, string Flight_level, string Track_number, int direction, int refreshratio)
+        {
+            PointLatLng coordinates = new PointLatLng(X, Y);
+            markerWithInfo marker = new markerWithInfo(coordinates, Callsign, time, num, emmiter, TargetAdd, detectionmode, CAT, SIC, SAC, Flight_level, Track_number, direction, refreshratio);
+            markers.Add(marker);
+           // SetMarkerShape(marker);
+        }
+        //private void SetMarkerShape(markerWithInfo marker)
+        //{
+        //    Bitmap bitmaptxt = MarkersDrawings.InsertText(marker);
+        //    int heig = 50; //35
+        //    int wid = 50; //35
+        //    marker.Shape = new System.Windows.Controls.Image
+        //    {
+
+        //        Width = heig,
+        //        Height = wid,
+        //        Source = MarkersDrawings.ToBitmapImage(bitmaptxt)
+        //    };
+        //    marker.Offset = new System.Windows.Point((-wid / 2), (-heig / 2) - 5);
+        //    bitmaptxt.Dispose();
+        //    bitmaptxt = null;
+        //    marker.Shape.MouseLeftButtonUp += markerclick;
+        //}
+
+        public GMapOverlay OverlayMarkers = new GMapOverlay("Markers");
+
+        private void ShowMarkers()
+        {
+            OverlayMarkers.Markers.Clear();
+            foreach (markerWithInfo marker in markers)
+            {
+                if (smrCheck.Checked)
+                {
+                    if (marker.DetectionMode == "SMR")
+                    {
+                        GMap.NET.WindowsForms.GMapMarker mk = new GMarkerGoogle(marker.p, GMarkerGoogleType.blue_dot);
+                        OverlayMarkers.Markers.Add(mk);
+                    }
+                }
+                if (mlatCheck.Checked)
+                {
+                    if (marker.DetectionMode == "MLAT")
+                    {
+                        GMap.NET.WindowsForms.GMapMarker mk = new GMarkerGoogle(marker.p, GMarkerGoogleType.pink_dot);
+                        OverlayMarkers.Markers.Add(mk);
+                    }
+                }
+                if (adsbCheck.Checked)
+                {
+                    if (marker.DetectionMode == "ADSB")
+                    {
+                        GMap.NET.WindowsForms.GMapMarker mk = new GMarkerGoogle(marker.p, GMarkerGoogleType.green_dot);
+                        OverlayMarkers.Markers.Add(mk);
+                    }
+                }
+            }
+            gMapControl1.Overlays.Add(OverlayMarkers);
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        { 
+            time++;
+            timeLabel.Text = Convert.ToString((time / (60 * 60))%24) + " : " + Convert.ToString((time / 60)%60) + " : " + Convert.ToString((time%60));
+            timeIncrease();
+        }
+
+        private void timeIncrease()
+        {
+            bool first_found = false;
+            int s = 0;
+
+            for (int i = 0; first_found == false && i<listCATALL.Count(); i++) { if (listCATALL[i].timeOfDay == time) { first_found = true; s = i; }; }
+
+            while (listCATALL[s].timeOfDay == time)
+            {
+                CATALL message = listCATALL[s];
+                if (message.latitudeInWGS84 != -200 && message.longitudeInWGS84 != -200)
+                {
+                    bool DuplicatedTarget = false;
+                    bool DuplicatedTrackNumber = false;
+                    if (message.targetAddress != null) { DuplicatedTarget = markers.Any(x => x.TargetAddress == message.targetAddress && x.TargetAddress != null && x.Time == message.timeOfDay && message.detectionMode == x.DetectionMode); }
+                    else { DuplicatedTrackNumber = markers.Any(x => x.Track_number == message.trackNumber && x.Track_number != null && x.Time == message.timeOfDay && message.detectionMode == x.DetectionMode); }
+
+                    if (DuplicatedTarget == false && DuplicatedTrackNumber == false)
+                    {
+                        markers.RemoveAll(item => (((item.TargetAddress == message.targetAddress && item.TargetAddress != null) || (item.Track_number == message.trackNumber && item.Track_number != null) || (item.Callsign == message.targetIdentification && item.Callsign != null)) && item.DetectionMode == message.detectionMode));
+                        AddActualMarker(Convert.ToDouble(message.latitudeInWGS84), Convert.ToDouble(message.longitudeInWGS84), message.targetIdentification, time, message.msgNum, message.type, message.targetAddress, message.detectionMode, message.CAT, message.SIC, message.SAC, message.flightLevel, message.trackNumber, message.direction, message.refreshratio);
+                    }
+                }
+                s++;
+            }
+            ShowMarkers();
+        }
+
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            timer1.Stop();
+            time = 86400;
+            foreach (CATALL message in listCATALL)
+            {
+                if (message.timeOfDay < time)
+                {
+                    time = message.timeOfDay;
+                }
+            }
+            markers.Clear();
+            OverlayMarkers.Markers.Clear();
+            timeLabel.Text = Convert.ToString((time / (60 * 60)) % 24) + " : " + Convert.ToString((time / 60) % 60) + " : " + Convert.ToString((time % 60));
+            startButton.Text = "Start";
+            
+        }
+
+        private void speedButton_Click(object sender, EventArgs e)
+        {
+            if (speedButton.Text=="Speed (x1)")
+            {
+                timer1.Interval = 100;
+                speedButton.Text = "Speed (x10)";
+            }
+            else if (speedButton.Text == "Speed (x10)")
+            {
+                timer1.Interval = 20;
+                speedButton.Text = "Speed (x50)";
+            }
+            else if (speedButton.Text == "Speed (x50)")
+            {
+                timer1.Interval = 1000;
+                speedButton.Text = "Speed (x1)";
+            }
+        }
+
+        private void timeButton_Click(object sender, EventArgs e)
+        {
+            Form2 cv = new Form2();
+            cv.ShowDialog();
+            time = cv.getTime();
+        }
     }
 }
