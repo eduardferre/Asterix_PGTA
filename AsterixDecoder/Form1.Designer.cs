@@ -61,7 +61,6 @@ namespace AsterixDecoder
             this.adsbCheck = new System.Windows.Forms.CheckBox();
             this.timeButton = new System.Windows.Forms.Button();
             this.labelFilter = new System.Windows.Forms.Label();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.trajButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT10)).BeginInit();
@@ -383,13 +382,8 @@ namespace AsterixDecoder
             this.labelFilter.TabIndex = 6;
             this.labelFilter.Text = "FILTER DATA";
             // 
-            // checkedListBox1
+            // label1
             // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(1152, 296);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(122, 76);
-            this.checkedListBox1.TabIndex = 18;
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(1238, 501);
             this.label1.Name = "label1";
@@ -412,7 +406,6 @@ namespace AsterixDecoder
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1300, 650);
-            this.Controls.Add(this.checkedListBox1);
             this.Controls.Add(this.labelFilter);
             this.Controls.Add(this.trajButton);
             this.Controls.Add(this.label1);
@@ -478,7 +471,6 @@ namespace AsterixDecoder
         private System.Windows.Forms.CheckBox adsbCheck;
         private System.Windows.Forms.Button timeButton;
         private System.Windows.Forms.Label labelFilter;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button trajButton;
     }
