@@ -36,7 +36,6 @@ namespace AsterixDecoder
         DataTable dataTableCAT21 = new DataTable();
 
         List<markerWithInfo> markers = new List<markerWithInfo>();
-        List<GMarkerGoogle> trajMarkers = new List<GMarkerGoogle>();
 
         
         int time = 0;
@@ -45,6 +44,8 @@ namespace AsterixDecoder
         {
             InitializeComponent();
         }
+
+        
 
         private void AsterixDecoder_Load(object sender, EventArgs e)
         {
@@ -64,7 +65,6 @@ namespace AsterixDecoder
             mlatCheck.Visible = false;
             adsbCheck.Visible = false;
             timeButton.Visible = false;
-            labelFilter.Visible = false;
         }
 
         private void gridCAT10_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -287,7 +287,10 @@ namespace AsterixDecoder
 
         private void tableCAT10ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            gridCAT10.Visible = false;
+            clickInfo_label.Visible = true;
+            gridCAT10.Visible = true;
+            gridCAT21.Visible = false;
+            info_label.Visible = true;
             process_label.Visible = false;
             msg_label.Visible = false;
             gMapControl1.Visible = false;
@@ -317,7 +320,6 @@ namespace AsterixDecoder
                 gridCAT10.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
 
                 info_label.Visible = true;
-                labelFilter.Visible = true;
                 clickInfo_label.Visible = true;
                 gridCAT10.Visible = true;
             }
@@ -326,7 +328,10 @@ namespace AsterixDecoder
 
         private void tableCAT21ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            clickInfo_label.Visible = true;
             gridCAT10.Visible = false;
+            gridCAT21.Visible = true;
+            info_label.Visible = true;
             process_label.Visible = false;
             msg_label.Visible = false;
             gMapControl1.Visible = false;
@@ -345,7 +350,6 @@ namespace AsterixDecoder
                 gridCAT21.Location = new Point(10, 40);
                 clickInfo_label.Location = new Point(1075, 80);
                 info_label.Location = new Point(1100, 40);
-                labelFilter.Location = new Point(1150, 250);
 
                 gridCAT21.Size = new Size(1050, 600);
                 clickInfo_label.Size = new Size(210, 250);
@@ -357,7 +361,6 @@ namespace AsterixDecoder
                 gridCAT21.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
 
                 info_label.Visible = true;
-                labelFilter.Visible = true;
                 clickInfo_label.Visible = true;
                 gridCAT21.Visible = true;
             }
@@ -762,10 +765,7 @@ namespace AsterixDecoder
                     }
                 }
             }
-            foreach (GMarkerGoogle m in trajMarkers)
-            {
-                OverlayMarkers.Markers.Add(m);
-            }
+            
             gMapControl1.Overlays.Add(OverlayMarkers);
         }
 
@@ -795,7 +795,7 @@ namespace AsterixDecoder
 
                     if (DuplicatedTarget == false && DuplicatedTrackNumber == false)
                     {
-                        markers.RemoveAll(item => (((item.TargetAddress == message.targetAddress && item.TargetAddress != null) || (item.Track_number == message.trackNumber && item.Track_number != null) || (item.Callsign == message.targetIdentification && item.Callsign != null)) && item.DetectionMode == message.detectionMode));
+                        markers.RemoveAll(item => (((item.TargetAddress == message.targetAddress && item.TargetAddress != null) || (item.Track_number == message.trackNumber && item.Track_number != null) || (item.Callsign == message.targetIdentification && item.Callsign != null))));
                         AddActualMarker(Convert.ToDouble(message.latitudeInWGS84), Convert.ToDouble(message.longitudeInWGS84), message.targetIdentification, time, message.msgNum, message.type, message.targetAddress, message.detectionMode, message.CAT, message.SIC, message.SAC, message.flightLevel, message.trackNumber, message.direction, message.refreshratio);
                     }
                 }
@@ -860,22 +860,29 @@ namespace AsterixDecoder
             }
             label1.Text = markerselected.Callsign;
         }
+        public GMapOverlay OverlayTraj = new GMapOverlay("Markers");
 
         private void trajButton_Click(object sender, EventArgs e)
         {
-            trajMarkers.Clear();
+            OverlayTraj.Clear();
             if (markerselected != null)
             {
                 for (int i = 0;  i < listCATALL.Count(); i++) 
                 { 
                     if (listCATALL[i].targetIdentification == markerselected.Callsign) 
                     {
-                        GMarkerGoogle mk = new GMarkerGoogle(markerselected.p, GMarkerGoogleType.black_small);
-                        trajMarkers.Add(mk);
+                        PointLatLng p = new PointLatLng(listCATALL[i].latitudeInWGS84, listCATALL[i].longitudeInWGS84);
+                        GMarkerGoogle mak = new GMarkerGoogle(p, GMarkerGoogleType.black_small);
+                        Size size = new Size();
+                        size.Height = 10;
+                        size.Width = 10;
+                        mak.Size = size;
+                        OverlayTraj.Markers.Add(mak);
                     }
                 }
 
             }
+            gMapControl1.Overlays.Add(OverlayTraj);
         }
     }
 }
