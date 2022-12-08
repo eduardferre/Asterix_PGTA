@@ -184,7 +184,11 @@ namespace AsterixDecoder
                 }
                 else if (columnName == "Mode S MB Data")
                 {
-                    //?info = cat21.REP_SMB.ToString();
+                    info = "Repetitions: " + cat21.REP_SMB.ToString();
+                    for (int s = 0; s < cat21.REP_SMB; s++)
+                    {
+                        info = info + "\n" + "Repetition: " + Convert.ToString(s) + "\n" + "Mode S Comm B message data: " + cat21.MBData[s] + "\n" + "Comm B Data Buffer Store 1 Address: " + cat21.BDS1[s] + "\n" + "Comm B Data Buffer Store 2 Address: " + cat21.BDS2[s];
+                    }
                 }
                 else if (columnName == "ACAS Resolution Advisory Report")
                 {
@@ -466,142 +470,146 @@ namespace AsterixDecoder
                 if (File.Exists(path)) { File.Delete(path); }
 
                 StringBuilder ColumnsNames = new StringBuilder();
+
                 foreach (DataColumn col in dataTableCAT21.Columns)
                 {
-                    if (col.ColumnName != "CAT number")
-                    {
-                        string Name = col.ColumnName.Replace('\n', ' ');
-                        ColumnsNames.Append(Name + ",");
-                    }
+                    ColumnsNames.Append(col.ColumnName + ",");
                 }
+
                 string ColNames = ColumnsNames.ToString();
                 ColNames = ColNames.TrimEnd(',');
                 sb.AppendLine(ColNames);
+
                 foreach (DataRow row in dataTableCAT21.Rows) //cat10
                 {
-                    string nl = "; ";
-                    string Value = "";
+                    string space = "; ";
+                    string cellString = "";
+
                     StringBuilder RowData = new StringBuilder();
                     int number = Convert.ToInt32(row[1].ToString());
                     CAT21 message = listCAT21[number - 1];
                     foreach (DataColumn column in dataTableCAT21.Columns)
                     {
-                        if (column.ColumnName != "CAT number")
+                        string data = row[column].ToString();
+                        cellString = "";
+                        if (data == "Click for more data")
                         {
-                            string data = row[column].ToString();
-                            Value = "";
-                            if (data == "Click to expand")
+                            if (column.ColumnName == "Target Report")
                             {
-                                if (column.ColumnName == "Target\nReport\nDescriptor")
+                                cellString = message.ATP + space + message.ARC + space + message.RC + space + message.RAB;
+                                if (message.DCR != null)
                                 {
-                                    Value = " Address Type: " + message.ATP + nl + "Altitude Reporting Capability: " + message.ARC + nl + "Range Check: " + message.RC + nl + "Report Type: " + message.RAB;
-                                    if (message.DCR != null)
+                                    cellString = cellString + space + message.DCR + space + message.GBS + space + message.SIM + space + message.TST + space + message.SAA + space + message.CL;
+                                    if (message.IPC != null)
                                     {
-                                        Value = Value + nl + "Differential Correction: " + message.DCR + nl + "Ground Bit Setting: " + message.GBS + nl + "Simulated Target: " + message.SIM + nl + "Test Target: " + message.TST + nl + "Selected Altitude Available: " + message.SAA + nl + "Confidence Level: " + message.CL;
-                                        if (message.IPC != null)
-                                        {
-                                            Value = Value + nl + "Independent Position Check: " + message.IPC + nl + "No-go Bit Status: " + message.NOGO + nl + "Compact Posiotion Reporting: " + message.CPR + nl + "Local Decoding Position Jump: " + message.LDPJ + nl + "Range Check: " + message.RCF;
-                                        }
+                                        cellString = cellString + space + message.IPC + space + message.NOGO + space + message.CPR + space + message.LDPJ + space + message.RCF;
                                     }
                                 }
-                                if (column.ColumnName == "Quality\nIndicators")
-                                {
-                                    Value = "NUCr or NACv: " + message.NUCr_NACv + nl + "NUCp or NIC: " + message.NUCp_NIC;
-                                    if (message.NICbaro != null)
-                                    {
-                                        Value = Value + nl + "Navigation Integrity Category for Barometric Altitude: " + message.NICbaro + nl + "Surveillance or Source  Integrity Level: " + message.SIL + nl + "Navigation Accuracy Category for Position: " + message.NACp;
-                                        if (message.SILsupp != null)
-                                        {
-                                            Value = Value + nl + "SIL-Supplement: " + message.SILsupp + nl + "Horizontal Position System Design Assurance Level: " + message.SDA + nl + "Geometric Altitude Accuracy: " + message.GVA;
-                                            if (message.ICB != null) { Value = Value + nl + "Position Integrity Category:" + nl + "Integrity Containment Bound" + message.ICB + nl + "NUCp: " + message.NUCp + nl + "NIC: " + message.NIC; }
-                                        }
-                                    }
-                                }
-                                if (column.ColumnName == "Target\nStatus")
-                                {
-                                    Value = "Intent Change Flag: " + message.ICF + nl + "LNAV Mode: " + message.LNAV + nl + "Priority Status: " + message.PS + nl + "Surveillance Status: " + message.SS;
-                                }
-                                if (column.ColumnName == "Met Information")
-                                {
-                                    if (message.WindSpeed != null) { Value = Value + "Wind Speed: " + message.WindSpeed; }
-                                    if (message.WindDirection != null) { Value = Value + nl + "Wind Direction: " + message.WindDirection; }
-                                    if (message.Temperature != null) { Value = Value + nl + "Temperature: " + message.Temperature; }
-                                    if (message.Turbulence != null) { Value = Value + nl + "Turbulence: " + message.Turbulence; }
-                                }
-                                if (column.ColumnName == "Final\nState\nSelected\nAltitude")
-                                {
-                                    Value = Value + "Manage Vertical Mode: " + message.MV + nl + "Altitude Hold Mode: " + message.AH + "Approach Mode: " + message.AM + nl + "Altitude: " + message.finalStateSelectedAltitude;
-                                }
-                                if (column.ColumnName == "Trajectory\nIntent")
-                                {
-                                    if (message.NAV != null)
-                                    {
-                                        Value = Value + message.NAV + nl + message.NVB;
-                                    }
-                                    if (message.REP_TI != 0)
-                                    {
-                                        Value = Value + nl + "Repetitions: " + Convert.ToString(message.REP_TI);
-                                        for (int s = 0; s < message.REP_TI; s++)
-                                        {
-                                            Value = Value + nl + "Repetition: " + Convert.ToString(s) + nl + message.TCA[s] + nl + message.NC[s] + nl + "Trajectory Change Point number: " + message.TCP[s] + nl + "Altitude: " + message.Altitude[s] + nl + "Latitude: " + message.Latitude[s] + nl + "Longitude: " + message.Longitude[s] + nl + "Point Type: " + message.PointType[s] + nl;
-                                            Value = Value + nl + "TD: " + message.TD[s] + nl + "Turn Radius Availabilty" + message.TRA[s] + nl + message.TOA[s] + nl + "Time Over Point: " + message.TOV[s] + nl + "TCP Turn radius: " + message.TTR[s];
-                                        }
-                                    }
-                                }
-                                if (column.ColumnName == "Aircraft\nOperational\nStatus")
-                                {
-                                    Value = Value + message.RA + nl + "Target Trajectory Change Report Capability: " + message.TC + nl + "Target State Report Capability: " + message.TS + nl + "Air-Referenced Velocity Report Capability: " + message.ARV + nl + "Cockpit Display of Traffic Information airborne: " + message.CDTIA + nl + "TCAS System Status: " + message.NotTCAS + nl + message.SA;
-                                }
-                                if (column.ColumnName == "Surface\nCapabilities\nand\nCharacteristics")
-                                {
-                                    Value = Value + message.POA + nl + message.CDTIS + nl + message.B2Low + nl + message.RAS + nl + message.IDENT;
-                                    if (message.Length_Width != null) { Value = Value + nl + message.Length_Width; }
-                                }
-                                if (column.ColumnName == "Mode S MB Data")
-                                {
-                                    Value = Value + "Repetitions: " + message.REP_SMB;
-                                    for (int s = 0; s < message.REP_SMB; s++)
-                                    {
-                                        Value = Value + nl + "Repetition: " + Convert.ToString(s) + nl + "Mode S Comm B message data: " + message.MBData[s] + nl + "Comm B Data Buffer Store 1 Address: " + message.BDS1[s] + nl + "Comm B Data Buffer Store 2 Address: " + message.BDS2[s];
-                                    }
-                                }
-                                if (column.ColumnName == "ACAS\nResolution\nAdvisory\nReport")
-                                {
-                                    Value = Value + "Message Type: " + message.TYP + nl + "Message Sub-type: " + message.STYP + nl + "Active Resolution Advisories: " + message.ARA + nl + "RAC(RA Complement) Record: " + message.RAC + nl + "RA Terminated: " + message.RAT + nl + "Multiple Threat Encounter: " + message.MTE + nl + "Threat Type Indicator: " + message.TTI + nl + "Threat Identity Data: " + message.TID;
-                                }
-                                if (column.ColumnName == "Data Ages")
-                                {
-                                    if (message.AOS != null) { Value = Value + "Age of the latest received information transmitted in item I021 / 008: " + message.AOS; }
-                                    if (message.TRD != null) { Value = Value + nl + "Age of the last update of the Target Report Descriptor: " + message.TRD; }
-                                    if (message.M3A != null) { Value = Value + nl + "Age of the last update of the Mode 3 / A Code: " + message.M3A; }
-                                    if (message.QI != null) { Value = Value + nl + "Age of the latest information received to update the Quality Indicators: " + message.QI; }
-                                    if (message.TI != null) { Value = Value + nl + "Age of the last update of the Trajectory Intent: " + message.TI; }
-                                    if (message.MAM != null) { Value = Value + nl + "Age of the latest measurement of the message amplitude: " + message.MAM; }
-                                    if (message.GH != null) { Value = Value + nl + "Age of the information contained in item 021 / 140: " + message.GH; }
-                                    if (message.FL != null) { Value = Value + nl + "Age of the Flight Level information: " + message.FL; }
-                                    if (message.ISA != null) { Value = Value + nl + "Age of the Intermediate State Selected Altitude: " + message.ISA; }
-                                    if (message.FSA != null) { Value = Value + nl + "Age of the Final State Selected Altitude: " + message.FSA; }
-                                    if (message.AS != null) { Value = Value + nl + "Age of the Air Speed: " + message.AS; }
-                                    if (message.TAS != null) { Value = Value + nl + "Age of the value for the True Air Speed: " + message.TAS; }
-                                    if (message.MH != null) { Value = Value + nl + "Age of the value for the Magnetic Heading: " + message.MH; }
-                                    if (message.BVR != null) { Value = Value + nl + "Age of the Barometric Vertical Rate: " + message.BVR; }
-                                    if (message.GVR != null) { Value = Value + nl + "Age of the Geometric Vertical Rate: " + message.GVR; }
-                                    if (message.GV != null) { Value = Value + nl + "Age of the Ground Vector: " + message.GV; }
-                                    if (message.TAR != null) { Value = Value + nl + "Age of item I021/165 Track Angle Rate: " + message.TAR; }
-                                    if (message.TIDataAge != null) { Value = Value + nl + "Age of the Target Identification: " + message.TIDataAge; }
-                                    if (message.TSDataAge != null) { Value = Value + nl + "Age of the Target Status: " + message.TSDataAge; }
-                                    if (message.MET != null) { Value = Value + nl + "Age of the Meteorological: " + message.MET; }
-                                    if (message.ROA != null) { Value = Value + nl + "Age of the Roll Angle value: " + message.ROA; }
-                                    if (message.ARADataAge != null) { Value = Value + nl + "Age of the latest update of an active ACAS Resolution Advisory: " + message.ARADataAge; }
-                                    if (message.SCC != null) { Value = Value + nl + "Age of the latest information received on the surface capabilities and characteristics of the respective target: " + message.SCC; }
-                                }
-                                data = Value;
                             }
-                            data = data.Replace(",", ".");
-                            RowData.Append(data);
-                            RowData.Append(",");
+                            if (column.ColumnName == "Quality Indicators")
+                            {
+                                cellString = message.NUCr_NACv + space + message.NUCp_NIC;
+                                if (message.NICbaro != null)
+                                {
+                                    cellString = cellString + space + message.NICbaro + space + message.SIL + space + message.NACp;
+                                    if (message.SILsupp != null)
+                                    {
+                                        cellString = cellString + space + message.SILsupp + space + message.SDA + space + message.GVA;
+                                        if (message.ICB != null) { cellString = cellString + space + message.PICsupp + space + message.ICB + space + message.NUCp + space  + message.NIC; }
+                                    }
+                                }
+                            }
+                            if (column.ColumnName == "Target Status")
+                            {
+                                cellString = message.ICF + space + message.LNAV + space + message.PS + space + message.SS;
+                            }
+                            if (column.ColumnName == "Met Information")
+                            {
+                                if (message.WindSpeed != null) { cellString = cellString + message.WindSpeed; }
+                                if (message.WindDirection != null) { cellString = cellString + space + message.WindDirection; }
+                                if (message.Temperature != null) { cellString = cellString + space + message.Temperature; }
+                                if (message.Turbulence != null) { cellString = cellString + space + message.Turbulence; }
+                            }
+                            if (column.ColumnName == "Selected Altitude")
+                            {
+                                cellString = cellString + message.SAS + space + message.Source + space + message.SA;
+                            }
+                            if (column.ColumnName == "Final State Selected Altitude")
+                            {
+                                cellString = cellString + message.MV + space + message.AH + message.AM + space + message.finalStateSelectedAltitude;
+                            }
+                            if (column.ColumnName == "Trajectory Intent")
+                            {
+                                if (message.NAV != null)
+                                {
+                                    cellString = cellString + message.NAV + space + message.NVB;
+                                }
+                                if (message.REP_TI != 0)
+                                {
+                                    cellString = cellString + space + "Repetitions: " + Convert.ToString(message.REP_TI);
+                                    for (int s = 0; s < message.REP_TI; s++)
+                                    {
+                                        cellString = cellString + space + "Repetition: " + Convert.ToString(s) + space + message.TCA[s] + space + message.NC[s] + space + "Trajectory Change Point number: " + Convert.ToString(message.TCP[s]) + space + "Altitude: " + message.Altitude[s] + space + "Latitude: " + message.Latitude[s] + space + "Longitude: " + message.Longitude[s] + space + "PT: " + message.PointType[s] + space;
+                                        cellString = cellString + space + "TD: " + message.TD[s] + space + "Turn Radius Availabilty" + message.TRA[s] + space + message.TOA[s] + space + "Time Over Point: " + message.TOV[s] + space + "TCP Turn radius: " + message.TTR[s];
+                                    }
+                                }
+                            }
+                            if (column.ColumnName == "Aircraft Operational Status")
+                            {
+                                cellString = cellString + message.RA + space + message.TC + space + message.TS + space + message.ARV + space + message.CDTIA + space + message.NotTCAS + space + message.SA;
+                            }
+                            if (column.ColumnName == "Surface Capabilities and Characteristics")
+                            {
+                                cellString = cellString + message.POA + space + message.CDTIS + space + message.B2Low + space + message.RAS + space + message.IDENT;
+                                if (message.Length_Width != null) { cellString = cellString + space + message.Length_Width; }
+                            }
+                            if (column.ColumnName == "Mode S MB Data")
+                            {
+                                cellString = cellString + "Repetitions: " + message.REP_SMB;
+                                for (int s = 0; s < message.REP_SMB; s++)
+                                {
+                                    cellString = cellString + space + "Repetition: " + Convert.ToString(s) + space + "Mode S Comm B message data: " + message.MBData[s] + space + "Comm B Data Buffer Store 1 Address: " + message.BDS1[s] + space + "Comm B Data Buffer Store 2 Address: " + message.BDS2[s];
+                                }
+                            }
+                            if (column.ColumnName == "ACAS Resolution Advisory Report")
+                            {
+                                cellString = cellString + message.TYP + space + message.STYP + space + message.ARA + space + message.RAC + space + message.RAT + space + message.MTE + space + message.TTI + space + message.TID;
+                            }
+                            if (column.ColumnName == "Data Ages")
+                            {
+                                if (message.AOS != null) { cellString = cellString + message.AOS; }
+                                if (message.TRD != null) { cellString = cellString + space + message.TRD; }
+                                if (message.M3A != null) { cellString = cellString + space + message.M3A; }
+                                if (message.QI != null) { cellString = cellString + space + message.QI; }
+                                if (message.TI != null) { cellString = cellString + space + message.TI; }
+                                if (message.MAM != null) { cellString = cellString + space + message.MAM; }
+                                if (message.GH != null) { cellString = cellString + space + message.GH; }
+                                if (message.FL != null) { cellString = cellString + space + message.FL; }
+                                if (message.ISA != null) { cellString = cellString + space + message.ISA; }
+                                if (message.FSA != null) { cellString = cellString + space + message.FSA; }
+                                if (message.AS != null) { cellString = cellString + space + message.AS; }
+                                if (message.TAS != null) { cellString = cellString + space + message.TAS; }
+                                if (message.MH != null) { cellString = cellString + space + message.MH; }
+                                if (message.BVR != null) { cellString = cellString + space + message.BVR; }
+                                if (message.GVR != null) { cellString = cellString + space + message.GVR; }
+                                if (message.GV != null) { cellString = cellString + space + message.GV; }
+                                if (message.TAR != null) { cellString = cellString + space + message.TAR; }
+                                if (message.TIDataAge != null) { cellString = cellString + space + message.TIDataAge; }
+                                if (message.TSDataAge != null) { cellString = cellString + space + message.TSDataAge; }
+                                if (message.MET != null) { cellString = cellString + space + message.MET; }
+                                if (message.ROA != null) { cellString = cellString + space + message.ROA; }
+                                if (message.ARADataAge != null) { cellString = cellString + space + message.ARADataAge; }
+                                if (message.SCC != null) { cellString = cellString + space + message.SCC; }
+                            }
+
+                            data = cellString;
                         }
+
+                        data = data.Replace(",", ".");
+                        RowData.Append(data);
+                        RowData.Append(",");
                     }
+
                     string RowDat = RowData.ToString();
                     RowDat = RowDat.TrimEnd(',');
                     sb.AppendLine(RowDat);
