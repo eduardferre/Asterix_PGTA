@@ -28,9 +28,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.clickInfo_label = new System.Windows.Forms.Label();
             this.gridCAT10 = new System.Windows.Forms.DataGridView();
             this.gridCAT21 = new System.Windows.Forms.DataGridView();
@@ -52,6 +52,11 @@
             this.startButton = new System.Windows.Forms.Button();
             this.resetButton = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timeLabel = new System.Windows.Forms.Label();
+            this.speedButton = new System.Windows.Forms.Button();
+            this.smrCheck = new System.Windows.Forms.CheckBox();
+            this.mlatCheck = new System.Windows.Forms.CheckBox();
+            this.adsbCheck = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT21)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -73,37 +78,37 @@
             this.gridCAT10.AllowUserToResizeColumns = false;
             this.gridCAT10.AllowUserToResizeRows = false;
             this.gridCAT10.CausesValidation = false;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridCAT10.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridCAT10.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gridCAT10.ColumnHeadersHeight = 22;
             this.gridCAT10.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridCAT10.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridCAT10.DefaultCellStyle = dataGridViewCellStyle2;
             this.gridCAT10.Location = new System.Drawing.Point(12, 317);
             this.gridCAT10.Margin = new System.Windows.Forms.Padding(0);
             this.gridCAT10.MultiSelect = false;
             this.gridCAT10.Name = "gridCAT10";
             this.gridCAT10.ReadOnly = true;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.gridCAT10.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.gridCAT10.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.gridCAT10.RowHeadersWidth = 6;
             this.gridCAT10.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gridCAT10.Size = new System.Drawing.Size(10, 11);
@@ -117,16 +122,16 @@
             this.gridCAT21.AllowUserToResizeColumns = false;
             this.gridCAT21.AllowUserToResizeRows = false;
             this.gridCAT21.CausesValidation = false;
-            this.gridCAT21.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.gridCAT21.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gridCAT21.ColumnHeadersHeight = 22;
             this.gridCAT21.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.gridCAT21.DefaultCellStyle = dataGridViewCellStyle5;
+            this.gridCAT21.DefaultCellStyle = dataGridViewCellStyle2;
             this.gridCAT21.Location = new System.Drawing.Point(12, 358);
             this.gridCAT21.Margin = new System.Windows.Forms.Padding(0);
             this.gridCAT21.MultiSelect = false;
             this.gridCAT21.Name = "gridCAT21";
             this.gridCAT21.ReadOnly = true;
-            this.gridCAT21.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.gridCAT21.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.gridCAT21.RowHeadersWidth = 6;
             this.gridCAT21.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gridCAT21.Size = new System.Drawing.Size(10, 10);
@@ -295,16 +300,71 @@
             this.resetButton.TabIndex = 11;
             this.resetButton.Text = "Reset";
             this.resetButton.UseVisualStyleBackColor = true;
+            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
             // 
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // timeLabel
+            // 
+            this.timeLabel.AutoSize = true;
+            this.timeLabel.Location = new System.Drawing.Point(1182, 45);
+            this.timeLabel.Name = "timeLabel";
+            this.timeLabel.Size = new System.Drawing.Size(49, 15);
+            this.timeLabel.TabIndex = 12;
+            this.timeLabel.Text = "00:00:00";
+            // 
+            // speedButton
+            // 
+            this.speedButton.Location = new System.Drawing.Point(1127, 141);
+            this.speedButton.Name = "speedButton";
+            this.speedButton.Size = new System.Drawing.Size(149, 32);
+            this.speedButton.TabIndex = 13;
+            this.speedButton.Text = "Speed (x1)";
+            this.speedButton.UseVisualStyleBackColor = true;
+            this.speedButton.Click += new System.EventHandler(this.speedButton_Click);
+            // 
+            // smrCheck
+            // 
+            this.smrCheck.AutoSize = true;
+            this.smrCheck.Location = new System.Drawing.Point(1127, 215);
+            this.smrCheck.Name = "smrCheck";
+            this.smrCheck.Size = new System.Drawing.Size(85, 19);
+            this.smrCheck.TabIndex = 14;
+            this.smrCheck.Text = "SMR Traffic";
+            this.smrCheck.UseVisualStyleBackColor = true;
+            // 
+            // mlatCheck
+            // 
+            this.mlatCheck.AutoSize = true;
+            this.mlatCheck.Location = new System.Drawing.Point(1127, 237);
+            this.mlatCheck.Name = "mlatCheck";
+            this.mlatCheck.Size = new System.Drawing.Size(91, 19);
+            this.mlatCheck.TabIndex = 15;
+            this.mlatCheck.Text = "MLAT Traffic";
+            this.mlatCheck.UseVisualStyleBackColor = true;
+            // 
+            // adsbCheck
+            // 
+            this.adsbCheck.AutoSize = true;
+            this.adsbCheck.Location = new System.Drawing.Point(1127, 262);
+            this.adsbCheck.Name = "adsbCheck";
+            this.adsbCheck.Size = new System.Drawing.Size(90, 19);
+            this.adsbCheck.TabIndex = 16;
+            this.adsbCheck.Text = "ADSB Traffic";
+            this.adsbCheck.UseVisualStyleBackColor = true;
             // 
             // AsterixDecoder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1300, 650);
+            this.Controls.Add(this.adsbCheck);
+            this.Controls.Add(this.mlatCheck);
+            this.Controls.Add(this.smrCheck);
+            this.Controls.Add(this.speedButton);
+            this.Controls.Add(this.timeLabel);
             this.Controls.Add(this.resetButton);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.gMapControl1);
@@ -354,6 +414,11 @@
         private System.Windows.Forms.Button startButton;
         private System.Windows.Forms.Button resetButton;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label timeLabel;
+        private System.Windows.Forms.Button speedButton;
+        private System.Windows.Forms.CheckBox smrCheck;
+        private System.Windows.Forms.CheckBox mlatCheck;
+        private System.Windows.Forms.CheckBox adsbCheck;
     }
 }
 

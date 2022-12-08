@@ -21,6 +21,7 @@ using Image = System.Drawing.Image;
 using GMap.NET.WindowsPresentation;
 using MessageBox = System.Windows.MessageBox;
 using GMap.NET.WindowsForms;
+using GMap.NET.WindowsForms.Markers;
 
 namespace AsterixDecoder
 {
@@ -54,6 +55,10 @@ namespace AsterixDecoder
             process_label.Visible = true;
             msg_label.Visible = false;
             gMapControl1.Visible = false;
+            timeLabel.Visible = false;
+            startButton.Visible = false;
+            resetButton.Visible = false;
+            speedButton.Visible = false;
         }
 
         private void gridCAT10_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -265,6 +270,10 @@ namespace AsterixDecoder
             process_label.Visible = false;
             msg_label.Visible = false;
             gMapControl1.Visible = false;
+            timeLabel.Visible = false;
+            startButton.Visible = false;
+            resetButton.Visible = false;
+            speedButton.Visible = false;
             if (listCAT10.Count != 0)
             {
 
@@ -297,6 +306,10 @@ namespace AsterixDecoder
             process_label.Visible = false;
             msg_label.Visible = false;
             gMapControl1.Visible = false;
+            timeLabel.Visible = false;
+            startButton.Visible = false;
+            resetButton.Visible = false;
+            speedButton.Visible = false;
             if (listCAT21.Count != 0)
             {
 
@@ -329,8 +342,12 @@ namespace AsterixDecoder
             process_label.Visible = false;
             msg_label.Visible = false;
             gMapControl1.Visible = true;
+            timeLabel.Visible = true;
+            startButton.Visible = true;
+            resetButton.Visible = true;
+            speedButton.Visible = true;
             timer1.Stop();
-            timer1.Interval = 100;
+            timer1.Interval = 1000;
             time = 86400;
             foreach (CATALL message in listCATALL) 
             { 
@@ -339,6 +356,7 @@ namespace AsterixDecoder
                     time = message.timeOfDay;
                 }
             }
+            timeLabel.Text = Convert.ToString((time / (60 * 60)) % 24) + " : " + Convert.ToString((time / 60) % 60) + " : " + Convert.ToString((time % 60));
 
 
         }
@@ -682,13 +700,40 @@ namespace AsterixDecoder
             OverlayMarkers.Markers.Clear();
             foreach (markerWithInfo marker in markers)
             {
-                OverlayMarkers.Markers.Add(marker);
+                if (smrCheck.Checked)
+                {
+                    if (marker.DetectionMode == "SMR")
+                    {
+                        marker.IsVisible = true;
+                        GMap.NET.WindowsForms.GMapMarker mk = new GMarkerGoogle(marker.p, GMarkerGoogleType.blue_dot);
+                        OverlayMarkers.Markers.Add(mk);
+                    }
+                }
+                if (mlatCheck.Checked)
+                {
+                    if (marker.DetectionMode == "MLAT")
+                    {
+                        marker.IsVisible = true;
+                        GMap.NET.WindowsForms.GMapMarker mk = new GMarkerGoogle(marker.p, GMarkerGoogleType.pink_dot);
+                        OverlayMarkers.Markers.Add(mk);
+                    }
+                }
+                if (adsbCheck.Checked)
+                {
+                    if (marker.DetectionMode == "ADSB")
+                    {
+                        marker.IsVisible = true;
+                        GMap.NET.WindowsForms.GMapMarker mk = new GMarkerGoogle(marker.p, GMarkerGoogleType.green_dot);
+                        OverlayMarkers.Markers.Add(mk);
+                    }
+                }
             }
             gMapControl1.Overlays.Add(OverlayMarkers);
         }
         private void timer1_Tick(object sender, EventArgs e)
         { 
             time++;
+            timeLabel.Text = Convert.ToString((time / (60 * 60))%24) + " : " + Convert.ToString((time / 60)%60) + " : " + Convert.ToString((time%60));
             timeIncrease();
         }
 
@@ -718,6 +763,43 @@ namespace AsterixDecoder
                 s++;
             }
             ShowMarkers();
+        }
+
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            timer1.Stop();
+            time = 86400;
+            foreach (CATALL message in listCATALL)
+            {
+                if (message.timeOfDay < time)
+                {
+                    time = message.timeOfDay;
+                }
+            }
+            markers.Clear();
+            OverlayMarkers.Markers.Clear();
+            timeLabel.Text = Convert.ToString((time / (60 * 60)) % 24) + " : " + Convert.ToString((time / 60) % 60) + " : " + Convert.ToString((time % 60));
+            startButton.Text = "Start";
+            
+        }
+
+        private void speedButton_Click(object sender, EventArgs e)
+        {
+            if (speedButton.Text=="Speed (x1)")
+            {
+                timer1.Interval = 100;
+                speedButton.Text = "Speed (x10)";
+            }
+            else if (speedButton.Text == "Speed (x10)")
+            {
+                timer1.Interval = 20;
+                speedButton.Text = "Speed (x50)";
+            }
+            else if (speedButton.Text == "Speed (x50)")
+            {
+                timer1.Interval = 1000;
+                speedButton.Text = "Speed (x1)";
+            }
         }
     }
 }
