@@ -373,6 +373,15 @@ namespace AsterixDecoder
                 gridCAT21.Location = new Point(10, 40);
                 clickInfo_label.Location = new Point(1075, 80);
                 info_label.Location = new Point(1100, 40);
+                labelFilter.Location = new Point(1110, 335);
+                smrButton.Location = new Point(1110, 375);
+                mlatButton.Location = new Point(1110, 400);
+                trackNumberButton.Location = new Point(1110, 425);
+                mode3AButton.Location = new Point(1110, 450);
+                targetAddressButton.Location = new Point(1110, 475);
+                targetIDButton.Location = new Point(1110, 500);
+                filterTextBox.Location = new Point(1115, 525);
+                filterButton.Location = new Point(1100, 560);
 
                 gridCAT21.Size = new Size(1050, 600);
                 clickInfo_label.Size = new Size(210, 250);
