@@ -57,6 +57,7 @@
             this.smrCheck = new System.Windows.Forms.CheckBox();
             this.mlatCheck = new System.Windows.Forms.CheckBox();
             this.adsbCheck = new System.Windows.Forms.CheckBox();
+            this.timeButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT21)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -355,11 +356,22 @@
             this.adsbCheck.Text = "ADSB Traffic";
             this.adsbCheck.UseVisualStyleBackColor = true;
             // 
+            // timeButton
+            // 
+            this.timeButton.Location = new System.Drawing.Point(1127, 296);
+            this.timeButton.Name = "timeButton";
+            this.timeButton.Size = new System.Drawing.Size(149, 32);
+            this.timeButton.TabIndex = 17;
+            this.timeButton.Text = "Select Time";
+            this.timeButton.UseVisualStyleBackColor = true;
+            this.timeButton.Click += new System.EventHandler(this.timeButton_Click);
+            // 
             // AsterixDecoder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1300, 650);
+            this.Controls.Add(this.timeButton);
             this.Controls.Add(this.adsbCheck);
             this.Controls.Add(this.mlatCheck);
             this.Controls.Add(this.smrCheck);
@@ -419,6 +431,7 @@
         private System.Windows.Forms.CheckBox smrCheck;
         private System.Windows.Forms.CheckBox mlatCheck;
         private System.Windows.Forms.CheckBox adsbCheck;
+        private System.Windows.Forms.Button timeButton;
     }
 }
 

@@ -652,6 +652,7 @@ namespace AsterixDecoder
             gMapControl1.Zoom = zoom;
             gMapControl1.Position = new PointLatLng(41.295855, 2.08442);
             gMapControl1.MapProvider = GMapProviders.GoogleMap;
+            gMapControl1.ShowCenter = false;
         }
 
         private void startButton_Click(object sender, EventArgs e)
@@ -704,7 +705,6 @@ namespace AsterixDecoder
                 {
                     if (marker.DetectionMode == "SMR")
                     {
-                        marker.IsVisible = true;
                         GMap.NET.WindowsForms.GMapMarker mk = new GMarkerGoogle(marker.p, GMarkerGoogleType.blue_dot);
                         OverlayMarkers.Markers.Add(mk);
                     }
@@ -713,7 +713,6 @@ namespace AsterixDecoder
                 {
                     if (marker.DetectionMode == "MLAT")
                     {
-                        marker.IsVisible = true;
                         GMap.NET.WindowsForms.GMapMarker mk = new GMarkerGoogle(marker.p, GMarkerGoogleType.pink_dot);
                         OverlayMarkers.Markers.Add(mk);
                     }
@@ -722,7 +721,6 @@ namespace AsterixDecoder
                 {
                     if (marker.DetectionMode == "ADSB")
                     {
-                        marker.IsVisible = true;
                         GMap.NET.WindowsForms.GMapMarker mk = new GMarkerGoogle(marker.p, GMarkerGoogleType.green_dot);
                         OverlayMarkers.Markers.Add(mk);
                     }
@@ -742,7 +740,7 @@ namespace AsterixDecoder
             bool first_found = false;
             int s = 0;
 
-            for (int i = 0; first_found == false; i++) { if (listCATALL[i].timeOfDay == time) { first_found = true; s = i; }; }
+            for (int i = 0; first_found == false && i<listCATALL.Count(); i++) { if (listCATALL[i].timeOfDay == time) { first_found = true; s = i; }; }
 
             while (listCATALL[s].timeOfDay == time)
             {
@@ -800,6 +798,13 @@ namespace AsterixDecoder
                 timer1.Interval = 1000;
                 speedButton.Text = "Speed (x1)";
             }
+        }
+
+        private void timeButton_Click(object sender, EventArgs e)
+        {
+            Form2 cv = new Form2();
+            cv.ShowDialog();
+            time = cv.getTime();
         }
     }
 }
