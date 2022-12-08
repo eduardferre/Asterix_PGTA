@@ -4,7 +4,8 @@ using System.Text;
 
 namespace ClassLibrary
 {
-    internal class Class1
+    public class MapsFunctions
     {
+
     }
 }
