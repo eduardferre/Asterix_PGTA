@@ -43,8 +43,6 @@ namespace AsterixDecoder
             InitializeComponent();
         }
 
-        
-
         private void AsterixDecoder_Load(object sender, EventArgs e)
         {
             process_label.Text = "Select a file to decode";
@@ -59,6 +57,7 @@ namespace AsterixDecoder
             startButton.Visible = false;
             resetButton.Visible = false;
             speedButton.Visible = false;
+            labelFilter.Visible = false;
         }
 
         private void gridCAT10_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -281,10 +280,7 @@ namespace AsterixDecoder
 
         private void tableCAT10ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            clickInfo_label.Visible = true;
-            gridCAT10.Visible = true;
-            gridCAT21.Visible = false;
-            info_label.Visible = true;
+            gridCAT10.Visible = false;
             process_label.Visible = false;
             msg_label.Visible = false;
             gMapControl1.Visible = false;
@@ -310,6 +306,7 @@ namespace AsterixDecoder
                 gridCAT10.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
 
                 info_label.Visible = true;
+                labelFilter.Visible = true;
                 clickInfo_label.Visible = true;
                 gridCAT10.Visible = true;
             }
@@ -318,10 +315,7 @@ namespace AsterixDecoder
 
         private void tableCAT21ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            clickInfo_label.Visible = true;
             gridCAT10.Visible = false;
-            gridCAT21.Visible = true;
-            info_label.Visible = true;
             process_label.Visible = false;
             msg_label.Visible = false;
             gMapControl1.Visible = false;
@@ -335,6 +329,7 @@ namespace AsterixDecoder
                 gridCAT21.Location = new Point(10, 40);
                 clickInfo_label.Location = new Point(1075, 80);
                 info_label.Location = new Point(1100, 40);
+                labelFilter.Location = new Point(1150, 250);
 
                 gridCAT21.Size = new Size(1050, 600);
                 clickInfo_label.Size = new Size(210, 250);
@@ -346,6 +341,7 @@ namespace AsterixDecoder
                 gridCAT21.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
 
                 info_label.Visible = true;
+                labelFilter.Visible = true;
                 clickInfo_label.Visible = true;
                 gridCAT21.Visible = true;
             }

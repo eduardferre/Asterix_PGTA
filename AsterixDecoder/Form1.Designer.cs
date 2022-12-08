@@ -60,7 +60,8 @@ namespace AsterixDecoder
             this.mlatCheck = new System.Windows.Forms.CheckBox();
             this.adsbCheck = new System.Windows.Forms.CheckBox();
             this.timeButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelFilter = new System.Windows.Forms.Label();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT21)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -70,7 +71,7 @@ namespace AsterixDecoder
             // 
             this.clickInfo_label.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.clickInfo_label.Font = new System.Drawing.Font("Segoe UI", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.clickInfo_label.Location = new System.Drawing.Point(1166, 62);
+            this.clickInfo_label.Location = new System.Drawing.Point(1152, 62);
             this.clickInfo_label.Name = "clickInfo_label";
             this.clickInfo_label.Size = new System.Drawing.Size(122, 172);
             this.clickInfo_label.TabIndex = 3;
@@ -370,21 +371,31 @@ namespace AsterixDecoder
             this.timeButton.UseVisualStyleBackColor = true;
             this.timeButton.Click += new System.EventHandler(this.timeButton_Click);
             // 
-            // label1
+            // labelFilter
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1127, 369);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 15);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "label1";
+            this.labelFilter.AutoSize = true;
+            this.labelFilter.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelFilter.Location = new System.Drawing.Point(1152, 255);
+            this.labelFilter.Name = "labelFilter";
+            this.labelFilter.Size = new System.Drawing.Size(124, 25);
+            this.labelFilter.TabIndex = 6;
+            this.labelFilter.Text = "FILTER DATA";
+            // 
+            // checkedListBox1
+            // 
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.Location = new System.Drawing.Point(1152, 296);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(122, 76);
+            this.checkedListBox1.TabIndex = 18;
             // 
             // AsterixDecoder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1300, 650);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.checkedListBox1);
+            this.Controls.Add(this.labelFilter);
             this.Controls.Add(this.timeButton);
             this.Controls.Add(this.adsbCheck);
             this.Controls.Add(this.mlatCheck);
@@ -446,7 +457,8 @@ namespace AsterixDecoder
         private System.Windows.Forms.CheckBox mlatCheck;
         private System.Windows.Forms.CheckBox adsbCheck;
         private System.Windows.Forms.Button timeButton;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelFilter;
+        private System.Windows.Forms.CheckedListBox checkedListBox1;
     }
 }
 
