@@ -1,7 +1,9 @@
-﻿using System;
+﻿using GMap.NET;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace ClassLibrary
@@ -415,38 +417,54 @@ namespace ClassLibrary
 
             positioninCartesianCoordinates = "X: " + XMap + ", Y: " + YMap;
 
-            //Point MapPoint = new Point(this.XMap, this.YMap);
+            Point MapPoint = new Point(Convert.ToInt32(this.XMap), Convert.ToInt32(this.YMap));
 
-            //PointLatLng position = lib.ComputeWGS_84_from_Cartesian(MapPoint, this.SIC); //Compute WGS84 position from cartesian position
-            //Set_WGS84_Coordinates(position); //Apply computed WGS84 position to this message
+            PointLatLng coordsLatLng = ComputeWGS84fromCartesian(MapPoint, this.SIC); //Compute WGS84 position from cartesian position
+            Set_WGS84_Coordinates(coordsLatLng); //Apply computed WGS84 position to this message
 
             return newposition;
         }
 
-        /*
-        WSG84 FROM CARTESIAN
-        public PointLatLng ComputeWGS_84_from_Cartesian(Point point, string SIC)
+
+        //WSG84 FROM CARTESIAN
+        public PointLatLng ComputeWGS84fromCartesian(Point point, string SIC)
         {
             PointLatLng position = new PointLatLng();
-            
-            double X_pos = position.X;
-            double Y_pos = position.Y;
+            double[] airportWGS84 = new double[3];
+
+            airportWGS84[0] = 41.29561833 * (Math.PI / 180); //lat
+            airportWGS84[1] = 2.095114167 * (Math.PI / 180); //long
+            airportWGS84[2] = 0;
+
+            CoordinatesXYZ planeCartesian = new CoordinatesXYZ(point.X, point.Y, 0);
+            CoordinatesWGS84 airportGeodesic = new CoordinatesWGS84(airportWGS84[0], airportWGS84[1]);
+            MapsFunctions maps = new MapsFunctions();
+            CoordinatesWGS84 markerGeo = maps.change_system_cartesian2geodesic(planeCartesian, airportGeodesic);
+            maps = null;
+
+            position.Lat = markerGeo.Lat * (180 / Math.PI);
+            position.Lng = markerGeo.Lon * (180 / Math.PI);
+
+            return position;
         }
 
         public void Set_WGS84_Coordinates(PointLatLng pos)
         {
-            LatitudeWGS_84_map=pos.Lat;
-            LongitudeWGS_84_map=pos.Lng;
-            int Latdegres = Convert.ToInt32(Math.Truncate(LatitudeWGS_84_map));
-            int Latmin = Convert.ToInt32(Math.Truncate((LatitudeWGS_84_map - Latdegres) * 60));
-            double Latsec = Math.Round(((LatitudeWGS_84_map - (Latdegres + (Convert.ToDouble(Latmin) / 60))) * 3600), 5);
-            int Londegres = Convert.ToInt32(Math.Truncate(LongitudeWGS_84_map));
-            int Lonmin = Convert.ToInt32(Math.Truncate((LongitudeWGS_84_map - Londegres) * 60));
-            double Lonsec = Math.Round(((LongitudeWGS_84_map - (Londegres + (Convert.ToDouble(Lonmin) / 60))) * 3600), 5);
-            Latitude_in_WGS_84 = Convert.ToString(Latdegres) + "º " + Convert.ToString(Latmin) + "' " + Convert.ToString(Latsec) + "''";
-            Longitude_in_WGS_84 = Convert.ToString(Londegres) + "º" + Convert.ToString(Lonmin) + "' " + Convert.ToString(Lonsec) + "''";
+            this.LatitudeMapWGS84 = pos.Lat;
+            this.LongitudeMapWGS84 = pos.Lng;
+
+            int Latdegres = Convert.ToInt32(Math.Truncate(LatitudeMapWGS84));
+            int Latmin = Convert.ToInt32(Math.Truncate((LatitudeMapWGS84 - Latdegres) * 60));
+            double Latsec = Math.Round(((LatitudeMapWGS84 - (Latdegres + (Convert.ToDouble(Latmin) / 60))) * 3600), 5);
+
+            int Londegres = Convert.ToInt32(Math.Truncate(LongitudeMapWGS84));
+            int Lonmin = Convert.ToInt32(Math.Truncate((LongitudeMapWGS84 - Londegres) * 60));
+            double Lonsec = Math.Round(((LongitudeMapWGS84 - (Londegres + (Convert.ToDouble(Lonmin) / 60))) * 3600), 5);
+
+            LatitudeinWGS84 = Convert.ToString(Latdegres) + "º " + Convert.ToString(Latmin) + "' " + Convert.ToString(Latsec) + "''";
+            LongitudeinWGS84 = Convert.ToString(Londegres) + "º" + Convert.ToString(Lonmin) + "' " + Convert.ToString(Lonsec) + "''";
         }
-        */
+
 
         //DATA ITEM I010/060
         public string VMode3A;
@@ -496,11 +514,11 @@ namespace ClassLibrary
             if(octet[1] == 0) this.GFlightLevel = "GFlight: Default";
             else this.GFlightLevel = "GFlight: Garbled code";
 
-            this.FlightLevel = Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position],  data[position + 1]).Substring(2, 14))) * 0.25);
+            this.FlightLevel = "FL" + Convert.ToString(Convert.ToDouble(BinTwosComplementToSignedDecimal(string.Concat(data[position],  data[position + 1]).Substring(2, 14))) * 0.25);
 
             this.FlightLevelFT =  Convert.ToString(Convert.ToDouble(FlightLevel) * 100) + " ft";
 
-            this.FlightLevelInfo = this.VFlightLevel + "\n" + this.GFlightLevel + "\n" +  "FL" + this.FlightLevel;
+            this.FlightLevelInfo = this.VFlightLevel + "\n" + this.GFlightLevel + "\n" + this.FlightLevel;
 
             position += 2;
             return position;
@@ -778,7 +796,7 @@ namespace ClassLibrary
 
             this.targetWidth = "Width: " + Convert.ToString(Convert.ToInt32(data[position].Substring(0, 7), 2)) + "m";
 
-            this.targetSizeOrientation = this.targetLength + ", " + this.targetOrientation + ", " + this.targetWidth;
+            this.targetSizeOrientation = this.targetLength + "\n" + this.targetOrientation + "\n" + this.targetWidth;
 
             position = position + 1;
             return position;

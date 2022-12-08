@@ -27,7 +27,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+<<<<<<< HEAD
+=======
             this.components = new System.ComponentModel.Container();
+>>>>>>> master
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -38,8 +41,10 @@
             this.fileStripMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.loadFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CAT10ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tableCAT10ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportCSV_CAT10_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CAT21ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tableCAT21ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportCSV_CAT21_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mAPSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportKMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,6 +54,8 @@
             this.process_label = new System.Windows.Forms.Label();
             this.msg_label = new System.Windows.Forms.Label();
             this.gMapControl1 = new GMap.NET.WindowsForms.GMapControl();
+<<<<<<< HEAD
+=======
             this.startButton = new System.Windows.Forms.Button();
             this.resetButton = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -58,6 +65,7 @@
             this.mlatCheck = new System.Windows.Forms.CheckBox();
             this.adsbCheck = new System.Windows.Forms.CheckBox();
             this.timeButton = new System.Windows.Forms.Button();
+>>>>>>> master
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT21)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -172,11 +180,18 @@
             // CAT10ToolStripMenuItem
             // 
             this.CAT10ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tableCAT10ToolStripMenuItem,
             this.exportCSV_CAT10_ToolStripMenuItem});
             this.CAT10ToolStripMenuItem.Name = "CAT10ToolStripMenuItem";
             this.CAT10ToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.CAT10ToolStripMenuItem.Text = "CAT10";
-            this.CAT10ToolStripMenuItem.Click += new System.EventHandler(this.CAT10ToolStripMenuItem_Click);
+            // 
+            // tableCAT10ToolStripMenuItem
+            // 
+            this.tableCAT10ToolStripMenuItem.Name = "tableCAT10ToolStripMenuItem";
+            this.tableCAT10ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tableCAT10ToolStripMenuItem.Text = "Data Table";
+            this.tableCAT10ToolStripMenuItem.Click += new System.EventHandler(this.tableCAT10ToolStripMenuItem_Click);
             // 
             // exportCSV_CAT10_ToolStripMenuItem
             // 
@@ -188,11 +203,18 @@
             // CAT21ToolStripMenuItem
             // 
             this.CAT21ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tableCAT21ToolStripMenuItem,
             this.exportCSV_CAT21_ToolStripMenuItem});
             this.CAT21ToolStripMenuItem.Name = "CAT21ToolStripMenuItem";
             this.CAT21ToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.CAT21ToolStripMenuItem.Text = "CAT21";
-            this.CAT21ToolStripMenuItem.Click += new System.EventHandler(this.CAT21ToolStripMenuItem_Click);
+            // 
+            // tableCAT21ToolStripMenuItem
+            // 
+            this.tableCAT21ToolStripMenuItem.Name = "tableCAT21ToolStripMenuItem";
+            this.tableCAT21ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tableCAT21ToolStripMenuItem.Text = "Data Table";
+            this.tableCAT21ToolStripMenuItem.Click += new System.EventHandler(this.tableCAT21ToolStripMenuItem_Click);
             // 
             // exportCSV_CAT21_ToolStripMenuItem
             // 
@@ -213,7 +235,11 @@
             // exportKMLToolStripMenuItem
             // 
             this.exportKMLToolStripMenuItem.Name = "exportKMLToolStripMenuItem";
+<<<<<<< HEAD
+            this.exportKMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+=======
             this.exportKMLToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+>>>>>>> master
             this.exportKMLToolStripMenuItem.Text = "Export KML";
             this.exportKMLToolStripMenuItem.Click += new System.EventHandler(this.exportKMLToolStripMenuItem_Click);
             // 
@@ -283,6 +309,8 @@
             this.gMapControl1.Zoom = 0D;
             this.gMapControl1.Load += new System.EventHandler(this.gMapControl1_Load);
             // 
+<<<<<<< HEAD
+=======
             // startButton
             // 
             this.startButton.Location = new System.Drawing.Point(1127, 65);
@@ -366,6 +394,7 @@
             this.timeButton.UseVisualStyleBackColor = true;
             this.timeButton.Click += new System.EventHandler(this.timeButton_Click);
             // 
+>>>>>>> master
             // AsterixDecoder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -423,6 +452,10 @@
         private System.Windows.Forms.ToolStripMenuItem exportCSV_CAT10_ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportCSV_CAT21_ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportKMLToolStripMenuItem;
+<<<<<<< HEAD
+        private System.Windows.Forms.ToolStripMenuItem tableCAT10ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tableCAT21ToolStripMenuItem;
+=======
         private System.Windows.Forms.Button startButton;
         private System.Windows.Forms.Button resetButton;
         private System.Windows.Forms.Timer timer1;
@@ -432,6 +465,7 @@
         private System.Windows.Forms.CheckBox mlatCheck;
         private System.Windows.Forms.CheckBox adsbCheck;
         private System.Windows.Forms.Button timeButton;
+>>>>>>> master
     }
 }
 

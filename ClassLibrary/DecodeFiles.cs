@@ -438,7 +438,7 @@ namespace ClassLibrary
             else { row["Track Velocity in Polar"] = "N/A"; }
             if (message.TrackVelocityCartesianCoordinates != null) { row["Track Velocity in Cartesian"] = message.TrackVelocityCartesianCoordinates; }
             else { row["Track Velocity in Cartesian"] = "N/A"; }
-            if (message.targetSizeOrientation != null) { row["Target Size and Orientation"] = message.targetSizeOrientation; }
+            if (message.targetSizeOrientation != null) { row["Target Size and Orientation"] = "Click for more data"; }
             else { row["Target Size and Orientation"] = "N/A"; }
             if (message.TargetAdd != null) { row["Target Address"] = message.TargetAdd; }
             else { row["Target Address"] = "N/A"; }
