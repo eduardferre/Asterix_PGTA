@@ -62,6 +62,8 @@ namespace AsterixDecoder
             this.timeButton = new System.Windows.Forms.Button();
             this.labelFilter = new System.Windows.Forms.Label();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.trajButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT21)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -334,7 +336,7 @@ namespace AsterixDecoder
             // smrCheck
             // 
             this.smrCheck.AutoSize = true;
-            this.smrCheck.Location = new System.Drawing.Point(1127, 215);
+            this.smrCheck.Location = new System.Drawing.Point(1127, 179);
             this.smrCheck.Name = "smrCheck";
             this.smrCheck.Size = new System.Drawing.Size(85, 19);
             this.smrCheck.TabIndex = 14;
@@ -344,7 +346,7 @@ namespace AsterixDecoder
             // mlatCheck
             // 
             this.mlatCheck.AutoSize = true;
-            this.mlatCheck.Location = new System.Drawing.Point(1127, 237);
+            this.mlatCheck.Location = new System.Drawing.Point(1126, 204);
             this.mlatCheck.Name = "mlatCheck";
             this.mlatCheck.Size = new System.Drawing.Size(91, 19);
             this.mlatCheck.TabIndex = 15;
@@ -354,7 +356,7 @@ namespace AsterixDecoder
             // adsbCheck
             // 
             this.adsbCheck.AutoSize = true;
-            this.adsbCheck.Location = new System.Drawing.Point(1127, 262);
+            this.adsbCheck.Location = new System.Drawing.Point(1126, 229);
             this.adsbCheck.Name = "adsbCheck";
             this.adsbCheck.Size = new System.Drawing.Size(90, 19);
             this.adsbCheck.TabIndex = 16;
@@ -363,7 +365,7 @@ namespace AsterixDecoder
             // 
             // timeButton
             // 
-            this.timeButton.Location = new System.Drawing.Point(1127, 296);
+            this.timeButton.Location = new System.Drawing.Point(1126, 254);
             this.timeButton.Name = "timeButton";
             this.timeButton.Size = new System.Drawing.Size(149, 32);
             this.timeButton.TabIndex = 17;
@@ -388,6 +390,22 @@ namespace AsterixDecoder
             this.checkedListBox1.Name = "checkedListBox1";
             this.checkedListBox1.Size = new System.Drawing.Size(122, 76);
             this.checkedListBox1.TabIndex = 18;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(1238, 501);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 15);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "label1";
+            // 
+            // trajButton
+            // 
+            this.trajButton.Location = new System.Drawing.Point(1126, 292);
+            this.trajButton.Name = "trajButton";
+            this.trajButton.Size = new System.Drawing.Size(149, 32);
+            this.trajButton.TabIndex = 19;
+            this.trajButton.Text = "Show Trajectory";
+            this.trajButton.UseVisualStyleBackColor = true;
+            this.trajButton.Click += new System.EventHandler(this.trajButton_Click);
             // 
             // AsterixDecoder
             // 
@@ -396,6 +414,8 @@ namespace AsterixDecoder
             this.ClientSize = new System.Drawing.Size(1300, 650);
             this.Controls.Add(this.checkedListBox1);
             this.Controls.Add(this.labelFilter);
+            this.Controls.Add(this.trajButton);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.timeButton);
             this.Controls.Add(this.adsbCheck);
             this.Controls.Add(this.mlatCheck);
@@ -459,6 +479,8 @@ namespace AsterixDecoder
         private System.Windows.Forms.Button timeButton;
         private System.Windows.Forms.Label labelFilter;
         private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button trajButton;
     }
 }
 

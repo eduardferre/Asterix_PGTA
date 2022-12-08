@@ -36,6 +36,9 @@ namespace AsterixDecoder
         DataTable dataTableCAT21 = new DataTable();
 
         List<markerWithInfo> markers = new List<markerWithInfo>();
+        List<GMarkerGoogle> trajMarkers = new List<GMarkerGoogle>();
+
+        
         int time = 0;
 
         public AsterixDecoder()
@@ -57,6 +60,10 @@ namespace AsterixDecoder
             startButton.Visible = false;
             resetButton.Visible = false;
             speedButton.Visible = false;
+            smrCheck.Visible = false;
+            mlatCheck.Visible = false;
+            adsbCheck.Visible = false;
+            timeButton.Visible = false;
             labelFilter.Visible = false;
         }
 
@@ -288,6 +295,10 @@ namespace AsterixDecoder
             startButton.Visible = false;
             resetButton.Visible = false;
             speedButton.Visible = false;
+            smrCheck.Visible = false;
+            mlatCheck.Visible = false;
+            adsbCheck.Visible = false;
+            timeButton.Visible = false;
 
             if (listCAT10.Count != 0)
             {
@@ -323,6 +334,11 @@ namespace AsterixDecoder
             startButton.Visible = false;
             resetButton.Visible = false;
             speedButton.Visible = false;
+            smrCheck.Visible = false;
+            mlatCheck.Visible = false;
+            adsbCheck.Visible = false;
+            timeButton.Visible = false;
+
             if (listCAT21.Count != 0)
             {
 
@@ -361,6 +377,10 @@ namespace AsterixDecoder
             startButton.Visible = true;
             resetButton.Visible = true;
             speedButton.Visible = true;
+            smrCheck.Visible = true;
+            mlatCheck.Visible = true;
+            adsbCheck.Visible = true;
+            timeButton.Visible = true;
 
             timer1.Stop();
             timer1.Interval = 1000;
@@ -707,22 +727,7 @@ namespace AsterixDecoder
 
         public GMapOverlay OverlayMarkers = new GMapOverlay("Markers");
 
-        public class MarkerIMG : GMarkerGoogle
-        {
-            public markerWithInfo marker;
-            Bitmap bitmap;
-            PointLatLng p;
-            public MarkerIMG(PointLatLng p, Bitmap bitmap, markerWithInfo mk)
-            :base(p,bitmap)
-            {
-                this.marker = mk;
-            }
-            public MarkerIMG(PointLatLng p, GMarkerGoogleType type, markerWithInfo mk)
-            : base(p,type)
-            {
-                this.marker = mk;
-            }
-        }
+       
 
         private void ShowMarkers()
         {
@@ -733,8 +738,8 @@ namespace AsterixDecoder
                 {
                     if (marker.DetectionMode == "SMR")
                     {
-                        MarkerIMG mk = new MarkerIMG(marker.p, GMarkerGoogleType.blue_dot, marker);
-
+                        GMarkerGoogle mk = new GMarkerGoogle(marker.p, GMarkerGoogleType.blue_dot);
+                        mk.Tag = marker.Callsign;
                         OverlayMarkers.Markers.Add(mk);
                     }
                 }
@@ -742,7 +747,8 @@ namespace AsterixDecoder
                 {
                     if (marker.DetectionMode == "MLAT")
                     {
-                        MarkerIMG mk = new MarkerIMG(marker.p, GMarkerGoogleType.pink, marker);
+                        GMarkerGoogle mk = new GMarkerGoogle(marker.p, GMarkerGoogleType.pink_dot);
+                        mk.Tag = marker.Callsign;
                         OverlayMarkers.Markers.Add(mk);
                     }
                 }
@@ -750,10 +756,15 @@ namespace AsterixDecoder
                 {
                     if (marker.DetectionMode == "ADSB")
                     {
-                        MarkerIMG mk = new MarkerIMG(marker.p, GMarkerGoogleType.green, marker);
+                        GMarkerGoogle mk = new GMarkerGoogle(marker.p, GMarkerGoogleType.green_dot);
+                        mk.Tag = marker.Callsign;
                         OverlayMarkers.Markers.Add(mk);
                     }
                 }
+            }
+            foreach (GMarkerGoogle m in trajMarkers)
+            {
+                OverlayMarkers.Markers.Add(m);
             }
             gMapControl1.Overlays.Add(OverlayMarkers);
         }
@@ -837,9 +848,34 @@ namespace AsterixDecoder
             time = cv.getTime();
         }
 
-
+        markerWithInfo markerselected;
         void gMapControl1_OnMarkerClick(GMap.NET.WindowsForms.GMapMarker item, System.Windows.Forms.MouseEventArgs e)
         {
+            foreach (markerWithInfo mark in markers)
+            {
+                if(mark.Callsign == item.Tag)
+                {
+                    markerselected = mark;
+                }
+            }
+            label1.Text = markerselected.Callsign;
+        }
+
+        private void trajButton_Click(object sender, EventArgs e)
+        {
+            trajMarkers.Clear();
+            if (markerselected != null)
+            {
+                for (int i = 0;  i < listCATALL.Count(); i++) 
+                { 
+                    if (listCATALL[i].targetIdentification == markerselected.Callsign) 
+                    {
+                        GMarkerGoogle mk = new GMarkerGoogle(markerselected.p, GMarkerGoogleType.black_small);
+                        trajMarkers.Add(mk);
+                    }
+                }
+
+            }
         }
     }
 }
