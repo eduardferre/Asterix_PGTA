@@ -363,16 +363,16 @@ namespace AsterixDecoder
 
                 foreach (DataColumn col in dataTableCAT10.Columns)
                 {
-                    ColumnsNames.Append(col.ColumnName + ',');
+                    ColumnsNames.Append(col.ColumnName + ';');
                 }
 
                 string ColNames = ColumnsNames.ToString();
-                ColNames = ColNames.TrimEnd(',');
+                ColNames = ColNames.TrimEnd(';');
                 sb.AppendLine(ColNames);
 
                 foreach (DataRow row in dataTableCAT10.Rows) //cat10
                 {
-                    string space = "; ";
+                    string space = ", ";
                     StringBuilder RowData = new StringBuilder();
                     int number = Convert.ToInt32(row[1].ToString());
                     CAT10 message = listCAT10[number - 1];
@@ -440,11 +440,11 @@ namespace AsterixDecoder
 
                         data = data.Replace(",", ".");
                         RowData.Append(data);
-                        RowData.Append(",");
+                        RowData.Append(";");
                     }
 
                     string RowDat = RowData.ToString();
-                    RowDat = RowDat.TrimEnd(',');
+                    RowDat = RowDat.TrimEnd(';');
                     sb.AppendLine(RowDat);
                 }
 
@@ -472,16 +472,16 @@ namespace AsterixDecoder
 
                 foreach (DataColumn col in dataTableCAT21.Columns)
                 {
-                    ColumnsNames.Append(col.ColumnName + ",");
+                    ColumnsNames.Append(col.ColumnName + ";");
                 }
 
                 string ColNames = ColumnsNames.ToString();
-                ColNames = ColNames.TrimEnd(',');
+                ColNames = ColNames.TrimEnd(';');
                 sb.AppendLine(ColNames);
 
                 foreach (DataRow row in dataTableCAT21.Rows) //cat10
                 {
-                    string space = "; ";
+                    string space = ", ";
 
                     StringBuilder RowData = new StringBuilder();
                     int number = Convert.ToInt32(row[1].ToString());
@@ -609,11 +609,11 @@ namespace AsterixDecoder
 
                         data = data.Replace(",", ".");
                         RowData.Append(data);
-                        RowData.Append(",");
+                        RowData.Append(";");
                     }
 
                     string RowDat = RowData.ToString();
-                    RowDat = RowDat.TrimEnd(',');
+                    RowDat = RowDat.TrimEnd(';');
                     sb.AppendLine(RowDat);
                 }
 
