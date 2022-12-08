@@ -464,8 +464,7 @@ namespace AsterixDecoder
             if (saveFileDialog.FileName != null)
             {
                 Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
-                string path0 = saveFileDialog.FileName;
-                string path = path0 + ".csv";
+                string path = saveFileDialog.FileName + ".csv";
                 StringBuilder sb = new StringBuilder();
                 if (File.Exists(path)) { File.Delete(path); }
 
@@ -483,15 +482,18 @@ namespace AsterixDecoder
                 foreach (DataRow row in dataTableCAT21.Rows) //cat10
                 {
                     string space = "; ";
-                    string cellString = "";
 
                     StringBuilder RowData = new StringBuilder();
                     int number = Convert.ToInt32(row[1].ToString());
                     CAT21 message = listCAT21[number - 1];
+
                     foreach (DataColumn column in dataTableCAT21.Columns)
                     {
+
+                        string cellString = "";
+
                         string data = row[column].ToString();
-                        cellString = "";
+
                         if (data == "Click for more data")
                         {
                             if (column.ColumnName == "Target Report")
