@@ -36,7 +36,8 @@ namespace ClassLibrary
 
         public List<CAT10> GetListCAT10() { return listCAT10; }
         public List<CAT21> GetListCAT21() { return listCAT21; }
-       // public List<CATALL> GetListCATALL() { return listCATALL; }
+        public List<CATALL> GetListCATALL() { return listCATALL; }
+
         public DataTable GetTableCAT10() { return tableCAT10; }
         public DataTable GetTableCAT21() { return tableCAT21; }
 

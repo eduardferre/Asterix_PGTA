@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ClassLibrary
 {
-    class CATALL
+    public class CATALL
     {
         public int msgNum;
         public string CAT;

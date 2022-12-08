@@ -311,13 +311,6 @@
         }
       },
       "GMap.NET.WinForms.Utils/2.1.7": {
-        "dependencies": {
-          "GMap.NET.Core": "2.1.7",
-          "GMap.NET.WinForms": "2.1.7",
-          "LINQPad": "5.40.0",
-          "Polylines": "1.0.0",
-          "System.ValueTuple": "4.5.0"
-        },
         "runtime": {
           "lib/net461/GMap.NET.WindowsForms.Utils.dll": {
             "assemblyVersion": "2.1.7.0",
@@ -404,18 +397,6 @@
           "lib/netstandard1.0/JetBrains.Annotations.dll": {
             "assemblyVersion": "10.3.0.0",
             "fileVersion": "10.3.0.0"
-          }
-        }
-      },
-      "LINQPad/5.40.0": {
-        "runtime": {
-          "lib/net46/LINQPad.exe": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "5.40.0.0"
-          },
-          "lib/net46/lprun.exe": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
           }
         }
       },
@@ -690,14 +671,6 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "assemblyVersion": "13.0.0.0",
             "fileVersion": "13.0.1.25517"
-          }
-        }
-      },
-      "Polylines/1.0.0": {
-        "runtime": {
-          "lib/Polylines.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
           }
         }
       },
@@ -1242,13 +1215,6 @@
       "path": "jetbrains.annotations/10.3.0",
       "hashPath": "jetbrains.annotations.10.3.0.nupkg.sha512"
     },
-    "LINQPad/5.40.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-NP/h6aSYNytwkFmMGYRRlNTBnBSmMFLE05LPreq2OLxCJNxhN8q5RhUbAI87LUzwXFVnjPBZvTeOBhtqiBEgkQ==",
-      "path": "linqpad/5.40.0",
-      "hashPath": "linqpad.5.40.0.nupkg.sha512"
-    },
     "Microsoft.CodeAnalysis.Analyzers/2.9.6": {
       "type": "package",
       "serviceable": true,
@@ -1325,13 +1291,6 @@
       "sha512": "sha512-ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
       "path": "newtonsoft.json/13.0.1",
       "hashPath": "newtonsoft.json.13.0.1.nupkg.sha512"
-    },
-    "Polylines/1.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-9WAUaLSVSWf0B+eLx965m3iw6Lbqx5kOlsfOk/lvWHHigG7JGwBWukXDVMlfpCXmho6Kh/EzGQlITXmP9LsE4Q==",
-      "path": "polylines/1.0.0",
-      "hashPath": "polylines.1.0.0.nupkg.sha512"
     },
     "runtime.native.System.Data.SqlClient.sni/4.7.0": {
       "type": "package",

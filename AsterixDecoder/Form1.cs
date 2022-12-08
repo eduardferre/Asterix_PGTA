@@ -20,6 +20,7 @@ using Cursors = System.Windows.Input.Cursors;
 using Image = System.Drawing.Image;
 using GMap.NET.WindowsPresentation;
 using MessageBox = System.Windows.MessageBox;
+using GMap.NET.WindowsForms;
 
 namespace AsterixDecoder
 {
@@ -29,15 +30,20 @@ namespace AsterixDecoder
 
         List<CAT10> listCAT10 = new List<CAT10>();
         List<CAT21> listCAT21 = new List<CAT21>();
+        List<CATALL> listCATALL = new List<CATALL>();
 
         DataTable dataTableCAT10 = new DataTable();
         DataTable dataTableCAT21 = new DataTable();
+
+        List<markerWithInfo> markers = new List<markerWithInfo>();
+        int time = 0;
 
         public AsterixDecoder()
         {
             InitializeComponent();
         }
 
+        
         private void AsterixDecoder_Load(object sender, EventArgs e)
         {
             process_label.Text = "Select a file to decode";
@@ -244,6 +250,7 @@ namespace AsterixDecoder
 
             this.listCAT10 = decodeFiles.GetListCAT10();
             this.listCAT21 = decodeFiles.GetListCAT21();
+            this.listCATALL = decodeFiles.GetListCATALL();
 
             this.dataTableCAT10 = decodeFiles.GetTableCAT10();
             this.dataTableCAT21 = decodeFiles.GetTableCAT21();
@@ -322,6 +329,18 @@ namespace AsterixDecoder
             process_label.Visible = false;
             msg_label.Visible = false;
             gMapControl1.Visible = true;
+            timer1.Stop();
+            timer1.Interval = 100;
+            time = 86400;
+            foreach (CATALL message in listCATALL) 
+            { 
+                if (message.timeOfDay < time) 
+                {
+                    time = message.timeOfDay;
+                }
+            }
+
+
         }
 
         private void exportCSV_CAT10_ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -615,6 +634,90 @@ namespace AsterixDecoder
             gMapControl1.Zoom = zoom;
             gMapControl1.Position = new PointLatLng(41.295855, 2.08442);
             gMapControl1.MapProvider = GMapProviders.GoogleMap;
+        }
+
+        private void startButton_Click(object sender, EventArgs e)
+        {
+            if (startButton.Text == "Start")
+            {
+                timer1.Start();
+                startButton.Text = "Pause";
+            }
+            else
+            {
+                timer1.Stop();
+                startButton.Text = "Start";
+            }
+        }
+
+        private void AddActualMarker(double X, double Y, string Callsign, int time, int num, string emmiter, string TargetAdd, string detectionmode, string CAT, string SIC, string SAC, string Flight_level, string Track_number, int direction, int refreshratio)
+        {
+            PointLatLng coordinates = new PointLatLng(X, Y);
+            markerWithInfo marker = new markerWithInfo(coordinates, Callsign, time, num, emmiter, TargetAdd, detectionmode, CAT, SIC, SAC, Flight_level, Track_number, direction, refreshratio);
+            markers.Add(marker);
+           // SetMarkerShape(marker);
+        }
+        //private void SetMarkerShape(markerWithInfo marker)
+        //{
+        //    Bitmap bitmaptxt = MarkersDrawings.InsertText(marker);
+        //    int heig = 50; //35
+        //    int wid = 50; //35
+        //    marker.Shape = new System.Windows.Controls.Image
+        //    {
+
+        //        Width = heig,
+        //        Height = wid,
+        //        Source = MarkersDrawings.ToBitmapImage(bitmaptxt)
+        //    };
+        //    marker.Offset = new System.Windows.Point((-wid / 2), (-heig / 2) - 5);
+        //    bitmaptxt.Dispose();
+        //    bitmaptxt = null;
+        //    marker.Shape.MouseLeftButtonUp += markerclick;
+        //}
+
+        public GMapOverlay OverlayMarkers = new GMapOverlay("Markers");
+
+        private void ShowMarkers()
+        {
+            OverlayMarkers.Markers.Clear();
+            foreach (markerWithInfo marker in markers)
+            {
+                OverlayMarkers.Markers.Add(marker);
+            }
+            gMapControl1.Overlays.Add(OverlayMarkers);
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        { 
+            time++;
+            timeIncrease();
+        }
+
+        private void timeIncrease()
+        {
+            bool first_found = false;
+            int s = 0;
+
+            for (int i = 0; first_found == false; i++) { if (listCATALL[i].timeOfDay == time) { first_found = true; s = i; }; }
+
+            while (listCATALL[s].timeOfDay == time)
+            {
+                CATALL message = listCATALL[s];
+                if (message.latitudeInWGS84 != -200 && message.longitudeInWGS84 != -200)
+                {
+                    bool DuplicatedTarget = false;
+                    bool DuplicatedTrackNumber = false;
+                    if (message.targetAddress != null) { DuplicatedTarget = markers.Any(x => x.TargetAddress == message.targetAddress && x.TargetAddress != null && x.Time == message.timeOfDay && message.detectionMode == x.DetectionMode); }
+                    else { DuplicatedTrackNumber = markers.Any(x => x.Track_number == message.trackNumber && x.Track_number != null && x.Time == message.timeOfDay && message.detectionMode == x.DetectionMode); }
+
+                    if (DuplicatedTarget == false && DuplicatedTrackNumber == false)
+                    {
+                        markers.RemoveAll(item => (((item.TargetAddress == message.targetAddress && item.TargetAddress != null) || (item.Track_number == message.trackNumber && item.Track_number != null) || (item.Callsign == message.targetIdentification && item.Callsign != null)) && item.DetectionMode == message.detectionMode));
+                        AddActualMarker(Convert.ToDouble(message.latitudeInWGS84), Convert.ToDouble(message.longitudeInWGS84), message.targetIdentification, time, message.msgNum, message.type, message.targetAddress, message.detectionMode, message.CAT, message.SIC, message.SAC, message.flightLevel, message.trackNumber, message.direction, message.refreshratio);
+                    }
+                }
+                s++;
+            }
+            ShowMarkers();
         }
     }
 }

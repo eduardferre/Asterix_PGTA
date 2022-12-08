@@ -27,6 +27,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -41,13 +42,16 @@
             this.CAT21ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportCSV_CAT21_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mAPSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportKMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trajectoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.info_label = new System.Windows.Forms.Label();
             this.process_label = new System.Windows.Forms.Label();
             this.msg_label = new System.Windows.Forms.Label();
             this.gMapControl1 = new GMap.NET.WindowsForms.GMapControl();
-            this.exportKMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.startButton = new System.Windows.Forms.Button();
+            this.resetButton = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT21)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -155,7 +159,7 @@
             // loadFileToolStripMenuItem
             // 
             this.loadFileToolStripMenuItem.Name = "loadFileToolStripMenuItem";
-            this.loadFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadFileToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
             this.loadFileToolStripMenuItem.Text = "Load File";
             this.loadFileToolStripMenuItem.Click += new System.EventHandler(this.loadFileToolStripMenuItem_Click);
             // 
@@ -171,7 +175,7 @@
             // exportCSV_CAT10_ToolStripMenuItem
             // 
             this.exportCSV_CAT10_ToolStripMenuItem.Name = "exportCSV_CAT10_ToolStripMenuItem";
-            this.exportCSV_CAT10_ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportCSV_CAT10_ToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.exportCSV_CAT10_ToolStripMenuItem.Text = "Export CSV";
             this.exportCSV_CAT10_ToolStripMenuItem.Click += new System.EventHandler(this.exportCSV_CAT10_ToolStripMenuItem_Click);
             // 
@@ -187,7 +191,7 @@
             // exportCSV_CAT21_ToolStripMenuItem
             // 
             this.exportCSV_CAT21_ToolStripMenuItem.Name = "exportCSV_CAT21_ToolStripMenuItem";
-            this.exportCSV_CAT21_ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportCSV_CAT21_ToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.exportCSV_CAT21_ToolStripMenuItem.Text = "Export CSV";
             this.exportCSV_CAT21_ToolStripMenuItem.Click += new System.EventHandler(this.exportCSV_CAT21_ToolStripMenuItem_Click);
             // 
@@ -199,6 +203,13 @@
             this.mAPSToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.mAPSToolStripMenuItem.Text = "Maps";
             this.mAPSToolStripMenuItem.Click += new System.EventHandler(this.mapsToolStripMenuItem_Click);
+            // 
+            // exportKMLToolStripMenuItem
+            // 
+            this.exportKMLToolStripMenuItem.Name = "exportKMLToolStripMenuItem";
+            this.exportKMLToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.exportKMLToolStripMenuItem.Text = "Export KML";
+            this.exportKMLToolStripMenuItem.Click += new System.EventHandler(this.exportKMLToolStripMenuItem_Click);
             // 
             // trajectoriesToolStripMenuItem
             // 
@@ -266,18 +277,36 @@
             this.gMapControl1.Zoom = 0D;
             this.gMapControl1.Load += new System.EventHandler(this.gMapControl1_Load);
             // 
-            // exportKMLToolStripMenuItem
+            // startButton
             // 
-            this.exportKMLToolStripMenuItem.Name = "exportKMLToolStripMenuItem";
-            this.exportKMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.exportKMLToolStripMenuItem.Text = "Export KML";
-            this.exportKMLToolStripMenuItem.Click += new System.EventHandler(this.exportKMLToolStripMenuItem_Click);
+            this.startButton.Location = new System.Drawing.Point(1127, 65);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(149, 32);
+            this.startButton.TabIndex = 10;
+            this.startButton.Text = "Start";
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
+            // 
+            // resetButton
+            // 
+            this.resetButton.Location = new System.Drawing.Point(1127, 103);
+            this.resetButton.Name = "resetButton";
+            this.resetButton.Size = new System.Drawing.Size(149, 32);
+            this.resetButton.TabIndex = 11;
+            this.resetButton.Text = "Reset";
+            this.resetButton.UseVisualStyleBackColor = true;
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // AsterixDecoder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1300, 650);
+            this.Controls.Add(this.resetButton);
+            this.Controls.Add(this.startButton);
             this.Controls.Add(this.gMapControl1);
             this.Controls.Add(this.msg_label);
             this.Controls.Add(this.process_label);
@@ -322,6 +351,9 @@
         private System.Windows.Forms.ToolStripMenuItem exportCSV_CAT10_ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportCSV_CAT21_ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportKMLToolStripMenuItem;
+        private System.Windows.Forms.Button startButton;
+        private System.Windows.Forms.Button resetButton;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 
