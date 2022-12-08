@@ -36,9 +36,10 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileStripMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.loadFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CAT10ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportCSV_CAT10_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CAT21ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportCSV_CAT21_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mAPSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.trajectoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,6 +47,7 @@
             this.process_label = new System.Windows.Forms.Label();
             this.msg_label = new System.Windows.Forms.Label();
             this.gMapControl1 = new GMap.NET.WindowsForms.GMapControl();
+            this.exportKMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT21)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -111,16 +113,16 @@
             this.gridCAT21.AllowUserToResizeColumns = false;
             this.gridCAT21.AllowUserToResizeRows = false;
             this.gridCAT21.CausesValidation = false;
-            this.gridCAT21.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.gridCAT21.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.gridCAT21.ColumnHeadersHeight = 22;
             this.gridCAT21.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.gridCAT21.DefaultCellStyle = dataGridViewCellStyle2;
+            this.gridCAT21.DefaultCellStyle = dataGridViewCellStyle5;
             this.gridCAT21.Location = new System.Drawing.Point(12, 358);
             this.gridCAT21.Margin = new System.Windows.Forms.Padding(0);
             this.gridCAT21.MultiSelect = false;
             this.gridCAT21.Name = "gridCAT21";
             this.gridCAT21.ReadOnly = true;
-            this.gridCAT21.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.gridCAT21.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.gridCAT21.RowHeadersWidth = 6;
             this.gridCAT21.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gridCAT21.Size = new System.Drawing.Size(10, 10);
@@ -145,8 +147,7 @@
             // fileStripMenu
             // 
             this.fileStripMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.loadFileToolStripMenuItem,
-            this.saveCSVToolStripMenuItem});
+            this.loadFileToolStripMenuItem});
             this.fileStripMenu.Name = "fileStripMenu";
             this.fileStripMenu.Size = new System.Drawing.Size(37, 20);
             this.fileStripMenu.Text = "File";
@@ -154,36 +155,50 @@
             // loadFileToolStripMenuItem
             // 
             this.loadFileToolStripMenuItem.Name = "loadFileToolStripMenuItem";
-            this.loadFileToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.loadFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.loadFileToolStripMenuItem.Text = "Load File";
             this.loadFileToolStripMenuItem.Click += new System.EventHandler(this.loadFileToolStripMenuItem_Click);
             // 
-            // saveCSVToolStripMenuItem
-            // 
-            this.saveCSVToolStripMenuItem.Name = "saveCSVToolStripMenuItem";
-            this.saveCSVToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
-            this.saveCSVToolStripMenuItem.Text = "Save CSV";
-            // 
             // CAT10ToolStripMenuItem
             // 
+            this.CAT10ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportCSV_CAT10_ToolStripMenuItem});
             this.CAT10ToolStripMenuItem.Name = "CAT10ToolStripMenuItem";
             this.CAT10ToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.CAT10ToolStripMenuItem.Text = "CAT10";
             this.CAT10ToolStripMenuItem.Click += new System.EventHandler(this.CAT10ToolStripMenuItem_Click);
             // 
+            // exportCSV_CAT10_ToolStripMenuItem
+            // 
+            this.exportCSV_CAT10_ToolStripMenuItem.Name = "exportCSV_CAT10_ToolStripMenuItem";
+            this.exportCSV_CAT10_ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportCSV_CAT10_ToolStripMenuItem.Text = "Export CSV";
+            this.exportCSV_CAT10_ToolStripMenuItem.Click += new System.EventHandler(this.exportCSV_CAT10_ToolStripMenuItem_Click);
+            // 
             // CAT21ToolStripMenuItem
             // 
+            this.CAT21ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportCSV_CAT21_ToolStripMenuItem});
             this.CAT21ToolStripMenuItem.Name = "CAT21ToolStripMenuItem";
             this.CAT21ToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.CAT21ToolStripMenuItem.Text = "CAT21";
             this.CAT21ToolStripMenuItem.Click += new System.EventHandler(this.CAT21ToolStripMenuItem_Click);
             // 
+            // exportCSV_CAT21_ToolStripMenuItem
+            // 
+            this.exportCSV_CAT21_ToolStripMenuItem.Name = "exportCSV_CAT21_ToolStripMenuItem";
+            this.exportCSV_CAT21_ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportCSV_CAT21_ToolStripMenuItem.Text = "Export CSV";
+            this.exportCSV_CAT21_ToolStripMenuItem.Click += new System.EventHandler(this.exportCSV_CAT21_ToolStripMenuItem_Click);
+            // 
             // mAPSToolStripMenuItem
             // 
+            this.mAPSToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportKMLToolStripMenuItem});
             this.mAPSToolStripMenuItem.Name = "mAPSToolStripMenuItem";
             this.mAPSToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.mAPSToolStripMenuItem.Text = "Maps";
-            this.mAPSToolStripMenuItem.Click += new System.EventHandler(this.MapsToolStripMenuItem_Click);
+            this.mAPSToolStripMenuItem.Click += new System.EventHandler(this.mapsToolStripMenuItem_Click);
             // 
             // trajectoriesToolStripMenuItem
             // 
@@ -251,6 +266,13 @@
             this.gMapControl1.Zoom = 0D;
             this.gMapControl1.Load += new System.EventHandler(this.gMapControl1_Load);
             // 
+            // exportKMLToolStripMenuItem
+            // 
+            this.exportKMLToolStripMenuItem.Name = "exportKMLToolStripMenuItem";
+            this.exportKMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportKMLToolStripMenuItem.Text = "Export KML";
+            this.exportKMLToolStripMenuItem.Click += new System.EventHandler(this.exportKMLToolStripMenuItem_Click);
+            // 
             // AsterixDecoder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -271,7 +293,7 @@
             this.Name = "AsterixDecoder";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ASTERIX Decoder";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.AsterixDecoder_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT21)).EndInit();
             this.menuStrip1.ResumeLayout(false);
@@ -288,7 +310,6 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileStripMenu;
         private System.Windows.Forms.ToolStripMenuItem loadFileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveCSVToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CAT10ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CAT21ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mAPSToolStripMenuItem;
@@ -298,6 +319,9 @@
         private System.Windows.Forms.Label process_label;
         private System.Windows.Forms.Label msg_label;
         private GMap.NET.WindowsForms.GMapControl gMapControl1;
+        private System.Windows.Forms.ToolStripMenuItem exportCSV_CAT10_ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportCSV_CAT21_ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportKMLToolStripMenuItem;
     }
 }
 
