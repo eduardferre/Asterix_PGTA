@@ -315,7 +315,13 @@ namespace AsterixDecoder
 
         private void mapsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            clickInfo_label.Visible = false;
+            gridCAT10.Visible = false;
+            gridCAT21.Visible = false;
+            info_label.Visible = false;
+            process_label.Visible = false;
+            msg_label.Visible = false;
+            gMapControl1.Visible = true;
         }
 
         private void exportCSV_CAT10_ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -609,18 +615,6 @@ namespace AsterixDecoder
             gMapControl1.Zoom = zoom;
             gMapControl1.Position = new PointLatLng(41.295855, 2.08442);
             gMapControl1.MapProvider = GMapProviders.GoogleMap;
-        }
-
-        private void MapsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            clickInfo_label.Visible = false;
-            gridCAT10.Visible = false;
-            gridCAT21.Visible = false;
-            info_label.Visible = false;
-            process_label.Visible = false;
-            msg_label.Visible = false;
-            gMapControl1.Visible = true;
-
         }
     }
 }
