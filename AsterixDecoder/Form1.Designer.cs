@@ -27,10 +27,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-<<<<<<< HEAD
-=======
             this.components = new System.ComponentModel.Container();
->>>>>>> master
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -54,18 +51,6 @@
             this.process_label = new System.Windows.Forms.Label();
             this.msg_label = new System.Windows.Forms.Label();
             this.gMapControl1 = new GMap.NET.WindowsForms.GMapControl();
-<<<<<<< HEAD
-=======
-            this.startButton = new System.Windows.Forms.Button();
-            this.resetButton = new System.Windows.Forms.Button();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.timeLabel = new System.Windows.Forms.Label();
-            this.speedButton = new System.Windows.Forms.Button();
-            this.smrCheck = new System.Windows.Forms.CheckBox();
-            this.mlatCheck = new System.Windows.Forms.CheckBox();
-            this.adsbCheck = new System.Windows.Forms.CheckBox();
-            this.timeButton = new System.Windows.Forms.Button();
->>>>>>> master
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT21)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -235,11 +220,7 @@
             // exportKMLToolStripMenuItem
             // 
             this.exportKMLToolStripMenuItem.Name = "exportKMLToolStripMenuItem";
-<<<<<<< HEAD
             this.exportKMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-=======
-            this.exportKMLToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
->>>>>>> master
             this.exportKMLToolStripMenuItem.Text = "Export KML";
             this.exportKMLToolStripMenuItem.Click += new System.EventHandler(this.exportKMLToolStripMenuItem_Click);
             // 
@@ -309,105 +290,12 @@
             this.gMapControl1.Zoom = 0D;
             this.gMapControl1.Load += new System.EventHandler(this.gMapControl1_Load);
             // 
-<<<<<<< HEAD
-=======
-            // startButton
-            // 
-            this.startButton.Location = new System.Drawing.Point(1127, 65);
-            this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(149, 32);
-            this.startButton.TabIndex = 10;
-            this.startButton.Text = "Start";
-            this.startButton.UseVisualStyleBackColor = true;
-            this.startButton.Click += new System.EventHandler(this.startButton_Click);
-            // 
-            // resetButton
-            // 
-            this.resetButton.Location = new System.Drawing.Point(1127, 103);
-            this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(149, 32);
-            this.resetButton.TabIndex = 11;
-            this.resetButton.Text = "Reset";
-            this.resetButton.UseVisualStyleBackColor = true;
-            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
-            // 
-            // timer1
-            // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // timeLabel
-            // 
-            this.timeLabel.AutoSize = true;
-            this.timeLabel.Location = new System.Drawing.Point(1182, 45);
-            this.timeLabel.Name = "timeLabel";
-            this.timeLabel.Size = new System.Drawing.Size(49, 15);
-            this.timeLabel.TabIndex = 12;
-            this.timeLabel.Text = "00:00:00";
-            // 
-            // speedButton
-            // 
-            this.speedButton.Location = new System.Drawing.Point(1127, 141);
-            this.speedButton.Name = "speedButton";
-            this.speedButton.Size = new System.Drawing.Size(149, 32);
-            this.speedButton.TabIndex = 13;
-            this.speedButton.Text = "Speed (x1)";
-            this.speedButton.UseVisualStyleBackColor = true;
-            this.speedButton.Click += new System.EventHandler(this.speedButton_Click);
-            // 
-            // smrCheck
-            // 
-            this.smrCheck.AutoSize = true;
-            this.smrCheck.Location = new System.Drawing.Point(1127, 215);
-            this.smrCheck.Name = "smrCheck";
-            this.smrCheck.Size = new System.Drawing.Size(85, 19);
-            this.smrCheck.TabIndex = 14;
-            this.smrCheck.Text = "SMR Traffic";
-            this.smrCheck.UseVisualStyleBackColor = true;
-            // 
-            // mlatCheck
-            // 
-            this.mlatCheck.AutoSize = true;
-            this.mlatCheck.Location = new System.Drawing.Point(1127, 237);
-            this.mlatCheck.Name = "mlatCheck";
-            this.mlatCheck.Size = new System.Drawing.Size(91, 19);
-            this.mlatCheck.TabIndex = 15;
-            this.mlatCheck.Text = "MLAT Traffic";
-            this.mlatCheck.UseVisualStyleBackColor = true;
-            // 
-            // adsbCheck
-            // 
-            this.adsbCheck.AutoSize = true;
-            this.adsbCheck.Location = new System.Drawing.Point(1127, 262);
-            this.adsbCheck.Name = "adsbCheck";
-            this.adsbCheck.Size = new System.Drawing.Size(90, 19);
-            this.adsbCheck.TabIndex = 16;
-            this.adsbCheck.Text = "ADSB Traffic";
-            this.adsbCheck.UseVisualStyleBackColor = true;
-            // 
-            // timeButton
-            // 
-            this.timeButton.Location = new System.Drawing.Point(1127, 296);
-            this.timeButton.Name = "timeButton";
-            this.timeButton.Size = new System.Drawing.Size(149, 32);
-            this.timeButton.TabIndex = 17;
-            this.timeButton.Text = "Select Time";
-            this.timeButton.UseVisualStyleBackColor = true;
-            this.timeButton.Click += new System.EventHandler(this.timeButton_Click);
-            // 
->>>>>>> master
+
             // AsterixDecoder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1300, 650);
-            this.Controls.Add(this.timeButton);
-            this.Controls.Add(this.adsbCheck);
-            this.Controls.Add(this.mlatCheck);
-            this.Controls.Add(this.smrCheck);
-            this.Controls.Add(this.speedButton);
-            this.Controls.Add(this.timeLabel);
-            this.Controls.Add(this.resetButton);
-            this.Controls.Add(this.startButton);
             this.Controls.Add(this.gMapControl1);
             this.Controls.Add(this.msg_label);
             this.Controls.Add(this.process_label);
@@ -452,20 +340,8 @@
         private System.Windows.Forms.ToolStripMenuItem exportCSV_CAT10_ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportCSV_CAT21_ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exportKMLToolStripMenuItem;
-<<<<<<< HEAD
         private System.Windows.Forms.ToolStripMenuItem tableCAT10ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tableCAT21ToolStripMenuItem;
-=======
-        private System.Windows.Forms.Button startButton;
-        private System.Windows.Forms.Button resetButton;
-        private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Label timeLabel;
-        private System.Windows.Forms.Button speedButton;
-        private System.Windows.Forms.CheckBox smrCheck;
-        private System.Windows.Forms.CheckBox mlatCheck;
-        private System.Windows.Forms.CheckBox adsbCheck;
-        private System.Windows.Forms.Button timeButton;
->>>>>>> master
     }
 }
 
