@@ -6,6 +6,7 @@ La planificación del proyecto se ha llevado a cabo semanalmente, por lo que cad
 
 
 
+<img width="509" alt="image" src="https://user-images.githubusercontent.com/73181261/206764583-4d294939-c126-4888-a839-7d75ec52b9c5.png">
 <img width="770" alt="image" src="https://user-images.githubusercontent.com/73181261/206764272-a2856496-0bbd-4638-8b7e-fbbc65a8d6ec.png">
 
 
