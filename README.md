@@ -1,4 +1,15 @@
-# Asterix_PGTA
+# Asterix Decoder (PGTA)
+
+El proyecto ha consistido en la programación de un programa capaz de leer ficheros Asterix y decodificarlos según los criterios indicados en los documentos pertinentes. Una vez hecha dicha decodificación se ha procedido con la verificación de los datos y finalmente se han procesado para listar cada DataItem a su mensaje correspondiente. Una vez los datos ya han sido procesados se empieza con la sintetización de los DataItems más relevantes, y así mostrar las trayectorias en el mapa. 
+
+La planificación del proyecto se ha llevado a cabo semanalmente, por lo que cada semana se marcó un objetivo a presentar en las sesiones con el profesor. En la siguiente gráfica se puede ver la evolución:
+
+
+
+<img width="770" alt="image" src="https://user-images.githubusercontent.com/73181261/206764272-a2856496-0bbd-4638-8b7e-fbbc65a8d6ec.png">
+
+
+
 
 STEPS (3-4 semanas):
 
