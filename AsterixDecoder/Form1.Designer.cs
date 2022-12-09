@@ -41,13 +41,14 @@ namespace AsterixDecoder
             this.fileStripMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.loadFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CAT10ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportCSV_CAT10_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CAT21ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showTableToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.exportCSV_CAT21_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mAPSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportKMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.trajectoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.info_label = new System.Windows.Forms.Label();
             this.process_label = new System.Windows.Forms.Label();
             this.msg_label = new System.Windows.Forms.Label();
@@ -167,9 +168,7 @@ namespace AsterixDecoder
             this.fileStripMenu,
             this.CAT10ToolStripMenuItem,
             this.CAT21ToolStripMenuItem,
-            this.mAPSToolStripMenuItem,
-            this.trajectoriesToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.mAPSToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1300, 24);
@@ -194,62 +193,71 @@ namespace AsterixDecoder
             // CAT10ToolStripMenuItem
             // 
             this.CAT10ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showTableToolStripMenuItem,
             this.exportCSV_CAT10_ToolStripMenuItem});
             this.CAT10ToolStripMenuItem.Name = "CAT10ToolStripMenuItem";
             this.CAT10ToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.CAT10ToolStripMenuItem.Text = "CAT10";
-            this.CAT10ToolStripMenuItem.Click += new System.EventHandler(this.tableCAT10ToolStripMenuItem_Click);
+            // 
+            // showTableToolStripMenuItem
+            // 
+            this.showTableToolStripMenuItem.Name = "showTableToolStripMenuItem";
+            this.showTableToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.showTableToolStripMenuItem.Text = "Show Table";
+            this.showTableToolStripMenuItem.Click += new System.EventHandler(this.showTableToolStripMenuItem_Click);
             // 
             // exportCSV_CAT10_ToolStripMenuItem
             // 
             this.exportCSV_CAT10_ToolStripMenuItem.Name = "exportCSV_CAT10_ToolStripMenuItem";
-            this.exportCSV_CAT10_ToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.exportCSV_CAT10_ToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.exportCSV_CAT10_ToolStripMenuItem.Text = "Export CSV";
             this.exportCSV_CAT10_ToolStripMenuItem.Click += new System.EventHandler(this.exportCSV_CAT10_ToolStripMenuItem_Click);
             // 
             // CAT21ToolStripMenuItem
             // 
             this.CAT21ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showTableToolStripMenuItem1,
             this.exportCSV_CAT21_ToolStripMenuItem});
             this.CAT21ToolStripMenuItem.Name = "CAT21ToolStripMenuItem";
             this.CAT21ToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.CAT21ToolStripMenuItem.Text = "CAT21";
-            this.CAT21ToolStripMenuItem.Click += new System.EventHandler(this.tableCAT21ToolStripMenuItem_Click);
+            // 
+            // showTableToolStripMenuItem1
+            // 
+            this.showTableToolStripMenuItem1.Name = "showTableToolStripMenuItem1";
+            this.showTableToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.showTableToolStripMenuItem1.Text = "Show Table";
+            this.showTableToolStripMenuItem1.Click += new System.EventHandler(this.showTableToolStripMenuItem1_Click);
             // 
             // exportCSV_CAT21_ToolStripMenuItem
             // 
             this.exportCSV_CAT21_ToolStripMenuItem.Name = "exportCSV_CAT21_ToolStripMenuItem";
-            this.exportCSV_CAT21_ToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.exportCSV_CAT21_ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exportCSV_CAT21_ToolStripMenuItem.Text = "Export CSV";
             this.exportCSV_CAT21_ToolStripMenuItem.Click += new System.EventHandler(this.exportCSV_CAT21_ToolStripMenuItem_Click);
             // 
             // mAPSToolStripMenuItem
             // 
             this.mAPSToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showMapToolStripMenuItem,
             this.exportKMLToolStripMenuItem});
             this.mAPSToolStripMenuItem.Name = "mAPSToolStripMenuItem";
             this.mAPSToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.mAPSToolStripMenuItem.Text = "Maps";
-            this.mAPSToolStripMenuItem.Click += new System.EventHandler(this.mapsToolStripMenuItem_Click);
+            // 
+            // showMapToolStripMenuItem
+            // 
+            this.showMapToolStripMenuItem.Name = "showMapToolStripMenuItem";
+            this.showMapToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.showMapToolStripMenuItem.Text = "Show Map";
+            this.showMapToolStripMenuItem.Click += new System.EventHandler(this.showMapToolStripMenuItem_Click);
             // 
             // exportKMLToolStripMenuItem
             // 
             this.exportKMLToolStripMenuItem.Name = "exportKMLToolStripMenuItem";
-            this.exportKMLToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
+            this.exportKMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exportKMLToolStripMenuItem.Text = "Export KML";
             this.exportKMLToolStripMenuItem.Click += new System.EventHandler(this.exportKMLToolStripMenuItem_Click);
-            // 
-            // trajectoriesToolStripMenuItem
-            // 
-            this.trajectoriesToolStripMenuItem.Name = "trajectoriesToolStripMenuItem";
-            this.trajectoriesToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
-            this.trajectoriesToolStripMenuItem.Text = "Trajectories";
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
             // 
             // info_label
             // 
@@ -673,8 +681,6 @@ namespace AsterixDecoder
         private System.Windows.Forms.ToolStripMenuItem CAT10ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CAT21ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mAPSToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem trajectoriesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.Label info_label;
         private System.Windows.Forms.Label process_label;
         private System.Windows.Forms.Label msg_label;
@@ -712,6 +718,9 @@ namespace AsterixDecoder
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label dmLabel;
+        private System.Windows.Forms.ToolStripMenuItem showTableToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showTableToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem showMapToolStripMenuItem;
     }
 }
 

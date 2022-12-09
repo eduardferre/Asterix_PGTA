@@ -313,218 +313,6 @@ namespace AsterixDecoder
             loadFile();
         }
 
-        private void tableCAT10ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            clickInfo_label.Visible = true;
-            gridCAT10.Visible = true;
-            gridCAT21.Visible = false;
-            info_label.Visible = true;
-            process_label.Visible = false;
-            msg_label.Visible = false;
-            gMapControl1.Visible = false;
-            timeLabel.Visible = false;
-            startButton.Visible = false;
-            resetButton.Visible = false;
-            speedButton.Visible = false;
-            smrCheck.Visible = false;
-            mlatCheck.Visible = false;
-            adsbCheck.Visible = false;
-            timeButton.Visible = false;
-            trajButton.Visible = false;
-            label1.Visible = false;
-            label2.Visible = false;
-            pictureBox1.Visible = false;
-            iDLabel.Visible = false;
-            addLabel.Visible = false;
-            trackLabel.Visible = false;
-            sicLabel.Visible = false;
-            sacLabel.Visible = false;
-            flLabel.Visible = false;
-            labelFilter.Visible = true;
-
-            if (listCAT10.Count != 0)
-            {
-
-                gridCAT10.Location = new Point(10, 40);
-                clickInfo_label.Location = new Point(1075, 80);
-                info_label.Location = new Point(1100, 40);
-                labelFilter.Location = new Point(1110, 335);
-                noFilterButton.Location = new Point(1110, 360);
-                smrButton.Location = new Point(1110, 385);
-                mlatButton.Location = new Point(1110, 410);
-                trackNumberButton.Location = new Point(1110, 435);
-                mode3AButton.Location = new Point(1110, 460);
-                targetAddressButton.Location = new Point(1110, 485);
-                targetIDButton.Location = new Point(1110, 510);
-                filterTextBox.Location = new Point(1115, 535);
-                filterButton.Location = new Point(1100, 560);
-
-                gridCAT10.Size = new Size(1050, 600);
-                clickInfo_label.Size = new Size(210, 250);
-
-                this.Controls.Add(gridCAT10);
-
-                gridCAT10.DataSource = dataTableCAT10;
-
-                gridCAT10.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-
-                info_label.Visible = true;
-                clickInfo_label.Visible = true;
-                gridCAT10.Visible = true;
-                noFilterButton.Visible = true;
-                smrButton.Visible = true;
-                mlatButton.Visible = true;
-                trackNumberButton.Visible = true;
-                targetAddressButton.Visible = true;
-                targetIDButton.Visible = true;
-                mode3AButton.Visible = true;
-                filterButton.Visible = true;
-                filterTextBox.Visible = true;
-            }
-            else { MessageBox.Show("No data for CAT10, please upload a file with CAT10 messages"); }
-        }
-
-        private void tableCAT21ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            clickInfo_label.Visible = true;
-            gridCAT10.Visible = false;
-            gridCAT21.Visible = true;
-            info_label.Visible = true;
-            process_label.Visible = false;
-            msg_label.Visible = false;
-            gMapControl1.Visible = false;
-            timeLabel.Visible = false;
-            startButton.Visible = false;
-            resetButton.Visible = false;
-            speedButton.Visible = false;
-            smrButton.Visible = false;
-            mlatButton.Visible = false;
-            smrCheck.Visible = false;
-            mlatCheck.Visible = false;
-            adsbCheck.Visible = false;
-            timeButton.Visible = false;
-            trajButton.Visible = false;
-            label1.Visible = false;
-            label2.Visible = false;
-            pictureBox1.Visible = false;
-            iDLabel.Visible = false;
-            addLabel.Visible = false;
-            trackLabel.Visible = false;
-            sicLabel.Visible = false;
-            sacLabel.Visible = false;
-            flLabel.Visible = false;
-            labelFilter.Visible = true;
-
-
-            if (listCAT21.Count != 0)
-            {
-                gridCAT21.Location = new Point(10, 40);
-                clickInfo_label.Location = new Point(1075, 80);
-                info_label.Location = new Point(1100, 40);
-
-                labelFilter.Location = new Point(1110, 335);
-                noFilterButton.Location = new Point(1110, 370);
-                trackNumberButton.Location = new Point(1110, 395);
-                mode3AButton.Location = new Point(1110, 420);
-                targetAddressButton.Location = new Point(1110, 445);
-                targetIDButton.Location = new Point(1110, 470);
-                filterTextBox.Location = new Point(1115, 495);
-                filterButton.Location = new Point(1100, 520);
-
-                gridCAT21.Size = new Size(1050, 600);
-                clickInfo_label.Size = new Size(210, 250);
-
-                this.Controls.Add(gridCAT21);
-
-                gridCAT21.DataSource = dataTableCAT21;
-
-                gridCAT21.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-
-                info_label.Visible = true;
-                clickInfo_label.Visible = true;
-                gridCAT21.Visible = true;
-                noFilterButton.Visible = true;
-                trackNumberButton.Visible = true;
-                targetAddressButton.Visible = true;
-                mode3AButton.Visible = true;
-                targetIDButton.Visible = true;
-                filterButton.Visible = true;
-                filterTextBox.Visible = true;
-            }
-            else { MessageBox.Show("No data for CAT21, please upload a file with CAT21 messages"); }
-        }
-
-        private void mapsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            clickInfo_label.Visible = false;
-            gridCAT10.Visible = false;
-            gridCAT21.Visible = false;
-            info_label.Visible = false;
-            process_label.Visible = false;
-            msg_label.Visible = false;
-            labelFilter.Visible = false;
-            noFilterButton.Visible = false;
-            smrButton.Visible = false;
-            mlatButton.Visible = false;
-            trackNumberButton.Visible = false;
-            targetAddressButton.Visible = false;
-            targetIDButton.Visible = false;
-            mode3AButton.Visible = false;
-            filterButton.Visible = false;
-            filterTextBox.Visible = false;
-            gMapControl1.Visible = true;
-            timeLabel.Visible = true;
-            startButton.Visible = true;
-            resetButton.Visible = true;
-            speedButton.Visible = true;
-            smrCheck.Visible = true;
-            mlatCheck.Visible = true;
-            adsbCheck.Visible = true;
-            timeButton.Visible = true;
-            trajButton.Visible = true;
-            label1.Visible = false;
-            label2.Visible = false;
-            pictureBox1.Visible = false;
-            iDLabel.Visible = true;
-            addLabel.Visible = true;
-            trackLabel.Visible = true;
-            sicLabel.Visible = true;
-            sacLabel.Visible = true;
-            flLabel.Visible = true;
-            labelFilter.Visible = false;
-            iDLabel.Text = "Click a marker for more information";
-
-            timer1.Stop();
-            timer1.Interval = 1000;
-            time = 86400;
-            foreach (CATALL message in listCATALL) 
-            { 
-                if (message.timeOfDay < time) 
-                {
-                    time = message.timeOfDay;
-                }
-            }
-            string hh = Convert.ToString((time / (60 * 60)) % 24);
-            string mm = Convert.ToString((time / 60) % 60);
-            string ss = Convert.ToString((time % 60));
-            
-            if (hh.Length < 2)
-            {
-                hh = "0" + hh;
-            }
-            if (mm.Length < 2)
-            {
-                mm = "0" + mm;
-            }
-            if (ss.Length < 2)
-            {
-                ss = "0" + ss;
-            }
-
-            timeLabel.Text = hh + " : " + mm + " : " + ss;
-
-        }
-
         private void exportCSV_CAT10_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -1221,6 +1009,221 @@ namespace AsterixDecoder
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             loadFile();
+        }
+
+        private void showTableToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            clickInfo_label.Visible = true;
+            gridCAT10.Visible = true;
+            gridCAT21.Visible = false;
+            info_label.Visible = true;
+            process_label.Visible = false;
+            msg_label.Visible = false;
+            gMapControl1.Visible = false;
+            timeLabel.Visible = false;
+            startButton.Visible = false;
+            resetButton.Visible = false;
+            speedButton.Visible = false;
+            smrCheck.Visible = false;
+            mlatCheck.Visible = false;
+            adsbCheck.Visible = false;
+            timeButton.Visible = false;
+            trajButton.Visible = false;
+            label1.Visible = false;
+            label2.Visible = false;
+            pictureBox1.Visible = false;
+            iDLabel.Visible = false;
+            addLabel.Visible = false;
+            trackLabel.Visible = false;
+            sicLabel.Visible = false;
+            sacLabel.Visible = false;
+            flLabel.Visible = false;
+            labelFilter.Visible = true;
+
+            if (listCAT10.Count != 0)
+            {
+
+                gridCAT10.Location = new Point(10, 40);
+                clickInfo_label.Location = new Point(1075, 80);
+                info_label.Location = new Point(1100, 40);
+                labelFilter.Location = new Point(1110, 335);
+                noFilterButton.Location = new Point(1110, 360);
+                smrButton.Location = new Point(1110, 385);
+                mlatButton.Location = new Point(1110, 410);
+                trackNumberButton.Location = new Point(1110, 435);
+                mode3AButton.Location = new Point(1110, 460);
+                targetAddressButton.Location = new Point(1110, 485);
+                targetIDButton.Location = new Point(1110, 510);
+                filterTextBox.Location = new Point(1115, 535);
+                filterButton.Location = new Point(1100, 560);
+
+                gridCAT10.Size = new Size(1050, 600);
+                clickInfo_label.Size = new Size(210, 250);
+
+                this.Controls.Add(gridCAT10);
+
+                gridCAT10.DataSource = dataTableCAT10;
+
+                gridCAT10.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+
+                info_label.Visible = true;
+                clickInfo_label.Visible = true;
+                gridCAT10.Visible = true;
+                noFilterButton.Visible = true;
+                smrButton.Visible = true;
+                mlatButton.Visible = true;
+                trackNumberButton.Visible = true;
+                targetAddressButton.Visible = true;
+                targetIDButton.Visible = true;
+                mode3AButton.Visible = true;
+                filterButton.Visible = true;
+                filterTextBox.Visible = true;
+            }
+            else { MessageBox.Show("No data for CAT10, please upload a file with CAT10 messages"); }
+        }
+
+        private void showTableToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            clickInfo_label.Visible = true;
+            gridCAT10.Visible = false;
+            gridCAT21.Visible = true;
+            info_label.Visible = true;
+            process_label.Visible = false;
+            msg_label.Visible = false;
+            gMapControl1.Visible = false;
+            timeLabel.Visible = false;
+            startButton.Visible = false;
+            resetButton.Visible = false;
+            speedButton.Visible = false;
+            smrButton.Visible = false;
+            mlatButton.Visible = false;
+            smrCheck.Visible = false;
+            mlatCheck.Visible = false;
+            adsbCheck.Visible = false;
+            timeButton.Visible = false;
+            trajButton.Visible = false;
+            label1.Visible = false;
+            label2.Visible = false;
+            pictureBox1.Visible = false;
+            iDLabel.Visible = false;
+            addLabel.Visible = false;
+            trackLabel.Visible = false;
+            sicLabel.Visible = false;
+            sacLabel.Visible = false;
+            flLabel.Visible = false;
+            labelFilter.Visible = true;
+
+
+            if (listCAT21.Count != 0)
+            {
+                gridCAT21.Location = new Point(10, 40);
+                clickInfo_label.Location = new Point(1075, 80);
+                info_label.Location = new Point(1100, 40);
+
+                labelFilter.Location = new Point(1110, 335);
+                noFilterButton.Location = new Point(1110, 370);
+                trackNumberButton.Location = new Point(1110, 395);
+                mode3AButton.Location = new Point(1110, 420);
+                targetAddressButton.Location = new Point(1110, 445);
+                targetIDButton.Location = new Point(1110, 470);
+                filterTextBox.Location = new Point(1115, 495);
+                filterButton.Location = new Point(1100, 520);
+
+                gridCAT21.Size = new Size(1050, 600);
+                clickInfo_label.Size = new Size(210, 250);
+
+                this.Controls.Add(gridCAT21);
+
+                gridCAT21.DataSource = dataTableCAT21;
+
+                gridCAT21.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+
+                info_label.Visible = true;
+                clickInfo_label.Visible = true;
+                gridCAT21.Visible = true;
+                noFilterButton.Visible = true;
+                trackNumberButton.Visible = true;
+                targetAddressButton.Visible = true;
+                mode3AButton.Visible = true;
+                targetIDButton.Visible = true;
+                filterButton.Visible = true;
+                filterTextBox.Visible = true;
+            }
+            else { MessageBox.Show("No data for CAT21, please upload a file with CAT21 messages"); }
+        }
+
+        private void showMapToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listCAT21.Count != 0 || listCAT10.Count != 0)
+            {
+                clickInfo_label.Visible = false;
+                gridCAT10.Visible = false;
+                gridCAT21.Visible = false;
+                info_label.Visible = false;
+                process_label.Visible = false;
+                msg_label.Visible = false;
+                labelFilter.Visible = false;
+                noFilterButton.Visible = false;
+                smrButton.Visible = false;
+                mlatButton.Visible = false;
+                trackNumberButton.Visible = false;
+                targetAddressButton.Visible = false;
+                targetIDButton.Visible = false;
+                mode3AButton.Visible = false;
+                filterButton.Visible = false;
+                filterTextBox.Visible = false;
+                gMapControl1.Visible = true;
+                timeLabel.Visible = true;
+                startButton.Visible = true;
+                resetButton.Visible = true;
+                speedButton.Visible = true;
+                smrCheck.Visible = true;
+                mlatCheck.Visible = true;
+                adsbCheck.Visible = true;
+                timeButton.Visible = true;
+                trajButton.Visible = true;
+                label1.Visible = false;
+                label2.Visible = false;
+                pictureBox1.Visible = false;
+                iDLabel.Visible = true;
+                addLabel.Visible = true;
+                trackLabel.Visible = true;
+                sicLabel.Visible = true;
+                sacLabel.Visible = true;
+                flLabel.Visible = true;
+                labelFilter.Visible = false;
+                iDLabel.Text = "Click a marker for more information";
+
+                timer1.Stop();
+                timer1.Interval = 1000;
+                time = 86400;
+                foreach (CATALL message in listCATALL)
+                {
+                    if (message.timeOfDay < time)
+                    {
+                        time = message.timeOfDay;
+                    }
+                }
+                string hh = Convert.ToString((time / (60 * 60)) % 24);
+                string mm = Convert.ToString((time / 60) % 60);
+                string ss = Convert.ToString((time % 60));
+
+                if (hh.Length < 2)
+                {
+                    hh = "0" + hh;
+                }
+                if (mm.Length < 2)
+                {
+                    mm = "0" + mm;
+                }
+                if (ss.Length < 2)
+                {
+                    ss = "0" + ss;
+                }
+
+                timeLabel.Text = hh + " : " + mm + " : " + ss;
+            }
+            else { MessageBox.Show("No data, please upload a file"); }
         }
     }
 }
