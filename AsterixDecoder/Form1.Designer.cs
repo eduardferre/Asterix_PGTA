@@ -71,6 +71,7 @@ namespace AsterixDecoder
             this.filterButton = new System.Windows.Forms.Button();
             this.filterTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.noFilterButton = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT21)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -384,7 +385,7 @@ namespace AsterixDecoder
             // 
             this.labelFilter.AutoSize = true;
             this.labelFilter.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.labelFilter.Location = new System.Drawing.Point(1139, 254);
+            this.labelFilter.Location = new System.Drawing.Point(1142, 239);
             this.labelFilter.Name = "labelFilter";
             this.labelFilter.Size = new System.Drawing.Size(124, 25);
             this.labelFilter.TabIndex = 6;
@@ -407,9 +408,9 @@ namespace AsterixDecoder
             this.smrButton.Name = "smrButton";
             this.smrButton.Size = new System.Drawing.Size(49, 19);
             this.smrButton.TabIndex = 20;
-            this.smrButton.TabStop = true;
             this.smrButton.Text = "SMR";
             this.smrButton.UseVisualStyleBackColor = true;
+            this.smrButton.CheckedChanged += new System.EventHandler(this.smrButton_CheckedChanged);
             // 
             // mlatButton
             // 
@@ -418,9 +419,9 @@ namespace AsterixDecoder
             this.mlatButton.Name = "mlatButton";
             this.mlatButton.Size = new System.Drawing.Size(55, 19);
             this.mlatButton.TabIndex = 21;
-            this.mlatButton.TabStop = true;
             this.mlatButton.Text = "MLAT";
             this.mlatButton.UseVisualStyleBackColor = true;
+            this.mlatButton.CheckedChanged += new System.EventHandler(this.mlatButton_CheckedChanged);
             // 
             // trackNumberButton
             // 
@@ -429,9 +430,9 @@ namespace AsterixDecoder
             this.trackNumberButton.Name = "trackNumberButton";
             this.trackNumberButton.Size = new System.Drawing.Size(99, 19);
             this.trackNumberButton.TabIndex = 22;
-            this.trackNumberButton.TabStop = true;
             this.trackNumberButton.Text = "Track Number";
             this.trackNumberButton.UseVisualStyleBackColor = true;
+            this.trackNumberButton.CheckedChanged += new System.EventHandler(this.trackNumberButton_CheckedChanged);
             // 
             // targetIDButton
             // 
@@ -440,9 +441,9 @@ namespace AsterixDecoder
             this.targetIDButton.Name = "targetIDButton";
             this.targetIDButton.Size = new System.Drawing.Size(68, 19);
             this.targetIDButton.TabIndex = 23;
-            this.targetIDButton.TabStop = true;
             this.targetIDButton.Text = "TargetID";
             this.targetIDButton.UseVisualStyleBackColor = true;
+            this.targetIDButton.CheckedChanged += new System.EventHandler(this.targetIDButton_CheckedChanged);
             // 
             // mode3AButton
             // 
@@ -451,9 +452,9 @@ namespace AsterixDecoder
             this.mode3AButton.Name = "mode3AButton";
             this.mode3AButton.Size = new System.Drawing.Size(78, 19);
             this.mode3AButton.TabIndex = 24;
-            this.mode3AButton.TabStop = true;
             this.mode3AButton.Text = "Mode 3/A";
             this.mode3AButton.UseVisualStyleBackColor = true;
+            this.mode3AButton.CheckedChanged += new System.EventHandler(this.mode3AButton_CheckedChanged);
             // 
             // targetAddressButton
             // 
@@ -462,9 +463,9 @@ namespace AsterixDecoder
             this.targetAddressButton.Name = "targetAddressButton";
             this.targetAddressButton.Size = new System.Drawing.Size(102, 19);
             this.targetAddressButton.TabIndex = 25;
-            this.targetAddressButton.TabStop = true;
             this.targetAddressButton.Text = "Target Address";
             this.targetAddressButton.UseVisualStyleBackColor = true;
+            this.targetAddressButton.CheckedChanged += new System.EventHandler(this.targetAddressButton_CheckedChanged);
             // 
             // filterButton
             // 
@@ -474,6 +475,7 @@ namespace AsterixDecoder
             this.filterButton.TabIndex = 26;
             this.filterButton.Text = "Filter";
             this.filterButton.UseVisualStyleBackColor = true;
+            this.filterButton.Click += new System.EventHandler(this.filterButton_Click);
             // 
             // filterTextBox
             // 
@@ -491,11 +493,25 @@ namespace AsterixDecoder
             this.label1.TabIndex = 28;
             this.label1.Text = "label1";
             // 
+            // noFilterButton
+            // 
+            this.noFilterButton.AutoSize = true;
+            this.noFilterButton.Checked = true;
+            this.noFilterButton.Location = new System.Drawing.Point(1139, 267);
+            this.noFilterButton.Name = "noFilterButton";
+            this.noFilterButton.Size = new System.Drawing.Size(75, 19);
+            this.noFilterButton.TabIndex = 29;
+            this.noFilterButton.TabStop = true;
+            this.noFilterButton.Text = "No Filters";
+            this.noFilterButton.UseVisualStyleBackColor = true;
+            this.noFilterButton.CheckedChanged += new System.EventHandler(this.noFilterButton_CheckedChanged);
+            // 
             // AsterixDecoder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1300, 650);
+            this.Controls.Add(this.noFilterButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.filterTextBox);
             this.Controls.Add(this.filterButton);
@@ -579,6 +595,7 @@ namespace AsterixDecoder
         private System.Windows.Forms.Button filterButton;
         private System.Windows.Forms.TextBox filterTextBox;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RadioButton noFilterButton;
     }
 }
 
