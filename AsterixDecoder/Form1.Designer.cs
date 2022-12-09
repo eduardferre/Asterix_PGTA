@@ -33,6 +33,7 @@ namespace AsterixDecoder
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AsterixDecoder));
             this.clickInfo_label = new System.Windows.Forms.Label();
             this.gridCAT10 = new System.Windows.Forms.DataGridView();
             this.gridCAT21 = new System.Windows.Forms.DataGridView();
@@ -72,15 +73,19 @@ namespace AsterixDecoder
             this.filterTextBox = new System.Windows.Forms.TextBox();
             this.noFilterButton = new System.Windows.Forms.RadioButton();
             this.iDLabel = new System.Windows.Forms.Label();
-            this.trajButton = new System.Windows.Forms.Button();
             this.addLabel = new System.Windows.Forms.Label();
             this.trackLabel = new System.Windows.Forms.Label();
             this.sicLabel = new System.Windows.Forms.Label();
             this.sacLabel = new System.Windows.Forms.Label();
             this.flLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.dmLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT21)).BeginInit();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // clickInfo_label
@@ -143,16 +148,13 @@ namespace AsterixDecoder
             this.gridCAT21.AllowUserToResizeColumns = false;
             this.gridCAT21.AllowUserToResizeRows = false;
             this.gridCAT21.CausesValidation = false;
-            this.gridCAT21.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.gridCAT21.ColumnHeadersHeight = 22;
             this.gridCAT21.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.gridCAT21.DefaultCellStyle = dataGridViewCellStyle2;
             this.gridCAT21.Location = new System.Drawing.Point(12, 358);
             this.gridCAT21.Margin = new System.Windows.Forms.Padding(0);
             this.gridCAT21.MultiSelect = false;
             this.gridCAT21.Name = "gridCAT21";
             this.gridCAT21.ReadOnly = true;
-            this.gridCAT21.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.gridCAT21.RowHeadersWidth = 6;
             this.gridCAT21.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.gridCAT21.Size = new System.Drawing.Size(10, 10);
@@ -263,17 +265,19 @@ namespace AsterixDecoder
             // process_label
             // 
             this.process_label.AutoSize = true;
-            this.process_label.Location = new System.Drawing.Point(494, 82);
+            this.process_label.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.process_label.Location = new System.Drawing.Point(152, 131);
             this.process_label.Name = "process_label";
-            this.process_label.Size = new System.Drawing.Size(0, 15);
+            this.process_label.Size = new System.Drawing.Size(0, 21);
             this.process_label.TabIndex = 7;
             // 
             // msg_label
             // 
             this.msg_label.AutoSize = true;
-            this.msg_label.Location = new System.Drawing.Point(494, 131);
+            this.msg_label.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.msg_label.Location = new System.Drawing.Point(152, 212);
             this.msg_label.Name = "msg_label";
-            this.msg_label.Size = new System.Drawing.Size(0, 15);
+            this.msg_label.Size = new System.Drawing.Size(0, 21);
             this.msg_label.TabIndex = 8;
             // 
             // gMapControl1
@@ -331,9 +335,10 @@ namespace AsterixDecoder
             // timeLabel
             // 
             this.timeLabel.AutoSize = true;
-            this.timeLabel.Location = new System.Drawing.Point(1182, 45);
+            this.timeLabel.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.timeLabel.Location = new System.Drawing.Point(1147, 34);
             this.timeLabel.Name = "timeLabel";
-            this.timeLabel.Size = new System.Drawing.Size(49, 15);
+            this.timeLabel.Size = new System.Drawing.Size(94, 28);
             this.timeLabel.TabIndex = 12;
             this.timeLabel.Text = "00:00:00";
             // 
@@ -402,14 +407,6 @@ namespace AsterixDecoder
             this.labelFilter.Size = new System.Drawing.Size(124, 25);
             this.labelFilter.TabIndex = 6;
             this.labelFilter.Text = "FILTER DATA";
-            // 
-            // iDLabel
-            // 
-            this.iDLabel.AutoSize = true;
-            this.iDLabel.Location = new System.Drawing.Point(1127, 328);
-            this.iDLabel.Name = "iDLabel";
-            this.iDLabel.Size = new System.Drawing.Size(0, 15);
-            this.iDLabel.TabIndex = 18;
             // 
             // trajButton
             // 
@@ -516,10 +513,19 @@ namespace AsterixDecoder
             this.noFilterButton.Text = "No Filters";
             this.noFilterButton.UseVisualStyleBackColor = true;
             this.noFilterButton.CheckedChanged += new System.EventHandler(this.noFilterButton_CheckedChanged);
+            // 
+            // iDLabel
+            // 
+            this.iDLabel.AutoSize = true;
+            this.iDLabel.Location = new System.Drawing.Point(1127, 380);
+            this.iDLabel.Name = "iDLabel";
+            this.iDLabel.Size = new System.Drawing.Size(0, 15);
+            this.iDLabel.TabIndex = 18;
+            // 
             // addLabel
             // 
             this.addLabel.AutoSize = true;
-            this.addLabel.Location = new System.Drawing.Point(1127, 343);
+            this.addLabel.Location = new System.Drawing.Point(1127, 400);
             this.addLabel.Name = "addLabel";
             this.addLabel.Size = new System.Drawing.Size(0, 15);
             this.addLabel.TabIndex = 20;
@@ -527,7 +533,7 @@ namespace AsterixDecoder
             // trackLabel
             // 
             this.trackLabel.AutoSize = true;
-            this.trackLabel.Location = new System.Drawing.Point(1127, 359);
+            this.trackLabel.Location = new System.Drawing.Point(1127, 420);
             this.trackLabel.Name = "trackLabel";
             this.trackLabel.Size = new System.Drawing.Size(0, 15);
             this.trackLabel.TabIndex = 21;
@@ -535,7 +541,7 @@ namespace AsterixDecoder
             // sicLabel
             // 
             this.sicLabel.AutoSize = true;
-            this.sicLabel.Location = new System.Drawing.Point(1127, 374);
+            this.sicLabel.Location = new System.Drawing.Point(1127, 440);
             this.sicLabel.Name = "sicLabel";
             this.sicLabel.Size = new System.Drawing.Size(0, 15);
             this.sicLabel.TabIndex = 22;
@@ -543,7 +549,7 @@ namespace AsterixDecoder
             // sacLabel
             // 
             this.sacLabel.AutoSize = true;
-            this.sacLabel.Location = new System.Drawing.Point(1127, 389);
+            this.sacLabel.Location = new System.Drawing.Point(1127, 460);
             this.sacLabel.Name = "sacLabel";
             this.sacLabel.Size = new System.Drawing.Size(0, 15);
             this.sacLabel.TabIndex = 23;
@@ -551,16 +557,61 @@ namespace AsterixDecoder
             // flLabel
             // 
             this.flLabel.AutoSize = true;
-            this.flLabel.Location = new System.Drawing.Point(1127, 404);
+            this.flLabel.Location = new System.Drawing.Point(1127, 480);
             this.flLabel.Name = "flLabel";
             this.flLabel.Size = new System.Drawing.Size(0, 15);
             this.flLabel.TabIndex = 25;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 30F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(494, 51);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(325, 54);
+            this.label1.TabIndex = 30;
+            this.label1.Text = "Asterix Decoder";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(158, 114);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(1000, 84);
+            this.label2.TabIndex = 31;
+            this.label2.Text = resources.GetString("label2.Text");
+            this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(516, 229);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(227, 229);
+            this.pictureBox1.TabIndex = 32;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // dmLabel
+            // 
+            this.dmLabel.AutoSize = true;
+            this.dmLabel.Location = new System.Drawing.Point(1127, 500);
+            this.dmLabel.Name = "dmLabel";
+            this.dmLabel.Size = new System.Drawing.Size(0, 15);
+            this.dmLabel.TabIndex = 33;
             // 
             // AsterixDecoder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1300, 650);
+            this.Controls.Add(this.dmLabel);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.noFilterButton);
             this.Controls.Add(this.filterTextBox);
             this.Controls.Add(this.filterButton);
@@ -570,8 +621,6 @@ namespace AsterixDecoder
             this.Controls.Add(this.trackNumberButton);
             this.Controls.Add(this.mlatButton);
             this.Controls.Add(this.smrButton);
-            this.Controls.Add(this.labelFilter);
-            this.Controls.Add(this.trajButton);
             this.Controls.Add(this.flLabel);
             this.Controls.Add(this.sacLabel);
             this.Controls.Add(this.sicLabel);
@@ -608,6 +657,7 @@ namespace AsterixDecoder
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT21)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -653,12 +703,15 @@ namespace AsterixDecoder
         private System.Windows.Forms.TextBox filterTextBox;
         private System.Windows.Forms.RadioButton noFilterButton;
         private System.Windows.Forms.Label iDLabel;
-        private System.Windows.Forms.Button trajButton;
         private System.Windows.Forms.Label addLabel;
         private System.Windows.Forms.Label trackLabel;
         private System.Windows.Forms.Label sicLabel;
         private System.Windows.Forms.Label sacLabel;
         private System.Windows.Forms.Label flLabel;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label dmLabel;
     }
 }
 
