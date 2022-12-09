@@ -35,6 +35,11 @@ namespace AsterixDecoder
         DataTable dataTableCAT10 = new DataTable();
         DataTable dataTableCAT21 = new DataTable();
 
+
+        List<Trajectories> SMRTraj = new List<Trajectories>();
+        List<Trajectories> MLATTraj = new List<Trajectories>();
+        List<Trajectories> ADSBTraj = new List<Trajectories>();
+
         List<markerWithInfo> markers = new List<markerWithInfo>();
 
         
@@ -283,6 +288,10 @@ namespace AsterixDecoder
 
             this.dataTableCAT10 = decodeFiles.GetTableCAT10();
             this.dataTableCAT21 = decodeFiles.GetTableCAT21();
+
+            this.SMRTraj = decodeFiles.GetSMRTraj();
+            this.MLATTraj = decodeFiles.GetMLATTraj();
+            this.ADSBTraj = decodeFiles.GetADSBTraj();
         }
 
         private void tableCAT10ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -677,9 +686,62 @@ namespace AsterixDecoder
             }
         }
 
+        StringBuilder kmlFile;
         private void exportKMLToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            kmlFile = new StringBuilder();
+            kmlFile.AppendLine("<?xml version='1.0' encoding='UTF-8'?>");
+            kmlFile.AppendLine("<kml xmlns='http://www.opengis.net/kml/2.2'>");
+            kmlFile.AppendLine("<Document>");
 
+            kmlFile.AppendLine("<Folder><name>SMR</name><open>1</open>");
+            foreach (Trajectories tra in SMRTraj)
+            {
+                kmlFile.AppendLine(tra.GetTrajectorieKML());
+            }
+            kmlFile.AppendLine("</Folder>");
+
+            kmlFile.AppendLine("<Folder><name>MLAT</name><open>1</open>");
+            foreach (Trajectories tra in MLATTraj)
+            {
+                kmlFile.AppendLine(tra.GetTrajectorieKML());
+            }
+            kmlFile.AppendLine("</Folder>");
+
+            kmlFile.AppendLine("<Folder><name>ADS-B</name><open>1</open>");
+            foreach (Trajectories tra in ADSBTraj)
+            {
+                kmlFile.AppendLine(tra.GetTrajectorieKML());
+            }
+            kmlFile.AppendLine("</Folder>");
+
+
+            kmlFile.Append("</Document>");
+            kmlFile.AppendLine("</kml>");
+
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "kml files (*.kml*)|*.kml*";
+            saveFileDialog1.FilterIndex = 2;
+            saveFileDialog1.RestoreDirectory = true;
+
+            saveFileDialog1.ShowDialog();
+
+            if (saveFileDialog1.FileName != null) 
+            {
+                string path0 = saveFileDialog1.FileName;
+                string path = path0 + ".kml";
+                string[] splitpath = path0.Split(System.IO.Path.DirectorySeparatorChar);
+                string FileName = splitpath[splitpath.Count() - 1];
+                if (File.Exists(path)) { File.Delete(path); }
+
+                if (SMRTraj.Count != 0 || MLATTraj.Count != 0 || ADSBTraj.Count != 0)
+                {
+                    File.WriteAllText(path, kmlFile.ToString()); 
+                    Mouse.OverrideCursor = null;
+                }
+                
+
+            }
         }
 
         int zoom = 12;
@@ -858,7 +920,13 @@ namespace AsterixDecoder
                     markerselected = mark;
                 }
             }
-            label1.Text = markerselected.Callsign;
+            iDLabel.Text = "Target ID: " + markerselected.Callsign;
+            addLabel.Text = "Target Address: " + markerselected.TargetAddress;
+            trackLabel.Text = "Track Number: " + markerselected.Track_number;
+            sicLabel.Text = "SIC: " + markerselected.SIC;
+            sacLabel.Text = "SAC: " + markerselected.SAC;
+            flLabel.Text = "Flight Level: " + markerselected.Flight_level;
+
         }
         public GMapOverlay OverlayTraj = new GMapOverlay("Markers");
 

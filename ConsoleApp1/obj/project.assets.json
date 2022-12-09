@@ -3255,11 +3255,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\ConsoleApp1\\ConsoleApp1.csproj",
+      "projectUniqueName": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\asterix\\Asterix_PGTA\\ConsoleApp1\\ConsoleApp1.csproj",
       "projectName": "ConsoleApp1",
-      "projectPath": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\ConsoleApp1\\ConsoleApp1.csproj",
+      "projectPath": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\asterix\\Asterix_PGTA\\ConsoleApp1\\ConsoleApp1.csproj",
       "packagesPath": "C:\\Users\\gerar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\ConsoleApp1\\obj\\",
+      "outputPath": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\asterix\\Asterix_PGTA\\ConsoleApp1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\gerar\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3275,8 +3275,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\ClassLibrary\\ClassLibrary.csproj": {
-              "projectPath": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\ClassLibrary\\ClassLibrary.csproj"
+            "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\asterix\\Asterix_PGTA\\ClassLibrary\\ClassLibrary.csproj": {
+              "projectPath": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\asterix\\Asterix_PGTA\\ClassLibrary\\ClassLibrary.csproj"
             }
           }
         }

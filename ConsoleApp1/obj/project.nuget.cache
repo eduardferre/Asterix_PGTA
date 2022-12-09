@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wrZi4H6YPYjsCgB+mu6LyElNcC6Mgzewgp29mHR0wBYEBwneAm/nI/zA1s0LBFgNHZMaHj6A6Apx8hywIuUdvA==",
+  "dgSpecHash": "HN3LT2W1YMUkowH7arm5+ViQpIbC1hV10J8iWJPT5zS7VB/7LJg55kO5FnNn7KY0TVXClyF7YDo7Rp7JT3eEzg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\ConsoleApp1\\ConsoleApp1.csproj",
+  "projectFilePath": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\asterix\\Asterix_PGTA\\ConsoleApp1\\ConsoleApp1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gerar\\.nuget\\packages\\avalonia\\0.10.6\\avalonia.0.10.6.nupkg.sha512",
     "C:\\Users\\gerar\\.nuget\\packages\\avalonia.angle.windows.natives\\2.1.0.2020091801\\avalonia.angle.windows.natives.2.1.0.2020091801.nupkg.sha512",

@@ -35,7 +35,6 @@ namespace ClassLibrary
       public Trajectories(string Callsign, int Time, double lat, double lon, string emitter, string TargetAddress, string DetectionMode, string CAT, string SAC, string SIC, string Track_number)
         {
             PointLatLng p = new PointLatLng(lat, lon);
-            this.listPoints.Add(p);
             PointWithTime pt = new PointWithTime(p, Time);
             this.listTimePoints.Add(pt);
             this.CAT = CAT;
@@ -141,10 +140,10 @@ namespace ClassLibrary
         {
             StringBuilder KMLcoor = new StringBuilder();
             KMLcoor.AppendLine("<coordinates>");
-            foreach (PointLatLng p in listPoints)
+            foreach (PointWithTime p in listTimePoints)
             {
-                string Lat = Convert.ToString(p.Lat).Replace(",", ".");
-                string Lon = Convert.ToString(p.Lng).Replace(",", ".");
+                string Lat = Convert.ToString(p.point.Lat).Replace(",", ".");
+                string Lon = Convert.ToString(p.point.Lng).Replace(",", ".");
                 KMLcoor.AppendLine(Lon + "," + Lat);
             }
             KMLcoor.AppendLine("</coordinates>");

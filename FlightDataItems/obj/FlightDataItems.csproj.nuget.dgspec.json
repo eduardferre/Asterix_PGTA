@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\FlightDataItems\\FlightDataItems.csproj": {}
+    "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\asterix\\Asterix_PGTA\\FlightDataItems\\FlightDataItems.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\FlightDataItems\\FlightDataItems.csproj": {
+    "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\asterix\\Asterix_PGTA\\FlightDataItems\\FlightDataItems.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\FlightDataItems\\FlightDataItems.csproj",
+        "projectUniqueName": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\asterix\\Asterix_PGTA\\FlightDataItems\\FlightDataItems.csproj",
         "projectName": "FlightDataItems",
-        "projectPath": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\FlightDataItems\\FlightDataItems.csproj",
+        "projectPath": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\asterix\\Asterix_PGTA\\FlightDataItems\\FlightDataItems.csproj",
         "packagesPath": "C:\\Users\\gerar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\Asterix_PGTA\\FlightDataItems\\obj\\",
+        "outputPath": "C:\\Users\\gerar\\OneDrive\\Universitat\\5A\\PGTA\\asterix\\Asterix_PGTA\\FlightDataItems\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\gerar\\AppData\\Roaming\\NuGet\\NuGet.Config",

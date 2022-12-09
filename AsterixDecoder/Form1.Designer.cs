@@ -61,8 +61,13 @@ namespace AsterixDecoder
             this.adsbCheck = new System.Windows.Forms.CheckBox();
             this.timeButton = new System.Windows.Forms.Button();
             this.labelFilter = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.iDLabel = new System.Windows.Forms.Label();
             this.trajButton = new System.Windows.Forms.Button();
+            this.addLabel = new System.Windows.Forms.Label();
+            this.trackLabel = new System.Windows.Forms.Label();
+            this.sicLabel = new System.Windows.Forms.Label();
+            this.sacLabel = new System.Windows.Forms.Label();
+            this.flLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridCAT21)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -335,6 +340,8 @@ namespace AsterixDecoder
             // smrCheck
             // 
             this.smrCheck.AutoSize = true;
+            this.smrCheck.Checked = true;
+            this.smrCheck.CheckState = System.Windows.Forms.CheckState.Checked;
             this.smrCheck.Location = new System.Drawing.Point(1127, 179);
             this.smrCheck.Name = "smrCheck";
             this.smrCheck.Size = new System.Drawing.Size(85, 19);
@@ -345,7 +352,9 @@ namespace AsterixDecoder
             // mlatCheck
             // 
             this.mlatCheck.AutoSize = true;
-            this.mlatCheck.Location = new System.Drawing.Point(1126, 204);
+            this.mlatCheck.Checked = true;
+            this.mlatCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.mlatCheck.Location = new System.Drawing.Point(1127, 204);
             this.mlatCheck.Name = "mlatCheck";
             this.mlatCheck.Size = new System.Drawing.Size(91, 19);
             this.mlatCheck.TabIndex = 15;
@@ -355,7 +364,9 @@ namespace AsterixDecoder
             // adsbCheck
             // 
             this.adsbCheck.AutoSize = true;
-            this.adsbCheck.Location = new System.Drawing.Point(1126, 229);
+            this.adsbCheck.Checked = true;
+            this.adsbCheck.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.adsbCheck.Location = new System.Drawing.Point(1127, 229);
             this.adsbCheck.Name = "adsbCheck";
             this.adsbCheck.Size = new System.Drawing.Size(90, 19);
             this.adsbCheck.TabIndex = 16;
@@ -364,7 +375,7 @@ namespace AsterixDecoder
             // 
             // timeButton
             // 
-            this.timeButton.Location = new System.Drawing.Point(1126, 254);
+            this.timeButton.Location = new System.Drawing.Point(1127, 254);
             this.timeButton.Name = "timeButton";
             this.timeButton.Size = new System.Drawing.Size(149, 32);
             this.timeButton.TabIndex = 17;
@@ -382,18 +393,17 @@ namespace AsterixDecoder
             this.labelFilter.TabIndex = 6;
             this.labelFilter.Text = "FILTER DATA";
             // 
-            // label1
+            // iDLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1238, 501);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 15);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "label1";
+            this.iDLabel.AutoSize = true;
+            this.iDLabel.Location = new System.Drawing.Point(1127, 328);
+            this.iDLabel.Name = "iDLabel";
+            this.iDLabel.Size = new System.Drawing.Size(0, 15);
+            this.iDLabel.TabIndex = 18;
             // 
             // trajButton
             // 
-            this.trajButton.Location = new System.Drawing.Point(1126, 292);
+            this.trajButton.Location = new System.Drawing.Point(1127, 292);
             this.trajButton.Name = "trajButton";
             this.trajButton.Size = new System.Drawing.Size(149, 32);
             this.trajButton.TabIndex = 19;
@@ -401,14 +411,59 @@ namespace AsterixDecoder
             this.trajButton.UseVisualStyleBackColor = true;
             this.trajButton.Click += new System.EventHandler(this.trajButton_Click);
             // 
+            // addLabel
+            // 
+            this.addLabel.AutoSize = true;
+            this.addLabel.Location = new System.Drawing.Point(1127, 343);
+            this.addLabel.Name = "addLabel";
+            this.addLabel.Size = new System.Drawing.Size(0, 15);
+            this.addLabel.TabIndex = 20;
+            // 
+            // trackLabel
+            // 
+            this.trackLabel.AutoSize = true;
+            this.trackLabel.Location = new System.Drawing.Point(1127, 359);
+            this.trackLabel.Name = "trackLabel";
+            this.trackLabel.Size = new System.Drawing.Size(0, 15);
+            this.trackLabel.TabIndex = 21;
+            // 
+            // sicLabel
+            // 
+            this.sicLabel.AutoSize = true;
+            this.sicLabel.Location = new System.Drawing.Point(1127, 374);
+            this.sicLabel.Name = "sicLabel";
+            this.sicLabel.Size = new System.Drawing.Size(0, 15);
+            this.sicLabel.TabIndex = 22;
+            // 
+            // sacLabel
+            // 
+            this.sacLabel.AutoSize = true;
+            this.sacLabel.Location = new System.Drawing.Point(1127, 389);
+            this.sacLabel.Name = "sacLabel";
+            this.sacLabel.Size = new System.Drawing.Size(0, 15);
+            this.sacLabel.TabIndex = 23;
+            // 
+            // flLabel
+            // 
+            this.flLabel.AutoSize = true;
+            this.flLabel.Location = new System.Drawing.Point(1127, 404);
+            this.flLabel.Name = "flLabel";
+            this.flLabel.Size = new System.Drawing.Size(0, 15);
+            this.flLabel.TabIndex = 25;
+            // 
             // AsterixDecoder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1300, 650);
+            this.Controls.Add(this.flLabel);
+            this.Controls.Add(this.sacLabel);
+            this.Controls.Add(this.sicLabel);
+            this.Controls.Add(this.trackLabel);
+            this.Controls.Add(this.addLabel);
             this.Controls.Add(this.labelFilter);
             this.Controls.Add(this.trajButton);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.iDLabel);
             this.Controls.Add(this.timeButton);
             this.Controls.Add(this.adsbCheck);
             this.Controls.Add(this.mlatCheck);
@@ -471,8 +526,13 @@ namespace AsterixDecoder
         private System.Windows.Forms.CheckBox adsbCheck;
         private System.Windows.Forms.Button timeButton;
         private System.Windows.Forms.Label labelFilter;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label iDLabel;
         private System.Windows.Forms.Button trajButton;
+        private System.Windows.Forms.Label addLabel;
+        private System.Windows.Forms.Label trackLabel;
+        private System.Windows.Forms.Label sicLabel;
+        private System.Windows.Forms.Label sacLabel;
+        private System.Windows.Forms.Label flLabel;
     }
 }
 
