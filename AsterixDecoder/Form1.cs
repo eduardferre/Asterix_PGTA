@@ -70,6 +70,17 @@ namespace AsterixDecoder
             mlatCheck.Visible = false;
             adsbCheck.Visible = false;
             timeButton.Visible = false;
+            labelFilter.Visible = false;
+            trajButton.Visible = false;
+            smrButton.Visible = false;
+            mlatButton.Visible = false;
+            trackNumberButton.Visible = false;
+            targetAddressButton.Visible = false;
+            mode3AButton.Visible = false;
+            targetIDButton.Visible = false;
+            noFilterButton.Visible = false;
+            filterButton.Visible = false;
+            filterTextBox.Visible = false;
         }
 
         private void gridCAT10_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -311,6 +322,7 @@ namespace AsterixDecoder
             mlatCheck.Visible = false;
             adsbCheck.Visible = false;
             timeButton.Visible = false;
+            trajButton.Visible = false;
 
             if (listCAT10.Count != 0)
             {
@@ -318,6 +330,16 @@ namespace AsterixDecoder
                 gridCAT10.Location = new Point(10, 40);
                 clickInfo_label.Location = new Point(1075, 80);
                 info_label.Location = new Point(1100, 40);
+                labelFilter.Location = new Point(1110, 335);
+                noFilterButton.Location = new Point(1110, 360);
+                smrButton.Location = new Point(1110, 385);
+                mlatButton.Location = new Point(1110, 410);
+                trackNumberButton.Location = new Point(1110, 435);
+                mode3AButton.Location = new Point(1110, 460);
+                targetAddressButton.Location = new Point(1110, 485);
+                targetIDButton.Location = new Point(1110, 510);
+                filterTextBox.Location = new Point(1115, 535);
+                filterButton.Location = new Point(1100, 560);
 
                 gridCAT10.Size = new Size(1050, 600);
                 clickInfo_label.Size = new Size(210, 250);
@@ -331,6 +353,15 @@ namespace AsterixDecoder
                 info_label.Visible = true;
                 clickInfo_label.Visible = true;
                 gridCAT10.Visible = true;
+                noFilterButton.Visible = true;
+                smrButton.Visible = true;
+                mlatButton.Visible = true;
+                trackNumberButton.Visible = true;
+                targetAddressButton.Visible = true;
+                targetIDButton.Visible = true;
+                mode3AButton.Visible = true;
+                filterButton.Visible = true;
+                filterTextBox.Visible = true;
             }
             else { MessageBox.Show("No data for CAT10, please upload a file with CAT10 messages"); }
         }
@@ -348,17 +379,28 @@ namespace AsterixDecoder
             startButton.Visible = false;
             resetButton.Visible = false;
             speedButton.Visible = false;
+            smrButton.Visible = false;
+            mlatButton.Visible = false;
             smrCheck.Visible = false;
             mlatCheck.Visible = false;
             adsbCheck.Visible = false;
             timeButton.Visible = false;
+            trajButton.Visible = false;
 
             if (listCAT21.Count != 0)
             {
-
                 gridCAT21.Location = new Point(10, 40);
                 clickInfo_label.Location = new Point(1075, 80);
                 info_label.Location = new Point(1100, 40);
+
+                labelFilter.Location = new Point(1110, 335);
+                noFilterButton.Location = new Point(1110, 360);
+                trackNumberButton.Location = new Point(1110, 385);
+                mode3AButton.Location = new Point(1110, 410);
+                targetAddressButton.Location = new Point(1110, 435);
+                targetIDButton.Location = new Point(1110, 460);
+                filterTextBox.Location = new Point(1115, 485);
+                filterButton.Location = new Point(1100, 510);
 
                 gridCAT21.Size = new Size(1050, 600);
                 clickInfo_label.Size = new Size(210, 250);
@@ -372,6 +414,13 @@ namespace AsterixDecoder
                 info_label.Visible = true;
                 clickInfo_label.Visible = true;
                 gridCAT21.Visible = true;
+                noFilterButton.Visible = true;
+                trackNumberButton.Visible = true;
+                targetAddressButton.Visible = true;
+                mode3AButton.Visible = true;
+                targetIDButton.Visible = true;
+                filterButton.Visible = true;
+                filterTextBox.Visible = true;
             }
             else { MessageBox.Show("No data for CAT21, please upload a file with CAT21 messages"); }
         }
@@ -384,6 +433,16 @@ namespace AsterixDecoder
             info_label.Visible = false;
             process_label.Visible = false;
             msg_label.Visible = false;
+            labelFilter.Visible = false;
+            noFilterButton.Visible = false;
+            smrButton.Visible = false;
+            mlatButton.Visible = false;
+            trackNumberButton.Visible = false;
+            targetAddressButton.Visible = false;
+            targetIDButton.Visible = false;
+            mode3AButton.Visible = false;
+            filterButton.Visible = false;
+            filterTextBox.Visible = false;
             gMapControl1.Visible = true;
             timeLabel.Visible = true;
             startButton.Visible = true;
@@ -393,6 +452,7 @@ namespace AsterixDecoder
             mlatCheck.Visible = true;
             adsbCheck.Visible = true;
             timeButton.Visible = true;
+            trajButton.Visible = true;
 
             timer1.Stop();
             timer1.Interval = 1000;
@@ -744,6 +804,8 @@ namespace AsterixDecoder
             }
         }
 
+
+
         int zoom = 12;
         private void gMapControl1_Load(object sender, EventArgs e)
         {
@@ -789,10 +851,7 @@ namespace AsterixDecoder
            // SetMarkerShape(marker);
         }
         
-
         public GMapOverlay OverlayMarkers = new GMapOverlay("Markers");
-
-       
 
         private void ShowMarkers()
         {
@@ -951,6 +1010,89 @@ namespace AsterixDecoder
 
             }
             gMapControl1.Overlays.Add(OverlayTraj);
+        }
+
+        private void filterButton_Click(object sender, EventArgs e)
+        {
+            string filterSearch = filterTextBox.Text;
+
+            if (filterSearch != null)
+            {
+                if (noFilterButton.Checked)
+                {
+                    (gridCAT10.DataSource as DataTable).DefaultView.RowFilter = string.Format("CAT Nº LIKE '10'");
+                    (gridCAT21.DataSource as DataTable).DefaultView.RowFilter = string.Format("CAT Nº LIKE '21'");
+                }
+            }
+        }
+
+        private void mlatButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (mlatButton.Checked)
+            {
+                filterButton.Enabled = false;
+                filterTextBox.Enabled = false;
+
+                (gridCAT10.DataSource as DataTable).DefaultView.RowFilter = string.Format("SIC LIKE '107'");
+            }
+        }
+
+        private void smrButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (smrButton.Checked)
+            {
+                filterButton.Enabled = false;
+                filterTextBox.Enabled = false;
+
+                (gridCAT10.DataSource as DataTable).DefaultView.RowFilter = string.Format("SIC LIKE '7'");
+
+                gridCAT10.DataSource = dataTableCAT10;
+            }
+        }
+
+        private void trackNumberButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (trackNumberButton.Checked)
+            {
+                filterButton.Enabled = true;
+                filterTextBox.Enabled = true;
+            }
+        }
+
+        private void targetIDButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (targetIDButton.Checked)
+            {
+                filterButton.Enabled = true;
+                filterTextBox.Enabled = true;
+            }
+        }
+
+        private void mode3AButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (mode3AButton.Checked)
+            {
+                filterButton.Enabled = true;
+                filterTextBox.Enabled = true;
+            }
+        }
+
+        private void targetAddressButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (targetAddressButton.Checked)
+            {
+                filterButton.Enabled = true;
+                filterTextBox.Enabled = true;
+            }
+        }
+
+        private void noFilterButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (noFilterButton.Checked)
+            {
+                filterButton.Enabled = false;
+                filterTextBox.Enabled = false;
+            }
         }
     }
 }
