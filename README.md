@@ -40,7 +40,7 @@ En la siguiente gráfica se puede ver la evolución:
 Las primeras 3 semanas se invirtió el tiempo en la definicion de cada DataItem y de las funciones necesarias para CAT10. Una vez CAT10 estuvo definida, se procedió a su decodificación y lectura. 
 Las próximas 3 semanas se definieron los DataItem y las funciones para CAT21. La decodificación de CAT21 culminó con el listado de la misma. Se verificaron los datos de ambas categorias con el programa AsterixInspector. 
 Las semanas 7 y 8 se reservaron para la optimización del código y para resolver un par de conflictos. En el momento en que el código ya fue suficientemente robusto se empezó con la segunda parte del proyecto: trayectorias y mapas.
-El cálculo de trayectorias y el graficado de los mapas se llevaron a cabo durante las semanas 9, 10 y 11, en paralelo se fueron añadiendo funcionalidades extra al proyecto. Una vez el graficado estuvo disponible y verificandolo, se programaron las funcionalidades extra de la simulación.
+El cálculo de trayectorias y el graficado de los mapas se llevaron a cabo durante las semanas 9, 10 y 11, en paralelo se fueron añadiendo funcionalidades extra al proyecto. Una vez el graficado estuvo disponible y verificado, se programaron las funcionalidades extra de la simulación.
 La última semana se dedicó a acabar dichas funcionalidades extra y a resolver posibles errores de robustez.
 
 Dicho proyecto ha acabado con un total de 159 horas, repartido entre los 3 miembros del grupo de la siguiente forma (teniendo en cuenta que la compañera Catalina Mosteiro se reubicó del proyecto 1 a los proyectos 2 y 3 en la octava semana):
