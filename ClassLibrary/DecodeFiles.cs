@@ -41,6 +41,11 @@ namespace ClassLibrary
         public DataTable GetTableCAT10() { return tableCAT10; }
         public DataTable GetTableCAT21() { return tableCAT21; }
 
+
+        public List<Trajectories> GetSMRTraj() { return SMRTraj; }
+        public List<Trajectories> GetMLATTraj() { return MLATTraj; }
+        public List<Trajectories> GetADSBTraj() { return ADSBTraj; }
+
         public DecodeFiles() 
         {
             this.CreateTableCAT10();
@@ -432,7 +437,6 @@ namespace ClassLibrary
             int i = 0;
             foreach (CATALL msg in list)
             {
-                process = "Computing trajectory for message " + i + " of " + Convert.ToString(list.Count) + " messages...";
                 i++;
 
                 if (msg.latitudeInWGS84 != -200 && msg.longitudeInWGS84 != -200)
@@ -461,7 +465,10 @@ namespace ClassLibrary
                         }
                         else if (msg.trackNumber != null)
                         {
-                            if (SMRTraj.Exists(x => x.trackNum == msg.trackNumber)) { SMRTraj.Find(x => x.trackNum == msg.trackNumber).AddTimePoint(msg.latitudeInWGS84, msg.longitudeInWGS84, msg.timeOfDay); }
+                            if (SMRTraj.Exists(x => x.trackNum == msg.trackNumber)) 
+                            { 
+                                SMRTraj.Find(x => x.trackNum == msg.trackNumber).AddTimePoint(msg.latitudeInWGS84, msg.longitudeInWGS84, msg.timeOfDay); 
+                            }
                             else
                             {
                                 Trajectories traj = new Trajectories(msg.targetIdentification, msg.timeOfDay, msg.latitudeInWGS84, msg.longitudeInWGS84, msg.type, msg.targetAddress, msg.detectionMode, msg.CAT, msg.SAC, msg.SIC, msg.trackNumber);
