@@ -776,7 +776,7 @@ namespace AsterixDecoder
 
                     if (DuplicatedTarget == false && DuplicatedTrackNumber == false)
                     {
-                        // markers.RemoveAll(item => (((item.TargetAddress == message.targetAddress && item.TargetAddress != null) || (item.Track_number == message.trackNumber && item.Track_number != null) || (item.Callsign == message.targetIdentification && item.Callsign != null))));
+                        markers.RemoveAll(item => (((item.TargetAddress == message.targetAddress && item.TargetAddress != null) || (item.Track_number == message.trackNumber && item.Track_number != null) || (item.Callsign == message.targetIdentification && item.Callsign != null)) && item.DetectionMode == message.detectionMode));
                         foreach (markerWithInfo mk in markers)
                         {
                             if ((mk.TargetAddress == message.targetAddress && mk.TargetAddress != null) || (mk.Track_number == message.trackNumber && mk.Track_number != null) || (mk.Callsign == message.targetIdentification && mk.Callsign != null))
@@ -1224,6 +1224,7 @@ namespace AsterixDecoder
                 timeLabel.Text = hh + " : " + mm + " : " + ss;
             }
             else { MessageBox.Show("No data, please upload a file"); }
+
         }
     }
 }
