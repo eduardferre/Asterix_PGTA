@@ -43,6 +43,6 @@ Las semanas 7 y 8 se reservaron para la optimización del código y para resolve
 El cálculo de trayectorias y el graficado de los mapas se llevaron a cabo durante las semanas 9, 10 y 11, en paralelo se fueron añadiendo funcionalidades extra al proyecto. Una vez el graficado estuvo disponible y verificandolo, se programaron las funcionalidades extra de la simulación.
 La última semana se dedicó a acabar dichas funcionalidades extra y a resolver posibles errores de robustez.
 
-Dicho proyecto ha acabado con un total de 159 horas, repartido entre los 3 miembros del grupo de la siguiente forma (teniendo en cuenta que la compañera Catalina Mosteiro se reubicó del proyecto 1 a los proyectos 2 y 3 en la sexta semana):
+Dicho proyecto ha acabado con un total de 159 horas, repartido entre los 3 miembros del grupo de la siguiente forma (teniendo en cuenta que la compañera Catalina Mosteiro se reubicó del proyecto 1 a los proyectos 2 y 3 en la octava semana):
 
 <img width="622" alt="image" src="https://user-images.githubusercontent.com/73181261/206767056-e2ffd50f-bc2f-4ee3-9922-6d46a38c3778.png">
