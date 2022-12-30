@@ -764,8 +764,19 @@ namespace AsterixDecoder
 
             for (int i = 0; first_found == false && i<listCATALL.Count(); i++) { if (listCATALL[i].timeOfDay == time) { first_found = true; s = i; }; }
 
+            for (int i = 0; i < listCATALL.Count(); i++) {
+                listCATALL[i].refreshratio++; 
+                if (listCATALL[i].refreshratio > 3)
+                {
+                    markers.RemoveAll(item => (((item.TargetAddress == listCATALL[i].targetAddress && item.TargetAddress != null) || (item.Track_number == listCATALL[i].trackNumber && item.Track_number != null) || (item.Callsign == listCATALL[i].targetIdentification && item.Callsign != null)) && item.DetectionMode == listCATALL[i].detectionMode));
+                }
+            }
+
+
+
             while (listCATALL[s].timeOfDay == time)
             {
+                listCATALL[s].refreshratio = 0;
                 CATALL message = listCATALL[s];
                 if (message.latitudeInWGS84 != -200 && message.longitudeInWGS84 != -200)
                 {
@@ -878,7 +889,7 @@ namespace AsterixDecoder
             sicLabel.Text = "SIC: " + markerselected.SIC;
             sacLabel.Text = "SAC: " + markerselected.SAC;
             flLabel.Text = "Flight Level: " + markerselected.Flight_level;
-            dmLabel.Text = "Detection Mode: " + markerselected.DetectionMode;
+            dmLabel.Text = "Detection Mode: " + markerselected.refreshratio;
 
         }
         public GMapOverlay OverlayTraj = new GMapOverlay("Markers");

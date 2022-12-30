@@ -21,7 +21,7 @@ namespace ClassLibrary
         public string type;
         public string detectionMode;
         public int direction;
-        public int refreshratio = -1;
+        public int refreshratio = 0;
 
         public CATALL(CAT10 msg, int firstTimeOfDay, int firstTime)
         {

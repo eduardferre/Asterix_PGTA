@@ -225,14 +225,14 @@ namespace AsterixDecoder
             // showTableToolStripMenuItem1
             // 
             this.showTableToolStripMenuItem1.Name = "showTableToolStripMenuItem1";
-            this.showTableToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.showTableToolStripMenuItem1.Size = new System.Drawing.Size(133, 22);
             this.showTableToolStripMenuItem1.Text = "Show Table";
             this.showTableToolStripMenuItem1.Click += new System.EventHandler(this.showTableToolStripMenuItem1_Click);
             // 
             // exportCSV_CAT21_ToolStripMenuItem
             // 
             this.exportCSV_CAT21_ToolStripMenuItem.Name = "exportCSV_CAT21_ToolStripMenuItem";
-            this.exportCSV_CAT21_ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportCSV_CAT21_ToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.exportCSV_CAT21_ToolStripMenuItem.Text = "Export CSV";
             this.exportCSV_CAT21_ToolStripMenuItem.Click += new System.EventHandler(this.exportCSV_CAT21_ToolStripMenuItem_Click);
             // 
@@ -248,14 +248,14 @@ namespace AsterixDecoder
             // showMapToolStripMenuItem
             // 
             this.showMapToolStripMenuItem.Name = "showMapToolStripMenuItem";
-            this.showMapToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.showMapToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.showMapToolStripMenuItem.Text = "Show Map";
             this.showMapToolStripMenuItem.Click += new System.EventHandler(this.showMapToolStripMenuItem_Click);
             // 
             // exportKMLToolStripMenuItem
             // 
             this.exportKMLToolStripMenuItem.Name = "exportKMLToolStripMenuItem";
-            this.exportKMLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportKMLToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.exportKMLToolStripMenuItem.Text = "Export KML";
             this.exportKMLToolStripMenuItem.Click += new System.EventHandler(this.exportKMLToolStripMenuItem_Click);
             // 
