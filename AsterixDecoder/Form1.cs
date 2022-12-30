@@ -889,7 +889,7 @@ namespace AsterixDecoder
             sicLabel.Text = "SIC: " + markerselected.SIC;
             sacLabel.Text = "SAC: " + markerselected.SAC;
             flLabel.Text = "Flight Level: " + markerselected.Flight_level;
-            dmLabel.Text = "Detection Mode: " + markerselected.refreshratio;
+            dmLabel.Text = "Detection Mode: " + markerselected.DetectionMode;
 
         }
         public GMapOverlay OverlayTraj = new GMapOverlay("Markers");
