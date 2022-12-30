@@ -7,10 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsterixDecoder", "AsterixDe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassLibrary", "..\ClassLibrary\ClassLibrary.csproj", "{16902B0B-0F1F-4D94-933E-CB7D0E471D44}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightDataItems", "..\FlightDataItems\FlightDataItems.csproj", "{12981F78-8A91-444E-A373-AB6915184644}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "..\ConsoleApp1\ConsoleApp1.csproj", "{29D8AF53-524F-4759-9FC5-F70D94330189}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,14 +21,6 @@ Global
 		{16902B0B-0F1F-4D94-933E-CB7D0E471D44}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16902B0B-0F1F-4D94-933E-CB7D0E471D44}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16902B0B-0F1F-4D94-933E-CB7D0E471D44}.Release|Any CPU.Build.0 = Release|Any CPU
-		{12981F78-8A91-444E-A373-AB6915184644}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{12981F78-8A91-444E-A373-AB6915184644}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{12981F78-8A91-444E-A373-AB6915184644}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{12981F78-8A91-444E-A373-AB6915184644}.Release|Any CPU.Build.0 = Release|Any CPU
-		{29D8AF53-524F-4759-9FC5-F70D94330189}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{29D8AF53-524F-4759-9FC5-F70D94330189}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{29D8AF53-524F-4759-9FC5-F70D94330189}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{29D8AF53-524F-4759-9FC5-F70D94330189}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

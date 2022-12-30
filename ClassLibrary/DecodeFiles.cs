@@ -188,8 +188,8 @@ namespace ClassLibrary
             tableCAT10.Columns.Add("Category"); 
             tableCAT10.Columns.Add("SAC"); 
             tableCAT10.Columns.Add("SIC");
-            tableCAT10.Columns.Add("Target Identification"); 
-            tableCAT10.Columns.Add("Track Number"); 
+            tableCAT10.Columns.Add("TargetIdentification"); 
+            tableCAT10.Columns.Add("TrackNumber"); 
             tableCAT10.Columns.Add("Target Report"); 
             tableCAT10.Columns.Add("Message Type"); 
             tableCAT10.Columns.Add("Flight Level"); 
@@ -201,12 +201,12 @@ namespace ClassLibrary
             tableCAT10.Columns.Add("Track Velocity in Polar"); 
             tableCAT10.Columns.Add("Track Velocity in Cartesian"); 
             tableCAT10.Columns.Add("Target Size and Orientation"); 
-            tableCAT10.Columns.Add("Target Address"); 
+            tableCAT10.Columns.Add("TargetAddress"); 
             tableCAT10.Columns.Add("System Status");
             tableCAT10.Columns.Add("Vehicle Fleet Identification");
             tableCAT10.Columns.Add("Pre-programmed Message");
             tableCAT10.Columns.Add("Measured Height");
-            tableCAT10.Columns.Add("Mode-3A Code");
+            tableCAT10.Columns.Add("Mode3ACode");
             tableCAT10.Columns.Add("Mode S MB Data");
             tableCAT10.Columns.Add("Standard Deviation of Position");
             tableCAT10.Columns.Add("Presence");
@@ -221,8 +221,8 @@ namespace ClassLibrary
             tableCAT21.Columns.Add("Category");  
             tableCAT21.Columns.Add("SAC"); 
             tableCAT21.Columns.Add("SIC"); 
-            tableCAT21.Columns.Add("Target Identification"); 
-            tableCAT21.Columns.Add("Track Number"); 
+            tableCAT21.Columns.Add("TargetIdentification"); 
+            tableCAT21.Columns.Add("TrackNumber"); 
             tableCAT21.Columns.Add("Target Report"); 
             tableCAT21.Columns.Add("Service Identification"); 
             tableCAT21.Columns.Add("Time of Report Transmission"); 
@@ -230,7 +230,7 @@ namespace ClassLibrary
             tableCAT21.Columns.Add("Position in WGS-84 HR"); 
             tableCAT21.Columns.Add("Air Speed"); 
             tableCAT21.Columns.Add("True Air Speed"); 
-            tableCAT21.Columns.Add("Target Address"); 
+            tableCAT21.Columns.Add("TargetAddress"); 
             tableCAT21.Columns.Add("Time of Applicability for Position"); 
             tableCAT21.Columns.Add("Time of Message Reception of Position"); 
             tableCAT21.Columns.Add("Time of Applicability for Velocity"); 
@@ -238,7 +238,7 @@ namespace ClassLibrary
             tableCAT21.Columns.Add("Geometric Height");  
             tableCAT21.Columns.Add("Quality Indicators");  
             tableCAT21.Columns.Add("MOPS Version");
-            tableCAT21.Columns.Add("Mode-3A Code");
+            tableCAT21.Columns.Add("Mode3ACode");
             tableCAT21.Columns.Add("Roll Angle");
             tableCAT21.Columns.Add("Flight Level");
             tableCAT21.Columns.Add("Magnetic Heading");
@@ -276,18 +276,18 @@ namespace ClassLibrary
             else { row["SIC"] = "N/A"; }
             if (message.TargetId != null)
             {
-                if (message.TargetId.Replace(" ","") != "" ) { row["Target Identification"] = message.TargetId; }
-                else { row["Target Identification"] = "N/A"; }
+                if (message.TargetId.Replace(" ","") != "" ) { row["TargetIdentification"] = message.TargetId; }
+                else { row["TargetIdentification"] = "N/A"; }
             }
-            else { row["Target Identification"] = "N/A"; }
+            else { row["TargetIdentification"] = "N/A"; }
             if (message.TYP != null) { row["Target Report"] = "Click for more data"; }
             else { row["Target Report"] = "N/A"; }
             if (message.messageType != null) { row["Message Type"] = message.messageType; }
             else { row["Message Type"] = "N/A"; }
             if (message.FlightLevelInfo != null) { row["Flight Level"] = "Click for more data"; }
             else { row["Flight Level"] = "N/A"; }
-            if (message.TrackNum != null) { row["Track Number"] = message.TrackNum; }
-            else { row["Track Number"] = "N/A"; }
+            if (message.TrackNum != null) { row["TrackNumber"] = message.TrackNum; }
+            else { row["TrackNumber"] = "N/A"; }
             if (message.TimeOfDay != null) { row["Time of Day"] = message.TimeOfDay; }
             else { row["Time of Day"] = "N/A"; }
             if (message.CNF != null) { row["Track Status"] = "Click for more data"; }
@@ -304,8 +304,8 @@ namespace ClassLibrary
             else { row["Track Velocity in Cartesian"] = "N/A"; }
             if (message.targetSizeOrientation != null) { row["Target Size and Orientation"] = "Click for more data"; }
             else { row["Target Size and Orientation"] = "N/A"; }
-            if (message.TargetAdd != null) { row["Target Address"] = message.TargetAdd; }
-            else { row["Target Address"] = "N/A"; }
+            if (message.TargetAdd != null) { row["TargetAddress"] = message.TargetAdd; }
+            else { row["TargetAddress"] = "N/A"; }
             if (message.NOGO != null) { row["System Status"] = "Click for more data"; }
             else { row["System Status"] = "N/A"; }
             if (message.VFI != null) { row["Vehicle Fleet Identification"] = message.VFI; }
@@ -314,8 +314,8 @@ namespace ClassLibrary
             else { row["Pre-programmed Message"] = "N/A"; }
             if (message.measuredHeight != null) { row["Measured Height"] = message.measuredHeight; }
             else { row["Measured Height"] = "N/A"; }
-            if (message.Mode3A != null) { row["Mode-3A Code"] = message.Mode3A; }
-            else { row["Mode-3A Code"] = "N/A"; }
+            if (message.Mode3A != null) { row["Mode3ACode"] = message.Mode3A; }
+            else { row["Mode3ACode"] = "N/A"; }
             if (message.MBData != null) { row["Mode S MB Data"] = "Click for more data"; }
             else { row["Mode S MB Data"] = "N/A"; }
             if (message.DeviationX != null) { row["Standard Deviation of Position"] = "Click for more data"; }
@@ -342,12 +342,12 @@ namespace ClassLibrary
             else { row["SAC"] = "N/A"; }
             if (message.SIC != null) { row["SIC"] = message.SIC; }
             else { row["SIC"] = "N/A"; }
-            if (message.TargetId != null) { row["Target Identification"] = message.TargetId; }
-            else { row["Target Identification"] = "N/A"; }
+            if (message.TargetId != null) { row["TargetIdentification"] = message.TargetId; }
+            else { row["TargetIdentification"] = "N/A"; }
             if (message.ATP != null) { row["Target Report"] = "Click for more data"; }
             else { row["Target Report"] = "N/A"; }
-            if (message.trackNumber != null) { row["Track Number"] = message.trackNumber; }
-            else { row["Track Number"] = "N/A"; }
+            if (message.trackNumber != null) { row["TrackNumber"] = message.trackNumber; }
+            else { row["TrackNumber"] = "N/A"; }
             if (message.ServiceId != null) { row["Service Identification"] = message.ServiceId; }
             else { row["Service Identification"] = "N/A"; }
             if (message.timeOfApplicabilityForPosition != null) { row["Time of Applicability for Position"] = message.timeOfApplicabilityForPosition; }
@@ -362,8 +362,8 @@ namespace ClassLibrary
             else { row["Air Speed"] = "N/A"; }
             if (message.trueAirSpeed != null) { row["True Air Speed"] = message.trueAirSpeed; }
             else { row["True Air Speed"] = "N/A"; }
-            if (message.TargetAdd != null) { row["Target Address"] = message.TargetAdd; }
-            else { row["Target Address"] = "N/A"; }
+            if (message.TargetAdd != null) { row["TargetAddress"] = message.TargetAdd; }
+            else { row["TargetAddress"] = "N/A"; }
             if (message.timeOfMessageReceptionOfPosition != null) { row["Time of Message Reception of Position"] = message.timeOfMessageReceptionOfPosition; }
             else { row["Time of Message Reception of Position"] = "N/A"; }
             if (message.timeOfMessageReceptionOfVelocity != null) { row["Time of Message Reception of Velocity"] = message.timeOfMessageReceptionOfVelocity; }
@@ -374,8 +374,8 @@ namespace ClassLibrary
             else { row["Quality Indicators"] = "N/A"; }
             if (message.MOPS != null) { row["MOPS Version"] = message.MOPS; }
             else { row["MOPS Version"] = "N/A"; }
-            if (message.Mode3A != null) { row["Mode-3A Code"] = message.Mode3A; }
-            else { row["Mode-3A Code"] = "N/A"; }
+            if (message.Mode3A != null) { row["Mode3ACode"] = message.Mode3A; }
+            else { row["Mode3ACode"] = "N/A"; }
             if (message.rollAngle != null) { row["Roll Angle"] = message.rollAngle; }
             else { row["Roll Angle"] = "N/A"; }
             if (message.fligthLevel != null) { row["Flight Level"] = message.fligthLevel; }

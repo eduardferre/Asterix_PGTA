@@ -120,7 +120,7 @@ namespace AsterixDecoder
                     info = cat10.NOGO + "\n" + cat10.OVL + "\n" + cat10.TSV + "\n"
                     + cat10.DIV + "\n" + cat10.TIF;
                 }
-                else if (columnName == "Mode-3A Code")
+                else if (columnName == "Mode3ACode")
                 {
                     info = cat10.VMode3A + "\n" + cat10.GMode3A + "\n" + cat10.LMode3A + "\n" + cat10.Mode3A;
                 }
@@ -247,7 +247,7 @@ namespace AsterixDecoder
             }
         }
 
-        private void loadFileToolStripMenuItem_Click(object sender, EventArgs e)
+        public void loadFile()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = "c:\\";
@@ -283,6 +283,9 @@ namespace AsterixDecoder
                     }
                     else MessageBox.Show(path + " file is nor readable or an error ocurred while decoding");
                 }
+                label1.Visible = false;
+                label2.Visible = false;
+                pictureBox1.Visible = false;
 
                 msg_label.Text = "There are a total of " + decodeFiles.numMsgs.ToString() + " messages\n" +
                                  "CAT10: " + decodeFiles.numCAT10Msgs.ToString() + " messages\n" +
@@ -305,167 +308,9 @@ namespace AsterixDecoder
             this.ADSBTraj = decodeFiles.GetADSBTraj();
         }
 
-        private void tableCAT10ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void loadFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            clickInfo_label.Visible = true;
-            gridCAT10.Visible = true;
-            gridCAT21.Visible = false;
-            info_label.Visible = true;
-            process_label.Visible = false;
-            msg_label.Visible = false;
-            gMapControl1.Visible = false;
-            timeLabel.Visible = false;
-            startButton.Visible = false;
-            resetButton.Visible = false;
-            speedButton.Visible = false;
-            smrCheck.Visible = false;
-            mlatCheck.Visible = false;
-            adsbCheck.Visible = false;
-            timeButton.Visible = false;
-            trajButton.Visible = false;
-
-            if (listCAT10.Count != 0)
-            {
-
-                gridCAT10.Location = new Point(10, 40);
-                clickInfo_label.Location = new Point(1075, 80);
-                info_label.Location = new Point(1100, 40);
-                labelFilter.Location = new Point(1110, 335);
-                noFilterButton.Location = new Point(1110, 360);
-                smrButton.Location = new Point(1110, 385);
-                mlatButton.Location = new Point(1110, 410);
-                trackNumberButton.Location = new Point(1110, 435);
-                mode3AButton.Location = new Point(1110, 460);
-                targetAddressButton.Location = new Point(1110, 485);
-                targetIDButton.Location = new Point(1110, 510);
-                filterTextBox.Location = new Point(1115, 535);
-                filterButton.Location = new Point(1100, 560);
-
-                gridCAT10.Size = new Size(1050, 600);
-                clickInfo_label.Size = new Size(210, 250);
-
-                this.Controls.Add(gridCAT10);
-
-                gridCAT10.DataSource = dataTableCAT10;
-
-                gridCAT10.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-
-                info_label.Visible = true;
-                clickInfo_label.Visible = true;
-                gridCAT10.Visible = true;
-                noFilterButton.Visible = true;
-                smrButton.Visible = true;
-                mlatButton.Visible = true;
-                trackNumberButton.Visible = true;
-                targetAddressButton.Visible = true;
-                targetIDButton.Visible = true;
-                mode3AButton.Visible = true;
-                filterButton.Visible = true;
-                filterTextBox.Visible = true;
-            }
-            else { MessageBox.Show("No data for CAT10, please upload a file with CAT10 messages"); }
-        }
-
-        private void tableCAT21ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            clickInfo_label.Visible = true;
-            gridCAT10.Visible = false;
-            gridCAT21.Visible = true;
-            info_label.Visible = true;
-            process_label.Visible = false;
-            msg_label.Visible = false;
-            gMapControl1.Visible = false;
-            timeLabel.Visible = false;
-            startButton.Visible = false;
-            resetButton.Visible = false;
-            speedButton.Visible = false;
-            smrButton.Visible = false;
-            mlatButton.Visible = false;
-            smrCheck.Visible = false;
-            mlatCheck.Visible = false;
-            adsbCheck.Visible = false;
-            timeButton.Visible = false;
-            trajButton.Visible = false;
-
-            if (listCAT21.Count != 0)
-            {
-                gridCAT21.Location = new Point(10, 40);
-                clickInfo_label.Location = new Point(1075, 80);
-                info_label.Location = new Point(1100, 40);
-
-                labelFilter.Location = new Point(1110, 335);
-                noFilterButton.Location = new Point(1110, 360);
-                trackNumberButton.Location = new Point(1110, 385);
-                mode3AButton.Location = new Point(1110, 410);
-                targetAddressButton.Location = new Point(1110, 435);
-                targetIDButton.Location = new Point(1110, 460);
-                filterTextBox.Location = new Point(1115, 485);
-                filterButton.Location = new Point(1100, 510);
-
-                gridCAT21.Size = new Size(1050, 600);
-                clickInfo_label.Size = new Size(210, 250);
-
-                this.Controls.Add(gridCAT21);
-
-                gridCAT21.DataSource = dataTableCAT21;
-
-                gridCAT21.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-
-                info_label.Visible = true;
-                clickInfo_label.Visible = true;
-                gridCAT21.Visible = true;
-                noFilterButton.Visible = true;
-                trackNumberButton.Visible = true;
-                targetAddressButton.Visible = true;
-                mode3AButton.Visible = true;
-                targetIDButton.Visible = true;
-                filterButton.Visible = true;
-                filterTextBox.Visible = true;
-            }
-            else { MessageBox.Show("No data for CAT21, please upload a file with CAT21 messages"); }
-        }
-
-        private void mapsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            clickInfo_label.Visible = false;
-            gridCAT10.Visible = false;
-            gridCAT21.Visible = false;
-            info_label.Visible = false;
-            process_label.Visible = false;
-            msg_label.Visible = false;
-            labelFilter.Visible = false;
-            noFilterButton.Visible = false;
-            smrButton.Visible = false;
-            mlatButton.Visible = false;
-            trackNumberButton.Visible = false;
-            targetAddressButton.Visible = false;
-            targetIDButton.Visible = false;
-            mode3AButton.Visible = false;
-            filterButton.Visible = false;
-            filterTextBox.Visible = false;
-            gMapControl1.Visible = true;
-            timeLabel.Visible = true;
-            startButton.Visible = true;
-            resetButton.Visible = true;
-            speedButton.Visible = true;
-            smrCheck.Visible = true;
-            mlatCheck.Visible = true;
-            adsbCheck.Visible = true;
-            timeButton.Visible = true;
-            trajButton.Visible = true;
-
-            timer1.Stop();
-            timer1.Interval = 1000;
-            time = 86400;
-            foreach (CATALL message in listCATALL) 
-            { 
-                if (message.timeOfDay < time) 
-                {
-                    time = message.timeOfDay;
-                }
-            }
-            timeLabel.Text = Convert.ToString((time / (60 * 60)) % 24) + " : " + Convert.ToString((time / 60) % 60) + " : " + Convert.ToString((time % 60));
-
+            loadFile();
         }
 
         private void exportCSV_CAT10_ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -533,7 +378,7 @@ namespace AsterixDecoder
                             {
                                 cellString = message.targetLength + space + message.targetWidth + space + message.targetOrientation;
                             }
-                            if (column.ColumnName == "Mode-3A Code")
+                            if (column.ColumnName == "Mode3ACode")
                             {
                                 cellString = message.VMode3A + space + message.GMode3A + space + message.LMode3A + space + message.Mode3A;
                             }
@@ -804,8 +649,6 @@ namespace AsterixDecoder
             }
         }
 
-
-
         int zoom = 12;
         private void gMapControl1_Load(object sender, EventArgs e)
         {
@@ -893,7 +736,24 @@ namespace AsterixDecoder
         private void timer1_Tick(object sender, EventArgs e)
         { 
             time++;
-            timeLabel.Text = Convert.ToString((time / (60 * 60))%24) + " : " + Convert.ToString((time / 60)%60) + " : " + Convert.ToString((time%60));
+
+            string hh = Convert.ToString((time / (60 * 60)) % 24);
+            string mm = Convert.ToString((time / 60) % 60);
+            string ss = Convert.ToString((time % 60));
+            if (hh.Length < 2)
+            {
+                hh = "0" + hh;
+            }
+            if (mm.Length < 2)
+            {
+                mm = "0" + mm;
+            }
+            if (ss.Length < 2)
+            {
+                ss = "0" + ss;
+            }
+
+            timeLabel.Text = hh + " : " + mm + " : " + ss;
             timeIncrease();
         }
 
@@ -904,8 +764,19 @@ namespace AsterixDecoder
 
             for (int i = 0; first_found == false && i<listCATALL.Count(); i++) { if (listCATALL[i].timeOfDay == time) { first_found = true; s = i; }; }
 
+            for (int i = 0; i < listCATALL.Count(); i++) {
+                listCATALL[i].refreshratio++; 
+                if (listCATALL[i].refreshratio > 3)
+                {
+                    markers.RemoveAll(item => (((item.TargetAddress == listCATALL[i].targetAddress && item.TargetAddress != null) || (item.Track_number == listCATALL[i].trackNumber && item.Track_number != null) || (item.Callsign == listCATALL[i].targetIdentification && item.Callsign != null)) && item.DetectionMode == listCATALL[i].detectionMode));
+                }
+            }
+
+
+
             while (listCATALL[s].timeOfDay == time)
             {
+                listCATALL[s].refreshratio = 0;
                 CATALL message = listCATALL[s];
                 if (message.latitudeInWGS84 != -200 && message.longitudeInWGS84 != -200)
                 {
@@ -916,7 +787,23 @@ namespace AsterixDecoder
 
                     if (DuplicatedTarget == false && DuplicatedTrackNumber == false)
                     {
-                        markers.RemoveAll(item => (((item.TargetAddress == message.targetAddress && item.TargetAddress != null) || (item.Track_number == message.trackNumber && item.Track_number != null) || (item.Callsign == message.targetIdentification && item.Callsign != null))));
+                        markers.RemoveAll(item => (((item.TargetAddress == message.targetAddress && item.TargetAddress != null) || (item.Track_number == message.trackNumber && item.Track_number != null) || (item.Callsign == message.targetIdentification && item.Callsign != null)) && item.DetectionMode == message.detectionMode));
+                        foreach (markerWithInfo mk in markers)
+                        {
+                            if ((mk.TargetAddress == message.targetAddress && mk.TargetAddress != null) || (mk.Track_number == message.trackNumber && mk.Track_number != null) || (mk.Callsign == message.targetIdentification && mk.Callsign != null))
+                            {
+                                //if (mk.DetectionMode == "ADSB" && message.detectionMode != "ASDB")
+                                //{
+                                //    message.latitudeInWGS84 = mk.p.Lat;
+                                //    message.longitudeInWGS84 = mk.p.Lng;
+                                //}
+                                if (message.detectionMode == "ADSB" && mk.DetectionMode != "ASDB")
+                                {
+                                    mk.p.Lat = message.latitudeInWGS84;
+                                    mk.p.Lng = message.longitudeInWGS84;
+                                }
+                            }
+                        }
                         AddActualMarker(Convert.ToDouble(message.latitudeInWGS84), Convert.ToDouble(message.longitudeInWGS84), message.targetIdentification, time, message.msgNum, message.type, message.targetAddress, message.detectionMode, message.CAT, message.SIC, message.SAC, message.flightLevel, message.trackNumber, message.direction, message.refreshratio);
                     }
                 }
@@ -938,7 +825,24 @@ namespace AsterixDecoder
             }
             markers.Clear();
             OverlayMarkers.Markers.Clear();
-            timeLabel.Text = Convert.ToString((time / (60 * 60)) % 24) + " : " + Convert.ToString((time / 60) % 60) + " : " + Convert.ToString((time % 60));
+
+            string hh = Convert.ToString((time / (60 * 60)) % 24);
+            string mm = Convert.ToString((time / 60) % 60);
+            string ss = Convert.ToString((time % 60));
+            if (hh.Length < 2)
+            {
+                hh = "0" + hh;
+            }
+            if (mm.Length < 2)
+            {
+                mm = "0" + mm;
+            }
+            if (ss.Length < 2)
+            {
+                ss = "0" + ss;
+            }
+
+            timeLabel.Text = hh + " : " + mm + " : " + ss;
             startButton.Text = "Start";
             
         }
@@ -985,6 +889,7 @@ namespace AsterixDecoder
             sicLabel.Text = "SIC: " + markerselected.SIC;
             sacLabel.Text = "SAC: " + markerselected.SAC;
             flLabel.Text = "Flight Level: " + markerselected.Flight_level;
+            dmLabel.Text = "Detection Mode: " + markerselected.DetectionMode;
 
         }
         public GMapOverlay OverlayTraj = new GMapOverlay("Markers");
@@ -1018,10 +923,26 @@ namespace AsterixDecoder
 
             if (filterSearch != null)
             {
-                if (noFilterButton.Checked)
+                if (trackNumberButton.Checked)
                 {
-                    (gridCAT10.DataSource as DataTable).DefaultView.RowFilter = string.Format("CAT Nº LIKE '10'");
-                    (gridCAT21.DataSource as DataTable).DefaultView.RowFilter = string.Format("CAT Nº LIKE '21'");
+                    if (smrButton.Visible) (gridCAT10.DataSource as DataTable).DefaultView.RowFilter = string.Format("{0} LIKE '{1}'","TrackNumber", filterSearch);
+                    else (gridCAT21.DataSource as DataTable).DefaultView.RowFilter = string.Format("TrackNumber LIKE '{0}'", filterSearch);
+
+                }
+                else if (targetIDButton.Checked)
+                {
+                    if (smrButton.Visible) (gridCAT10.DataSource as DataTable).DefaultView.RowFilter = string.Format("TargetIdentification LIKE '{0}'", filterSearch);
+                    else (gridCAT21.DataSource as DataTable).DefaultView.RowFilter = string.Format("TargetIdentification LIKE '{0}'", filterSearch);
+                }
+                else if (targetAddressButton.Checked)
+                {
+                    if (smrButton.Visible) (gridCAT10.DataSource as DataTable).DefaultView.RowFilter = string.Format("TargetAddress LIKE '{0}'", filterSearch);
+                    else (gridCAT21.DataSource as DataTable).DefaultView.RowFilter = string.Format("TargetAddress LIKE '{0}'", filterSearch);
+                }
+                else if (mode3AButton.Checked)
+                {
+                    if (smrButton.Visible) (gridCAT10.DataSource as DataTable).DefaultView.RowFilter = string.Format("Mode3ACode LIKE '{0}'", filterSearch);
+                    else (gridCAT21.DataSource as DataTable).DefaultView.RowFilter = string.Format("Mode3ACode LIKE '{0}'", filterSearch);
                 }
             }
         }
@@ -1045,8 +966,6 @@ namespace AsterixDecoder
                 filterTextBox.Enabled = false;
 
                 (gridCAT10.DataSource as DataTable).DefaultView.RowFilter = string.Format("SIC LIKE '7'");
-
-                gridCAT10.DataSource = dataTableCAT10;
             }
         }
 
@@ -1092,7 +1011,231 @@ namespace AsterixDecoder
             {
                 filterButton.Enabled = false;
                 filterTextBox.Enabled = false;
+                
+                if(smrButton.Visible == true) (gridCAT10.DataSource as DataTable).DefaultView.RowFilter = string.Format("Category LIKE '10'");
+                else (gridCAT21.DataSource as DataTable).DefaultView.RowFilter = string.Format("Category LIKE '21'");
             }
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            loadFile();
+        }
+
+        private void showTableToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            clickInfo_label.Visible = true;
+            gridCAT10.Visible = true;
+            gridCAT21.Visible = false;
+            info_label.Visible = true;
+            process_label.Visible = false;
+            msg_label.Visible = false;
+            gMapControl1.Visible = false;
+            timeLabel.Visible = false;
+            startButton.Visible = false;
+            resetButton.Visible = false;
+            speedButton.Visible = false;
+            smrCheck.Visible = false;
+            mlatCheck.Visible = false;
+            adsbCheck.Visible = false;
+            timeButton.Visible = false;
+            trajButton.Visible = false;
+            label1.Visible = false;
+            label2.Visible = false;
+            pictureBox1.Visible = false;
+            iDLabel.Visible = false;
+            addLabel.Visible = false;
+            trackLabel.Visible = false;
+            sicLabel.Visible = false;
+            sacLabel.Visible = false;
+            flLabel.Visible = false;
+            labelFilter.Visible = true;
+
+            if (listCAT10.Count != 0)
+            {
+
+                gridCAT10.Location = new Point(10, 40);
+                clickInfo_label.Location = new Point(1075, 80);
+                info_label.Location = new Point(1100, 40);
+                labelFilter.Location = new Point(1110, 335);
+                noFilterButton.Location = new Point(1110, 360);
+                smrButton.Location = new Point(1110, 385);
+                mlatButton.Location = new Point(1110, 410);
+                trackNumberButton.Location = new Point(1110, 435);
+                mode3AButton.Location = new Point(1110, 460);
+                targetAddressButton.Location = new Point(1110, 485);
+                targetIDButton.Location = new Point(1110, 510);
+                filterTextBox.Location = new Point(1115, 535);
+                filterButton.Location = new Point(1100, 560);
+
+                gridCAT10.Size = new Size(1050, 600);
+                clickInfo_label.Size = new Size(210, 250);
+
+                this.Controls.Add(gridCAT10);
+
+                gridCAT10.DataSource = dataTableCAT10;
+
+                gridCAT10.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+
+                info_label.Visible = true;
+                clickInfo_label.Visible = true;
+                gridCAT10.Visible = true;
+                noFilterButton.Visible = true;
+                smrButton.Visible = true;
+                mlatButton.Visible = true;
+                trackNumberButton.Visible = true;
+                targetAddressButton.Visible = true;
+                targetIDButton.Visible = true;
+                mode3AButton.Visible = true;
+                filterButton.Visible = true;
+                filterTextBox.Visible = true;
+            }
+            else { MessageBox.Show("No data for CAT10, please upload a file with CAT10 messages"); }
+        }
+
+        private void showTableToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            clickInfo_label.Visible = true;
+            gridCAT10.Visible = false;
+            gridCAT21.Visible = true;
+            info_label.Visible = true;
+            process_label.Visible = false;
+            msg_label.Visible = false;
+            gMapControl1.Visible = false;
+            timeLabel.Visible = false;
+            startButton.Visible = false;
+            resetButton.Visible = false;
+            speedButton.Visible = false;
+            smrButton.Visible = false;
+            mlatButton.Visible = false;
+            smrCheck.Visible = false;
+            mlatCheck.Visible = false;
+            adsbCheck.Visible = false;
+            timeButton.Visible = false;
+            trajButton.Visible = false;
+            label1.Visible = false;
+            label2.Visible = false;
+            pictureBox1.Visible = false;
+            iDLabel.Visible = false;
+            addLabel.Visible = false;
+            trackLabel.Visible = false;
+            sicLabel.Visible = false;
+            sacLabel.Visible = false;
+            flLabel.Visible = false;
+            labelFilter.Visible = true;
+
+
+            if (listCAT21.Count != 0)
+            {
+                gridCAT21.Location = new Point(10, 40);
+                clickInfo_label.Location = new Point(1075, 80);
+                info_label.Location = new Point(1100, 40);
+
+                labelFilter.Location = new Point(1110, 335);
+                noFilterButton.Location = new Point(1110, 370);
+                trackNumberButton.Location = new Point(1110, 395);
+                mode3AButton.Location = new Point(1110, 420);
+                targetAddressButton.Location = new Point(1110, 445);
+                targetIDButton.Location = new Point(1110, 470);
+                filterTextBox.Location = new Point(1115, 495);
+                filterButton.Location = new Point(1100, 520);
+
+                gridCAT21.Size = new Size(1050, 600);
+                clickInfo_label.Size = new Size(210, 250);
+
+                this.Controls.Add(gridCAT21);
+
+                gridCAT21.DataSource = dataTableCAT21;
+
+                gridCAT21.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+
+                info_label.Visible = true;
+                clickInfo_label.Visible = true;
+                gridCAT21.Visible = true;
+                noFilterButton.Visible = true;
+                trackNumberButton.Visible = true;
+                targetAddressButton.Visible = true;
+                mode3AButton.Visible = true;
+                targetIDButton.Visible = true;
+                filterButton.Visible = true;
+                filterTextBox.Visible = true;
+            }
+            else { MessageBox.Show("No data for CAT21, please upload a file with CAT21 messages"); }
+        }
+
+        private void showMapToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listCAT21.Count != 0 || listCAT10.Count != 0)
+            {
+                clickInfo_label.Visible = false;
+                gridCAT10.Visible = false;
+                gridCAT21.Visible = false;
+                info_label.Visible = false;
+                process_label.Visible = false;
+                msg_label.Visible = false;
+                labelFilter.Visible = false;
+                noFilterButton.Visible = false;
+                smrButton.Visible = false;
+                mlatButton.Visible = false;
+                trackNumberButton.Visible = false;
+                targetAddressButton.Visible = false;
+                targetIDButton.Visible = false;
+                mode3AButton.Visible = false;
+                filterButton.Visible = false;
+                filterTextBox.Visible = false;
+                gMapControl1.Visible = true;
+                timeLabel.Visible = true;
+                startButton.Visible = true;
+                resetButton.Visible = true;
+                speedButton.Visible = true;
+                smrCheck.Visible = true;
+                mlatCheck.Visible = true;
+                adsbCheck.Visible = true;
+                timeButton.Visible = true;
+                trajButton.Visible = true;
+                label1.Visible = false;
+                label2.Visible = false;
+                pictureBox1.Visible = false;
+                iDLabel.Visible = true;
+                addLabel.Visible = true;
+                trackLabel.Visible = true;
+                sicLabel.Visible = true;
+                sacLabel.Visible = true;
+                flLabel.Visible = true;
+                labelFilter.Visible = false;
+                iDLabel.Text = "Click a marker for more information";
+
+                timer1.Stop();
+                timer1.Interval = 1000;
+                time = 86400;
+                foreach (CATALL message in listCATALL)
+                {
+                    if (message.timeOfDay < time)
+                    {
+                        time = message.timeOfDay;
+                    }
+                }
+                string hh = Convert.ToString((time / (60 * 60)) % 24);
+                string mm = Convert.ToString((time / 60) % 60);
+                string ss = Convert.ToString((time % 60));
+
+                if (hh.Length < 2)
+                {
+                    hh = "0" + hh;
+                }
+                if (mm.Length < 2)
+                {
+                    mm = "0" + mm;
+                }
+                if (ss.Length < 2)
+                {
+                    ss = "0" + ss;
+                }
+
+                timeLabel.Text = hh + " : " + mm + " : " + ss;
+            }
+            else { MessageBox.Show("No data, please upload a file"); }
+
         }
     }
 }

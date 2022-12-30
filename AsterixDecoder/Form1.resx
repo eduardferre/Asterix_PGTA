@@ -57,6 +57,65 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label2.Text" xml:space="preserve">
+    <value>This software is designed to decode messages in ASTERIX format, both CAT 10 and CAT 21, for SMR, MLAT, ADSB. 
+The data decoded is displayed in two formats, tables and a map based in Google Maps. 
+To start using this program remember to load a asterix file. Use the button below or the load menu.
+</value>
+  </data>
+  <assembly alias="System.Drawing.Common" name="System.Drawing.Common, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
+  <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing.Common" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+        pvkPdxvH0oObcLoAAAAASUVORK5CYII=
+</value>
+  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, System.Private.CoreLib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e">
     <value>40</value>
   </metadata>
