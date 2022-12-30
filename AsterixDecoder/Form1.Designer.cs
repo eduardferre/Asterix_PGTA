@@ -653,7 +653,6 @@ namespace AsterixDecoder
         private System.Windows.Forms.TextBox filterTextBox;
         private System.Windows.Forms.RadioButton noFilterButton;
         private System.Windows.Forms.Label iDLabel;
-        private System.Windows.Forms.Button trajButton;
         private System.Windows.Forms.Label addLabel;
         private System.Windows.Forms.Label trackLabel;
         private System.Windows.Forms.Label sicLabel;
